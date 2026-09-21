@@ -572,6 +572,10 @@ impl Engine {
             Stage::Failed => Some("terminal_connection_refused".into()),
             _ => None,
         };
+        if event == "device_disconnected"
+            && let Some(device) = self.devices.get_mut(&op.device_id) {
+                device.online = false;
+            }
         self.log(Some(id), "input_event", event.into());
         if op.scenario.outcome == Outcome::Error
             && op.stage == op.scenario.failure_stage

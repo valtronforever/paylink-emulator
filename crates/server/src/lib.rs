@@ -385,6 +385,33 @@ async fn command(
                         .start(id, amount, p.get("merchant").and_then(Value::as_str))?;
                 Ok(json!({"operation_id":op,"operation":data.engine.operations[&op]}))
             }
+            "standalone" => {
+                let scenario: Scenario = serde_json::from_value(
+                    p.get("scenario").context("scenario required")?.clone(),
+                )?;
+                let amount = p
+                    .get("amount")
+                    .and_then(Value::as_u64)
+                    .context("amount must be integer minor units")?;
+                if data
+                    .engine
+                    .queue
+                    .iter()
+                    .any(|queued| queued.device_id == scenario.device_id)
+                {
+                    bail!(
+                        "device has queued scenarios; consume or reset them before standalone start"
+                    );
+                }
+                let device_id = scenario.device_id.clone();
+                let mut next = data.engine.clone();
+                next.arm(scenario)?;
+                let operation_id = next.start(&device_id, amount, None)?;
+                data.engine = next;
+                Ok(
+                    json!({"operation_id":operation_id,"operation":data.engine.operations[&operation_id]}),
+                )
+            }
             "action" => {
                 let id = required_string(p, "operation_id")?;
                 data.engine.action(id, required_string(p, "event")?)?;

@@ -230,3 +230,25 @@ fn manual_input_cannot_bypass_selected_phase_error() {
         assert_eq!(engine.counters.approvals, 0);
     }
 }
+
+#[test]
+fn physical_disconnect_requires_device_reconnection_for_the_next_payment() {
+    let mut engine = Engine::default();
+    engine
+        .arm(Scenario {
+            mode: Mode::Manual,
+            ..instant()
+        })
+        .unwrap();
+    let id = engine.start(DEVICE_ID, 100, None).unwrap();
+    engine.action(&id, "device_disconnected").unwrap();
+    engine.arm(instant()).unwrap();
+    assert_eq!(
+        engine.start(DEVICE_ID, 100, None).unwrap_err().code,
+        "terminal_connection_refused"
+    );
+    assert_eq!(engine.queue.len(), 1);
+    engine.set_device(Device::default()).unwrap();
+    engine.start(DEVICE_ID, 100, None).unwrap();
+    assert_eq!(engine.counters.approvals, 1);
+}

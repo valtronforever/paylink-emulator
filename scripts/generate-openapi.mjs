@@ -11,6 +11,7 @@ const ref=name=>({'$ref':`#/components/schemas/${name}`});
 const commands={
   scenarios:ref('Scenario'),arm:{oneOf:[ref('Scenario'),obj({scenario_id:string})]},devices:ref('Device'),
   purchase:obj({device_id:string,amount:{...integer,minimum:1,maximum:999999999},merchant:string},['device_id','amount']),
+  standalone:obj({scenario:ref('Scenario'),amount:{...integer,minimum:1,maximum:999999999}}),
   action:obj({operation_id:string,event:{type:'string',enum:['card_presented','customer_confirmed','bank_approved','bank_declined','terminal_confirmed','customer_cancelled','device_disconnected','reversed']}}),
   advance:obj({ms:{...integer,maximum:3600000}}),transport:obj({online:{type:'boolean'}}),reset:obj({}),
   assert:obj({requests:integer,accepted:integer,approvals:integer,reversals:integer,delivered:integer,queue_empty:{type:'boolean'},idle:{type:'boolean'}},[]),

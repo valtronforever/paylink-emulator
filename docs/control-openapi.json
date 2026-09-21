@@ -524,6 +524,71 @@
         }
       }
     },
+    "/control/v1/standalone": {
+      "post": {
+        "operationId": "command_standalone",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "command_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "generation": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "payload": {
+                    "type": "object",
+                    "properties": {
+                      "scenario": {
+                        "$ref": "#/components/schemas/Scenario"
+                      },
+                      "amount": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 999999999
+                      }
+                    },
+                    "required": [
+                      "scenario",
+                      "amount"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "command_id",
+                  "payload"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Applied, or cached response for identical command_id",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid token or browser Origin"
+          },
+          "409": {
+            "description": "Invalid model command, stale generation, failed assertion or conflicting command_id"
+          }
+        }
+      }
+    },
     "/control/v1/action": {
       "post": {
         "operationId": "command_action",

@@ -447,3 +447,43 @@ async fn reset_closes_incomplete_requests_before_a_new_scenario_can_be_consumed(
     assert_eq!(h.read("queue").await.as_array().unwrap().len(), 1);
     h.server.shutdown().await.unwrap();
 }
+
+#[tokio::test]
+async fn standalone_start_cannot_consume_an_old_scenario_or_leave_a_failed_arm() {
+    let mut h = Harness::new(true).await;
+    h.arm(instant()).await;
+    let request = |payload: Value| {
+        h.client
+            .post(h.endpoint("standalone"))
+            .bearer_auth(TOKEN)
+            .json(&json!({"command_id":"standalone-rejected","payload":payload}))
+    };
+    assert_eq!(
+        request(json!({"scenario":instant(),"amount":100}))
+            .send()
+            .await
+            .unwrap()
+            .status(),
+        409
+    );
+    assert_eq!(h.read("queue").await.as_array().unwrap().len(), 1);
+    h.command("reset", json!({})).await;
+    let invalid = h
+        .client
+        .post(h.endpoint("standalone"))
+        .bearer_auth(TOKEN)
+        .json(&json!({"command_id":"bad-amount","payload":{"scenario":instant(),"amount":0}}))
+        .send()
+        .await
+        .unwrap();
+    assert_eq!(invalid.status(), 409);
+    assert!(h.read("queue").await.as_array().unwrap().is_empty());
+    h.command("standalone", json!({"scenario":instant(),"amount":100}))
+        .await;
+    h.command(
+        "assert",
+        json!({"approvals":1,"accepted":1,"queue_empty":true}),
+    )
+    .await;
+    h.server.shutdown().await.unwrap();
+}

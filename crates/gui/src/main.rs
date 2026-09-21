@@ -211,7 +211,7 @@ impl Terminal {
                 .send("action", json!({"operation_id":op.id,"event":event}));
         }
     }
-    fn queue(&mut self) {
+    fn queue(&mut self, standalone: bool) {
         if self.outcome >= 2 {
             let error = &ERRORS[self.outcome - 2];
             if error.category == "transport" {
@@ -240,7 +240,21 @@ impl Terminal {
             self.scenario.error_id = None;
         }
         self.scenario.amount = None;
-        self.api.send("arm", json!(self.scenario));
+        self.scenario.id = if self.outcome >= 2 {
+            ERRORS[self.outcome - 2].id.to_owned()
+        } else if self.outcome == 1 {
+            "declined".into()
+        } else {
+            "approved".into()
+        };
+        if standalone {
+            self.api.send(
+                "standalone",
+                json!({"scenario":self.scenario,"amount":self.amount}),
+            );
+        } else {
+            self.api.send("arm", json!(self.scenario));
+        }
     }
     fn button(
         &self,
@@ -569,23 +583,10 @@ impl Render for Terminal {
                     .h_flex()
                     .gap_2()
                     .child(
-                        self.button("arm", "Arm next request", |s, _, _| s.queue(), cx)
+                        self.button("arm", "Arm next request", |s, _, _| s.queue(false), cx)
                             .primary(),
                     )
-                    .child(self.button(
-                        "start",
-                        "Start standalone",
-                        |s, _, _| {
-                            s.queue();
-                            if s.outcome < 2 || ERRORS[s.outcome - 2].category == "terminal" {
-                                s.api.send(
-                                    "purchase",
-                                    json!({"device_id":s.scenario.device_id,"amount":s.amount}),
-                                );
-                            }
-                        },
-                        cx,
-                    )),
+                    .child(self.button("start", "Start standalone", |s, _, _| s.queue(true), cx)),
             )
             .child(
                 div()

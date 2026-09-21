@@ -72,3 +72,5 @@ Machine-readable specification: [OpenAPI 3.1](control-openapi.json). Its model s
 All delivery policies: `normal`, `disconnect_before_accept`, `disconnect_after_accept`, `disconnect_after_commit`, `partial_response`, `hang`, `malformed_json`, `http400`, `http500`, `wrong_content_type`, `missing_fields`, `unknown_code`. The last cases are explicitly synthetic. A fault in delivery does not roll back a bank outcome.
 
 Journal events carry profile, device/scenario/operation correlation, monotonic time, calendar time derived from the run epoch, and charge state when an operation is known. Controlled clock advances also advance this synthetic calendar; they do not change the host clock.
+
+`POST /control/v1/standalone` accepts `{"scenario":{...},"amount":100}`. Native **Start standalone** uses it to validate/arm/start atomically. Existing queued scenarios for that device are rejected, and a failed start leaves the queue unchanged. This prevents a rejected editor configuration from accidentally launching an earlier queued scenario. The browser-facing PayLink API is unaffected.
