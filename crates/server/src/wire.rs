@@ -153,6 +153,7 @@ async fn respond(
         404 => "Not Found",
         405 => "Method Not Allowed",
         409 => "Conflict",
+        501 => "Not Implemented",
         _ => "Internal Server Error",
     };
     let cors=origin.map(|o|format!("Access-Control-Allow-Origin: {o}\r\nVary: Origin\r\nAccess-Control-Allow-Methods: GET, POST, OPTIONS\r\nAccess-Control-Allow-Headers: Content-Type\r\nAccess-Control-Allow-Private-Network: true\r\n")).unwrap_or_default();
@@ -188,6 +189,10 @@ async fn json_response(
     .await
 }
 fn wire_error(code: &str, message: &str) -> Value {
+    if code == "terminal_busy" {
+        return json!({"success":false,"code":9009,"description":"Device is busy",
+            "error":"Пристрій вже зайнятий виконанням команди. Потрібно зачекати декілька секунд та повторити спробу."});
+    }
     json!({"success":false,"error":error_definition(code).map(|e|e.message).unwrap_or(message),"code":0,"result":null})
 }
 async fn connection(mut socket: TcpStream, s: Shared, generation: u64) -> Result<()> {
@@ -219,7 +224,7 @@ async fn connection(mut socket: TcpStream, s: Shared, generation: u64) -> Result
         return respond(&mut socket, 204, b"", origin, false, "application/json").await;
     }
     let path = request.path.trim_end_matches('/');
-    if request.method == "GET" && path == "/api/devices" {
+    if request.method == "GET" && matches!(path, "/api/devices" | "/api/pos/devices") {
         let d = s.data.lock().await;
         let devices = d
             .engine
@@ -231,12 +236,14 @@ async fn connection(mut socket: TcpStream, s: Shared, generation: u64) -> Result
         return json_response(&mut socket, 200, json!(devices), origin).await;
     }
     if request.method == "GET"
-        && let Some(id) = path.strip_prefix("/api/devices/")
+        && let Some(id) = path
+            .strip_prefix("/api/devices/")
+            .or_else(|| path.strip_prefix("/api/pos/devices/"))
     {
         let device = s.data.lock().await.engine.devices.get(id).cloned();
         return match device {
             Some(device)=>json_response(&mut socket,200,json!({"id":device.id,"device_id":device.id,"name":device.name,"merchant":device.merchant}),origin).await,
-            None=>json_response(&mut socket,404,wire_error("terminal_id_invalid","Unknown terminal"),origin).await,
+            None=>json_response(&mut socket,404,json!({"loc":[],"msg":format!("POS terminal not found: Id {id}"),"type":"POS terminal"}),origin).await,
         };
     }
     let parts = path.split('/').collect::<Vec<_>>();
@@ -256,9 +263,37 @@ async fn connection(mut socket: TcpStream, s: Shared, generation: u64) -> Result
     let action = parts[4];
     if action == "ping" && request.method == "GET" {
         let d = s.data.lock().await;
+        if !d.engine.devices.contains_key(device_id) {
+            drop(d);
+            return json_response(
+                &mut socket,
+                404,
+                json!({
+                    "success": false, "code": 9524,
+                    "description": format!("Invalid terminal id > Id {device_id}"),
+                    "error": "Недійсний ідентифікатор терміналу."
+                }),
+                origin,
+            )
+            .await;
+        }
+        if d.engine
+            .operations
+            .values()
+            .any(|op| op.device_id == device_id && !op.stage.terminal())
+        {
+            drop(d);
+            return json_response(
+                &mut socket,
+                400,
+                wire_error("terminal_busy", "Device is busy"),
+                origin,
+            )
+            .await;
+        }
         let result = match d.engine.devices.get(device_id) {
             Some(device) if device.online && device.setup_error.is_none() => {
-                json!({"success":true,"error":null,"code":0,"result":null})
+                json!({"success":true,"terminal_status":"None","error":"","code":0})
             }
             Some(_) => wire_error("terminal_connection_refused", "Terminal unavailable"),
             None => wire_error("terminal_id_invalid", "Unknown terminal"),
@@ -314,6 +349,43 @@ async fn connection(mut socket: TcpStream, s: Shared, generation: u64) -> Result
             .await;
         }
     };
+    if payload
+        .get("merchant_id")
+        .is_some_and(|v| !v.is_null() && !v.is_string())
+    {
+        return json_response(
+            &mut socket,
+            400,
+            wire_error("invalid_merchant", "merchant_id must be a string"),
+            origin,
+        )
+        .await;
+    }
+    // Real PayLink also accepts transaction identity and confirmation fields. Until
+    // reference calibration establishes their semantics, fail explicitly rather
+    // than ignoring them and potentially simulating a duplicate charge.
+    if let Some(fields) = payload.as_object() {
+        let unsupported = fields
+            .keys()
+            .filter(|key| !matches!(key.as_str(), "amount" | "merchant_id"))
+            .cloned()
+            .collect::<Vec<_>>();
+        if !unsupported.is_empty() {
+            return json_response(
+                &mut socket,
+                501,
+                wire_error(
+                    "unsupported_request_fields",
+                    &format!(
+                        "Unsupported fields in experimental profile: {}",
+                        unsupported.join(", ")
+                    ),
+                ),
+                origin,
+            )
+            .await;
+        }
+    }
     let Some(amount) = payload.get("amount").and_then(Value::as_u64) else {
         return json_response(
             &mut socket,
@@ -331,7 +403,7 @@ async fn connection(mut socket: TcpStream, s: Shared, generation: u64) -> Result
         d.engine.start(
             device_id,
             amount,
-            payload.get("merchant").and_then(Value::as_str),
+            payload.get("merchant_id").and_then(Value::as_str),
         )
     };
     s.journal().await?;
@@ -341,7 +413,11 @@ async fn connection(mut socket: TcpStream, s: Shared, generation: u64) -> Result
         Err(e) => {
             return json_response(
                 &mut socket,
-                if e.code == "invalid_amount" { 400 } else { 200 },
+                if matches!(e.code.as_str(), "invalid_amount" | "terminal_busy") {
+                    400
+                } else {
+                    200
+                },
                 wire_error(&e.code, &e.message),
                 origin,
             )

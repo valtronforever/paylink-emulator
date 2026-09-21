@@ -243,8 +243,22 @@ async fn controlled_time_manual_actions_busy_reset_and_listener_recovery() {
         }
         tokio::time::sleep(Duration::from_millis(5)).await;
     };
-    let busy: Value = h.payment().send().await.unwrap().json().await.unwrap();
-    assert_eq!(busy["error"], "Device is busy");
+    let busy = h.payment().send().await.unwrap();
+    assert_eq!(busy.status(), 400);
+    let busy: Value = busy.json().await.unwrap();
+    assert_eq!(busy["description"], "Device is busy");
+    assert_eq!(busy["code"], 9009);
+    let ping = h
+        .client
+        .get(format!(
+            "{}/api/pos/{DEVICE_ID}/ping",
+            h.server.ready.payment_url
+        ))
+        .send()
+        .await
+        .unwrap();
+    assert_eq!(ping.status(), 400);
+    assert_eq!(ping.json::<Value>().await.unwrap()["code"], 9009);
     h.command(
         "action",
         json!({"operation_id":id,"event":"card_presented"}),
@@ -506,5 +520,104 @@ async fn json_media_type_is_case_insensitive() {
         .await
         .unwrap();
     assert_eq!(response["success"], true);
+    h.server.shutdown().await.unwrap();
+}
+
+#[tokio::test]
+async fn static_2120_contract_fields_aliases_and_explicit_unsupported_fields() {
+    let mut h = Harness::new(true).await;
+    let base = h.server.ready.payment_url.clone();
+    for route in ["/api/devices", "/api/pos/devices"] {
+        let devices: Value = h
+            .client
+            .get(format!("{base}{route}"))
+            .send()
+            .await
+            .unwrap()
+            .json()
+            .await
+            .unwrap();
+        assert_eq!(devices[0]["id"], DEVICE_ID);
+        let unknown = h
+            .client
+            .get(format!("{base}{route}/missing"))
+            .send()
+            .await
+            .unwrap();
+        assert_eq!(unknown.status(), 404);
+        assert_eq!(
+            unknown.json::<Value>().await.unwrap(),
+            json!({"loc":[],"msg":"POS terminal not found: Id missing","type":"POS terminal"})
+        );
+    }
+    let unknown_ping = h
+        .client
+        .get(format!("{base}/api/pos/missing/ping"))
+        .send()
+        .await
+        .unwrap();
+    assert_eq!(unknown_ping.status(), 404);
+    assert_eq!(unknown_ping.json::<Value>().await.unwrap()["code"], 9524);
+    h.command("devices",json!({"id":DEVICE_ID,"name":"Virtual POS","merchant":"SECOND","online":true,"setup_error":null})).await;
+    h.arm(Scenario {
+        merchant: Some("SECOND".into()),
+        ..instant()
+    })
+    .await;
+    let url = format!("{base}/api/pos/{DEVICE_ID}/purchase");
+    // A request identity has real PayLink dedup semantics which this draft cannot
+    // safely approximate. Unsupported parameters must not consume the scenario.
+    for extra in ["id", "confirm_signature", "merchant"] {
+        let mut body = json!({"amount":100,"merchant_id":"SECOND"});
+        body[extra] = json!("unsupported");
+        assert_eq!(
+            h.client
+                .post(&url)
+                .json(&body)
+                .send()
+                .await
+                .unwrap()
+                .status(),
+            501
+        );
+    }
+    assert_eq!(h.read("queue").await.as_array().unwrap().len(), 1);
+    assert_eq!(h.read("state").await["counters"]["accepted"], 0);
+    let invalid = h
+        .client
+        .post(&url)
+        .json(&json!({"amount":100,"merchant_id":7}))
+        .send()
+        .await
+        .unwrap();
+    assert_eq!(invalid.status(), 400);
+    let response: Value = h
+        .client
+        .post(&url)
+        .json(&json!({"amount":100,"merchant_id":"SECOND"}))
+        .send()
+        .await
+        .unwrap()
+        .json()
+        .await
+        .unwrap();
+    assert_eq!(response["success"], true);
+    assert_eq!(response["error"], "");
+    assert!(response["terminal_status"].is_string());
+    assert_eq!(response["result"]["merchant_id"], "SECOND");
+    assert_eq!(
+        response["result"]["terminal"],
+        response["result"]["terminal_id"]
+    );
+    assert_eq!(response["result"]["amount"], response["result"]["value"]);
+    assert_eq!(
+        response["result"]["receipt_no"],
+        response["result"]["invoice_num"]
+            .as_u64()
+            .unwrap()
+            .to_string()
+    );
+    assert!(response["result"].get("card_name").is_none());
+    assert!(response["result"].get("code").is_none());
     h.server.shutdown().await.unwrap();
 }

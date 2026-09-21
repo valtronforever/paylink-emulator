@@ -21,7 +21,7 @@ POST envelopes:
 {"command_id":"unique-run-command-1","generation":1,"payload":{}}
 ```
 
-A repeated ID with identical content returns the same result. Different content with the same ID returns 409. `generation` is optional but recommended for delayed test commands: stale generations return 409. Reset clears old command IDs, then caches its own result, so retrying the same reset does not reset twice. Use IDs unique within the run, including across resets. This idempotency applies only to control commands, never PayLink purchases.
+A repeated ID with identical content returns the same result. Different content with the same ID returns 409. `generation` is optional but recommended for delayed test commands: stale generations return 409. Reset clears old command IDs, then caches its own result, so retrying the same reset does not reset twice. Use IDs unique within the run, including across resets. This idempotency applies only to control commands. Payment calls without IDs are independent. The draft payment adapter explicitly rejects the real PayLink `id` field until its deduplication semantics are calibrated.
 
 | Resource | Payload |
 | --- | --- |
@@ -74,3 +74,7 @@ All delivery policies: `normal`, `disconnect_before_accept`, `disconnect_after_a
 Journal events carry profile, device/scenario/operation correlation, monotonic time, calendar time derived from the run epoch, and charge state when an operation is known. Controlled clock advances also advance this synthetic calendar; they do not change the host clock.
 
 `POST /control/v1/standalone` accepts `{"scenario":{...},"amount":100}`. Native **Start standalone** uses it to validate/arm/start atomically. Existing queued scenarios for that device are rejected, and a failed start leaves the queue unchanged. This prevents a rejected editor configuration from accidentally launching an earlier queued scenario. The browser-facing PayLink API is unaffected.
+
+## Payment adapter boundary
+
+The separate payment listener accepts `POST /api/pos/{device_id}/purchase` with `amount` (integer minor units) and optional string `merchant_id`. Device and scenario configuration use `merchant`; the adapter maps the wire field to it. Unknown or unsupported payment fields return HTTP 501 before consuming a queued scenario. This includes real PayLink request identity/confirmation options, which are not yet calibrated. See [static contract evidence and remaining limitations](COMPATIBILITY.md).

@@ -635,11 +635,11 @@ impl Engine {
                 .wrapping_mul(1_000_000)
                 .wrapping_add(sequence);
             Ok(
-                serde_json::json!({"success":true,"error":null,"code":0,"result":{
-                    "terminal":op.device_id,"rrn":format!("{:012}",serial%1_000_000_000_000),
-                    "card_mask":"4444 44** **** 1111","card_name":"TEST CARD","auth_code":format!("{:06}",serial.wrapping_add(op.scenario.seed)%1_000_000),
-                    "payment_system":"VISA","receipt_no":op.id,"acquirer_and_seller":"TEST ACQUIRER / TEST MERCHANT",
-                    "amount":op.amount,"code":1,"commission":0
+                serde_json::json!({"success":true,"terminal_status":"None","error":"","code":0,"id":op.id,"result":{
+                    "terminal":op.device_id,"terminal_id":op.device_id,"merchant_id":op.merchant,"rrn":format!("{:012}",serial%1_000_000_000_000),
+                    "card_mask":"4444 44** **** 1111","card_holder":"TEST CARD","auth_code":format!("{:06}",serial.wrapping_add(op.scenario.seed)%1_000_000),
+                    "payment_system":"VISA","receipt_no":sequence.to_string(),"invoice_num":sequence,"acquirer_and_seller":"TEST ACQUIRER / TEST MERCHANT",
+                    "amount":op.amount,"value":op.amount
                 }}),
             )
         } else {

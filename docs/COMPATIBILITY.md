@@ -4,9 +4,31 @@ Target: **Checkbox Desktop PayLink 2.1.20, win-x86**. Emulator host platforms ar
 
 The [manifest](../profiles/desktop-paylink-2.1.20-win-x86/manifest.json) records the official installer URL and SHA-256 actually computed on 2026-09-21. The executable has **not** been run against a physical terminal. API bodies, error channels, numeric codes, model-specific phases, timeout boundaries and browser headers remain **unverified**. Passing emulator tests proves its own model behaves consistently, not compatibility with a bank.
 
-The installer contains `POSServer.xml`. Its `Purchase` documentation shows an integer `amount` body and 200/400 responses. `GetDeviceConfig` documents 200/404; registration requires a subsequent `/api/pos/saveconfig`. It also lists ping, merchant discovery, last operation, report and WebSocket methods. Those names alone are not enough to invent paths or DTOs. Only the four routes in the manifest are provisionally implemented; unsupported routes return 404 and are not advertised as compatible.
+## Static evidence from the pinned build
 
-The provisional `success/error/code/result` wrapper and purchase result field names were cross-checked against [this community SDK](https://github.com/MakarovIgor/checkbox.paylink.php.sdk). This is secondary evidence, not proof of 2.1.20 behavior. In particular, `code: 0`, success details and device JSON must be replaced or confirmed through reference fixtures.
+The installer contains `POSServer.exe` (assembly version **2.1.20.10**) and `POSServer.xml`. [The metadata snapshot](../profiles/desktop-paylink-2.1.20-win-x86/static-contract.json) records 169 native status constants, 51 HTTP route attributes and 96 DTO properties with serializer attributes. It contains public contract metadata only, not the application implementation, certificates or keys.
+
+The native status enum includes progress and success values as well as errors: 169 does **not** mean 169 injectible payment errors. `ServiceCommand.GetErrorsList` enumerates all of them. Their availability, error channel, bank mapping and timing cannot be inferred just from the enum. The emulator's 13 common scenarios are a separate, smaller coverage set.
+
+Statically established facts applied to this draft:
+
+- The purchase DTO uses unsigned integer `amount` and string `merchant_id`. The model/control API still calls its configuration field `merchant`.
+- Discovery supports both `/api/devices` and `/api/pos/devices`, including the device ID variants. A missing configuration returns HTTP 404 with `loc`, `msg`, and `type` fields.
+- Ping of an unknown device returns HTTP 404 and native code 9524 (`InvalidTerminalId`). A concurrent purchase/ping against a locked device returns HTTP 400 and code 9009 (`DeviceBusy`). These are distinct from an injected terminal-error scenario.
+- `BaseResponseDTO` serializes `terminal_status` as a string and initializes `error` to an empty string. A purchase response carries an operation `id`. The provisional success body now follows these rules.
+- In `ResponseDTO`, `terminal` aliases `terminal_id`, `value` aliases `amount`, and `receipt_no` is the string form of numeric `invoice_num`. The test body no longer invents `card_name`, nested `code` or `commission` fields.
+
+Response details still form a **synthetic subset**, not a full bank-specific DTO. In particular discovery data, terminal failure payloads and many success fields still require reference calibration. A static identifier does not establish how a provider uses it. The earlier [community SDK](https://github.com/MakarovIgor/checkbox.paylink.php.sdk) was useful for initial discovery but is superseded by the version-specific metadata where they differ.
+
+The supported purchase body is currently `{"amount":100,"merchant_id":"TEST-MERCHANT"}` with `merchant_id` optional. Other fields return explicit HTTP 501 before an operation starts. Real PayLink has request-ID/deduplication, signature/continuation and further options; silently ignoring them would give tests misleading duplicate-payment behavior. HTTP 501 for these fields is an **emulator limitation**, not asserted PayLink behavior. Calls without IDs remain independent operations.
+
+To reproduce the metadata snapshot, extract the pinned NSIS installer into a temporary directory, install `dnfile==0.18.0` in an isolated Python environment, and run:
+
+```sh
+python scripts/extract-static-contract.py /path/to/POSServer.exe output.json
+```
+
+The script refuses a different assembly hash. JSON serializer options are stored as numeric enum values; for example `NullValueHandling: 1` means omit null values. Route attributes retain `[controller]`; the controller prefix is `api/[controller]` and its name is `POS`. The snapshot inventories additional endpoints but does not claim they are implemented.
 
 ## Error taxonomy
 

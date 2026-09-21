@@ -4,7 +4,7 @@
 
 A Rust terminal simulator for manual testing and browser automation, targeting **Checkbox Desktop PayLink 2.1.20 win-x86**. Run a headless local service in CI, control it with an API/CLI, or use a native GPUI terminal with a display, keypad and card/customer actions.
 
-**Experimental compatibility:** the installer version and checksum are pinned, but wire responses and timing have not yet been validated against a physical terminal. See [compatibility evidence and calibration](docs/COMPATIBILITY.md). This emulator cannot contact a bank or charge a real card.
+**Experimental compatibility:** the installer version and checksum are pinned, but wire responses and timing have not yet been validated against a physical terminal. The pinned assembly also has a reproducible inventory of 169 status constants; progress codes and uncalibrated bank errors are not presented as covered scenarios. See [compatibility evidence and calibration](docs/COMPATIBILITY.md). This emulator cannot contact a bank or charge a real card.
 
 ## Quick start
 
@@ -19,6 +19,8 @@ cargo run --locked -p paylink-emulator -- serve \
 ```
 
 Readiness is one JSON line with actual payment/control URLs and profile. Both listeners bind loopback; defaults are ports 3000 and 3001. Use `--payment-addr 127.0.0.1:0 --control-addr 127.0.0.1:0` for isolated dynamic ports. Each worker should own its process, token, ports and journal. There is no passthrough mode.
+
+The payment adapter currently accepts `amount` and optional `merchant_id`. Unsupported fields, including real PayLink transaction IDs and confirmation options, return HTTP 501 without starting payment. See the compatibility guide before writing integration tests.
 
 In another terminal with the same token:
 
@@ -41,7 +43,7 @@ cargo run --locked -p paylink-gui
 cargo run --locked -p paylink-gui -- --connect http://127.0.0.1:3001
 ```
 
-The native app starts the same service when `--connect` is absent. Its original generic terminal skin has a display, physical-style keypad, Cancel/OK and a test-card button. Choose a field and use the keypad to enter the amount or a delay. **Arm next request** prepares a browser-driven payment; **Start standalone** lets you practice the entire flow without another app. In manual mode, card and customer stages wait for clicks. Enable manual bank decisions to hold authorization until you approve or decline. All 13 documented cases are selectable; transport/setup cases use their own controls. The journal shows stage changes and separate charge/delivery counts.
+The native app starts the same service when `--connect` is absent. Its original generic terminal skin has a display, physical-style keypad, Cancel/OK and a test-card button. Choose a field and use the keypad to enter the amount or a delay. **Arm next request** prepares a browser-driven payment; **Start standalone** lets you practice the entire flow without another app. In manual mode, card and customer stages wait for clicks. Enable manual bank decisions to hold authorization until you approve or decline. All 13 documented common cases are selectable; transport/setup cases use their own controls. The journal shows stage changes and separate charge/delivery counts.
 
 A default embedded token is randomly generated; set `PAYLINK_CONTROL_TOKEN` if a CLI/test runner must also control that session. An attached service requires its existing token. Native UI needs a graphics session and platform development libraries. Headless `cargo build`/`cargo test` use the workspace default members and do not compile GPUI.
 
