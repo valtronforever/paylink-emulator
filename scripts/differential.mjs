@@ -4,6 +4,7 @@ import {readFileSync,writeFileSync,mkdirSync,readdirSync,existsSync} from 'node:
 import {join} from 'node:path';
 import {randomUUID} from 'node:crypto';
 import {isDeepStrictEqual} from 'node:util';
+import {normalizeReference as normalized} from './normalize-reference.mjs';
 const fixtureDir='profiles/desktop-paylink-2.1.20-win-x86/reference';
 const files=existsSync(fixtureDir)?readdirSync(fixtureDir).filter(f=>f.endsWith('.json')):[];
 mkdirSync('test-results',{recursive:true});
@@ -17,14 +18,6 @@ const token=process.env.PAYLINK_CONTROL_TOKEN;if(!token)throw new Error('PAYLINK
 const command=async(resource,payload)=>{
   const r=await fetch(`${control}/control/v1/${resource}`,{method:'POST',headers:{Authorization:`Bearer ${token}`,'Content-Type':'application/json'},body:JSON.stringify({command_id:randomUUID(),payload})});
   if(!r.ok)throw new Error(await r.text());return r.json();
-};
-const normalized=(value,paths)=>{
-  const copy=structuredClone(value);
-  for(const path of paths){
-    if(!['result.rrn','result.auth_code','result.receipt_no'].includes(path))throw new Error(`Not an allowed variable field: ${path}`);
-    const keys=path.split('.');let parent=copy;for(const key of keys.slice(0,-1))parent=parent?.[key];
-    if(parent&&Object.hasOwn(parent,keys.at(-1)))parent[keys.at(-1)]=`<variable:${typeof parent[keys.at(-1)]}>`;
-  }return copy;
 };
 const results=[];
 for(const file of files){

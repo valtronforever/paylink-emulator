@@ -73,4 +73,4 @@ Place reference JSON files in `profiles/desktop-paylink-2.1.20-win-x86/reference
 }
 ```
 
-This is a **format example**, not an actual reference response. Payment fixtures additionally carry a matching emulator `scenario` and JSON request `body`. Optional `timing` has `min_ms` and `max_ms`. Only result RRN, authorization code and receipt number may be explicitly normalized; absence/types/status/error content remain significant. Set `PAYLINK_PAYMENT_URL`, `PAYLINK_CONTROL_URL`, and `PAYLINK_CONTROL_TOKEN` to the isolated emulator. The runner resets it before every case.
+This is a **format example**, not an actual reference response. Payment fixtures additionally carry a matching emulator `scenario` and JSON request `body`. Optional `timing` has `min_ms` and `max_ms`. Only operation ID and result RRN, authorization code, invoice number and receipt number may be explicitly normalized; absence/types/status/error content remain significant. Set `PAYLINK_PAYMENT_URL`, `PAYLINK_CONTROL_URL`, and `PAYLINK_CONTROL_TOKEN` to the isolated emulator. The runner resets it before every case.

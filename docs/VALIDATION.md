@@ -19,6 +19,7 @@ Date: 2026-09-21. Target: Desktop PayLink 2.1.20 win-x86.
 | Native selected terminal error | Passed | `terminal_unknown_0` → card → OK → Failed; exact catalog text visible on display |
 | Native accessibility/shutdown | Passed | terminal status exposed in AX tree; last-window close terminated process |
 | Docker without external network | Passed | built image; `--network none`; CLI arm/purchase/advance/assert reported one approval |
+| Reference normalizer | 1 passed | `node --test scripts/normalize-reference.test.mjs`; preserves missing/null/types and material response differences |
 | Reference differential comparison | **Blocked** | no real PayLink/terminal recordings; runner exits 2 and writes `test-results/differential.json` |
 
 Commit `4063b09` passed all eight jobs in [CI run 35566221664](https://github.com/valtronforever/paylink-emulator/actions/runs/35566221664): headless tests and native builds/tests on Linux, Windows and macOS, Linux browser tests, and container smoke. Later changes must pass the PR's latest run; see [PR #8 checks](https://github.com/valtronforever/paylink-emulator/pull/8/checks). Native runtime behavior has only been observed on macOS, not Windows/Linux desktops.

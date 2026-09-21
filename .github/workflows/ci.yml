@@ -83,6 +83,7 @@ jobs:
           node-version: '24'
           cache: npm
       - run: npm ci
+      - run: node --test scripts/normalize-reference.test.mjs
       - run: npx playwright install --with-deps chromium
       - run: cargo build --locked -p paylink-emulator
       - run: mkdir -p test-results && cargo test --locked > test-results/rust-tests.log 2>&1
