@@ -29,3 +29,26 @@ Confirmation/reversal state-machine support is **synthetic and opt-in**, never e
 Source setup/release documentation: https://wiki.checkbox.ua/app/pc/portal_acquiring
 
 The original Inerix issue is retained as historical context in `ORIGINAL_REQUIREMENTS.md`. The user's later decision moved the emulator to its own Rust repository and added a native GPUI interface; those decisions supersede its old path suggestions and GUI exclusion.
+
+## Differential runner
+
+`node scripts/differential.mjs` compares sanitized reference fixtures with a **running emulator**. It does not record payments against a real bank. Without fixtures it writes `test-results/differential.json` with `blocked` and exits 2. This is the expected current result, never a passed calibration.
+
+Place reference JSON files in `profiles/desktop-paylink-2.1.20-win-x86/reference/`. Each contains:
+
+```json
+{
+  "profile": "desktop-paylink-2.1.20-win-x86",
+  "evidence": {
+    "installer_sha256": "62d0e7a539380937ecb5af2f1c50438e4b84a070de4a20c1c848c11a5e395491",
+    "bank": "record the actual test bank",
+    "protocol": "record the actual terminal protocol",
+    "capture_date": "YYYY-MM-DD"
+  },
+  "request": {"method": "GET", "path": "/api/devices/", "headers": {}},
+  "response": {"status": 200, "body": []},
+  "variable_fields": []
+}
+```
+
+This is a **format example**, not an actual reference response. Payment fixtures additionally carry a matching emulator `scenario` and JSON request `body`. Optional `timing` has `min_ms` and `max_ms`. Only result RRN, authorization code and receipt number may be explicitly normalized; absence/types/status/error content remain significant. Set `PAYLINK_PAYMENT_URL`, `PAYLINK_CONTROL_URL`, and `PAYLINK_CONTROL_TOKEN` to the isolated emulator. The runner resets it before every case.

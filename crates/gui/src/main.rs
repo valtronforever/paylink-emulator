@@ -4,7 +4,7 @@ use gpui_kit::{
     component::{button::*, *},
     *,
 };
-use paylink_core::{Device, Engine, Mode, Outcome, Scenario, catalog::ERRORS};
+use paylink_core::{Delivery, Device, Engine, Mode, Outcome, Scenario, Stage, catalog::ERRORS};
 use paylink_server::{Config, Server};
 use serde_json::{Value, json};
 use std::{
@@ -166,6 +166,11 @@ impl Terminal {
         }
     }
     fn digit(&mut self, ch: &str) {
+        if matches!(self.input, InputTarget::Amount)
+            && self.current().is_some_and(|o| !o.stage.terminal())
+        {
+            return;
+        }
         let replace = self.replace_input;
         self.replace_input = false;
         let value = self.value();
@@ -265,6 +270,23 @@ impl Render for Terminal {
             .filter(|o| !o.stage.terminal())
             .map(|o| o.amount)
             .unwrap_or(self.amount);
+        let active = op.as_ref().is_some_and(|o| !o.stage.terminal());
+        let detail = op
+            .as_ref()
+            .and_then(|o| o.error_id.as_deref())
+            .and_then(paylink_core::catalog::error_definition)
+            .map(|e| e.message.to_owned())
+            .unwrap_or_default();
+        let elapsed = op
+            .as_ref()
+            .and_then(|o| {
+                snapshot.engine.as_ref().map(|e| {
+                    o.completed_ms
+                        .unwrap_or(e.now_ms)
+                        .saturating_sub(o.started_ms)
+                })
+            })
+            .unwrap_or(0);
         let outcome = match self.outcome {
             0 => "Approved",
             1 => "Declined",
@@ -290,6 +312,7 @@ impl Render for Terminal {
                             "backspace" => "←",
                             _ => key,
                         })
+                        .disabled(active && matches!(self.input, InputTarget::Amount))
                         .w(px(80.))
                         .h(px(44.))
                         .on_click(cx.listener(move |this, _, _, cx| {
@@ -304,7 +327,7 @@ impl Render for Terminal {
             .id("terminal-display")
             .role(Role::Status)
             .aria_label(format!(
-                "Terminal {stage}, amount {}.{:02} UAH",
+                "Terminal {stage}, amount {}.{:02} UAH, {detail}",
                 amount / 100,
                 amount % 100
             ))
@@ -323,6 +346,8 @@ impl Render for Terminal {
                     .child(format!("{}.{:02} UAH", amount / 100, amount % 100)),
             )
             .child(stage.clone())
+            .child(div().text_sm().child(detail))
+            .child(div().text_xs().child(format!("Elapsed: {elapsed} ms")))
             .child(
                 div().text_xs().child(
                     op.as_ref()
@@ -441,6 +466,51 @@ impl Render for Terminal {
                     .text_sm()
                     .child("Select a field, then use the keypad (or keyboard digits)."),
             );
+        settings = settings
+            .child(self.button(
+                "delivery",
+                format!("Reply fault: {:?} →", self.scenario.delivery),
+                |s, _, _| {
+                    let choices = [
+                        Delivery::Normal,
+                        Delivery::DisconnectBeforeAccept,
+                        Delivery::DisconnectAfterAccept,
+                        Delivery::DisconnectAfterCommit,
+                        Delivery::PartialResponse,
+                        Delivery::Hang,
+                        Delivery::MalformedJson,
+                        Delivery::Http400,
+                        Delivery::Http500,
+                        Delivery::WrongContentType,
+                        Delivery::MissingFields,
+                        Delivery::UnknownCode,
+                    ];
+                    let index = choices
+                        .iter()
+                        .position(|d| *d == s.scenario.delivery)
+                        .unwrap_or(0);
+                    s.scenario.delivery = choices[(index + 1) % choices.len()];
+                },
+                cx,
+            ))
+            .child(self.button(
+                "failure-stage",
+                format!("Inject error at: {:?} →", self.scenario.failure_stage),
+                |s, _, _| {
+                    let stages = [
+                        Stage::Connecting,
+                        Stage::AwaitingCard,
+                        Stage::AwaitingCustomer,
+                        Stage::Authorizing,
+                    ];
+                    let index = stages
+                        .iter()
+                        .position(|v| *v == s.scenario.failure_stage)
+                        .unwrap_or(0);
+                    s.scenario.failure_stage = stages[(index + 1) % stages.len()];
+                },
+                cx,
+            ));
         for (index, (target, label, value)) in [
             (InputTarget::Amount, "Amount / minor units", self.amount),
             (
@@ -480,6 +550,7 @@ impl Render for Terminal {
             settings = settings.child(
                 Button::new(("field", index))
                     .label(format!("{label}: {value}"))
+                    .disabled(active && matches!(target, InputTarget::Amount))
                     .on_click(cx.listener(move |s, _, _, cx| {
                         s.input = target;
                         s.replace_input = true;

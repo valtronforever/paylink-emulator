@@ -85,6 +85,12 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: cargo build --locked -p paylink-emulator
       - run: mkdir -p test-results && cargo test --locked > test-results/rust-tests.log 2>&1
+      - name: Generated contracts are current
+        run: |
+          cargo run -q -p paylink-core --example export_catalog > profiles/desktop-paylink-2.1.20-win-x86/errors.json
+          cargo run -q -p paylink-core --example export_schema > docs/model-schemas.json
+          node scripts/generate-openapi.mjs
+          git diff --exit-code -- docs/model-schemas.json docs/control-openapi.json profiles/desktop-paylink-2.1.20-win-x86/errors.json
       - run: npm run test:browser
       - run: npm run test:coverage
       - uses: actions/upload-artifact@v4
@@ -92,3 +98,23 @@ jobs:
         with:
           name: browser-evidence
           path: test-results/
+
+  container:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t paylink-emulator:test .
+      - name: Isolated container smoke
+        run: |
+          docker run -d --name paylink-smoke --network none -e PAYLINK_CONTROL_TOKEN=container-smoke-test-token paylink-emulator:test serve --clock controlled
+          trap "docker rm -f paylink-smoke" EXIT
+          for attempt in $(seq 1 50); do
+            if docker exec paylink-smoke paylink-emulator get health >/dev/null 2>&1; then break; fi
+            sleep 0.1
+          done
+          docker exec paylink-smoke paylink-emulator get health
+          docker exec paylink-smoke paylink-emulator arm --state approved
+          docker exec paylink-smoke paylink-emulator purchase 1234
+          docker exec paylink-smoke paylink-emulator advance 5000
+          docker exec paylink-smoke paylink-emulator assert '{"approvals":1,"accepted":1,"queue_empty":true}'
+          docker stop --timeout 5 paylink-smoke

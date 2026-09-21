@@ -40,3 +40,16 @@ test('blocked origin fails actual browser CORS',async({page,emulator})=>{
   await page.getByRole('button').click();await expect(page.locator('#result')).toHaveText('Transport error');
   await emulator.control('assert',{requests:0,approvals:0});
 });
+
+test('not-running and setup-only errors have distinct observable consequences',async({page,emulator})=>{
+  await emulator.control('transport',{online:false});
+  await expect.poll(async()=>(await emulator.control('transport')).online).toBe(false);
+  await page.getByRole('button').click();await expect(page.locator('#result')).toHaveText('Transport error');
+  await emulator.control('transport',{online:true});
+  await expect.poll(async()=>(await emulator.control('transport')).online).toBe(true);
+  await emulator.control('devices',{id:'00000000-0000-4000-8000-000000000001',name:'Virtual POS',merchant:'TEST-MERCHANT',online:true,setup_error:'driver_install_9011'});
+  await page.getByRole('button').click();await expect(page.locator('#result')).toHaveText('Connection refused');
+  await emulator.control('assert',{accepted:0,approvals:0});
+  await emulator.control('devices',{id:'00000000-0000-4000-8000-000000000001',name:'Virtual POS',merchant:'TEST-MERCHANT',online:true,setup_error:null});
+  await emulator.arm(instant);await page.getByRole('button').click();await expect(page.locator('#result')).toHaveText('Approved');
+});

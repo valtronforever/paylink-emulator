@@ -363,3 +363,87 @@ async fn independent_process_state_and_controlled_delay_boundary() {
     a.server.shutdown().await.unwrap();
     b.server.shutdown().await.unwrap();
 }
+
+#[tokio::test]
+async fn setup_fault_is_visible_without_claiming_a_payment_driver_code() {
+    let mut h = Harness::new(true).await;
+    h.command("devices",json!({"id":DEVICE_ID,"name":"Virtual POS","merchant":"TEST-MERCHANT","online":true,"setup_error":"driver_install_9011"})).await;
+    let response: Value = h.payment().send().await.unwrap().json().await.unwrap();
+    assert_eq!(response["success"], false);
+    assert_eq!(response["error"], "Connection refused");
+    h.command("assert", json!({"accepted":0,"approvals":0}))
+        .await;
+    h.server.shutdown().await.unwrap();
+}
+
+#[tokio::test]
+async fn synthetic_response_shapes_and_disconnect_after_accept_are_distinct() {
+    let mut h = Harness::new(true).await;
+    for delivery in [
+        Delivery::Http400,
+        Delivery::WrongContentType,
+        Delivery::MissingFields,
+        Delivery::UnknownCode,
+    ] {
+        h.command("reset", json!({})).await;
+        h.arm(Scenario {
+            delivery,
+            ..instant()
+        })
+        .await;
+        let response = h.payment().send().await.unwrap();
+        if delivery == Delivery::Http400 {
+            assert_eq!(response.status(), 400);
+        }
+        if delivery == Delivery::WrongContentType {
+            assert_eq!(response.headers()["content-type"], "text/plain");
+        }
+        let body: Value = response.json().await.unwrap();
+        if delivery == Delivery::MissingFields {
+            assert_eq!(body["result"], json!({}));
+        }
+        if delivery == Delivery::UnknownCode {
+            assert_eq!(body["code"], 999999);
+        }
+        h.command("assert", json!({"approvals":1,"accepted":1,"delivered":0}))
+            .await;
+    }
+    h.command("reset", json!({})).await;
+    h.arm(Scenario {
+        delivery: Delivery::DisconnectAfterAccept,
+        timing: Timing {
+            authorize_ms: 100,
+            ..instant().timing
+        },
+        ..instant()
+    })
+    .await;
+    assert!(h.payment().send().await.is_err());
+    h.command("assert", json!({"accepted":1,"approvals":0}))
+        .await;
+    h.command("advance", json!({"ms":100})).await;
+    h.command("assert", json!({"accepted":1,"approvals":1,"delivered":0}))
+        .await;
+    h.server.shutdown().await.unwrap();
+}
+
+#[tokio::test]
+async fn reset_closes_incomplete_requests_before_a_new_scenario_can_be_consumed() {
+    use tokio::io::{AsyncReadExt, AsyncWriteExt};
+    let mut h = Harness::new(true).await;
+    let addr = h.server.ready.payment_url.strip_prefix("http://").unwrap();
+    let mut socket = tokio::net::TcpStream::connect(addr).await.unwrap();
+    socket.write_all(format!("POST /api/pos/{DEVICE_ID}/purchase HTTP/1.1\r\nHost: localhost\r\nContent-Type: application/json\r\nContent-Length: 14\r\n\r\n{{").as_bytes()).await.unwrap();
+    tokio::time::sleep(Duration::from_millis(20)).await;
+    h.command("reset", json!({})).await;
+    h.arm(instant()).await;
+    let mut bytes = [0; 1024];
+    let read = tokio::time::timeout(Duration::from_secs(1), socket.read(&mut bytes))
+        .await
+        .unwrap();
+    assert!(matches!(read, Ok(0) | Err(_)));
+    h.command("assert", json!({"requests":0,"approvals":0}))
+        .await;
+    assert_eq!(h.read("queue").await.as_array().unwrap().len(), 1);
+    h.server.shutdown().await.unwrap();
+}

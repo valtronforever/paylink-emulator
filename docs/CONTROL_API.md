@@ -66,3 +66,9 @@ Provisional routes: GET `/api/devices/`, GET `/api/devices/{id}`, GET `/api/pos/
 The default device ID is `00000000-0000-4000-8000-000000000001`. Every accepted payment snapshots a scenario. A disconnected client does not cancel the model. Inspect approvals separately from response delivery. `delivered` records a successful server socket write, not a client application acknowledgement: TCP cannot prove that the browser processed the body.
 
 The small HTTP/1.1 listener accepts bounded Content-Length JSON requests, closes each response connection and rejects chunked request bodies. It exists to produce actual TCP faults, including incomplete response bodies. The exact reference server's keep-alive/chunked/header behavior is not yet verified.
+
+Machine-readable specification: [OpenAPI 3.1](control-openapi.json). Its model schemas are generated from Rust via `cargo run -q -p paylink-core --example export_schema > docs/model-schemas.json`, then `node scripts/generate-openapi.mjs`.
+
+All delivery policies: `normal`, `disconnect_before_accept`, `disconnect_after_accept`, `disconnect_after_commit`, `partial_response`, `hang`, `malformed_json`, `http400`, `http500`, `wrong_content_type`, `missing_fields`, `unknown_code`. The last cases are explicitly synthetic. A fault in delivery does not roll back a bank outcome.
+
+Journal events carry profile, device/scenario/operation correlation, monotonic time, calendar time derived from the run epoch, and charge state when an operation is known. Controlled clock advances also advance this synthetic calendar; they do not change the host clock.

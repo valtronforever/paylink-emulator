@@ -1,5 +1,7 @@
 # PayLink emulator
 
+[Українська документація](README.uk.md)
+
 A Rust terminal simulator for manual testing and browser automation, targeting **Checkbox Desktop PayLink 2.1.20 win-x86**. Run a headless local service in CI, control it with an API/CLI, or use a native GPUI terminal with a display, keypad and card/customer actions.
 
 **Experimental compatibility:** the installer version and checksum are pinned, but wire responses and timing have not yet been validated against a physical terminal. See [compatibility evidence and calibration](docs/COMPATIBILITY.md). This emulator cannot contact a bank or charge a real card.
@@ -62,9 +64,10 @@ Use `serve --clock controlled` then `advance 100` for deterministic millisecond 
 
 ## API and tests
 
-- [Control API](docs/CONTROL_API.md): token-authenticated runner/CLI/native control, separate from the payment listener.
+- [Control API](docs/CONTROL_API.md) / [OpenAPI 3.1](docs/control-openapi.json): token-authenticated runner/CLI/native control, separate from the payment listener.
 - [Compatibility manifest](profiles/desktop-paylink-2.1.20-win-x86/manifest.json): exact version, evidence and unsupported routes.
 - [Testing and coverage](docs/TESTING.md): native, HTTP and actual browser tests; reference calibration boundary.
+- [Headless container](docs/CONTAINERS.md): isolated network and runtime instructions.
 - [Project issues](https://github.com/valtronforever/paylink-emulator/issues): implementation and remaining verification work.
 
 ```sh

@@ -13,10 +13,17 @@ pub async fn serve(initial: TcpListener, addr: SocketAddr, s: Shared) {
     let mut listener = Some(initial);
     let mut online = s.transport.subscribe();
     let mut stop = s.stop.subscribe();
+    let mut reset = s.reset_connections.subscribe();
     let mut connections = JoinSet::new();
     loop {
         tokio::select! {
             _=stop.changed()=>break,
+            _=reset.changed()=> {
+                connections.abort_all();
+                while connections.join_next().await.is_some() {}
+                let generation=*reset.borrow_and_update();
+                s.data.lock().await.listener_generation=generation;
+            },
             _=online.changed()=> {
                 if !*online.borrow_and_update() {
                     listener=None; connections.abort_all();
@@ -31,7 +38,8 @@ pub async fn serve(initial: TcpListener, addr: SocketAddr, s: Shared) {
             accepted=async { match &listener {Some(l)=>l.accept().await,None=>std::future::pending().await} } => {
                 if let Ok((socket,_))=accepted {
                     let shared=s.clone();
-                    connections.spawn(async move { let _=connection(socket,shared).await; });
+                    let generation=s.data.lock().await.engine.generation;
+                    connections.spawn(async move { let _=connection(socket,shared,generation).await; });
                 }
             },
             _=connections.join_next(),if !connections.is_empty()=>{}
@@ -170,7 +178,7 @@ async fn json_response(
 fn wire_error(code: &str, message: &str) -> Value {
     json!({"success":false,"error":error_definition(code).map(|e|e.message).unwrap_or(message),"code":0,"result":null})
 }
-async fn connection(mut socket: TcpStream, s: Shared) -> Result<()> {
+async fn connection(mut socket: TcpStream, s: Shared, generation: u64) -> Result<()> {
     let request = match tokio::time::timeout(Duration::from_secs(10), parse(&mut socket)).await {
         Ok(Ok(r)) => r,
         _ => {
@@ -207,13 +215,14 @@ async fn connection(mut socket: TcpStream, s: Shared) -> Result<()> {
             .values()
             .map(|d| json!({"id":d.id,"device_id":d.id,"name":d.name,"merchant":d.merchant}))
             .collect::<Vec<_>>();
+        drop(d);
         return json_response(&mut socket, 200, json!(devices), origin).await;
     }
     if request.method == "GET"
         && let Some(id) = path.strip_prefix("/api/devices/")
     {
-        let d = s.data.lock().await;
-        return match d.engine.devices.get(id) {
+        let device = s.data.lock().await.engine.devices.get(id).cloned();
+        return match device {
             Some(device)=>json_response(&mut socket,200,json!({"id":device.id,"device_id":device.id,"name":device.name,"merchant":device.merchant}),origin).await,
             None=>json_response(&mut socket,404,wire_error("terminal_id_invalid","Unknown terminal"),origin).await,
         };
@@ -242,6 +251,7 @@ async fn connection(mut socket: TcpStream, s: Shared) -> Result<()> {
             Some(_) => wire_error("terminal_connection_refused", "Terminal unavailable"),
             None => wire_error("terminal_id_invalid", "Unknown terminal"),
         };
+        drop(d);
         return json_response(&mut socket, 200, result, origin).await;
     }
     if action != "purchase" {
@@ -301,6 +311,9 @@ async fn connection(mut socket: TcpStream, s: Shared) -> Result<()> {
     };
     let started = {
         let mut d = s.data.lock().await;
+        if d.engine.generation != generation {
+            return Ok(());
+        }
         d.engine.start(
             device_id,
             amount,
@@ -322,6 +335,11 @@ async fn connection(mut socket: TcpStream, s: Shared) -> Result<()> {
         }
     };
     s.journal().await?;
+    if s.data.lock().await.engine.operations[&id].scenario.delivery
+        == Delivery::DisconnectAfterAccept
+    {
+        return Ok(());
+    }
     loop {
         let snapshot = {
             let d = s.data.lock().await;
@@ -341,10 +359,18 @@ async fn connection(mut socket: TcpStream, s: Shared) -> Result<()> {
                     .saturating_add(op.scenario.timing.response_ms)
         {
             match op.scenario.delivery {
-                Delivery::DisconnectAfterCommit | Delivery::DisconnectBeforeAccept => return Ok(()),
+                Delivery::DisconnectAfterCommit
+                | Delivery::DisconnectBeforeAccept
+                | Delivery::DisconnectAfterAccept => return Ok(()),
                 Delivery::Hang => {}
                 delivery => {
-                    let result = result.context("completed result missing")?;
+                    let result = match delivery {
+                        Delivery::MissingFields => json!({"success":true,"result":{}}),
+                        Delivery::UnknownCode => {
+                            json!({"success":false,"error":"Synthetic unknown code","code":999999,"result":null})
+                        }
+                        _ => result.context("completed result missing")?,
+                    };
                     let body = if delivery == Delivery::MalformedJson {
                         b"{invalid-json".to_vec()
                     } else {
@@ -352,7 +378,9 @@ async fn connection(mut socket: TcpStream, s: Shared) -> Result<()> {
                     };
                     respond(
                         &mut socket,
-                        if delivery == Delivery::Http500 {
+                        if delivery == Delivery::Http400 {
+                            400
+                        } else if delivery == Delivery::Http500 {
                             500
                         } else {
                             200
@@ -360,7 +388,11 @@ async fn connection(mut socket: TcpStream, s: Shared) -> Result<()> {
                         &body,
                         origin,
                         delivery == Delivery::PartialResponse,
-                        "application/json",
+                        if delivery == Delivery::WrongContentType {
+                            "text/plain"
+                        } else {
+                            "application/json"
+                        },
                     )
                     .await?;
                     if delivery == Delivery::Normal {

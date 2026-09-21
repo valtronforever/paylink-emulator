@@ -1,5 +1,6 @@
 //! Deterministic terminal model. It has no network, UI or wall-clock dependency.
 pub mod catalog;
+use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, VecDeque};
 use thiserror::Error;
@@ -7,7 +8,7 @@ use thiserror::Error;
 pub const PROFILE: &str = "desktop-paylink-2.1.20-win-x86";
 pub const DEVICE_ID: &str = "00000000-0000-4000-8000-000000000001";
 
-#[derive(Debug, Error, Clone, Serialize)]
+#[derive(Debug, Error, Clone, Serialize, JsonSchema)]
 #[error("{code}: {message}")]
 pub struct ModelError {
     pub code: String,
@@ -21,7 +22,7 @@ fn fail(code: &str, message: &str) -> ModelError {
 }
 type Result<T> = std::result::Result<T, ModelError>;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "snake_case")]
 pub enum Stage {
     Connecting,
@@ -49,14 +50,14 @@ impl Stage {
         )
     }
 }
-#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "snake_case")]
 pub enum Mode {
     #[default]
     Automatic,
     Manual,
 }
-#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "snake_case")]
 pub enum Outcome {
     #[default]
@@ -64,19 +65,24 @@ pub enum Outcome {
     Declined,
     Error,
 }
-#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "snake_case")]
 pub enum Delivery {
     #[default]
     Normal,
     DisconnectBeforeAccept,
     DisconnectAfterCommit,
+    DisconnectAfterAccept,
     PartialResponse,
     Hang,
     MalformedJson,
     Http500,
+    Http400,
+    WrongContentType,
+    MissingFields,
+    UnknownCode,
 }
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
 #[serde(default, deny_unknown_fields)]
 pub struct Timing {
     pub connect_ms: u64,
@@ -100,7 +106,7 @@ impl Default for Timing {
         }
     }
 }
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
 #[serde(default, deny_unknown_fields)]
 pub struct Scenario {
     pub id: String,
@@ -198,7 +204,7 @@ impl Scenario {
         Ok(())
     }
 }
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
 pub struct Device {
     pub id: String,
@@ -219,7 +225,7 @@ impl Default for Device {
         }
     }
 }
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
 pub struct Operation {
     pub id: String,
     pub device_id: String,
@@ -235,7 +241,7 @@ pub struct Operation {
     pub scenario: Scenario,
     pub response_delivered: bool,
 }
-#[derive(Debug, Clone, Default, Serialize, Deserialize)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema)]
 pub struct Counters {
     pub requests: u64,
     pub accepted: u64,
@@ -243,19 +249,25 @@ pub struct Counters {
     pub reversals: u64,
     pub delivered: u64,
 }
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
 pub struct Event {
     pub cursor: u64,
     pub generation: u64,
     pub at_ms: u64,
+    pub unix_ms: Option<u64>,
+    pub profile: String,
+    pub device_id: Option<String>,
+    pub scenario_id: Option<String>,
+    pub charged: Option<bool>,
     pub operation_id: Option<String>,
     pub kind: String,
     pub detail: String,
 }
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
 pub struct Engine {
     pub profile: String,
     pub now_ms: u64,
+    pub epoch_unix_ms: Option<u64>,
     pub generation: u64,
     pub devices: BTreeMap<String, Device>,
     pub operations: BTreeMap<String, Operation>,
@@ -270,6 +282,7 @@ impl Default for Engine {
         Self {
             profile: PROFILE.into(),
             now_ms: 0,
+            epoch_unix_ms: None,
             generation: 1,
             devices: BTreeMap::from([(DEVICE_ID.into(), Device::default())]),
             operations: BTreeMap::new(),
@@ -282,11 +295,23 @@ impl Default for Engine {
     }
 }
 impl Engine {
+    pub fn with_epoch(mut self, epoch_unix_ms: u64) -> Self {
+        self.epoch_unix_ms = Some(epoch_unix_ms);
+        self
+    }
     fn log(&mut self, operation_id: Option<&str>, kind: &str, detail: String) {
+        let operation = operation_id.and_then(|id| self.operations.get(id));
         self.events.push(Event {
             cursor: self.next_event,
             generation: self.generation,
             at_ms: self.now_ms,
+            unix_ms: self
+                .epoch_unix_ms
+                .map(|epoch| epoch.saturating_add(self.now_ms)),
+            profile: self.profile.clone(),
+            device_id: operation.map(|o| o.device_id.clone()),
+            scenario_id: operation.map(|o| o.scenario.id.clone()),
+            charged: operation.map(|o| o.charged),
             operation_id: operation_id.map(str::to_owned),
             kind: kind.into(),
             detail,
@@ -575,9 +600,13 @@ impl Engine {
     }
     pub fn reset(&mut self) {
         let generation = self.generation + 1;
+        let epoch_unix_ms = self
+            .epoch_unix_ms
+            .map(|epoch| epoch.saturating_add(self.now_ms));
         let next_event = self.next_event;
         *self = Self::default();
         self.generation = generation;
+        self.epoch_unix_ms = epoch_unix_ms;
         self.next_event = next_event;
         self.log(None, "reset", format!("generation {generation}"));
     }

@@ -51,12 +51,14 @@ pub(crate) struct Shared {
     pub config: Arc<Config>,
     pub transport: watch::Sender<bool>,
     pub stop: watch::Sender<bool>,
+    pub reset_connections: watch::Sender<u64>,
 }
 pub(crate) struct Data {
     pub engine: Engine,
     pub scenarios: BTreeMap<String, Scenario>,
     commands: BTreeMap<String, (Value, Value)>,
     pub listener_online: bool,
+    pub listener_generation: u64,
     pub listener_error: Option<String>,
 }
 impl Shared {
@@ -127,17 +129,21 @@ impl Server {
         };
         let (transport, _) = watch::channel(true);
         let (stop, _) = watch::channel(false);
+        let (reset_connections, _) = watch::channel(1);
         let shared = Shared {
             data: Arc::new(Mutex::new(Data {
-                engine: Engine::default(),
+                engine: Engine::default()
+                    .with_epoch(SystemTime::now().duration_since(UNIX_EPOCH)?.as_millis() as u64),
                 scenarios: BTreeMap::new(),
                 commands: BTreeMap::new(),
                 listener_online: true,
+                listener_generation: 1,
                 listener_error: None,
             })),
             config: Arc::new(config),
             transport,
             stop,
+            reset_connections,
         };
         let app = Router::new()
             .route("/control/v1/{resource}", get(read).post(command))
@@ -339,6 +345,7 @@ async fn command(
         );
     }
     let mut transport_change = None;
+    let mut reset_generation = None;
     let result = (|| -> Result<Value> {
         let p = &cmd.payload;
         match resource.as_str() {
@@ -407,6 +414,7 @@ async fn command(
             }
             "reset" => {
                 data.engine.reset();
+                reset_generation = Some(data.engine.generation);
                 data.scenarios.clear();
                 data.commands.clear();
                 transport_change = Some(true);
@@ -447,6 +455,20 @@ async fn command(
     data.commands
         .insert(cmd.command_id, (signature, result.clone()));
     drop(data);
+    if let Some(generation) = reset_generation {
+        s.reset_connections.send_replace(generation);
+        let deadline = Instant::now() + Duration::from_secs(2);
+        while s.data.lock().await.listener_generation != generation {
+            if Instant::now() >= deadline {
+                return error(
+                    StatusCode::INTERNAL_SERVER_ERROR,
+                    "reset_failed",
+                    "payment listener did not acknowledge reset",
+                );
+            }
+            tokio::time::sleep(Duration::from_millis(1)).await;
+        }
+    }
     if let Some(online) = transport_change {
         s.transport.send_replace(online);
     }

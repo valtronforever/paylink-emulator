@@ -161,6 +161,16 @@ async fn request(
     }
     Ok(value)
 }
+async fn shutdown_signal() -> Result<()> {
+    #[cfg(unix)]
+    {
+        let mut term = tokio::signal::unix::signal(tokio::signal::unix::SignalKind::terminate())?;
+        tokio::select! { result = tokio::signal::ctrl_c() => {result?;}, _ = term.recv() => {} }
+    }
+    #[cfg(not(unix))]
+    tokio::signal::ctrl_c().await?;
+    Ok(())
+}
 #[tokio::main]
 async fn main() -> Result<()> {
     let args = Cli::parse();
@@ -202,7 +212,7 @@ async fn main() -> Result<()> {
                 .await?;
             }
             println!("{}", serde_json::to_string(&server.ready)?);
-            tokio::signal::ctrl_c().await?;
+            shutdown_signal().await?;
             server.shutdown().await?;
             return Ok(());
         }
