@@ -125,6 +125,8 @@ struct Terminal {
     replace_input: bool,
     base: String,
     device_index: usize,
+    entry_dirty: bool,
+    last_operation_id: Option<String>,
 }
 impl Terminal {
     fn new(api: Api, base: String, cx: &mut Context<Self>) -> Self {
@@ -152,6 +154,8 @@ impl Terminal {
             replace_input: true,
             base,
             device_index: 0,
+            entry_dirty: true,
+            last_operation_id: None,
         }
     }
     fn value(&mut self) -> &mut u64 {
@@ -170,6 +174,9 @@ impl Terminal {
             && self.current().is_some_and(|o| !o.stage.terminal())
         {
             return;
+        }
+        if matches!(self.input, InputTarget::Amount) {
+            self.entry_dirty = true;
         }
         let replace = self.replace_input;
         self.replace_input = false;
@@ -271,22 +278,31 @@ impl Terminal {
             }))
     }
 }
+fn display_state(
+    op: Option<&paylink_core::Operation>,
+    input_amount: u64,
+    editing: bool,
+) -> (String, u64) {
+    match op {
+        Some(op) if !op.stage.terminal() || !editing => (format!("{:?}", op.stage), op.amount),
+        Some(_) => ("Enter amount".into(), input_amount),
+        None => ("Ready".into(), input_amount),
+    }
+}
 impl Render for Terminal {
     fn render(&mut self, _window: &mut Window, cx: &mut Context<Self>) -> impl IntoElement {
         let snapshot = self.api.snapshot.lock().unwrap().clone();
         let op = self.current();
-        let stage = op
-            .as_ref()
-            .map(|o| format!("{:?}", o.stage))
-            .unwrap_or("Ready".into());
-        let amount = op
-            .as_ref()
-            .filter(|o| !o.stage.terminal())
-            .map(|o| o.amount)
-            .unwrap_or(self.amount);
+        let id = op.as_ref().map(|o| o.id.clone());
+        if id != self.last_operation_id {
+            self.entry_dirty = id.is_none();
+            self.last_operation_id = id;
+        }
         let active = op.as_ref().is_some_and(|o| !o.stage.terminal());
+        let (stage, amount) = display_state(op.as_ref(), self.amount, self.entry_dirty);
         let detail = op
             .as_ref()
+            .filter(|_| !self.entry_dirty || active)
             .and_then(|o| o.error_id.as_deref())
             .and_then(paylink_core::catalog::error_definition)
             .map(|e| e.message.to_owned())
@@ -436,6 +452,18 @@ impl Render for Terminal {
                 } else {
                     "disconnected"
                 }
+            )))
+            .child(
+                div()
+                    .id("control-feedback")
+                    .role(Role::Status)
+                    .aria_label(snapshot.message.clone())
+                    .text_sm()
+                    .child(snapshot.message.clone()),
+            )
+            .child(div().text_sm().child(format!(
+                "Queued scenarios: {}",
+                snapshot.engine.as_ref().map(|e| e.queue.len()).unwrap_or(0)
             )))
             .child(self.button(
                 "device",
@@ -636,8 +664,7 @@ impl Render for Terminal {
                 "Reset session and journal",
                 |s, _, _| s.api.send("reset", json!({})),
                 cx,
-            ))
-            .child(div().text_sm().child(snapshot.message));
+            ));
         let mut journal = div()
             .v_flex()
             .gap_1()
@@ -707,6 +734,11 @@ fn main() -> anyhow::Result<()> {
         cx.spawn(async move |cx| {
             cx.open_window(
                 WindowOptions {
+                    titlebar: Some(TitlebarOptions {
+                        title: Some("PayLink Emulator".into()),
+                        ..Default::default()
+                    }),
+                    window_min_size: Some(size(px(830.), px(650.))),
                     window_bounds: Some(WindowBounds::Windowed(Bounds::new(
                         point(px(80.), px(60.)),
                         size(px(1000.), px(980.)),
@@ -729,4 +761,29 @@ fn main() -> anyhow::Result<()> {
         runtime.block_on(server.shutdown())?;
     }
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::display_state;
+    use paylink_core::{DEVICE_ID, Engine, Scenario};
+    #[test]
+    fn browser_payment_amount_is_preserved_after_completion_until_new_entry() {
+        let mut engine = Engine::default();
+        engine.arm(Scenario::default()).unwrap();
+        let id = engine.start(DEVICE_ID, 2600, None).unwrap();
+        assert_eq!(
+            display_state(Some(&engine.operations[&id]), 100, true).1,
+            2600
+        );
+        engine.advance(5000).unwrap();
+        assert_eq!(
+            display_state(Some(&engine.operations[&id]), 100, false),
+            ("Approved".into(), 2600)
+        );
+        assert_eq!(
+            display_state(Some(&engine.operations[&id]), 999, true),
+            ("Enter amount".into(), 999)
+        );
+    }
 }

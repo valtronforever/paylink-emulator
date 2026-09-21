@@ -57,6 +57,7 @@ jobs:
         with:
           key: native
       - run: cargo build --locked -p paylink-gui
+      - run: cargo test --locked -p paylink-gui
       - name: macOS app bundle
         if: runner.os == 'macOS'
         run: ./scripts/package-macos.sh

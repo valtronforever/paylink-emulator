@@ -12,6 +12,7 @@ Date: 2026-09-21. Target: Desktop PayLink 2.1.20 win-x86.
 | HTTPS browser transport | 6 passed | `test-results/browser-report.json`, per-test journals/screenshots/traces |
 | All 13 catalog cases | Exercised, reference unverified | generated `test-results/coverage.json` |
 | Workspace Clippy | Passed with `-D warnings` | `.runtime/clippy-all.log`; one upstream `block` future-compatibility notice is not a project lint |
+| Native completed-payment amount | 1 passed | `cargo test --locked -p paylink-gui`; completed browser amount is preserved until a new entry |
 | Native macOS build | Passed | `cargo build --locked -p paylink-gui` |
 | Native manual approved payment | Passed | keypad 26.00 → card → OK → Authorizing → Approved, observed through native UI |
 | Native manual bank rejection | Passed | amount stayed 1.00 after attempted edit while active; card → OK → manual bank decline → Declined |
