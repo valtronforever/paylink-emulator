@@ -487,3 +487,24 @@ async fn standalone_start_cannot_consume_an_old_scenario_or_leave_a_failed_arm()
     .await;
     h.server.shutdown().await.unwrap();
 }
+
+#[tokio::test]
+async fn json_media_type_is_case_insensitive() {
+    let mut h = Harness::new(true).await;
+    h.arm(instant()).await;
+    let mut request = h.payment().build().unwrap();
+    request.headers_mut().insert(
+        reqwest::header::CONTENT_TYPE,
+        reqwest::header::HeaderValue::from_static("Application/JSON; charset=utf-8"),
+    );
+    let response: Value = h
+        .client
+        .execute(request)
+        .await
+        .unwrap()
+        .json()
+        .await
+        .unwrap();
+    assert_eq!(response["success"], true);
+    h.server.shutdown().await.unwrap();
+}

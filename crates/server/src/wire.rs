@@ -15,6 +15,18 @@ pub async fn serve(initial: TcpListener, addr: SocketAddr, s: Shared) {
     let mut stop = s.stop.subscribe();
     let mut reset = s.reset_connections.subscribe();
     let mut connections = JoinSet::new();
+    if !*online.borrow_and_update() {
+        listener = None;
+    }
+    let generation = *reset.borrow_and_update();
+    {
+        let mut data = s.data.lock().await;
+        data.listener_online = listener.is_some();
+        data.listener_generation = generation;
+    }
+    if *stop.borrow() {
+        return;
+    }
     loop {
         tokio::select! {
             _=stop.changed()=>break,
@@ -275,11 +287,13 @@ async fn connection(mut socket: TcpStream, s: Shared, generation: u64) -> Result
         )
         .await;
     }
-    if !request
-        .headers
-        .get("content-type")
-        .is_some_and(|v| v.split(';').next().unwrap_or("").trim() == "application/json")
-    {
+    if !request.headers.get("content-type").is_some_and(|v| {
+        v.split(';')
+            .next()
+            .unwrap_or("")
+            .trim()
+            .eq_ignore_ascii_case("application/json")
+    }) {
         return json_response(
             &mut socket,
             400,
@@ -407,5 +421,52 @@ async fn connection(mut socket: TcpStream, s: Shared, generation: u64) -> Result
             return Ok(());
         }
         tokio::time::sleep(Duration::from_millis(5)).await;
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::{Config, Data};
+    use paylink_core::Engine;
+    use std::{collections::BTreeMap, sync::Arc};
+    use tokio::sync::{Mutex, watch};
+    #[tokio::test]
+    async fn listener_applies_watch_values_set_before_task_first_poll() {
+        let listener = TcpListener::bind("127.0.0.1:0").await.unwrap();
+        let addr = listener.local_addr().unwrap();
+        let (transport, _) = watch::channel(false);
+        let (stop, _) = watch::channel(false);
+        let (reset_connections, _) = watch::channel(2);
+        let shared = Shared {
+            data: Arc::new(Mutex::new(Data {
+                engine: Engine::default(),
+                scenarios: BTreeMap::new(),
+                commands: BTreeMap::new(),
+                listener_online: true,
+                listener_generation: 1,
+                listener_error: None,
+            })),
+            config: Arc::new(Config::default()),
+            transport,
+            stop,
+            reset_connections,
+        };
+        let task = tokio::spawn(serve(listener, addr, shared.clone()));
+        tokio::time::timeout(Duration::from_secs(1), async {
+            loop {
+                if shared.data.lock().await.listener_generation == 2 {
+                    break;
+                }
+                tokio::task::yield_now().await;
+            }
+        })
+        .await
+        .unwrap();
+        assert!(!shared.data.lock().await.listener_online);
+        let probe = TcpListener::bind(addr).await.unwrap();
+        drop(probe);
+        shared.stop.send_replace(true);
+        task.await.unwrap();
     }
 }

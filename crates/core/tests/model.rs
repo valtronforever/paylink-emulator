@@ -252,3 +252,20 @@ fn physical_disconnect_requires_device_reconnection_for_the_next_payment() {
     engine.start(DEVICE_ID, 100, None).unwrap();
     assert_eq!(engine.counters.approvals, 1);
 }
+
+#[test]
+fn receipt_references_do_not_collide_when_amount_and_sequence_offsets_cancel() {
+    let mut engine = Engine::default();
+    engine
+        .arm(Scenario {
+            uses: 2,
+            ..instant()
+        })
+        .unwrap();
+    let first = engine.start(DEVICE_ID, 100, None).unwrap();
+    let second = engine.start(DEVICE_ID, 99, None).unwrap();
+    assert_ne!(
+        engine.result(&first).unwrap()["result"]["rrn"],
+        engine.result(&second).unwrap()["result"]["rrn"]
+    );
+}

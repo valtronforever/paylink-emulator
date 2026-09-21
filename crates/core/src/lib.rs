@@ -630,16 +630,14 @@ impl Engine {
                 .last()
                 .and_then(|v| v.parse::<u64>().ok())
                 .unwrap_or(0);
-            let serial = op
-                .scenario
-                .seed
-                .wrapping_add(op.started_ms)
-                .wrapping_add(op.amount)
+            let serial = self
+                .generation
+                .wrapping_mul(1_000_000)
                 .wrapping_add(sequence);
             Ok(
                 serde_json::json!({"success":true,"error":null,"code":0,"result":{
                     "terminal":op.device_id,"rrn":format!("{:012}",serial%1_000_000_000_000),
-                    "card_mask":"4444 44** **** 1111","card_name":"TEST CARD","auth_code":format!("{:06}",serial%1_000_000),
+                    "card_mask":"4444 44** **** 1111","card_name":"TEST CARD","auth_code":format!("{:06}",serial.wrapping_add(op.scenario.seed)%1_000_000),
                     "payment_system":"VISA","receipt_no":op.id,"acquirer_and_seller":"TEST ACQUIRER / TEST MERCHANT",
                     "amount":op.amount,"code":1,"commission":0
                 }}),

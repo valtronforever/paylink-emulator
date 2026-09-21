@@ -218,6 +218,20 @@ impl Terminal {
                 .send("action", json!({"operation_id":op.id,"event":event}));
         }
     }
+    fn configured_device(&self) -> Device {
+        self.api
+            .snapshot
+            .lock()
+            .unwrap()
+            .engine
+            .as_ref()
+            .and_then(|e| e.devices.get(&self.scenario.device_id))
+            .cloned()
+            .unwrap_or_else(|| Device {
+                id: self.scenario.device_id.clone(),
+                ..Device::default()
+            })
+    }
     fn queue(&mut self, standalone: bool) {
         if self.outcome >= 2 {
             let error = &ERRORS[self.outcome - 2];
@@ -231,7 +245,7 @@ impl Terminal {
                     json!(Device {
                         id: self.scenario.device_id.clone(),
                         setup_error: Some(error.id.into()),
-                        ..Device::default()
+                        ..self.configured_device()
                     }),
                 );
                 return;
@@ -652,7 +666,9 @@ impl Render for Terminal {
                                 "devices",
                                 json!(Device {
                                     id: s.scenario.device_id.clone(),
-                                    ..Device::default()
+                                    online: true,
+                                    setup_error: None,
+                                    ..s.configured_device()
                                 }),
                             );
                         },

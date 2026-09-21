@@ -6,9 +6,9 @@ Date: 2026-09-21. Target: Desktop PayLink 2.1.20 win-x86.
 
 | Check | Result | Evidence |
 | --- | --- | --- |
-| Core state model | 11 passed | `cargo test --locked`, `crates/core/tests/model.rs` |
+| Core state model | 12 passed | `cargo test --locked`, `crates/core/tests/model.rs` |
 | CLI command schema and live API workflow | 2 passed | CLI unit test and `crates/cli/tests/commands.rs` |
-| Real HTTP/control/transport tests | 10 passed | `crates/server/tests/http.rs` |
+| Real HTTP/control/transport and listener startup tests | 12 passed | `crates/server/tests/http.rs` and listener startup unit test |
 | HTTPS browser transport | 6 passed | `test-results/browser-report.json`, per-test journals/screenshots/traces |
 | All 13 catalog cases | Exercised, reference unverified | generated `test-results/coverage.json` |
 | Workspace Clippy | Passed with `-D warnings` | `.runtime/clippy-all.log`; one upstream `block` future-compatibility notice is not a project lint |
