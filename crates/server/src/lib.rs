@@ -84,6 +84,7 @@ impl Shared {
 pub struct Ready {
     pub profile: &'static str,
     pub compatibility: &'static str,
+    pub reference_compatibility: &'static str,
     pub payment_url: String,
     pub control_url: String,
     pub clock: &'static str,
@@ -118,7 +119,8 @@ impl Server {
         let payment_addr = payment.local_addr()?;
         let ready = Ready {
             profile: PROFILE,
-            compatibility: "unverified",
+            compatibility: "documentation_based",
+            reference_compatibility: "unverified",
             payment_url: format!("http://{payment_addr}"),
             control_url: format!("http://{}", control.local_addr()?),
             clock: if config.controlled_clock {
@@ -268,7 +270,7 @@ async fn read(
     let value = match resource.as_str() {
         "health" => json!({"ready":true,"profile":PROFILE,"generation":data.engine.generation}),
         "profile" => {
-            json!({"id":PROFILE,"version":"2.1.20","platform":"win-x86","compatibility":"unverified","installer_sha256":"62d0e7a539380937ecb5af2f1c50438e4b84a070de4a20c1c848c11a5e395491"})
+            json!({"id":PROFILE,"version":"2.1.20","platform":"win-x86","compatibility":"documentation_based","acceptance_basis":"documentation","reference_compatibility":"unverified","reference_required":false,"installer_sha256":"62d0e7a539380937ecb5af2f1c50438e4b84a070de4a20c1c848c11a5e395491"})
         }
         "errors" => json!(paylink_core::catalog::ERRORS),
         "state" | "journal" => json!(data.engine),

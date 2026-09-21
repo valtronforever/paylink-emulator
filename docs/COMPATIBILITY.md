@@ -2,7 +2,7 @@
 
 Target: **Checkbox Desktop PayLink 2.1.20, win-x86**. Emulator host platforms are independent of this target.
 
-The [manifest](../profiles/desktop-paylink-2.1.20-win-x86/manifest.json) records the official installer URL and SHA-256 actually computed on 2026-09-21. The executable has **not** been run against a physical terminal. API bodies, error channels, numeric codes, model-specific phases, timeout boundaries and browser headers remain **unverified**. Passing emulator tests proves its own model behaves consistently, not compatibility with a bank.
+The [manifest](../profiles/desktop-paylink-2.1.20-win-x86/manifest.json) records the official installer URL and SHA-256 actually computed on 2026-09-21. Acceptance follows the user’s documentation-only decision. Physical terminal comparison is optional and does not block delivery. See [documented scope and assumptions](DOCUMENTATION_CONTRACT.md). The executable has **not** been run against a physical terminal. API bodies, error channels, numeric codes, model-specific phases, timeout boundaries and browser headers remain **unverified**. Passing emulator tests proves its own model behaves consistently, not compatibility with a bank.
 
 ## Static evidence from the pinned build
 
@@ -38,14 +38,14 @@ Eleven terminal errors can be selected with `outcome=error` and `error_id`. `pay
 
 Confirmation/reversal state-machine support is **synthetic and opt-in**, never enabled by the default PayLink profile. It models tests of uncertain outcomes but must not imply that any bank requires that handshake. Likewise, the default 120-second timeout is configurable test data until measured.
 
-## Reference calibration procedure
+## Optional reference calibration procedure
 
 1. On an isolated Windows test machine, download the manifest URL and verify the SHA-256 before installing. Record Windows build, PayLink build information, terminal model, bank and configured protocol.
 2. Export the local API documentation and record exact methods, paths, headers, DTOs and response status/body. Do not use the Checkbox fiscal API schema as a substitute.
 3. Capture safe test-mode discovery, ping, approved/declined and each supported error scenario. Record relative monotonic timings, customer actions, terminal state and bank result separately from response delivery. Never use production cards or copy PINs, tokens or unmasked card data.
 4. Normalize only genuinely variable reference fields (IDs/timestamps). Keep types, nullability, numeric codes and error channel intact. Compare the same request against the emulator.
 5. Check actual CORS/preflight and local-network permission behavior using the supported browsers. Do not disable browser security to make a test pass.
-6. Add sanitized fixtures under the version profile, link every catalog entry to its fixture and test, and change individual coverage status only with supporting evidence. No fixture means `unverified/blocked`, not a skipped pass.
+6. Add sanitized fixtures under the version profile, link every catalog entry to its fixture and test, and change individual coverage status only with supporting evidence. No fixture means reference compatibility stays `unverified`; optional comparison is `not_run`, never a passed reference check.
 7. Separate bank-specific timing/confirmation rules into named profiles. Never silently move the 2.1.20 profile to a newer PayLink version.
 
 Source setup/release documentation: https://wiki.checkbox.ua/app/pc/portal_acquiring
@@ -54,7 +54,7 @@ The original Inerix issue is retained as historical context in `ORIGINAL_REQUIRE
 
 ## Differential runner
 
-`node scripts/differential.mjs` compares sanitized reference fixtures with a **running emulator**. It does not record payments against a real bank. Without fixtures it writes `test-results/differential.json` with `blocked` and exits 2. This is the expected current result, never a passed calibration.
+`node scripts/differential.mjs` compares sanitized reference fixtures with a **running emulator**. It does not record payments against a real bank. Without fixtures it writes `test-results/differential.json` with `not_run`, `required: false` and zero verified cases, then exits 0. This is optional work under documentation-based acceptance, never a passed calibration. Explicit `--require-reference` retains `blocked` and exit 2 for a future mandatory reference run.
 
 Place reference JSON files in `profiles/desktop-paylink-2.1.20-win-x86/reference/`. Each contains:
 

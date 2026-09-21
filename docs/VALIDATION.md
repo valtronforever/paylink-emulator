@@ -1,6 +1,6 @@
 # Validation and completion audit
 
-Date: 2026-09-21. Target: Desktop PayLink 2.1.20 win-x86.
+Date: 2026-09-21. Target: Desktop PayLink 2.1.20 win-x86. Acceptance basis: **documentation**, per the user’s decision to proceed without a real stand.
 
 ## Executed locally
 
@@ -19,8 +19,9 @@ Date: 2026-09-21. Target: Desktop PayLink 2.1.20 win-x86.
 | Native selected terminal error | Passed | `terminal_unknown_0` → card → OK → Failed; exact catalog text visible on display |
 | Native accessibility/shutdown | Passed | terminal status exposed in AX tree; last-window close terminated process |
 | Docker without external network | Passed | built image; `--network none`; CLI arm/purchase/advance/assert reported one approval |
+| Optional reference policy | 1 passed | `node --test scripts/differential-policy.test.mjs`; optional absence vs explicit strict requirement |
 | Reference normalizer | 1 passed | `node --test scripts/normalize-reference.test.mjs`; preserves missing/null/types and material response differences |
-| Reference differential comparison | **Blocked** | no real PayLink/terminal recordings; runner exits 2 and writes `test-results/differential.json` |
+| Reference differential comparison | Optional, not run | no recordings; default runner exits 0 with `not_run` and zero verified cases; `--require-reference` retains strict exit 2 |
 
 Commit `4063b09` passed all eight jobs in [CI run 35566221664](https://github.com/valtronforever/paylink-emulator/actions/runs/35566221664): headless tests and native builds/tests on Linux, Windows and macOS, Linux browser tests, and container smoke. Later changes must pass the PR's latest run; see [PR #8 checks](https://github.com/valtronforever/paylink-emulator/pull/8/checks). Native runtime behavior has only been observed on macOS, not Windows/Linux desktops.
 
@@ -41,8 +42,8 @@ Commit `4063b09` passed all eight jobs in [CI run 35566221664](https://github.co
 | Versioned control interface | `/control/v1`, JSON Schema generated from Rust, OpenAPI 3.1, token and command ID deduplication |
 | Cross-platform and CI | Three-OS native build/headless test matrix, browser artifacts, container image/smoke |
 | Reproducibility | Pinned compiler, GPUI family, Cargo/npm lockfiles, deterministic core clock/scenario/result seed |
-| Real API fidelity and bank timing | **Blocked on reference captures**; unknown wire fields/codes and timing remain unverified |
-| Reference fixtures / full API error list | Static inventory of 169 status constants available; per-bank applicability, injection mapping and runtime fixtures **blocked on reference calibration** |
+| Documented API behavior and timing assumptions | Covered for the supported adapter; undocumented timing and bank details are explicit configurable assumptions in `DOCUMENTATION_CONTRACT.md` |
+| Optional reference fixtures / native status inventory | 169 status constants retained as supplementary evidence; no claim of 169 injectable errors or physical certification; recordings not required for documentation-based acceptance |
 | Inerix Devices settings and actual checkout UI | Separate integration [inerix#476](https://github.com/valtronforever/inerix/issues/476); not implemented in this emulator repository |
 
 The emulator is an operational experimental test tool. This report does not certify PayLink/bank compatibility, physical EMV behavior or actual Inerix integration. No bank/protocol is listed as verified without reference evidence.

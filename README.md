@@ -4,7 +4,7 @@
 
 A Rust terminal simulator for manual testing and browser automation, targeting **Checkbox Desktop PayLink 2.1.20 win-x86**. Run a headless local service in CI, control it with an API/CLI, or use a native GPUI terminal with a display, keypad and card/customer actions.
 
-**Experimental compatibility:** the installer version and checksum are pinned, but wire responses and timing have not yet been validated against a physical terminal. The pinned assembly also has a reproducible inventory of 169 status constants; progress codes and uncalibrated bank errors are not presented as covered scenarios. See [compatibility evidence and calibration](docs/COMPATIBILITY.md). This emulator cannot contact a bank or charge a real card.
+**Documentation-based contract:** the profile targets PayLink 2.1.20 using the published setup/error documentation and the pinned build's API contract evidence. Physical terminal recordings are optional; they are not an acceptance gate. Defaults for undocumented behavior are listed in [the contract and assumptions](docs/DOCUMENTATION_CONTRACT.md). Reference compatibility remains unverified; the emulator cannot contact a bank or charge a real card.
 
 ## Quick start
 

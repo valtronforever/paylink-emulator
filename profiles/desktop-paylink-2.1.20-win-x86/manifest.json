@@ -3,8 +3,8 @@
   "product": "Checkbox Desktop PayLink",
   "version": "2.1.20",
   "reference_platform": "win-x86",
-  "contract_revision": 2,
-  "compatibility": "unverified",
+  "contract_revision": 3,
+  "compatibility": "documentation_based",
   "installer": {
     "url": "https://api.checkbox.ua/update-service/api/v1/pos_srv/versions/2.1.20/win-x86/installer",
     "sha256": "62d0e7a539380937ecb5af2f1c50438e4b84a070de4a20c1c848c11a5e395491",
@@ -68,5 +68,9 @@
     "purchase id/deduplication and confirmation fields",
     "native status catalog beyond the 13 common wiki scenarios"
   ],
-  "release_gate": "Must compare sanitized reference traces on Windows with PayLink 2.1.20 and at least one named bank/protocol before claiming wire compatibility"
+  "release_gate": "Pass documented-contract model/API/browser tests and cross-platform CI. Physical reference comparison is optional and must not block this documentation-based scope.",
+  "reference_compatibility": "unverified",
+  "acceptance_basis": "documentation",
+  "reference_required": false,
+  "assumptions": "docs/DOCUMENTATION_CONTRACT.md"
 }

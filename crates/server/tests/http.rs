@@ -89,6 +89,12 @@ fn instant() -> Scenario {
 #[tokio::test]
 async fn authentication_origin_and_idempotent_control() {
     let h = Harness::new(true).await;
+    let profile = h.read("profile").await;
+    assert_eq!(profile["compatibility"], "documentation_based");
+    assert_eq!(profile["reference_compatibility"], "unverified");
+    assert_eq!(profile["reference_required"], false);
+    assert_eq!(h.server.ready.compatibility, "documentation_based");
+    assert_eq!(h.server.ready.reference_compatibility, "unverified");
     assert_eq!(
         h.client
             .get(h.endpoint("state"))

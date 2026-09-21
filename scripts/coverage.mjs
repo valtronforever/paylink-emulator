@@ -17,9 +17,9 @@ const entries=catalog.map(error=>{
     model_exercise:unit?(rustPassed(unit)?'pass':'failed'):'not_applicable',
     api_exercise:api?(rustPassed(api)?'pass':'failed'):'pending',
     browser_exercise:ui?(browserPassed(ui)?'pass':'failed'):'pending',
-    reference_compatibility:'unverified/blocked',inerix_ui:'pending'};
+    reference_compatibility:'unverified',inerix_ui:'pending'};
 });
-const report={profile:manifest.id,installer_hash_verified:manifest.installer.hash_verified,compatibility:manifest.compatibility,catalog_count:entries.length,verified_reference_cases:0,entries};
+const report={profile:manifest.id,installer_hash_verified:manifest.installer.hash_verified,compatibility:manifest.compatibility,acceptance_basis:manifest.acceptance_basis,reference_required:manifest.reference_required,catalog_count:entries.length,verified_reference_cases:0,entries};
 mkdirSync('test-results',{recursive:true});writeFileSync('test-results/coverage.json',JSON.stringify(report,null,2));
 if(entries.length!==13||new Set(entries.map(e=>e.id)).size!==13||entries.some(e=>[e.model_exercise,e.api_exercise,e.browser_exercise].includes('failed')))process.exitCode=1;
 console.log(`Catalog ${entries.length}; reference verified 0; report: test-results/coverage.json`);

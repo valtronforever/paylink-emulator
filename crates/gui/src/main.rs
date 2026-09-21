@@ -703,11 +703,36 @@ impl Render for Terminal {
                 )));
             }
         }
-        div().id("terminal-app").track_focus(&self.focus).on_key_down(cx.listener(|s,event:&KeyDownEvent,_,cx|{let key=event.keystroke.key.as_str();if key.len()==1&&key.as_bytes()[0].is_ascii_digit()||key=="backspace"{s.digit(key);cx.notify();}}))
-            .size_full().overflow_y_scroll().v_flex().gap_5().p_6().bg(cx.theme().background).text_color(cx.theme().foreground)
+        div()
+            .id("terminal-app")
+            .track_focus(&self.focus)
+            .on_key_down(cx.listener(|s, event: &KeyDownEvent, _, cx| {
+                let key = event.keystroke.key.as_str();
+                if key.len() == 1 && key.as_bytes()[0].is_ascii_digit() || key == "backspace" {
+                    s.digit(key);
+                    cx.notify();
+                }
+            }))
+            .size_full()
+            .overflow_y_scroll()
+            .v_flex()
+            .gap_5()
+            .p_6()
+            .bg(cx.theme().background)
+            .text_color(cx.theme().foreground)
             .child(div().text_2xl().child("PayLink terminal lab"))
-            .child(div().text_sm().child("Experimental 2.1.20 profile · wire compatibility has not been verified against a real terminal"))
-            .child(div().h_flex().items_start().gap_6().child(terminal).child(settings)).child(journal)
+            .child(div().text_sm().child(
+                "Documentation-based 2.1.20 profile · configurable timing and terminal behavior",
+            ))
+            .child(
+                div()
+                    .h_flex()
+                    .items_start()
+                    .gap_6()
+                    .child(terminal)
+                    .child(settings),
+            )
+            .child(journal)
     }
 }
 fn main() -> anyhow::Result<()> {
