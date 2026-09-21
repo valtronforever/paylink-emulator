@@ -1,0 +1,10 @@
+{
+  "name": "paylink-emulator-browser-tests",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:browser": "playwright test",
+    "test:coverage": "node scripts/coverage.mjs"
+  },
+  "devDependencies": {"@playwright/test": "1.55.1"}
+}

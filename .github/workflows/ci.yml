@@ -1,0 +1,122 @@
+name: CI
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+env:
+  CARGO_TERM_COLOR: always
+  CARGO_PROFILE_DEV_DEBUG: 0
+jobs:
+  headless:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: 1.98.1
+          components: clippy,rustfmt
+      - uses: Swatinem/rust-cache@v2
+        with:
+          key: headless
+      - run: cargo fmt --all --check
+      - run: cargo clippy --locked --all-targets -- -D warnings
+      - run: cargo test --locked
+      - run: cargo build --locked -p paylink-emulator
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cli-${{ matrix.os }}
+          path: |
+            target/debug/paylink-emulator
+            target/debug/paylink-emulator.exe
+  native:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: 1.98.1
+      - name: Linux graphics development libraries
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc g++ clang libfontconfig-dev libwayland-dev libwebkit2gtk-4.1-dev libxkbcommon-x11-dev libx11-xcb-dev libssl-dev libzstd-dev vulkan-validationlayers libvulkan1
+      - uses: Swatinem/rust-cache@v2
+        with:
+          key: native
+      - run: cargo build --locked -p paylink-gui
+      - run: cargo test --locked -p paylink-gui
+      - name: macOS app bundle
+        if: runner.os == 'macOS'
+        run: ./scripts/package-macos.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gui-${{ matrix.os }}
+          path: |
+            target/debug/paylink-gui
+            target/debug/paylink-gui.exe
+            target/debug/PayLink Emulator.app
+  browser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: 1.98.1
+      - uses: Swatinem/rust-cache@v2
+        with:
+          key: headless
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: node --test scripts/normalize-reference.test.mjs scripts/differential-policy.test.mjs
+      - run: npx playwright install --with-deps chromium
+      - run: cargo build --locked -p paylink-emulator
+      - run: mkdir -p test-results && cargo test --locked > test-results/rust-tests.log 2>&1
+      - name: Generated contracts are current
+        run: |
+          cargo run -q -p paylink-core --example export_catalog > profiles/desktop-paylink-2.1.20-win-x86/errors.json
+          cargo run -q -p paylink-core --example export_schema > docs/model-schemas.json
+          node scripts/generate-openapi.mjs
+          git diff --exit-code -- docs/model-schemas.json docs/control-openapi.json profiles/desktop-paylink-2.1.20-win-x86/errors.json
+      - run: npm run test:browser
+      - run: npm run test:coverage
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-evidence
+          path: test-results/
+
+  container:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t paylink-emulator:test .
+      - name: Isolated container smoke
+        run: |
+          docker run -d --name paylink-smoke --network none -e PAYLINK_CONTROL_TOKEN=container-smoke-test-token paylink-emulator:test serve --clock controlled
+          trap "docker rm -f paylink-smoke" EXIT
+          for attempt in $(seq 1 50); do
+            if docker exec paylink-smoke paylink-emulator get health >/dev/null 2>&1; then break; fi
+            sleep 0.1
+          done
+          docker exec paylink-smoke paylink-emulator get health
+          docker exec paylink-smoke paylink-emulator arm --state approved
+          docker exec paylink-smoke paylink-emulator purchase 1234
+          docker exec paylink-smoke paylink-emulator advance 5000
+          docker exec paylink-smoke paylink-emulator assert '{"approvals":1,"accepted":1,"queue_empty":true}'
+          docker stop --timeout 5 paylink-smoke

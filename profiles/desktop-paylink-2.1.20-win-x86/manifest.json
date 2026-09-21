@@ -1,0 +1,76 @@
+{
+  "id": "desktop-paylink-2.1.20-win-x86",
+  "product": "Checkbox Desktop PayLink",
+  "version": "2.1.20",
+  "reference_platform": "win-x86",
+  "contract_revision": 3,
+  "compatibility": "documentation_based",
+  "installer": {
+    "url": "https://api.checkbox.ua/update-service/api/v1/pos_srv/versions/2.1.20/win-x86/installer",
+    "sha256": "62d0e7a539380937ecb5af2f1c50438e4b84a070de4a20c1c848c11a5e395491",
+    "retrieved": "2026-09-21",
+    "format": "PE32 NSIS installer",
+    "hash_verified": true
+  },
+  "build_metadata": "POSServer assembly version 2.1.20.10, statically read from the pinned installer",
+  "evidence": [
+    {
+      "source": "static-contract.json",
+      "scope": "169 native status constants, 51 route attributes, 96 DTO properties and serializer attributes from POSServer.exe",
+      "status": "static_metadata_not_runtime_verified"
+    },
+    {
+      "source": "POSServer.xml extracted from this installer",
+      "scope": "Purchase amount request, device lookup status, ping and saveconfig method existence",
+      "status": "static_documentation"
+    },
+    {
+      "source": "https://wiki.checkbox.ua/app/pc/portal_acquiring",
+      "scope": "Product setup and releases",
+      "status": "documentation"
+    },
+    {
+      "source": "https://wiki.checkbox.ua/app/pc/desktop_paylink_errors",
+      "scope": "13 common cases, not a complete API error code catalog",
+      "status": "documentation"
+    },
+    {
+      "source": "https://github.com/MakarovIgor/checkbox.paylink.php.sdk",
+      "scope": "Provisional routes and response wrapper; NOT version-specific reference proof",
+      "status": "secondary_unverified"
+    }
+  ],
+  "verified_banks": [],
+  "verified_protocols": [],
+  "reference_traces": [],
+  "restart_policy": "Fresh in-memory model; exported journal is evidence and is not automatically replayed",
+  "timing": {
+    "kind": "synthetic configurable defaults",
+    "measured_against_reference": false
+  },
+  "implemented_routes": [
+    "GET /api/devices/",
+    "GET /api/devices/{id}",
+    "GET /api/pos/{id}/ping",
+    "POST /api/pos/{id}/purchase",
+    "GET /api/pos/devices",
+    "GET /api/pos/devices/{id}"
+  ],
+  "unsupported": [
+    "WebSocket",
+    "USB/COM drivers",
+    "EMV",
+    "real banking",
+    "register/saveconfig wire DTOs",
+    "refunds",
+    "reports",
+    "automatic reconciliation",
+    "purchase id/deduplication and confirmation fields",
+    "native status catalog beyond the 13 common wiki scenarios"
+  ],
+  "release_gate": "Pass documented-contract model/API/browser tests and cross-platform CI. Physical reference comparison is optional and must not block this documentation-based scope.",
+  "reference_compatibility": "unverified",
+  "acceptance_basis": "documentation",
+  "reference_required": false,
+  "assumptions": "docs/DOCUMENTATION_CONTRACT.md"
+}

@@ -1,0 +1,1555 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "PayLink emulator control API",
+    "version": "1.0.0",
+    "description": "Native test-runner control API. This is not the PayLink wire specification. Browser Origin requests are rejected."
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:3001"
+    }
+  ],
+  "security": [
+    {
+      "RunToken": []
+    }
+  ],
+  "paths": {
+    "/control/v1/health": {
+      "get": {
+        "operationId": "get_health",
+        "responses": {
+          "200": {
+            "description": "Current control resource",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid token or browser Origin"
+          }
+        }
+      }
+    },
+    "/control/v1/profile": {
+      "get": {
+        "operationId": "get_profile",
+        "responses": {
+          "200": {
+            "description": "Current control resource",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid token or browser Origin"
+          }
+        }
+      }
+    },
+    "/control/v1/errors": {
+      "get": {
+        "operationId": "get_errors",
+        "responses": {
+          "200": {
+            "description": "Current control resource",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid token or browser Origin"
+          }
+        }
+      }
+    },
+    "/control/v1/state": {
+      "get": {
+        "operationId": "get_state",
+        "responses": {
+          "200": {
+            "description": "Current control resource",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Engine"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid token or browser Origin"
+          }
+        }
+      }
+    },
+    "/control/v1/journal": {
+      "get": {
+        "operationId": "get_journal",
+        "responses": {
+          "200": {
+            "description": "Current control resource",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Engine"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid token or browser Origin"
+          }
+        }
+      }
+    },
+    "/control/v1/devices": {
+      "get": {
+        "operationId": "get_devices",
+        "responses": {
+          "200": {
+            "description": "Current control resource",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid token or browser Origin"
+          }
+        }
+      },
+      "post": {
+        "operationId": "command_devices",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "command_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "generation": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "payload": {
+                    "$ref": "#/components/schemas/Device"
+                  }
+                },
+                "required": [
+                  "command_id",
+                  "payload"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Applied, or cached response for identical command_id",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid token or browser Origin"
+          },
+          "409": {
+            "description": "Invalid model command, stale generation, failed assertion or conflicting command_id"
+          }
+        }
+      }
+    },
+    "/control/v1/operations": {
+      "get": {
+        "operationId": "get_operations",
+        "responses": {
+          "200": {
+            "description": "Current control resource",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid token or browser Origin"
+          }
+        }
+      }
+    },
+    "/control/v1/scenarios": {
+      "get": {
+        "operationId": "get_scenarios",
+        "responses": {
+          "200": {
+            "description": "Current control resource",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid token or browser Origin"
+          }
+        }
+      },
+      "post": {
+        "operationId": "command_scenarios",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "command_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "generation": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "payload": {
+                    "$ref": "#/components/schemas/Scenario"
+                  }
+                },
+                "required": [
+                  "command_id",
+                  "payload"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Applied, or cached response for identical command_id",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid token or browser Origin"
+          },
+          "409": {
+            "description": "Invalid model command, stale generation, failed assertion or conflicting command_id"
+          }
+        }
+      }
+    },
+    "/control/v1/queue": {
+      "get": {
+        "operationId": "get_queue",
+        "responses": {
+          "200": {
+            "description": "Current control resource",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid token or browser Origin"
+          }
+        }
+      }
+    },
+    "/control/v1/events": {
+      "get": {
+        "operationId": "get_events",
+        "responses": {
+          "200": {
+            "description": "Current control resource",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid token or browser Origin"
+          }
+        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "after",
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          {
+            "in": "query",
+            "name": "wait_ms",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 30000
+            }
+          }
+        ]
+      }
+    },
+    "/control/v1/transport": {
+      "get": {
+        "operationId": "get_transport",
+        "responses": {
+          "200": {
+            "description": "Current control resource",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid token or browser Origin"
+          }
+        }
+      },
+      "post": {
+        "operationId": "command_transport",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "command_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "generation": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "payload": {
+                    "type": "object",
+                    "properties": {
+                      "online": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "online"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "command_id",
+                  "payload"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Applied, or cached response for identical command_id",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid token or browser Origin"
+          },
+          "409": {
+            "description": "Invalid model command, stale generation, failed assertion or conflicting command_id"
+          }
+        }
+      }
+    },
+    "/control/v1/arm": {
+      "post": {
+        "operationId": "command_arm",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "command_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "generation": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "payload": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/Scenario"
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "scenario_id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "scenario_id"
+                        ],
+                        "additionalProperties": false
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "command_id",
+                  "payload"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Applied, or cached response for identical command_id",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid token or browser Origin"
+          },
+          "409": {
+            "description": "Invalid model command, stale generation, failed assertion or conflicting command_id"
+          }
+        }
+      }
+    },
+    "/control/v1/purchase": {
+      "post": {
+        "operationId": "command_purchase",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "command_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "generation": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "payload": {
+                    "type": "object",
+                    "properties": {
+                      "device_id": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 999999999
+                      },
+                      "merchant": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "device_id",
+                      "amount"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "command_id",
+                  "payload"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Applied, or cached response for identical command_id",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid token or browser Origin"
+          },
+          "409": {
+            "description": "Invalid model command, stale generation, failed assertion or conflicting command_id"
+          }
+        }
+      }
+    },
+    "/control/v1/standalone": {
+      "post": {
+        "operationId": "command_standalone",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "command_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "generation": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "payload": {
+                    "type": "object",
+                    "properties": {
+                      "scenario": {
+                        "$ref": "#/components/schemas/Scenario"
+                      },
+                      "amount": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 999999999
+                      }
+                    },
+                    "required": [
+                      "scenario",
+                      "amount"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "command_id",
+                  "payload"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Applied, or cached response for identical command_id",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid token or browser Origin"
+          },
+          "409": {
+            "description": "Invalid model command, stale generation, failed assertion or conflicting command_id"
+          }
+        }
+      }
+    },
+    "/control/v1/action": {
+      "post": {
+        "operationId": "command_action",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "command_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "generation": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "payload": {
+                    "type": "object",
+                    "properties": {
+                      "operation_id": {
+                        "type": "string"
+                      },
+                      "event": {
+                        "type": "string",
+                        "enum": [
+                          "card_presented",
+                          "customer_confirmed",
+                          "bank_approved",
+                          "bank_declined",
+                          "terminal_confirmed",
+                          "customer_cancelled",
+                          "device_disconnected",
+                          "reversed"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "operation_id",
+                      "event"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "command_id",
+                  "payload"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Applied, or cached response for identical command_id",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid token or browser Origin"
+          },
+          "409": {
+            "description": "Invalid model command, stale generation, failed assertion or conflicting command_id"
+          }
+        }
+      }
+    },
+    "/control/v1/advance": {
+      "post": {
+        "operationId": "command_advance",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "command_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "generation": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "payload": {
+                    "type": "object",
+                    "properties": {
+                      "ms": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 3600000
+                      }
+                    },
+                    "required": [
+                      "ms"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "command_id",
+                  "payload"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Applied, or cached response for identical command_id",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid token or browser Origin"
+          },
+          "409": {
+            "description": "Invalid model command, stale generation, failed assertion or conflicting command_id"
+          }
+        }
+      }
+    },
+    "/control/v1/reset": {
+      "post": {
+        "operationId": "command_reset",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "command_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "generation": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "payload": {
+                    "type": "object",
+                    "properties": {},
+                    "required": [],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "command_id",
+                  "payload"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Applied, or cached response for identical command_id",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid token or browser Origin"
+          },
+          "409": {
+            "description": "Invalid model command, stale generation, failed assertion or conflicting command_id"
+          }
+        }
+      }
+    },
+    "/control/v1/assert": {
+      "post": {
+        "operationId": "command_assert",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "command_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "generation": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "payload": {
+                    "type": "object",
+                    "properties": {
+                      "requests": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "accepted": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "approvals": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "reversals": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "delivered": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "queue_empty": {
+                        "type": "boolean"
+                      },
+                      "idle": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "command_id",
+                  "payload"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Applied, or cached response for identical command_id",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid token or browser Origin"
+          },
+          "409": {
+            "description": "Invalid model command, stale generation, failed assertion or conflicting command_id"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "RunToken": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "Device": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "merchant": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "online": {
+            "type": "boolean"
+          },
+          "setup_error": {
+            "default": null,
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "merchant",
+          "online"
+        ],
+        "title": "Device",
+        "type": "object"
+      },
+      "Engine": {
+        "$defs": {
+          "Counters": {
+            "properties": {
+              "accepted": {
+                "format": "uint64",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "approvals": {
+                "format": "uint64",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "delivered": {
+                "format": "uint64",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "requests": {
+                "format": "uint64",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "reversals": {
+                "format": "uint64",
+                "minimum": 0,
+                "type": "integer"
+              }
+            },
+            "required": [
+              "requests",
+              "accepted",
+              "approvals",
+              "reversals",
+              "delivered"
+            ],
+            "type": "object"
+          },
+          "Delivery": {
+            "enum": [
+              "normal",
+              "disconnect_before_accept",
+              "disconnect_after_commit",
+              "disconnect_after_accept",
+              "partial_response",
+              "hang",
+              "malformed_json",
+              "http500",
+              "http400",
+              "wrong_content_type",
+              "missing_fields",
+              "unknown_code"
+            ],
+            "type": "string"
+          },
+          "Device": {
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "merchant": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "online": {
+                "type": "boolean"
+              },
+              "setup_error": {
+                "default": null,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "merchant",
+              "online"
+            ],
+            "type": "object"
+          },
+          "Event": {
+            "properties": {
+              "at_ms": {
+                "format": "uint64",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "charged": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "cursor": {
+                "format": "uint64",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "detail": {
+                "type": "string"
+              },
+              "device_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "generation": {
+                "format": "uint64",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "kind": {
+                "type": "string"
+              },
+              "operation_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "profile": {
+                "type": "string"
+              },
+              "scenario_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "unix_ms": {
+                "format": "uint64",
+                "minimum": 0,
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "cursor",
+              "generation",
+              "at_ms",
+              "profile",
+              "kind",
+              "detail"
+            ],
+            "type": "object"
+          },
+          "Mode": {
+            "enum": [
+              "automatic",
+              "manual"
+            ],
+            "type": "string"
+          },
+          "Operation": {
+            "properties": {
+              "amount": {
+                "format": "uint64",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "charged": {
+                "type": "boolean"
+              },
+              "completed_ms": {
+                "format": "uint64",
+                "minimum": 0,
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "deadline_ms": {
+                "format": "uint64",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "device_id": {
+                "type": "string"
+              },
+              "error_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "id": {
+                "type": "string"
+              },
+              "merchant": {
+                "type": "string"
+              },
+              "response_delivered": {
+                "type": "boolean"
+              },
+              "scenario": {
+                "$ref": "#/components/schemas/Engine/$defs/Scenario"
+              },
+              "stage": {
+                "$ref": "#/components/schemas/Engine/$defs/Stage"
+              },
+              "stage_started_ms": {
+                "format": "uint64",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "started_ms": {
+                "format": "uint64",
+                "minimum": 0,
+                "type": "integer"
+              }
+            },
+            "required": [
+              "id",
+              "device_id",
+              "merchant",
+              "amount",
+              "stage",
+              "started_ms",
+              "stage_started_ms",
+              "deadline_ms",
+              "charged",
+              "scenario",
+              "response_delivered"
+            ],
+            "type": "object"
+          },
+          "Outcome": {
+            "enum": [
+              "approved",
+              "declined",
+              "error"
+            ],
+            "type": "string"
+          },
+          "Scenario": {
+            "additionalProperties": false,
+            "properties": {
+              "amount": {
+                "default": null,
+                "format": "uint64",
+                "minimum": 0,
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "delivery": {
+                "$ref": "#/components/schemas/Engine/$defs/Delivery",
+                "default": "normal"
+              },
+              "device_id": {
+                "default": "00000000-0000-4000-8000-000000000001",
+                "type": "string"
+              },
+              "error_id": {
+                "default": null,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "failure_stage": {
+                "$ref": "#/components/schemas/Engine/$defs/Stage",
+                "default": "authorizing"
+              },
+              "id": {
+                "default": "approved",
+                "type": "string"
+              },
+              "manual_bank": {
+                "default": false,
+                "type": "boolean"
+              },
+              "merchant": {
+                "default": null,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "mode": {
+                "$ref": "#/components/schemas/Engine/$defs/Mode",
+                "default": "automatic"
+              },
+              "outcome": {
+                "$ref": "#/components/schemas/Engine/$defs/Outcome",
+                "default": "approved"
+              },
+              "require_confirmation": {
+                "default": false,
+                "type": "boolean"
+              },
+              "seed": {
+                "default": 42,
+                "format": "uint64",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "timing": {
+                "$ref": "#/components/schemas/Engine/$defs/Timing",
+                "default": {
+                  "authorize_ms": 1200,
+                  "card_ms": 2000,
+                  "confirm_ms": 500,
+                  "connect_ms": 300,
+                  "customer_ms": 500,
+                  "response_ms": 0,
+                  "timeout_ms": 120000
+                }
+              },
+              "uses": {
+                "default": 1,
+                "format": "uint32",
+                "minimum": 0,
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "Stage": {
+            "enum": [
+              "connecting",
+              "awaiting_card",
+              "awaiting_customer",
+              "authorizing",
+              "awaiting_confirmation",
+              "approved",
+              "declined",
+              "cancelled",
+              "failed",
+              "timed_out",
+              "reversed"
+            ],
+            "type": "string"
+          },
+          "Timing": {
+            "additionalProperties": false,
+            "properties": {
+              "authorize_ms": {
+                "default": 1200,
+                "format": "uint64",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "card_ms": {
+                "default": 2000,
+                "format": "uint64",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "confirm_ms": {
+                "default": 500,
+                "format": "uint64",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "connect_ms": {
+                "default": 300,
+                "format": "uint64",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "customer_ms": {
+                "default": 500,
+                "format": "uint64",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "response_ms": {
+                "default": 0,
+                "format": "uint64",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "timeout_ms": {
+                "default": 120000,
+                "format": "uint64",
+                "minimum": 0,
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "properties": {
+          "counters": {
+            "$ref": "#/components/schemas/Engine/$defs/Counters"
+          },
+          "devices": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Engine/$defs/Device"
+            },
+            "type": "object"
+          },
+          "epoch_unix_ms": {
+            "format": "uint64",
+            "minimum": 0,
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "events": {
+            "items": {
+              "$ref": "#/components/schemas/Engine/$defs/Event"
+            },
+            "type": "array"
+          },
+          "generation": {
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "next_event": {
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "next_operation": {
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "now_ms": {
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "operations": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Engine/$defs/Operation"
+            },
+            "type": "object"
+          },
+          "profile": {
+            "type": "string"
+          },
+          "queue": {
+            "items": {
+              "$ref": "#/components/schemas/Engine/$defs/Scenario"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "profile",
+          "now_ms",
+          "generation",
+          "devices",
+          "operations",
+          "queue",
+          "events",
+          "counters",
+          "next_operation",
+          "next_event"
+        ],
+        "title": "Engine",
+        "type": "object"
+      },
+      "Scenario": {
+        "$defs": {
+          "Delivery": {
+            "enum": [
+              "normal",
+              "disconnect_before_accept",
+              "disconnect_after_commit",
+              "disconnect_after_accept",
+              "partial_response",
+              "hang",
+              "malformed_json",
+              "http500",
+              "http400",
+              "wrong_content_type",
+              "missing_fields",
+              "unknown_code"
+            ],
+            "type": "string"
+          },
+          "Mode": {
+            "enum": [
+              "automatic",
+              "manual"
+            ],
+            "type": "string"
+          },
+          "Outcome": {
+            "enum": [
+              "approved",
+              "declined",
+              "error"
+            ],
+            "type": "string"
+          },
+          "Stage": {
+            "enum": [
+              "connecting",
+              "awaiting_card",
+              "awaiting_customer",
+              "authorizing",
+              "awaiting_confirmation",
+              "approved",
+              "declined",
+              "cancelled",
+              "failed",
+              "timed_out",
+              "reversed"
+            ],
+            "type": "string"
+          },
+          "Timing": {
+            "additionalProperties": false,
+            "properties": {
+              "authorize_ms": {
+                "default": 1200,
+                "format": "uint64",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "card_ms": {
+                "default": 2000,
+                "format": "uint64",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "confirm_ms": {
+                "default": 500,
+                "format": "uint64",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "connect_ms": {
+                "default": 300,
+                "format": "uint64",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "customer_ms": {
+                "default": 500,
+                "format": "uint64",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "response_ms": {
+                "default": 0,
+                "format": "uint64",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "timeout_ms": {
+                "default": 120000,
+                "format": "uint64",
+                "minimum": 0,
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "additionalProperties": false,
+        "properties": {
+          "amount": {
+            "default": null,
+            "format": "uint64",
+            "minimum": 0,
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "delivery": {
+            "$ref": "#/components/schemas/Scenario/$defs/Delivery",
+            "default": "normal"
+          },
+          "device_id": {
+            "default": "00000000-0000-4000-8000-000000000001",
+            "type": "string"
+          },
+          "error_id": {
+            "default": null,
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "failure_stage": {
+            "$ref": "#/components/schemas/Scenario/$defs/Stage",
+            "default": "authorizing"
+          },
+          "id": {
+            "default": "approved",
+            "type": "string"
+          },
+          "manual_bank": {
+            "default": false,
+            "type": "boolean"
+          },
+          "merchant": {
+            "default": null,
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "mode": {
+            "$ref": "#/components/schemas/Scenario/$defs/Mode",
+            "default": "automatic"
+          },
+          "outcome": {
+            "$ref": "#/components/schemas/Scenario/$defs/Outcome",
+            "default": "approved"
+          },
+          "require_confirmation": {
+            "default": false,
+            "type": "boolean"
+          },
+          "seed": {
+            "default": 42,
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "timing": {
+            "$ref": "#/components/schemas/Scenario/$defs/Timing",
+            "default": {
+              "authorize_ms": 1200,
+              "card_ms": 2000,
+              "confirm_ms": 500,
+              "connect_ms": 300,
+              "customer_ms": 500,
+              "response_ms": 0,
+              "timeout_ms": 120000
+            }
+          },
+          "uses": {
+            "default": 1,
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "title": "Scenario",
+        "type": "object"
+      }
+    }
+  }
+}

@@ -1,0 +1,690 @@
+{
+  "Device": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "merchant": {
+        "type": "string"
+      },
+      "name": {
+        "type": "string"
+      },
+      "online": {
+        "type": "boolean"
+      },
+      "setup_error": {
+        "default": null,
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "name",
+      "merchant",
+      "online"
+    ],
+    "title": "Device",
+    "type": "object"
+  },
+  "Engine": {
+    "$defs": {
+      "Counters": {
+        "properties": {
+          "accepted": {
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "approvals": {
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "delivered": {
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "requests": {
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "reversals": {
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "requests",
+          "accepted",
+          "approvals",
+          "reversals",
+          "delivered"
+        ],
+        "type": "object"
+      },
+      "Delivery": {
+        "enum": [
+          "normal",
+          "disconnect_before_accept",
+          "disconnect_after_commit",
+          "disconnect_after_accept",
+          "partial_response",
+          "hang",
+          "malformed_json",
+          "http500",
+          "http400",
+          "wrong_content_type",
+          "missing_fields",
+          "unknown_code"
+        ],
+        "type": "string"
+      },
+      "Device": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "merchant": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "online": {
+            "type": "boolean"
+          },
+          "setup_error": {
+            "default": null,
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "merchant",
+          "online"
+        ],
+        "type": "object"
+      },
+      "Event": {
+        "properties": {
+          "at_ms": {
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "charged": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "cursor": {
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "detail": {
+            "type": "string"
+          },
+          "device_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "generation": {
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "operation_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "profile": {
+            "type": "string"
+          },
+          "scenario_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "unix_ms": {
+            "format": "uint64",
+            "minimum": 0,
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "cursor",
+          "generation",
+          "at_ms",
+          "profile",
+          "kind",
+          "detail"
+        ],
+        "type": "object"
+      },
+      "Mode": {
+        "enum": [
+          "automatic",
+          "manual"
+        ],
+        "type": "string"
+      },
+      "Operation": {
+        "properties": {
+          "amount": {
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "charged": {
+            "type": "boolean"
+          },
+          "completed_ms": {
+            "format": "uint64",
+            "minimum": 0,
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "deadline_ms": {
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "device_id": {
+            "type": "string"
+          },
+          "error_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "merchant": {
+            "type": "string"
+          },
+          "response_delivered": {
+            "type": "boolean"
+          },
+          "scenario": {
+            "$ref": "#/$defs/Scenario"
+          },
+          "stage": {
+            "$ref": "#/$defs/Stage"
+          },
+          "stage_started_ms": {
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "started_ms": {
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "device_id",
+          "merchant",
+          "amount",
+          "stage",
+          "started_ms",
+          "stage_started_ms",
+          "deadline_ms",
+          "charged",
+          "scenario",
+          "response_delivered"
+        ],
+        "type": "object"
+      },
+      "Outcome": {
+        "enum": [
+          "approved",
+          "declined",
+          "error"
+        ],
+        "type": "string"
+      },
+      "Scenario": {
+        "additionalProperties": false,
+        "properties": {
+          "amount": {
+            "default": null,
+            "format": "uint64",
+            "minimum": 0,
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "delivery": {
+            "$ref": "#/$defs/Delivery",
+            "default": "normal"
+          },
+          "device_id": {
+            "default": "00000000-0000-4000-8000-000000000001",
+            "type": "string"
+          },
+          "error_id": {
+            "default": null,
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "failure_stage": {
+            "$ref": "#/$defs/Stage",
+            "default": "authorizing"
+          },
+          "id": {
+            "default": "approved",
+            "type": "string"
+          },
+          "manual_bank": {
+            "default": false,
+            "type": "boolean"
+          },
+          "merchant": {
+            "default": null,
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "mode": {
+            "$ref": "#/$defs/Mode",
+            "default": "automatic"
+          },
+          "outcome": {
+            "$ref": "#/$defs/Outcome",
+            "default": "approved"
+          },
+          "require_confirmation": {
+            "default": false,
+            "type": "boolean"
+          },
+          "seed": {
+            "default": 42,
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "timing": {
+            "$ref": "#/$defs/Timing",
+            "default": {
+              "authorize_ms": 1200,
+              "card_ms": 2000,
+              "confirm_ms": 500,
+              "connect_ms": 300,
+              "customer_ms": 500,
+              "response_ms": 0,
+              "timeout_ms": 120000
+            }
+          },
+          "uses": {
+            "default": 1,
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "Stage": {
+        "enum": [
+          "connecting",
+          "awaiting_card",
+          "awaiting_customer",
+          "authorizing",
+          "awaiting_confirmation",
+          "approved",
+          "declined",
+          "cancelled",
+          "failed",
+          "timed_out",
+          "reversed"
+        ],
+        "type": "string"
+      },
+      "Timing": {
+        "additionalProperties": false,
+        "properties": {
+          "authorize_ms": {
+            "default": 1200,
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "card_ms": {
+            "default": 2000,
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "confirm_ms": {
+            "default": 500,
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "connect_ms": {
+            "default": 300,
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "customer_ms": {
+            "default": 500,
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "response_ms": {
+            "default": 0,
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "timeout_ms": {
+            "default": 120000,
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "properties": {
+      "counters": {
+        "$ref": "#/$defs/Counters"
+      },
+      "devices": {
+        "additionalProperties": {
+          "$ref": "#/$defs/Device"
+        },
+        "type": "object"
+      },
+      "epoch_unix_ms": {
+        "format": "uint64",
+        "minimum": 0,
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "events": {
+        "items": {
+          "$ref": "#/$defs/Event"
+        },
+        "type": "array"
+      },
+      "generation": {
+        "format": "uint64",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "next_event": {
+        "format": "uint64",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "next_operation": {
+        "format": "uint64",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "now_ms": {
+        "format": "uint64",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "operations": {
+        "additionalProperties": {
+          "$ref": "#/$defs/Operation"
+        },
+        "type": "object"
+      },
+      "profile": {
+        "type": "string"
+      },
+      "queue": {
+        "items": {
+          "$ref": "#/$defs/Scenario"
+        },
+        "type": "array"
+      }
+    },
+    "required": [
+      "profile",
+      "now_ms",
+      "generation",
+      "devices",
+      "operations",
+      "queue",
+      "events",
+      "counters",
+      "next_operation",
+      "next_event"
+    ],
+    "title": "Engine",
+    "type": "object"
+  },
+  "Scenario": {
+    "$defs": {
+      "Delivery": {
+        "enum": [
+          "normal",
+          "disconnect_before_accept",
+          "disconnect_after_commit",
+          "disconnect_after_accept",
+          "partial_response",
+          "hang",
+          "malformed_json",
+          "http500",
+          "http400",
+          "wrong_content_type",
+          "missing_fields",
+          "unknown_code"
+        ],
+        "type": "string"
+      },
+      "Mode": {
+        "enum": [
+          "automatic",
+          "manual"
+        ],
+        "type": "string"
+      },
+      "Outcome": {
+        "enum": [
+          "approved",
+          "declined",
+          "error"
+        ],
+        "type": "string"
+      },
+      "Stage": {
+        "enum": [
+          "connecting",
+          "awaiting_card",
+          "awaiting_customer",
+          "authorizing",
+          "awaiting_confirmation",
+          "approved",
+          "declined",
+          "cancelled",
+          "failed",
+          "timed_out",
+          "reversed"
+        ],
+        "type": "string"
+      },
+      "Timing": {
+        "additionalProperties": false,
+        "properties": {
+          "authorize_ms": {
+            "default": 1200,
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "card_ms": {
+            "default": 2000,
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "confirm_ms": {
+            "default": 500,
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "connect_ms": {
+            "default": 300,
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "customer_ms": {
+            "default": 500,
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "response_ms": {
+            "default": 0,
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "timeout_ms": {
+            "default": 120000,
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "additionalProperties": false,
+    "properties": {
+      "amount": {
+        "default": null,
+        "format": "uint64",
+        "minimum": 0,
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "delivery": {
+        "$ref": "#/$defs/Delivery",
+        "default": "normal"
+      },
+      "device_id": {
+        "default": "00000000-0000-4000-8000-000000000001",
+        "type": "string"
+      },
+      "error_id": {
+        "default": null,
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "failure_stage": {
+        "$ref": "#/$defs/Stage",
+        "default": "authorizing"
+      },
+      "id": {
+        "default": "approved",
+        "type": "string"
+      },
+      "manual_bank": {
+        "default": false,
+        "type": "boolean"
+      },
+      "merchant": {
+        "default": null,
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "mode": {
+        "$ref": "#/$defs/Mode",
+        "default": "automatic"
+      },
+      "outcome": {
+        "$ref": "#/$defs/Outcome",
+        "default": "approved"
+      },
+      "require_confirmation": {
+        "default": false,
+        "type": "boolean"
+      },
+      "seed": {
+        "default": 42,
+        "format": "uint64",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "timing": {
+        "$ref": "#/$defs/Timing",
+        "default": {
+          "authorize_ms": 1200,
+          "card_ms": 2000,
+          "confirm_ms": 500,
+          "connect_ms": 300,
+          "customer_ms": 500,
+          "response_ms": 0,
+          "timeout_ms": 120000
+        }
+      },
+      "uses": {
+        "default": 1,
+        "format": "uint32",
+        "minimum": 0,
+        "type": "integer"
+      }
+    },
+    "title": "Scenario",
+    "type": "object"
+  }
+}

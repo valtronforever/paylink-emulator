@@ -1,0 +1,1 @@
+{"id":"approved","mode":"automatic","outcome":"approved","timing":{"connect_ms":300,"card_ms":2000,"customer_ms":500,"authorize_ms":1200,"response_ms":100,"timeout_ms":120000}}
