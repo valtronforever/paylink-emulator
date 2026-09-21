@@ -1,0 +1,660 @@
+//! Native terminal skin. All mutations travel through the same API as CLI/tests.
+use clap::Parser;
+use gpui_kit::{
+    component::{button::*, *},
+    *,
+};
+use paylink_core::{Device, Engine, Mode, Outcome, Scenario, catalog::ERRORS};
+use paylink_server::{Config, Server};
+use serde_json::{Value, json};
+use std::{
+    sync::{Arc, Mutex, mpsc},
+    time::Duration,
+};
+
+#[derive(Parser)]
+#[command(version, about = "Interactive PayLink terminal simulator")]
+struct Args {
+    /// Attach to an existing headless server instead of starting an embedded one.
+    #[arg(long)]
+    connect: Option<String>,
+    #[arg(long, env = "PAYLINK_CONTROL_TOKEN")]
+    token: Option<String>,
+    #[arg(long, default_value = "127.0.0.1:3000")]
+    payment_addr: std::net::SocketAddr,
+    #[arg(long, default_value = "127.0.0.1:3001")]
+    control_addr: std::net::SocketAddr,
+    #[arg(long)]
+    allow_origin: Vec<String>,
+    #[arg(long)]
+    journal: Option<std::path::PathBuf>,
+}
+#[derive(Clone, Default)]
+struct Snapshot {
+    engine: Option<Engine>,
+    message: String,
+    connected: bool,
+}
+struct Api {
+    tx: mpsc::Sender<(String, Value)>,
+    snapshot: Arc<Mutex<Snapshot>>,
+}
+impl Api {
+    fn new(base: String, token: String) -> Self {
+        let (tx, rx) = mpsc::channel::<(String, Value)>();
+        let snapshot = Arc::new(Mutex::new(Snapshot::default()));
+        let shared = snapshot.clone();
+        std::thread::spawn(move || {
+            let client = reqwest::blocking::Client::builder()
+                .timeout(Duration::from_secs(2))
+                .build()
+                .unwrap();
+            loop {
+                match rx.recv_timeout(Duration::from_millis(100)) {
+                    Ok((resource, payload)) => {
+                        let result = (|| -> anyhow::Result<Value> {
+                            let response=client.post(format!("{base}/control/v1/{resource}")).bearer_auth(&token).json(&json!({"command_id":uuid::Uuid::new_v4().to_string(),"payload":payload})).send()?;
+                            let status = response.status();
+                            let value: Value = response.json()?;
+                            anyhow::ensure!(status.is_success(), "{value}");
+                            Ok(value)
+                        })();
+                        shared.lock().unwrap().message = match result {
+                            Ok(_) => format!("{resource}: OK"),
+                            Err(e) => format!("{resource}: {e}"),
+                        };
+                    }
+                    Err(mpsc::RecvTimeoutError::Disconnected) => break,
+                    Err(mpsc::RecvTimeoutError::Timeout) => {}
+                }
+                let result = client
+                    .get(format!("{base}/control/v1/state"))
+                    .bearer_auth(&token)
+                    .send()
+                    .and_then(|r| r.error_for_status())
+                    .and_then(|r| r.json::<Engine>());
+                let mut snapshot = shared.lock().unwrap();
+                match result {
+                    Ok(engine) => {
+                        snapshot.engine = Some(engine);
+                        snapshot.connected = true;
+                    }
+                    Err(e) => {
+                        snapshot.connected = false;
+                        snapshot.message = format!("Control connection: {e}");
+                    }
+                }
+            }
+        });
+        Self { tx, snapshot }
+    }
+    fn send(&self, resource: &str, payload: Value) {
+        let _ = self.tx.send((resource.into(), payload));
+    }
+}
+#[derive(Clone, Copy)]
+enum InputTarget {
+    Amount,
+    Connect,
+    Card,
+    Customer,
+    Authorize,
+    Response,
+    Timeout,
+}
+impl InputTarget {
+    fn label(self) -> &'static str {
+        match self {
+            Self::Amount => "Amount (minor units)",
+            Self::Connect => "Connect delay (ms)",
+            Self::Card => "Card delay (ms)",
+            Self::Customer => "Customer delay (ms)",
+            Self::Authorize => "Bank delay (ms)",
+            Self::Response => "Response delay (ms)",
+            Self::Timeout => "Timeout (ms)",
+        }
+    }
+}
+struct Terminal {
+    api: Api,
+    focus: FocusHandle,
+    amount: u64,
+    scenario: Scenario,
+    outcome: usize,
+    input: InputTarget,
+    replace_input: bool,
+    base: String,
+    device_index: usize,
+}
+impl Terminal {
+    fn new(api: Api, base: String, cx: &mut Context<Self>) -> Self {
+        cx.spawn(async move |view, cx| {
+            loop {
+                cx.background_executor()
+                    .timer(Duration::from_millis(100))
+                    .await;
+                if view.update(cx, |_, cx| cx.notify()).is_err() {
+                    break;
+                }
+            }
+        })
+        .detach();
+        Self {
+            api,
+            focus: cx.focus_handle(),
+            amount: 100,
+            scenario: Scenario {
+                mode: Mode::Manual,
+                ..Scenario::default()
+            },
+            outcome: 0,
+            input: InputTarget::Amount,
+            replace_input: true,
+            base,
+            device_index: 0,
+        }
+    }
+    fn value(&mut self) -> &mut u64 {
+        match self.input {
+            InputTarget::Amount => &mut self.amount,
+            InputTarget::Connect => &mut self.scenario.timing.connect_ms,
+            InputTarget::Card => &mut self.scenario.timing.card_ms,
+            InputTarget::Customer => &mut self.scenario.timing.customer_ms,
+            InputTarget::Authorize => &mut self.scenario.timing.authorize_ms,
+            InputTarget::Response => &mut self.scenario.timing.response_ms,
+            InputTarget::Timeout => &mut self.scenario.timing.timeout_ms,
+        }
+    }
+    fn digit(&mut self, ch: &str) {
+        let replace = self.replace_input;
+        self.replace_input = false;
+        let value = self.value();
+        if ch == "clear" {
+            *value = 0;
+        } else if ch == "backspace" {
+            *value /= 10;
+        } else if let Ok(d) = ch.parse::<u64>() {
+            *value = if replace {
+                d
+            } else {
+                value.saturating_mul(10).saturating_add(d).min(999_999_999)
+            };
+        }
+    }
+    fn current(&self) -> Option<paylink_core::Operation> {
+        let snapshot = self.api.snapshot.lock().unwrap();
+        snapshot
+            .engine
+            .as_ref()?
+            .operations
+            .values()
+            .filter(|o| o.device_id == self.scenario.device_id)
+            .max_by_key(|o| {
+                (
+                    o.started_ms,
+                    o.id.split("-op")
+                        .last()
+                        .and_then(|n| n.parse::<u64>().ok())
+                        .unwrap_or(0),
+                )
+            })
+            .cloned()
+    }
+    fn event(&self, event: &str) {
+        if let Some(op) = self.current() {
+            self.api
+                .send("action", json!({"operation_id":op.id,"event":event}));
+        }
+    }
+    fn queue(&mut self) {
+        if self.outcome >= 2 {
+            let error = &ERRORS[self.outcome - 2];
+            if error.category == "transport" {
+                self.api.send("transport", json!({"online":false}));
+                return;
+            }
+            if error.category == "setup_only" {
+                self.api.send(
+                    "devices",
+                    json!(Device {
+                        id: self.scenario.device_id.clone(),
+                        setup_error: Some(error.id.into()),
+                        ..Device::default()
+                    }),
+                );
+                return;
+            }
+            self.scenario.outcome = Outcome::Error;
+            self.scenario.error_id = Some(error.id.into());
+        } else {
+            self.scenario.outcome = if self.outcome == 0 {
+                Outcome::Approved
+            } else {
+                Outcome::Declined
+            };
+            self.scenario.error_id = None;
+        }
+        self.scenario.amount = None;
+        self.api.send("arm", json!(self.scenario));
+    }
+    fn button(
+        &self,
+        id: &'static str,
+        label: impl Into<SharedString>,
+        f: impl Fn(&mut Self, &mut Window, &mut Context<Self>) + 'static,
+        cx: &Context<Self>,
+    ) -> Button {
+        Button::new(id)
+            .label(label)
+            .on_click(cx.listener(move |this, _, window, cx| {
+                f(this, window, cx);
+                cx.notify();
+            }))
+    }
+}
+impl Render for Terminal {
+    fn render(&mut self, _window: &mut Window, cx: &mut Context<Self>) -> impl IntoElement {
+        let snapshot = self.api.snapshot.lock().unwrap().clone();
+        let op = self.current();
+        let stage = op
+            .as_ref()
+            .map(|o| format!("{:?}", o.stage))
+            .unwrap_or("Ready".into());
+        let amount = op
+            .as_ref()
+            .filter(|o| !o.stage.terminal())
+            .map(|o| o.amount)
+            .unwrap_or(self.amount);
+        let outcome = match self.outcome {
+            0 => "Approved",
+            1 => "Declined",
+            n => ERRORS[n - 2].id,
+        };
+        let mut keypad = div().v_flex().gap_2();
+        for (row, keys) in [
+            ["1", "2", "3"],
+            ["4", "5", "6"],
+            ["7", "8", "9"],
+            ["clear", "0", "backspace"],
+        ]
+        .iter()
+        .enumerate()
+        {
+            let mut line = div().h_flex().gap_2();
+            for (column, key) in keys.iter().enumerate() {
+                let key = *key;
+                line = line.child(
+                    Button::new(("key", row * 3 + column))
+                        .label(match key {
+                            "clear" => "C",
+                            "backspace" => "←",
+                            _ => key,
+                        })
+                        .w(px(80.))
+                        .h(px(44.))
+                        .on_click(cx.listener(move |this, _, _, cx| {
+                            this.digit(key);
+                            cx.notify();
+                        })),
+                );
+            }
+            keypad = keypad.child(line);
+        }
+        let display = div()
+            .id("terminal-display")
+            .role(Role::Status)
+            .aria_label(format!(
+                "Terminal {stage}, amount {}.{:02} UAH",
+                amount / 100,
+                amount % 100
+            ))
+            .v_flex()
+            .gap_2()
+            .p_5()
+            .rounded_lg()
+            .bg(rgb(0xd9efdc))
+            .text_color(rgb(0x173d2c))
+            .w_full()
+            .min_h(px(150.))
+            .child(div().text_sm().child("PAYLINK 2.1.20 · SIMULATED"))
+            .child(
+                div()
+                    .text_3xl()
+                    .child(format!("{}.{:02} UAH", amount / 100, amount % 100)),
+            )
+            .child(stage.clone())
+            .child(
+                div().text_xs().child(
+                    op.as_ref()
+                        .map(|o| o.id.clone())
+                        .unwrap_or("Enter amount, then Start".into()),
+                ),
+            );
+        let terminal = div()
+            .v_flex()
+            .gap_4()
+            .p_5()
+            .w(px(320.))
+            .rounded_3xl()
+            .bg(rgb(0x24323e))
+            .text_color(rgb(0xf1f5f9))
+            .shadow_lg()
+            .child(div().text_sm().child("VIRTUAL PAYMENT TERMINAL"))
+            .child(div().h(px(6.)).w_full().bg(rgb(0x101820)).rounded_full())
+            .child(display)
+            .child(keypad)
+            .child(
+                div()
+                    .h_flex()
+                    .gap_2()
+                    .child(
+                        self.button(
+                            "cancel",
+                            "Cancel",
+                            |s, _, _| s.event("customer_cancelled"),
+                            cx,
+                        )
+                        .danger(),
+                    )
+                    .child(
+                        self.button(
+                            "ok",
+                            "OK",
+                            |s, _, _| match s.current().map(|o| o.stage) {
+                                Some(paylink_core::Stage::AwaitingCustomer) => {
+                                    s.event("customer_confirmed")
+                                }
+                                Some(paylink_core::Stage::AwaitingConfirmation) => {
+                                    s.event("terminal_confirmed")
+                                }
+                                _ => {}
+                            },
+                            cx,
+                        )
+                        .primary(),
+                    ),
+            )
+            .child(self.button(
+                "card",
+                "Tap / insert test card",
+                |s, _, _| s.event("card_presented"),
+                cx,
+            ))
+            .child(div().h(px(8.)).w_full().bg(rgb(0x101820)).rounded_sm())
+            .child(
+                div()
+                    .text_xs()
+                    .child("No real cards or PINs. Original generic terminal skin."),
+            );
+        let mut settings = div().v_flex().gap_3().flex_1().min_w(px(390.));
+        settings = settings
+            .child(div().text_xl().child("Scenario controls"))
+            .child(div().text_sm().child(format!(
+                "{} · {}",
+                self.base,
+                if snapshot.connected {
+                    "connected"
+                } else {
+                    "disconnected"
+                }
+            )))
+            .child(self.button(
+                "device",
+                format!("Device: {}", self.scenario.device_id),
+                |s, _, _| {
+                    if let Some(engine) = &s.api.snapshot.lock().unwrap().engine {
+                        let devices = engine.devices.keys().cloned().collect::<Vec<_>>();
+                        if !devices.is_empty() {
+                            s.device_index = (s.device_index + 1) % devices.len();
+                            s.scenario.device_id = devices[s.device_index].clone();
+                        }
+                    }
+                },
+                cx,
+            ))
+            .child(self.button(
+                "mode",
+                format!("Mode: {:?}", self.scenario.mode),
+                |s, _, _| {
+                    s.scenario.mode = if s.scenario.mode == Mode::Manual {
+                        Mode::Automatic
+                    } else {
+                        Mode::Manual
+                    }
+                },
+                cx,
+            ))
+            .child(self.button(
+                "outcome",
+                format!("Next outcome: {outcome}  →"),
+                |s, _, _| s.outcome = (s.outcome + 1) % (ERRORS.len() + 2),
+                cx,
+            ))
+            .child(self.button(
+                "manual-bank",
+                format!("Manual bank decision: {}", self.scenario.manual_bank),
+                |s, _, _| s.scenario.manual_bank = !s.scenario.manual_bank,
+                cx,
+            ))
+            .child(
+                div()
+                    .text_sm()
+                    .child("Select a field, then use the keypad (or keyboard digits)."),
+            );
+        for (index, (target, label, value)) in [
+            (InputTarget::Amount, "Amount / minor units", self.amount),
+            (
+                InputTarget::Connect,
+                "Connection / ms",
+                self.scenario.timing.connect_ms,
+            ),
+            (
+                InputTarget::Card,
+                "Automatic card / ms",
+                self.scenario.timing.card_ms,
+            ),
+            (
+                InputTarget::Customer,
+                "Automatic customer / ms",
+                self.scenario.timing.customer_ms,
+            ),
+            (
+                InputTarget::Authorize,
+                "Bank processing / ms",
+                self.scenario.timing.authorize_ms,
+            ),
+            (
+                InputTarget::Response,
+                "Response delivery / ms",
+                self.scenario.timing.response_ms,
+            ),
+            (
+                InputTarget::Timeout,
+                "Operation timeout / ms",
+                self.scenario.timing.timeout_ms,
+            ),
+        ]
+        .into_iter()
+        .enumerate()
+        {
+            settings = settings.child(
+                Button::new(("field", index))
+                    .label(format!("{label}: {value}"))
+                    .on_click(cx.listener(move |s, _, _, cx| {
+                        s.input = target;
+                        s.replace_input = true;
+                        cx.notify();
+                    })),
+            );
+        }
+        settings = settings
+            .child(
+                div()
+                    .text_sm()
+                    .child(format!("Editing: {}", self.input.label())),
+            )
+            .child(
+                div()
+                    .h_flex()
+                    .gap_2()
+                    .child(
+                        self.button("arm", "Arm next request", |s, _, _| s.queue(), cx)
+                            .primary(),
+                    )
+                    .child(self.button(
+                        "start",
+                        "Start standalone",
+                        |s, _, _| {
+                            s.queue();
+                            if s.outcome < 2 || ERRORS[s.outcome - 2].category == "terminal" {
+                                s.api.send(
+                                    "purchase",
+                                    json!({"device_id":s.scenario.device_id,"amount":s.amount}),
+                                );
+                            }
+                        },
+                        cx,
+                    )),
+            )
+            .child(
+                div()
+                    .h_flex()
+                    .gap_2()
+                    .child(self.button(
+                        "approve",
+                        "Bank approves",
+                        |s, _, _| s.event("bank_approved"),
+                        cx,
+                    ))
+                    .child(self.button(
+                        "decline",
+                        "Bank declines",
+                        |s, _, _| s.event("bank_declined"),
+                        cx,
+                    )),
+            )
+            .child(
+                div()
+                    .h_flex()
+                    .gap_2()
+                    .child(self.button(
+                        "disconnect",
+                        "Disconnect device",
+                        |s, _, _| s.event("device_disconnected"),
+                        cx,
+                    ))
+                    .child(self.button(
+                        "restore",
+                        "Restore device / port",
+                        |s, _, _| {
+                            s.api.send("transport", json!({"online":true}));
+                            s.api.send(
+                                "devices",
+                                json!(Device {
+                                    id: s.scenario.device_id.clone(),
+                                    ..Device::default()
+                                }),
+                            );
+                        },
+                        cx,
+                    )),
+            )
+            .child(self.button(
+                "reset",
+                "Reset session and journal",
+                |s, _, _| s.api.send("reset", json!({})),
+                cx,
+            ))
+            .child(div().text_sm().child(snapshot.message));
+        let mut journal = div()
+            .v_flex()
+            .gap_1()
+            .p_4()
+            .border_1()
+            .border_color(cx.theme().border)
+            .rounded_lg();
+        if let Some(engine) = snapshot.engine {
+            journal = journal.child(format!(
+                "Requests {} · Accepted {} · Approvals {} · Delivered {}",
+                engine.counters.requests,
+                engine.counters.accepted,
+                engine.counters.approvals,
+                engine.counters.delivered
+            ));
+            for event in engine.events.iter().rev().take(12) {
+                journal = journal.child(div().text_xs().child(format!(
+                    "#{} · {} ms · {} · {}",
+                    event.cursor, event.at_ms, event.kind, event.detail
+                )));
+            }
+        }
+        div().id("terminal-app").track_focus(&self.focus).on_key_down(cx.listener(|s,event:&KeyDownEvent,_,cx|{let key=event.keystroke.key.as_str();if key.len()==1&&key.as_bytes()[0].is_ascii_digit()||key=="backspace"{s.digit(key);cx.notify();}}))
+            .size_full().overflow_y_scroll().v_flex().gap_5().p_6().bg(cx.theme().background).text_color(cx.theme().foreground)
+            .child(div().text_2xl().child("PayLink terminal lab"))
+            .child(div().text_sm().child("Experimental 2.1.20 profile · wire compatibility has not been verified against a real terminal"))
+            .child(div().h_flex().items_start().gap_6().child(terminal).child(settings)).child(journal)
+    }
+}
+fn main() -> anyhow::Result<()> {
+    let args = Args::parse();
+    let runtime = tokio::runtime::Runtime::new()?;
+    anyhow::ensure!(
+        args.connect.is_none() || args.token.is_some(),
+        "--connect requires --token or PAYLINK_CONTROL_TOKEN"
+    );
+    let token = args
+        .token
+        .unwrap_or_else(|| uuid::Uuid::new_v4().to_string());
+    let server = if args.connect.is_none() {
+        Some(runtime.block_on(Server::start(Config {
+            payment_addr: args.payment_addr,
+            control_addr: args.control_addr,
+            token: token.clone(),
+            controlled_clock: false,
+            allowed_origins: args.allow_origin,
+            journal: args.journal,
+        }))?)
+    } else {
+        None
+    };
+    let base = args
+        .connect
+        .unwrap_or_else(|| server.as_ref().unwrap().ready.control_url.clone());
+    if let Some(server) = &server {
+        println!("{}", serde_json::to_string(&server.ready)?);
+    }
+    let api = Api::new(base.clone(), token);
+    gpui_kit::application().run(move |cx| {
+        gpui_kit::init(cx);
+        cx.on_window_closed(|cx, _| {
+            if cx.windows().is_empty() {
+                cx.quit();
+            }
+        })
+        .detach();
+        cx.spawn(async move |cx| {
+            cx.open_window(
+                WindowOptions {
+                    window_bounds: Some(WindowBounds::Windowed(Bounds::new(
+                        point(px(80.), px(60.)),
+                        size(px(1000.), px(980.)),
+                    ))),
+                    ..Default::default()
+                },
+                |window, cx| {
+                    let view = cx.new(|cx| Terminal::new(api, base, cx));
+                    let focus = view.read(cx).focus.clone();
+                    focus.focus(window, cx);
+                    cx.new(|cx| Root::new(view, window, cx).bg(cx.theme().background))
+                },
+            )
+            .expect("open terminal window");
+        })
+        .detach();
+        cx.activate(true);
+    });
+    if let Some(server) = server {
+        runtime.block_on(server.shutdown())?;
+    }
+    Ok(())
+}
