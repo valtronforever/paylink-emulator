@@ -14,7 +14,7 @@ const handler = (_req, res) => {
 };
 const server = config.browser_tls ? https.createServer({key: readFileSync(config.browser_tls.key), cert: readFileSync(config.browser_tls.cert)}, handler) : http.createServer(handler);
 await new Promise(r => server.listen(13020, '127.0.0.1', r));
-const origin = `${config.browser_tls ? 'https' : 'http'}://127.0.0.1:13020`;
+const origin = config.browser_origin ?? `${config.browser_tls ? 'https' : 'http'}://127.0.0.1:13020`;
 const browser = await chromium.launch({channel: config.browser_channel ?? 'chromium', headless: true});
 const summary = [];
 try {
@@ -54,6 +54,6 @@ try {
     await context.tracing.stop({path: join(out, `${target}-trace.zip`)}); await context.close();
   }
 } finally {
-  writeFileSync(join(out, 'summary.json'), JSON.stringify({origin, browser: browser.version(), inerix: 'not_run_dependency_476', https_to_localhost: config.browser_tls ? 'see_results' : 'not_run_no_trusted_harness_certificate', results: summary}, null, 2));
+  writeFileSync(join(out, 'summary.json'), JSON.stringify({origin, browser: browser.version(), inerix: 'not_run_dependency_476', https_to_localhost: origin.startsWith('https:') ? 'see_results' : 'not_run_no_trusted_harness_certificate', results: summary}, null, 2));
   await browser.close(); await new Promise(r => server.close(r));
 }

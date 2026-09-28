@@ -4,3 +4,7 @@
 !rust-toolchain.toml
 !crates
 !crates/**
+!profiles
+!profiles/desktop-paylink-2.1.20-win-x86
+!profiles/desktop-paylink-2.1.20-win-x86/ssi
+!profiles/desktop-paylink-2.1.20-win-x86/ssi/http-errors.json

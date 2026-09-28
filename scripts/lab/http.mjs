@@ -2,14 +2,14 @@ import http from 'node:http';
 import https from 'node:https';
 import {appendFileSync} from 'node:fs';
 // Unlike fetch, retain raw header pairs, non-JSON bodies, partial bodies and errors.
-export function recordHttp(url, request, {file, runId, scenarioId, timeoutMs = 30000, epoch = performance.now()} = {}) {
+export function recordHttp(url, request, {file, runId, scenarioId, stepId, timeoutMs = 30000, epoch = performance.now()} = {}) {
   const target = new URL(url);
   if (!['127.0.0.1', 'localhost', '[::1]'].includes(target.hostname)) throw Error('Lab HTTP targets must be loopback');
   if (target.username || target.password) throw Error('Credentials in URL are not permitted');
   const start = performance.now();
   const rawBody = request.body === undefined ? undefined : JSON.stringify(request.body);
   const headers = {...request.headers, ...(rawBody === undefined ? {} : {'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(rawBody)})};
-  const entry = {run_id: runId, scenario_id: scenarioId, start_utc: new Date().toISOString(),
+  const entry = {run_id: runId, scenario_id: scenarioId, ...(stepId ? {step_id: stepId} : {}), start_utc: new Date().toISOString(),
     start_ms: start - epoch, client_timeout_ms: timeoutMs, request: {url, method: request.method, headers, body: rawBody ?? null}};
   return new Promise(resolve => {
     const chunks = []; let finished = false, timer;
@@ -34,6 +34,21 @@ export function recordHttp(url, request, {file, runId, scenarioId, timeoutMs = 3
     timer = setTimeout(() => { finish('client_timeout'); client.destroy(); }, timeoutMs);
     client.end(rawBody);
   });
+}
+
+export async function recordGroup(base, item, options, emulator = false) {
+  const steps = item.requests ?? [{...item.request, id: 'request', after_ms: 0, emulator_path: item.emulator_path}];
+  if (!Array.isArray(steps) || !steps.length || steps.length > 30) throw Error('Expected 1–30 requests');
+  if (new Set(steps.map(s => s.id)).size !== steps.length) throw Error('Duplicate step ID');
+  for (const step of steps) {
+    if (!/^[\w-]{1,80}$/.test(step.id) || !Number.isInteger(step.after_ms ?? 0) || (step.after_ms ?? 0) < 0 || (step.after_ms ?? 0) > 3600000) throw Error('Invalid request offset/ID');
+    if (!step.path?.startsWith('/api/') || step.path.includes('://')) throw Error('Expected local /api/ request');
+  }
+  return Promise.all(steps.map(async step => {
+    if (step.after_ms) await new Promise(r => setTimeout(r, step.after_ms));
+    return recordHttp(base + (emulator ? step.emulator_path ?? step.path : step.path), step,
+      {...options, stepId: step.id, timeoutMs: step.timeout_ms ?? item.timeout_ms ?? 30000});
+  }));
 }
 
 export async function control(url, token, resource, body, emulator = false) {

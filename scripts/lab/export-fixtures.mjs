@@ -14,6 +14,7 @@ mkdirSync(join(dir, 'evidence'), {recursive: true});
 for (const record of records) {
   const id = record.scenario_id;
   const scenario = JSON.parse(readFileSync(join(root, 'scenarios', `${id}.json`)));
+  if (scenario.requests) throw Error('Concurrent groups require sequence-aware review; do not export as isolated fixtures');
   if (record.connection_error) throw Error(`${id}: connection failure requires manual fixture review`);
   const raw = {run_id: manifest.run_id, scenario, http: record, ssi: wire.filter(e => e.scenario_id === id),
     build: {commit: manifest.commit, dirty: manifest.dirty, executable_sha256: manifest.executable_sha256, installer_sha256: manifest.installer_sha256, ssi: manifest.ssi, host: manifest.host}};

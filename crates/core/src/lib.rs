@@ -1,4 +1,5 @@
 //! Deterministic terminal model. It has no network, UI or wall-clock dependency.
+#![recursion_limit = "256"]
 pub mod catalog;
 pub mod ssi;
 use schemars::JsonSchema;

@@ -4,7 +4,7 @@ import {createHash, randomUUID} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import os from 'node:os';
 import {parseArgs} from 'node:util';
-import {recordHttp, control} from './lab/http.mjs';
+import {recordHttp, recordGroup, control} from './lab/http.mjs';
 import {compare} from './lab/compare.mjs';
 const {values} = parseArgs({options: {config: {type: 'string'}, out: {type: 'string'}}});
 if (!values.config) throw Error('--config <lab.json> required; see docs/WINDOWS_SSI_LAB.md');
@@ -25,6 +25,8 @@ const manifest = {run_id: runId, started_utc: new Date().toISOString(), provenan
   ssi: {revision: '1.4.6', date: '2026-09-12', wire_version: 1, sha256: hash(config.spec_path)},
   commit: execFileSync('git', ['rev-parse', 'HEAD'], {encoding: 'utf8'}).trim(),
   dirty: !!execFileSync('git', ['status', '--porcelain'], {encoding: 'utf8'}).trim(),
+  source_hashes: Object.fromEntries(['scripts/ssi/codec.mjs','scripts/ssi/model.mjs','scripts/ssi/server.mjs','scripts/record-paylink.mjs','scripts/lab/http.mjs'].map(path => [path, hash(path)])),
+  emulator_binary: config.emulator_executable_path ? {sha256:hash(config.emulator_executable_path), commit:config.emulator_commit ?? null} : null,
   host: {platform: os.platform(), release: os.release(), version: os.version(), architecture: os.arch(), node: process.version},
   reference_url: config.reference_url, emulator_url: config.emulator_url ?? null,
   device_configuration: config.device, id_mapping: config.id_mapping ?? {},
@@ -42,22 +44,25 @@ try {
   for (const item of config.scenarios) {
     writeFileSync(join(root, 'scenarios', `${item.id}.json`), JSON.stringify(item, null, 2));
     await ssi('reset', {run_id: runId}); await ssi('arm', {...item.ssi, id: item.id});
-    const reference = await recordHttp(config.reference_url + item.request.path, item.request, {
-      file: join(root, 'reference/http.jsonl'), runId, scenarioId: item.id, timeoutMs: item.timeout_ms ?? 30000, epoch});
+    const references = await recordGroup(config.reference_url, item, {
+      file: join(root, 'reference/http.jsonl'), runId, scenarioId: item.id, epoch});
     const state = await ssi('state');
     writeFileSync(join(root, 'reference', `${item.id}-state.json`), JSON.stringify(state, null, 2));
-    let result = {scenario_id: item.id, status: 'not_run', reason: 'Emulator not configured', reference_status: reference.status, reference_error: reference.connection_error};
+    let candidates;
     if (config.emulator_url && item.emulator) {
       await emu('reset', {}); await emu('arm', item.emulator);
-      const request = {...item.request, path: item.emulator_path ?? item.request.path};
-      const candidate = await recordHttp(config.emulator_url + request.path, request, {
-        file: join(root, 'emulator/http.jsonl'), runId, scenarioId: item.id, timeoutMs: item.timeout_ms ?? 30000, epoch});
-      result = {scenario_id: item.id, ...compare(reference, candidate, item)};
+      candidates = await recordGroup(config.emulator_url, item, {
+        file: join(root, 'emulator/http.jsonl'), runId, scenarioId: item.id, epoch}, true);
       writeFileSync(join(root, 'emulator', `${item.id}-journal.json`), JSON.stringify(await emu('journal'), null, 2));
     }
-    results.push(result); console.log(JSON.stringify({...result, reference_ms: reference.duration_ms}));
+    for (let i = 0; i < references.length; i++) {
+      const reference = references[i];
+      const result = {scenario_id: item.id, step_id: reference.step_id,
+        ...(candidates ? compare(reference, candidates[i], item) : {status:'not_run',reason:'Emulator not configured',reference_status:reference.status,reference_error:reference.connection_error})};
+      results.push(result); console.log(JSON.stringify({...result, reference_ms: reference.duration_ms}));
+    }
     // Client timeout is not cancellation. Refuse to reset away an unresolved operation.
-    if (reference.connection_error === 'client_timeout') {
+    if (references.some(r => r.connection_error === 'client_timeout')) {
       manifest.missing_evidence.push(`${item.id}: client timed out; PayLink may still be busy. Run recovery separately.`);
       break;
     }
@@ -81,7 +86,7 @@ finally {
   manifest.executable_sha256_after = hash(config.executable_path);
   if (manifest.executable_sha256_after !== manifest.executable_sha256) { manifest.status = 'invalid_build_changed'; process.exitCode = 1; }
   const summary = Object.fromEntries(['verified', 'mismatch', 'not_run'].map(s => [s, results.filter(r => r.status === s).length]));
-  summary.not_run += config.scenarios.length - results.length;
+  summary.not_run += config.scenarios.reduce((n, item) => n + (item.requests?.length ?? 1), 0) - results.length;
   if (summary.mismatch) process.exitCode = 1;
   writeFileSync(join(root, 'manifest.json'), JSON.stringify(manifest, null, 2));
   writeFileSync(join(root, 'comparison.json'), JSON.stringify({summary, results}, null, 2));

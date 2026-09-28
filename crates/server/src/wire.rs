@@ -285,7 +285,7 @@ async fn connection(mut socket: TcpStream, s: Shared, generation: u64) -> Result
             drop(d);
             return json_response(
                 &mut socket,
-                400,
+                503,
                 wire_error("terminal_busy", "Device is busy"),
                 origin,
             )
@@ -413,7 +413,9 @@ async fn connection(mut socket: TcpStream, s: Shared, generation: u64) -> Result
         Err(e) => {
             return json_response(
                 &mut socket,
-                if matches!(e.code.as_str(), "invalid_amount" | "terminal_busy") {
+                if e.code == "terminal_busy" {
+                    503
+                } else if e.code == "invalid_amount" {
                     400
                 } else {
                     200

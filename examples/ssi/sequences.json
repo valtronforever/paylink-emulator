@@ -1,0 +1,20 @@
+[
+  {
+    "id": "busy-and-recovery",
+    "ssi": {"phases": [{"status":"S02","ms":3000},{"status":"S04","ms":1000}]},
+    "emulator": {"id":"busy-and-recovery","uses":2,"timing":{"connect_ms":0,"card_ms":3000,"customer_ms":0,"authorize_ms":1000}},
+    "variable_fields":["id","result.rrn","result.auth_code","result.invoice_num","result.receipt_no","result.date_time","result.additional_properties.transactionUid"],
+    "requests": [
+      {"id":"first","after_ms":0,"method":"POST","path":"/api/pos/00000000-0000-4000-8000-000000000001/purchase","body":{"amount":100}},
+      {"id":"busy-ping","after_ms":200,"method":"GET","path":"/api/pos/00000000-0000-4000-8000-000000000001/ping"},
+      {"id":"busy-purchase","after_ms":400,"method":"POST","path":"/api/pos/00000000-0000-4000-8000-000000000001/purchase","body":{"amount":100}},
+      {"id":"recovered","after_ms":7000,"method":"POST","path":"/api/pos/00000000-0000-4000-8000-000000000001/purchase","body":{"amount":101}}
+    ]
+  },
+  {
+    "id":"fragmented-ping",
+    "ssi":{"fragment_bytes":3,"fragment_delay_ms":1},
+    "emulator":{"id":"fragmented-ping"},
+    "request":{"method":"GET","path":"/api/pos/00000000-0000-4000-8000-000000000001/ping"}
+  }
+]

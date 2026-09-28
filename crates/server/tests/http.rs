@@ -308,7 +308,7 @@ async fn controlled_time_manual_actions_busy_reset_and_listener_recovery() {
         tokio::time::sleep(Duration::from_millis(5)).await;
     };
     let busy = h.payment().send().await.unwrap();
-    assert_eq!(busy.status(), 400);
+    assert_eq!(busy.status(), 503);
     let busy: Value = busy.json().await.unwrap();
     assert_eq!(busy["description"], "Device is busy");
     assert_eq!(busy["code"], 9009);
@@ -321,7 +321,7 @@ async fn controlled_time_manual_actions_busy_reset_and_listener_recovery() {
         .send()
         .await
         .unwrap();
-    assert_eq!(ping.status(), 400);
+    assert_eq!(ping.status(), 503);
     assert_eq!(ping.json::<Value>().await.unwrap()["code"], 9009);
     h.command(
         "action",

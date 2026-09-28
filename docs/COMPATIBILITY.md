@@ -20,7 +20,7 @@ Statically established facts applied to this draft:
 
 - The purchase DTO uses unsigned integer `amount` and string `merchant_id`. The model/control API still calls its configuration field `merchant`.
 - Discovery supports both `/api/devices` and `/api/pos/devices`, including the device ID variants. A missing configuration returns HTTP 404 with `loc`, `msg`, and `type` fields.
-- Ping of an unknown device returns HTTP 404 and native code 9524 (`InvalidTerminalId`). A concurrent purchase/ping against a locked device returns HTTP 400 and code 9009 (`DeviceBusy`). These are distinct from an injected terminal-error scenario.
+- Ping of an unknown device returns HTTP 404 and native code 9524 (`InvalidTerminalId`). Real SSI bench recordings corrected concurrent purchase/ping against a locked device to HTTP 503 and code 9009 (`DeviceBusy`). These are distinct from an injected terminal-error scenario.
 - `BaseResponseDTO` serializes `terminal_status` as a string and initializes `error` to an empty string. A purchase response carries an operation `id`. The provisional success body now follows these rules.
 - In `ResponseDTO`, `terminal` aliases `terminal_id`, `value` aliases `amount`, and `receipt_no` is the string form of numeric `invoice_num`. The test body no longer invents `card_name`, nested `code` or `commission` fields.
 
