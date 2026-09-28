@@ -1,0 +1,1 @@
+{"id":"manual-customer-and-bank","mode":"manual","manual_bank":true,"timing":{"connect_ms":300,"timeout_ms":120000}}

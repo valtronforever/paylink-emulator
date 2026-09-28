@@ -1,0 +1,2405 @@
+{
+  "profile": "desktop-paylink-2.1.20-win-x86",
+  "evidence": "static CLR metadata, not live reference capture",
+  "assembly": "POSServer.exe",
+  "assembly_sha256": "85d1bf9280e7c63e1099ecc2db480813f439e68c41a5eca8a453094a948ab465",
+  "terminal_statuses": [
+    {
+      "name": "None",
+      "code": 0
+    },
+    {
+      "name": "Success",
+      "code": 1
+    },
+    {
+      "name": "DeviceIdNotFound",
+      "code": 100
+    },
+    {
+      "name": "CanceledSearchTerminal",
+      "code": 101
+    },
+    {
+      "name": "DeviceProtocolFound",
+      "code": 102
+    },
+    {
+      "name": "DeviceProtocolNotFound",
+      "code": 103
+    },
+    {
+      "name": "EmptyLogin",
+      "code": 200
+    },
+    {
+      "name": "NonAuthorized",
+      "code": 201
+    },
+    {
+      "name": "InvalidAuthorization",
+      "code": 202
+    },
+    {
+      "name": "EmptyPaydesk",
+      "code": 203
+    },
+    {
+      "name": "InvalidPaydesk",
+      "code": 204
+    },
+    {
+      "name": "SuperkasaDisabled",
+      "code": 205
+    },
+    {
+      "name": "IOException",
+      "code": 1000
+    },
+    {
+      "name": "IOExceptionTerminal",
+      "code": 1001
+    },
+    {
+      "name": "HostUnreachable",
+      "code": 1002
+    },
+    {
+      "name": "RequestNotFound",
+      "code": 2000
+    },
+    {
+      "name": "ResponseNotFound",
+      "code": 2001
+    },
+    {
+      "name": "PaymentSignMode",
+      "code": 3000
+    },
+    {
+      "name": "ValueIsNullOrEmpty",
+      "code": 9000
+    },
+    {
+      "name": "DriverNotRegistered",
+      "code": 9001
+    },
+    {
+      "name": "DeviceConfigNotFound",
+      "code": 9002
+    },
+    {
+      "name": "DeviceConfigurationIsNotSaved",
+      "code": 9003
+    },
+    {
+      "name": "BankIsNotSupported",
+      "code": 9004
+    },
+    {
+      "name": "POSTerminalIsNotSupported",
+      "code": 9005
+    },
+    {
+      "name": "MethodIsNotSupported",
+      "code": 9006
+    },
+    {
+      "name": "POSTerminalNotConnected",
+      "code": 9007
+    },
+    {
+      "name": "CommandExecutionError",
+      "code": 9008
+    },
+    {
+      "name": "DeviceBusy",
+      "code": 9009
+    },
+    {
+      "name": "DeviceManagerIsNotInitialized",
+      "code": 9010
+    },
+    {
+      "name": "DriverNotInstalled",
+      "code": 9011
+    },
+    {
+      "name": "DeviceNotFound",
+      "code": 9012
+    },
+    {
+      "name": "ConnectionRefused",
+      "code": 9013
+    },
+    {
+      "name": "HostNotFound",
+      "code": 9014
+    },
+    {
+      "name": "NetworkUnreachable",
+      "code": 9015
+    },
+    {
+      "name": "TimedOut",
+      "code": 9016
+    },
+    {
+      "name": "ErrorOpenComPort",
+      "code": 9017
+    },
+    {
+      "name": "NeedOpenComPort",
+      "code": 9018
+    },
+    {
+      "name": "UnauthorizedAccess",
+      "code": 9019
+    },
+    {
+      "name": "InputOutputError",
+      "code": 9020
+    },
+    {
+      "name": "ArgumentError",
+      "code": 9021
+    },
+    {
+      "name": "ProtocolIsNotSupported",
+      "code": 9022
+    },
+    {
+      "name": "ResultCodeIsUnknown",
+      "code": 9023
+    },
+    {
+      "name": "Error",
+      "code": 9024
+    },
+    {
+      "name": "Break",
+      "code": 9025
+    },
+    {
+      "name": "Decline",
+      "code": 9026
+    },
+    {
+      "name": "Message",
+      "code": 9027
+    },
+    {
+      "name": "KeepAlive",
+      "code": 9028
+    },
+    {
+      "name": "WrongMAC",
+      "code": 9029
+    },
+    {
+      "name": "StatusCodeIsNotAvailable",
+      "code": 9030
+    },
+    {
+      "name": "CardWasRead",
+      "code": 9031
+    },
+    {
+      "name": "UsedChipCard",
+      "code": 9032
+    },
+    {
+      "name": "AuthorizationInProgress",
+      "code": 9033
+    },
+    {
+      "name": "WaitingForCashierAction",
+      "code": 9034
+    },
+    {
+      "name": "PrintingReceipt",
+      "code": 9035
+    },
+    {
+      "name": "PinEntryIsNeeded",
+      "code": 9036
+    },
+    {
+      "name": "CardWasRemoved",
+      "code": 9037
+    },
+    {
+      "name": "EMVMultiAids",
+      "code": 9038
+    },
+    {
+      "name": "WaitingForCard",
+      "code": 9039
+    },
+    {
+      "name": "InProgress",
+      "code": 9040
+    },
+    {
+      "name": "CorrectTransaction",
+      "code": 9041
+    },
+    {
+      "name": "PinInputWaitKey",
+      "code": 9042
+    },
+    {
+      "name": "PinInputBackspacePressed",
+      "code": 9043
+    },
+    {
+      "name": "PinInputKeyPressed",
+      "code": 9044
+    },
+    {
+      "name": "StandbyMode",
+      "code": 9045
+    },
+    {
+      "name": "CommunicationWithBank",
+      "code": 9046
+    },
+    {
+      "name": "RequiresOutCardFromCardSlot",
+      "code": 9047
+    },
+    {
+      "name": "OperationInterrupted",
+      "code": 9048
+    },
+    {
+      "name": "DriverNotUsedForProtocol",
+      "code": 9049
+    },
+    {
+      "name": "TransactionCanceledByUser",
+      "code": 9201
+    },
+    {
+      "name": "EMVDecline",
+      "code": 9202
+    },
+    {
+      "name": "TransactionLogIsFull",
+      "code": 9203
+    },
+    {
+      "name": "NoConnectionWithHost",
+      "code": 9204
+    },
+    {
+      "name": "NoPaperInPrinter",
+      "code": 9205
+    },
+    {
+      "name": "ErrorCryptoKeys",
+      "code": 9206
+    },
+    {
+      "name": "CardReaderIsNotConnected",
+      "code": 9207
+    },
+    {
+      "name": "TransactionIsAlreadyComplete",
+      "code": 9208
+    },
+    {
+      "name": "ChecksumError",
+      "code": 9300
+    },
+    {
+      "name": "JsonFormatError",
+      "code": 9301
+    },
+    {
+      "name": "RequiredFieldsAreMissing",
+      "code": 9302
+    },
+    {
+      "name": "InvalidMerchant",
+      "code": 9303
+    },
+    {
+      "name": "InterruptProhibited",
+      "code": 9304
+    },
+    {
+      "name": "VerificationErrorPIN",
+      "code": 9305
+    },
+    {
+      "name": "KeyError",
+      "code": 9306
+    },
+    {
+      "name": "NeedZReport",
+      "code": 9307
+    },
+    {
+      "name": "CardError",
+      "code": 9308
+    },
+    {
+      "name": "ContactIssuingBank",
+      "code": 9400
+    },
+    {
+      "name": "NeedsTelephoneAuthorisation",
+      "code": 9401
+    },
+    {
+      "name": "FormatError",
+      "code": 9402
+    },
+    {
+      "name": "RetainCard",
+      "code": 9403
+    },
+    {
+      "name": "AuthorisationDeclined",
+      "code": 9404
+    },
+    {
+      "name": "ServiceWithIdentification",
+      "code": 9405
+    },
+    {
+      "name": "InvalidTransaction",
+      "code": 9406
+    },
+    {
+      "name": "EnteredIncorrectlyAmount",
+      "code": 9407
+    },
+    {
+      "name": "InvalidCard",
+      "code": 9408
+    },
+    {
+      "name": "NoSuchIssuer",
+      "code": 9409
+    },
+    {
+      "name": "RefusalOfClient",
+      "code": 9410
+    },
+    {
+      "name": "VerificationFault",
+      "code": 9411
+    },
+    {
+      "name": "NoAction",
+      "code": 9412
+    },
+    {
+      "name": "IncorrectFormat",
+      "code": 9413
+    },
+    {
+      "name": "PartiallyCompleted",
+      "code": 9414
+    },
+    {
+      "name": "CardExpired",
+      "code": 9415
+    },
+    {
+      "name": "CallIssuingBank",
+      "code": 9416
+    },
+    {
+      "name": "NoMoreAttemptsEnterPINCode",
+      "code": 9417
+    },
+    {
+      "name": "LostCard",
+      "code": 9418
+    },
+    {
+      "name": "StolenCard",
+      "code": 9419
+    },
+    {
+      "name": "InsufficientFundsOnAccount",
+      "code": 9420
+    },
+    {
+      "name": "NonVerifyingAccount",
+      "code": 9421
+    },
+    {
+      "name": "IncorrectPINCode",
+      "code": 9422
+    },
+    {
+      "name": "TransactionMeansOfPaymentIsNotAllowed",
+      "code": 9423
+    },
+    {
+      "name": "WithdrawalLimitHasBeenExceeded",
+      "code": 9424
+    },
+    {
+      "name": "ProhibitedMeansOfPayment",
+      "code": 9425
+    },
+    {
+      "name": "AccountTransactionLimitHasBeenExceeded",
+      "code": 9426
+    },
+    {
+      "name": "ContactAcquiringBank",
+      "code": 9427
+    },
+    {
+      "name": "MeansOfPaymentWasWithdrawnFromATM",
+      "code": 9428
+    },
+    {
+      "name": "AnswerReceivedTooLate",
+      "code": 9429
+    },
+    {
+      "name": "PreviousMessageNotFound",
+      "code": 9430
+    },
+    {
+      "name": "DataDoesNotMatchOriginal",
+      "code": 9431
+    },
+    {
+      "name": "ErrorInPINCodeCipher",
+      "code": 9432
+    },
+    {
+      "name": "InvalidCVV",
+      "code": 9433
+    },
+    {
+      "name": "NoReasonToRefuse",
+      "code": 9434
+    },
+    {
+      "name": "NoConnectionWithIssuingBank",
+      "code": 9435
+    },
+    {
+      "name": "RequestFailed",
+      "code": 9436
+    },
+    {
+      "name": "TransmissionDuplication",
+      "code": 9437
+    },
+    {
+      "name": "SystemError",
+      "code": 9499
+    },
+    {
+      "name": "DataPacketError",
+      "code": 9500
+    },
+    {
+      "name": "ContactCardIssuer",
+      "code": 9501
+    },
+    {
+      "name": "SelectAccount",
+      "code": 9502
+    },
+    {
+      "name": "ExternalDecline",
+      "code": 9503
+    },
+    {
+      "name": "ExternalDeclineSpecial",
+      "code": 9504
+    },
+    {
+      "name": "PartialApproval",
+      "code": 9505
+    },
+    {
+      "name": "MerchantLimitExceeded",
+      "code": 9506
+    },
+    {
+      "name": "InvalidTrack2",
+      "code": 9507
+    },
+    {
+      "name": "ClosedAccount",
+      "code": 9508
+    },
+    {
+      "name": "BlockedFirstUsedTemporarilyBlocked",
+      "code": 9509
+    },
+    {
+      "name": "SelectBill",
+      "code": 9510
+    },
+    {
+      "name": "PinRequired",
+      "code": 9511
+    },
+    {
+      "name": "AdditionalAuthenticationRequired",
+      "code": 9512
+    },
+    {
+      "name": "WeakPin",
+      "code": 9513
+    },
+    {
+      "name": "InvalidPinReentersAllowed",
+      "code": 9514
+    },
+    {
+      "name": "IneligibleTransactionAccount",
+      "code": 9515
+    },
+    {
+      "name": "TransactionNotSupported",
+      "code": 9516
+    },
+    {
+      "name": "InvalidProcessingCode",
+      "code": 9517
+    },
+    {
+      "name": "UsesLimitExceeded",
+      "code": 9518
+    },
+    {
+      "name": "OriginalRequestNotFound",
+      "code": 9519
+    },
+    {
+      "name": "BadCVV2",
+      "code": 9520
+    },
+    {
+      "name": "WrongCustomerInformationFormat",
+      "code": 9521
+    },
+    {
+      "name": "PrepaidCodeNotFound",
+      "code": 9522
+    },
+    {
+      "name": "CustomerConfirmationRequested",
+      "code": 9523
+    },
+    {
+      "name": "InvalidTerminalId",
+      "code": 9524
+    },
+    {
+      "name": "DestinationNotAvailable",
+      "code": 9525
+    },
+    {
+      "name": "RoutingError",
+      "code": 9526
+    },
+    {
+      "name": "ReconcileError",
+      "code": 9527
+    },
+    {
+      "name": "ApprovedOfflineByCard",
+      "code": 9528
+    },
+    {
+      "name": "ApprovedOfflineByCardVoiceReferral",
+      "code": 9529
+    },
+    {
+      "name": "ApprovedOfflineNoConnection",
+      "code": 9530
+    },
+    {
+      "name": "ErrorBeforeFirstCryptogramGeneration",
+      "code": 9531
+    },
+    {
+      "name": "ErrorDuringFirstCryptogramGeneration",
+      "code": 9532
+    },
+    {
+      "name": "ServiceErrorNoConnection",
+      "code": 9533
+    },
+    {
+      "name": "ErrorCannotGetCycleNumber",
+      "code": 9534
+    },
+    {
+      "name": "DeclinedOfflineFirstCryptogram",
+      "code": 9535
+    },
+    {
+      "name": "DeclinedDuringVoiceReferral",
+      "code": 9536
+    },
+    {
+      "name": "DeclinedOfflineSecondCryptogram",
+      "code": 9537
+    },
+    {
+      "name": "DoNotHonour",
+      "code": 9600
+    },
+    {
+      "name": "HonourWithIdentification",
+      "code": 9601
+    },
+    {
+      "name": "ApprovedPartialAmount",
+      "code": 9602
+    },
+    {
+      "name": "ApprovedVIP",
+      "code": 9603
+    },
+    {
+      "name": "InvalidCardNumber",
+      "code": 9604
+    },
+    {
+      "name": "ApprovedUpdateTrack3",
+      "code": 9605
+    },
+    {
+      "name": "Exception",
+      "code": 9999
+    }
+  ],
+  "routes": [
+    {
+      "method": "Test",
+      "attribute": "HttpGetAttribute",
+      "template": "/api/test"
+    },
+    {
+      "method": "TestWebSocket",
+      "attribute": "HttpGetAttribute",
+      "template": ""
+    },
+    {
+      "method": "TestWebSocket",
+      "attribute": "RouteAttribute",
+      "template": "/api/test"
+    },
+    {
+      "method": "Get",
+      "attribute": "HttpGetAttribute",
+      "template": "/api/get"
+    },
+    {
+      "method": "ExitApplication",
+      "attribute": "HttpGetAttribute",
+      "template": "/api/exit"
+    },
+    {
+      "method": "testprotocol",
+      "attribute": "HttpPostAttribute",
+      "template": "/api/testprotocol/{protocol}"
+    },
+    {
+      "method": "GetInfo",
+      "attribute": "HttpGetAttribute",
+      "template": "/api/GetInfo/{id}"
+    },
+    {
+      "method": "SetupMap",
+      "attribute": "HttpGetAttribute",
+      "template": "setup_map"
+    },
+    {
+      "method": "GetErrorsList",
+      "attribute": "HttpGetAttribute",
+      "template": "errors"
+    },
+    {
+      "method": "ProtocolInformation",
+      "attribute": "HttpGetAttribute",
+      "template": "protocol/{protocol}"
+    },
+    {
+      "method": "ProtocolInstall",
+      "attribute": "HttpPostAttribute",
+      "template": "protocol/{protocol}"
+    },
+    {
+      "method": "GetDevices",
+      "attribute": "HttpGetAttribute",
+      "template": "/api/[controller]/devices"
+    },
+    {
+      "method": "GetDevices",
+      "attribute": "HttpGetAttribute",
+      "template": "/api/devices"
+    },
+    {
+      "method": "GetDeviceConfig",
+      "attribute": "HttpGetAttribute",
+      "template": "/api/[controller]/devices/{device_id}"
+    },
+    {
+      "method": "GetDeviceConfig",
+      "attribute": "HttpGetAttribute",
+      "template": "/api/devices/{device_id}"
+    },
+    {
+      "method": "SearchDevices",
+      "attribute": "HttpGetAttribute",
+      "template": "devices/search"
+    },
+    {
+      "method": "SearchDevices",
+      "attribute": "HttpGetAttribute",
+      "template": "devices/{Bank}/{DeviceModel}/{TypeConnect}/search"
+    },
+    {
+      "method": "SearchDevices",
+      "attribute": "HttpPostAttribute",
+      "template": "devices/search"
+    },
+    {
+      "method": "SearchDevicesStop",
+      "attribute": "HttpDeleteAttribute",
+      "template": "devices/search/{ProcessId}"
+    },
+    {
+      "method": "GetTerminalInfo",
+      "attribute": "HttpPostAttribute",
+      "template": "/api/[controller]/device/{protocol}/information"
+    },
+    {
+      "method": "GetTerminalInfo",
+      "attribute": "HttpPostAttribute",
+      "template": "/api/device/{protocol}/information"
+    },
+    {
+      "method": "GetTerminalInfo",
+      "attribute": "HttpGetAttribute",
+      "template": "/api/[controller]/device/information"
+    },
+    {
+      "method": "GetAcquirers",
+      "attribute": "HttpGetAttribute",
+      "template": "/api/[controller]/devices/{device_id}/acquirers"
+    },
+    {
+      "method": "GetAcquirers",
+      "attribute": "HttpGetAttribute",
+      "template": "/api/devices/{device_id}/acquirers"
+    },
+    {
+      "method": "GetMerchants",
+      "attribute": "HttpPostAttribute",
+      "template": "/api/[controller]/devices/{bank}/{protocol}/merchants"
+    },
+    {
+      "method": "GetMerchants",
+      "attribute": "HttpPostAttribute",
+      "template": "/api/devices/{bank}/{protocol}/merchants"
+    },
+    {
+      "method": "DeviceRegisterSocket",
+      "attribute": "HttpGetAttribute",
+      "template": "/api/[controller]/devices/register"
+    },
+    {
+      "method": "DeviceRegisterSocket",
+      "attribute": "HttpGetAttribute",
+      "template": "/api/devices/register"
+    },
+    {
+      "method": "DeviceRegister",
+      "attribute": "HttpPostAttribute",
+      "template": "/api/[controller]/devices/register"
+    },
+    {
+      "method": "DeviceRegister",
+      "attribute": "HttpPostAttribute",
+      "template": "/api/devices/register"
+    },
+    {
+      "method": "DeviceDelete",
+      "attribute": "HttpDeleteAttribute",
+      "template": "/api/[controller]/devices/{device_id}"
+    },
+    {
+      "method": "DeviceDelete",
+      "attribute": "HttpDeleteAttribute",
+      "template": "/api/devices/{device_id}"
+    },
+    {
+      "method": "SaveConfig",
+      "attribute": "HttpPostAttribute",
+      "template": "/api/[controller]/saveconfig"
+    },
+    {
+      "method": "SaveConfigWebsocket",
+      "attribute": "HttpGetAttribute",
+      "template": "/api/[controller]/saveconfig"
+    },
+    {
+      "method": "PurchaseSocket",
+      "attribute": "HttpGetAttribute",
+      "template": ""
+    },
+    {
+      "method": "PurchaseSocket",
+      "attribute": "RouteAttribute",
+      "template": "/api/[controller]/{device_id}/purchase"
+    },
+    {
+      "method": "CancelSocket",
+      "attribute": "HttpGetAttribute",
+      "template": "/api/[controller]/{device_id}/cancel"
+    },
+    {
+      "method": "Purchase",
+      "attribute": "HttpPostAttribute",
+      "template": "/api/[controller]/{device_id}/purchase"
+    },
+    {
+      "method": "Cancel",
+      "attribute": "HttpPostAttribute",
+      "template": "/api/[controller]/{device_id}/cancel"
+    },
+    {
+      "method": "Ping",
+      "attribute": "HttpGetAttribute",
+      "template": "/api/[controller]/{device_id}/ping"
+    },
+    {
+      "method": "LastResultOperation",
+      "attribute": "HttpGetAttribute",
+      "template": "/api/[controller]/{device_id}/last-result"
+    },
+    {
+      "method": "GetBatchTotals",
+      "attribute": "HttpPostAttribute",
+      "template": "/api/[controller]/{device_id}/get_batch_totals"
+    },
+    {
+      "method": "GetBatchTotals",
+      "attribute": "HttpPostAttribute",
+      "template": "/api/[controller]/{device_id}/get_batch_totals/{merchant_id}"
+    },
+    {
+      "method": "PrintBatchTotals",
+      "attribute": "HttpPostAttribute",
+      "template": "/api/[controller]/{device_id}/print_batch_totals"
+    },
+    {
+      "method": "PrintBatchTotals",
+      "attribute": "HttpPostAttribute",
+      "template": "/api/[controller]/{device_id}/print_batch_totals/{merchant_id}"
+    },
+    {
+      "method": "PrintBatchJournal",
+      "attribute": "HttpPostAttribute",
+      "template": "/api/[controller]/{device_id}/print_batch_journal"
+    },
+    {
+      "method": "PrintBatchJournal",
+      "attribute": "HttpPostAttribute",
+      "template": "/api/[controller]/{device_id}/print_batch_journal/{merchant_id}"
+    },
+    {
+      "method": "Settlement",
+      "attribute": "HttpPostAttribute",
+      "template": "/api/[controller]/{device_id}/settlement"
+    },
+    {
+      "method": "Settlement",
+      "attribute": "HttpPostAttribute",
+      "template": "/api/[controller]/{device_id}/settlement/{merchant_id}"
+    },
+    {
+      "method": "PrintLastSettleCopy",
+      "attribute": "HttpPostAttribute",
+      "template": "/api/[controller]/{device_id}/print_last_settle_copy"
+    },
+    {
+      "method": "PrintLastSettleCopy",
+      "attribute": "HttpPostAttribute",
+      "template": "/api/[controller]/{device_id}/print_last_settle_copy/{merchant_id}"
+    }
+  ],
+  "dto_properties": [
+    {
+      "type": "CommonClasses.DeviceDTO",
+      "property": "id",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "id",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.DeviceDTO",
+      "property": "name",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "name",
+          "options": {
+            "Required": 2
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.DeviceDTO",
+      "property": "DeviceCategory",
+      "signature_hex": "2800118258",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "device_category",
+          "options": {
+            "Required": 0
+          }
+        },
+        {
+          "attribute": "JsonConverterAttribute",
+          "converter": "Newtonsoft.Json.Converters.StringEnumConverter"
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.DeviceDTO",
+      "property": "type",
+      "signature_hex": "28001180a0",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "type",
+          "options": {
+            "Required": 2
+          }
+        },
+        {
+          "attribute": "JsonConverterAttribute",
+          "converter": "Newtonsoft.Json.Converters.StringEnumConverter"
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.DeviceDTO",
+      "property": "BankName",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "bank_name",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.DeviceDTO",
+      "property": "model",
+      "signature_hex": "28001180a4",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "model",
+          "options": {
+            "Required": 2
+          }
+        },
+        {
+          "attribute": "JsonConverterAttribute",
+          "converter": "Newtonsoft.Json.Converters.StringEnumConverter"
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.DeviceDTO",
+      "property": "protocol",
+      "signature_hex": "28001180a8",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "protocol",
+          "options": {
+            "Required": 2
+          }
+        },
+        {
+          "attribute": "JsonConverterAttribute",
+          "converter": "Newtonsoft.Json.Converters.StringEnumConverter"
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.DeviceDTO",
+      "property": "properties",
+      "signature_hex": "2800128298",
+      "json_attributes": [
+        {
+          "attribute": "JsonConverterAttribute",
+          "converter": "CommonClasses.Devices.Transport.ConnectProperties.POS.POSConnectPropertiesJsonConverter"
+        },
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "properties",
+          "options": {
+            "Required": 2
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.DeviceDTO",
+      "property": "connected",
+      "signature_hex": "280002",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "connected",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.DeviceDTO",
+      "property": "lastOperationId",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "last_operation_id",
+          "options": {
+            "Required": 0
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.DeviceDTO",
+      "property": "verifyPaymentSystem",
+      "signature_hex": "280002",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "verify_payment_system",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.DeviceDTO",
+      "property": "codeRegistation",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "code_registration",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ErrorResponse",
+      "property": "success",
+      "signature_hex": "280002",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "success",
+          "options": {
+            "Required": 3,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ErrorResponse",
+      "property": "code",
+      "signature_hex": "280008",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "code",
+          "options": {
+            "Required": 2
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ErrorResponse",
+      "property": "error",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "error",
+          "options": {
+            "Required": 2
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ErrorResponse",
+      "property": "description",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "description",
+          "options": {
+            "Required": 2
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ErrorResponse",
+      "property": "result",
+      "signature_hex": "28001c",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "result",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.PaymentDTO",
+      "property": "amount",
+      "signature_hex": "28000b",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "amount",
+          "options": {
+            "Required": 2
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.PaymentDTO",
+      "property": "discount",
+      "signature_hex": "28000b",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "discount",
+          "options": {
+            "Required": 0
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.PaymentDTO",
+      "property": "amountOfParts",
+      "signature_hex": "28000b",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "amountOfParts",
+          "options": {
+            "Required": 0
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.PaymentDTO",
+      "property": "discountedAmount",
+      "signature_hex": "28000b",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "discountedAmount",
+          "options": {
+            "Required": 0
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.PaymentDTO",
+      "property": "merchant_id",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "merchant_id",
+          "options": {
+            "Required": 0
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.PaymentDTO",
+      "property": "id",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "id",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.PaymentDTO",
+      "property": "step",
+      "signature_hex": "28001511710109",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "step",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.PaymentDTO",
+      "property": "Confirm_Signature",
+      "signature_hex": "28001511710102",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "confirm_signature",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.PaymentDTO",
+      "property": "Continue_Payment",
+      "signature_hex": "28001511710102",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "continue_payment",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.PaymentDTO",
+      "property": "RequireAck",
+      "signature_hex": "280002",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "require_ack",
+          "options": {
+            "Required": 0
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.PaymentDTO",
+      "property": "RunMacIpResolver",
+      "signature_hex": "28001511710102",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "run_mac_ip_resolver",
+          "options": {
+            "Required": 0
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.PerformPurchaseDTO",
+      "property": "facepay",
+      "signature_hex": "280002",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "facepay",
+          "options": {
+            "Required": 3,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.BaseResponseDTO",
+      "property": "success",
+      "signature_hex": "280002",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "success",
+          "options": {
+            "Required": 3,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.BaseResponseDTO",
+      "property": "terminalStatus",
+      "signature_hex": "2800118334",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "terminal_status",
+          "options": {
+            "Required": 0
+          }
+        },
+        {
+          "attribute": "JsonConverterAttribute",
+          "converter": "Newtonsoft.Json.Converters.StringEnumConverter"
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.BaseResponseDTO",
+      "property": "code",
+      "signature_hex": "280008",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "code",
+          "options": {
+            "Required": 0
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.BaseResponseDTO",
+      "property": "msg",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "message",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.BaseResponseDTO",
+      "property": "error",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "error",
+          "options": {
+            "Required": 0
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.BaseResponseDTO",
+      "property": "id",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "id",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.BaseResponseDTO",
+      "property": "result",
+      "signature_hex": "28001280d0",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "result",
+          "options": {
+            "Required": 2,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "terminal_id",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "terminal_id",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "terminal",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "terminal",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "merchant_id",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "merchant_id",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "pan",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "pan",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "card_mask",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "card_mask",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "rrn",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "rrn",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "currency",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "currency",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "currency_code",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "currency_code",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "auth_code",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "auth_code",
+          "options": {
+            "Required": 3,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "date_time",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "date_time",
+          "options": {
+            "Required": 2,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "invoice_num",
+      "signature_hex": "280009",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "invoice_num",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "receipt_no",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "receipt_no",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "exp_date",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "exp_date",
+          "options": {
+            "Required": 3,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "card_holder",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "card_holder",
+          "options": {
+            "Required": 3,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "owner_name",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "owner_name",
+          "options": {
+            "Required": 3,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "issuer_name",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "issuer_name",
+          "options": {
+            "Required": 3,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "payment_system",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "payment_system",
+          "options": {
+            "Required": 3,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "totals_debit_num",
+      "signature_hex": "280009",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "totals_debit_num",
+          "options": {
+            "Required": 2,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "totals_debit_amt",
+      "signature_hex": "280009",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "totals_debit_amt",
+          "options": {
+            "Required": 2,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "totals_credit_num",
+      "signature_hex": "280009",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "totals_credit_num",
+          "options": {
+            "Required": 2,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "totals_credit_amt",
+      "signature_hex": "280009",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "totals_credit_amt",
+          "options": {
+            "Required": 2,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "totals_cancelled_num",
+      "signature_hex": "280009",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "totals_cancelled_num",
+          "options": {
+            "Required": 2,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "totals_cancelled_amt",
+      "signature_hex": "280009",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "totals_cancelled_amt",
+          "options": {
+            "Required": 2,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "sign_verif",
+      "signature_hex": "280002",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "sign_verif",
+          "options": {
+            "Required": 2,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "signature_required",
+      "signature_hex": "280002",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "signature_required",
+          "options": {
+            "Required": 2,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "txn_num",
+      "signature_hex": "280009",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "txn_num",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "amount",
+      "signature_hex": "280009",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "amount",
+          "options": {
+            "Required": 2,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "value",
+      "signature_hex": "280009",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "value",
+          "options": {
+            "Required": 2,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "add_amount",
+      "signature_hex": "280009",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "add_amount",
+          "options": {
+            "Required": 2,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "discountedAmount",
+      "signature_hex": "28000b",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "discountedAmount",
+          "options": {
+            "Required": 2,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "txn_type",
+      "signature_hex": "280005",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "txn_type",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "entry_mode",
+      "signature_hex": "280007",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "entry_mode",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "emv_aid",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "emv_aid",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "scenario_data",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "scenario_data",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "terminal_info",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "terminal_info",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "receipt",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "receipt",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "bankAcquirer",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "bank_acquirer",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "bank_name",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "bank_name",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "acquirer_and_seller",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "acquirer_and_seller",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "provider_type",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "provider_type",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.ResponseDTO",
+      "property": "AdditionalProperties",
+      "signature_hex": "2800151281c5020e1c",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "additional_properties",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.Response.HTTPValidationError",
+      "property": "Detail",
+      "signature_hex": "28001d12814c",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "detail",
+          "options": {
+            "Required": 2
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.Response.ValidationError",
+      "property": "Loc",
+      "signature_hex": "280015128231010e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "loc",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.Response.ValidationError",
+      "property": "ErrorMessage",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "msg",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.Response.ValidationError",
+      "property": "ErrorType",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "type",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.Response.ValidationError",
+      "property": "AdditionalProperties",
+      "signature_hex": "2800151281c5020e1c",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "data",
+          "options": {
+            "Required": 0
+          }
+        },
+        {
+          "attribute": "JsonExtensionDataAttribute"
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.Devices.POSDeviceDTO",
+      "property": "Id",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "id",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.Devices.POSDeviceDTO",
+      "property": "Name",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "name",
+          "options": {
+            "Required": 2
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.Devices.POSDeviceDTO",
+      "property": "DeviceCategory",
+      "signature_hex": "2800118258",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "device_category",
+          "options": {
+            "Required": 0
+          }
+        },
+        {
+          "attribute": "JsonConverterAttribute",
+          "converter": "Newtonsoft.Json.Converters.StringEnumConverter"
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.Devices.POSDeviceDTO",
+      "property": "Type",
+      "signature_hex": "28001180a0",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "type",
+          "options": {
+            "Required": 2
+          }
+        },
+        {
+          "attribute": "JsonConverterAttribute",
+          "converter": "Newtonsoft.Json.Converters.StringEnumConverter"
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.Devices.POSDeviceDTO",
+      "property": "BankName",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "bank_name",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.Devices.POSDeviceDTO",
+      "property": "Model",
+      "signature_hex": "28001180a4",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "model",
+          "options": {
+            "Required": 2
+          }
+        },
+        {
+          "attribute": "JsonConverterAttribute",
+          "converter": "Newtonsoft.Json.Converters.StringEnumConverter"
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.Devices.POSDeviceDTO",
+      "property": "Protocol",
+      "signature_hex": "28001180a8",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "protocol",
+          "options": {
+            "Required": 2
+          }
+        },
+        {
+          "attribute": "JsonConverterAttribute",
+          "converter": "Newtonsoft.Json.Converters.StringEnumConverter"
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.Devices.POSDeviceDTO",
+      "property": "Status",
+      "signature_hex": "2800118334",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "status",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        },
+        {
+          "attribute": "JsonConverterAttribute",
+          "converter": "Newtonsoft.Json.Converters.StringEnumConverter"
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.Devices.POSDeviceDTO",
+      "property": "Properties",
+      "signature_hex": "2800128298",
+      "json_attributes": [
+        {
+          "attribute": "JsonConverterAttribute",
+          "converter": "CommonClasses.Devices.Transport.ConnectProperties.POS.POSConnectPropertiesJsonConverter"
+        },
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "properties",
+          "options": {
+            "Required": 2
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.Devices.POSDeviceDTO",
+      "property": "CodeRegistation",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "code_registration",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.Devices.POSDeviceDTO",
+      "property": "LastOperationId",
+      "signature_hex": "28000e",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "last_operation_id",
+          "options": {
+            "Required": 0
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.Devices.POSDeviceDTO",
+      "property": "VerifyPaymentSystem",
+      "signature_hex": "280002",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "verify_payment_system",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.Devices.POSDeviceDTO",
+      "property": "Connected",
+      "signature_hex": "280002",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "connected",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "CommonClasses.Devices.POSDeviceDTO",
+      "property": "UsedPaymentSignMode",
+      "signature_hex": "280002",
+      "json_attributes": [
+        {
+          "attribute": "JsonPropertyAttribute",
+          "json_name": "used_payment_sign_mode",
+          "options": {
+            "Required": 0,
+            "NullValueHandling": 1
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,882 @@
+{
+  "spec": {
+    "url": "https://www.ssi.com.ua/_files/ugd/c8ff39_c33c4ea4837842229ecb6331cb310d28.pdf",
+    "revision": "1.4.6",
+    "date": "2026-09-12",
+    "wire_version": 1,
+    "sha256": "8e4b459ade28f4ee301de7751659d4bf365f9c0f2ac3508a6745a597158e1a65",
+    "ambiguities": [
+      "§4.3.5 says params is absent except GetLastResult, but individual method examples require params.",
+      "§4.3.2 lists APPROVED_ONLINE; §5.5.1 example uses APPROVED-ONLINE.",
+      "§4.3.2 describes 2/3-character responseCode; §5.5.1 example uses 0000.",
+      "Request examples contain punctuation errors; codec tests use valid JSON and the §6.1 XOR algorithm."
+    ]
+  },
+  "executable_sha256": "85d1bf9280e7c63e1099ecc2db480813f439e68c41a5eca8a453094a948ab465",
+  "scope": "Synthetic malformed response and disconnect probes; no physical reachability claim",
+  "results": [
+    {
+      "id": "close",
+      "scenario": {
+        "id": "close",
+        "faults": {
+          "Purchase": "close"
+        }
+      },
+      "device": {
+        "id": "973e28cc-13b6-4f36-a0a5-ef6b4241af70",
+        "name": "transport-close",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 57553,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:57553",
+        "control_url": "http://127.0.0.1:57559",
+        "wire_path": "runs\\transport\\close-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "9dc4fd3b-3dda-4402-adeb-86957cd66ac0",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 1000,
+        "error": "Загальна помилка вводу-виводу.",
+        "description": "Input/Output exception : Connection lost during read operation."
+      },
+      "duration_ms": 335.1576,
+      "connection_error": null,
+      "recovery_status": 200,
+      "terminal": {
+        "generation": 1,
+        "status": "S02",
+        "armed": {
+          "id": "close-recovery",
+          "phases": [
+            {
+              "status": "S02",
+              "ms": 100
+            },
+            {
+              "status": "S04",
+              "ms": 100
+            }
+          ],
+          "error_code": "",
+          "response_code": "0000",
+          "transaction_result": "APPROVED-ONLINE",
+          "faults": {},
+          "request_errors": {},
+          "method_delays": {},
+          "result_fields": {},
+          "response_delay_ms": 0,
+          "fragment_delay_ms": 0,
+          "fragment_bytes": 0
+        },
+        "active": {
+          "start": 1362.2046,
+          "scenario": {
+            "id": "close",
+            "phases": [
+              {
+                "status": "S02",
+                "ms": 100
+              },
+              {
+                "status": "S04",
+                "ms": 100
+              }
+            ],
+            "error_code": "",
+            "response_code": "0000",
+            "transaction_result": "APPROVED-ONLINE",
+            "faults": {
+              "Purchase": "close"
+            },
+            "request_errors": {},
+            "method_delays": {},
+            "result_fields": {},
+            "response_delay_ms": 0,
+            "fragment_delay_ms": 0,
+            "fragment_bytes": 0
+          },
+          "result": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "123456",
+            "date": "28/09/2026",
+            "time": "05:07:05",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "0000",
+            "rrn": "000000000001",
+            "transactionResult": "APPROVED-ONLINE",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "a91bbe8d0538"
+          },
+          "status": "S02"
+        },
+        "last": null
+      }
+    },
+    {
+      "id": "bad_lrc",
+      "scenario": {
+        "id": "bad_lrc",
+        "faults": {
+          "Purchase": "bad_lrc"
+        }
+      },
+      "device": {
+        "id": "f50f3c12-d691-4711-ab4c-682f8dab6c98",
+        "name": "transport-bad_lrc",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 57554,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:57554",
+        "control_url": "http://127.0.0.1:57560",
+        "wire_path": "runs\\transport\\bad_lrc-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "8bd1e378-6085-452a-8de5-7cec4551a508",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 9008,
+        "error": "Помилка виконання операції на терміналі.",
+        "description": "Command execution description => Purchase"
+      },
+      "duration_ms": 255.5054,
+      "connection_error": null,
+      "recovery_status": 200,
+      "terminal": {
+        "generation": 1,
+        "status": "S02",
+        "armed": {
+          "id": "bad_lrc-recovery",
+          "phases": [
+            {
+              "status": "S02",
+              "ms": 100
+            },
+            {
+              "status": "S04",
+              "ms": 100
+            }
+          ],
+          "error_code": "",
+          "response_code": "0000",
+          "transaction_result": "APPROVED-ONLINE",
+          "faults": {},
+          "request_errors": {},
+          "method_delays": {},
+          "result_fields": {},
+          "response_delay_ms": 0,
+          "fragment_delay_ms": 0,
+          "fragment_bytes": 0
+        },
+        "active": {
+          "start": 1312.1154,
+          "scenario": {
+            "id": "bad_lrc",
+            "phases": [
+              {
+                "status": "S02",
+                "ms": 100
+              },
+              {
+                "status": "S04",
+                "ms": 100
+              }
+            ],
+            "error_code": "",
+            "response_code": "0000",
+            "transaction_result": "APPROVED-ONLINE",
+            "faults": {
+              "Purchase": "bad_lrc"
+            },
+            "request_errors": {},
+            "method_delays": {},
+            "result_fields": {},
+            "response_delay_ms": 0,
+            "fragment_delay_ms": 0,
+            "fragment_bytes": 0
+          },
+          "result": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "123456",
+            "date": "28/09/2026",
+            "time": "05:07:05",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "0000",
+            "rrn": "000000000001",
+            "transactionResult": "APPROVED-ONLINE",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "db6a1f0ca0b7"
+          },
+          "status": "S04"
+        },
+        "last": null
+      }
+    },
+    {
+      "id": "bad_length",
+      "scenario": {
+        "id": "bad_length",
+        "faults": {
+          "Purchase": "bad_length"
+        }
+      },
+      "device": {
+        "id": "0118d787-2844-409e-bc04-b84155a2c997",
+        "name": "transport-bad_length",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 57555,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:57555",
+        "control_url": "http://127.0.0.1:57561",
+        "wire_path": "runs\\transport\\bad_length-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "aa876b48-3e17-4224-89ba-1ec4fd408921",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 200,
+      "body": {
+        "success": true,
+        "terminal_status": "None",
+        "code": 0,
+        "error": "",
+        "id": "512f26680784",
+        "result": {
+          "terminal_id": "TEST0001",
+          "terminal": "TEST0001",
+          "merchant_id": "TEST-MERCHANT",
+          "pan": "4111XXXXXXXX1111",
+          "card_mask": "4111XXXXXXXX1111",
+          "rrn": "000000000001",
+          "auth_code": "123456",
+          "date_time": "28.09.2026 8:09:30",
+          "invoice_num": 1,
+          "receipt_no": "1",
+          "exp_date": "2609",
+          "card_holder": "TEST USER",
+          "owner_name": "TEST USER",
+          "payment_system": "VISA",
+          "totals_debit_num": 0,
+          "totals_debit_amt": 0,
+          "totals_credit_num": 0,
+          "totals_credit_amt": 0,
+          "totals_cancelled_num": 0,
+          "totals_cancelled_amt": 0,
+          "sign_verif": false,
+          "signature_required": false,
+          "txn_num": 0,
+          "amount": 100,
+          "value": 100,
+          "add_amount": 0,
+          "discountedAmount": 0,
+          "txn_type": 1,
+          "entry_mode": 3,
+          "receipt": "",
+          "bank_acquirer": "SIMULATED",
+          "bank_name": "SIMULATED",
+          "acquirer_and_seller": "SIMULATED",
+          "provider_type": "POSCONTROL",
+          "additional_properties": {
+            "responseCode": "0000",
+            "transactionResult": "APPROVED-ONLINE",
+            "errorDetails": "",
+            "transactionUid": "512f26680784"
+          }
+        }
+      },
+      "duration_ms": 145289.575,
+      "connection_error": null,
+      "recovery_status": 200,
+      "terminal": {
+        "generation": 1,
+        "status": "S00",
+        "armed": {
+          "id": "bad_length-recovery",
+          "phases": [
+            {
+              "status": "S02",
+              "ms": 100
+            },
+            {
+              "status": "S04",
+              "ms": 100
+            }
+          ],
+          "error_code": "",
+          "response_code": "0000",
+          "transaction_result": "APPROVED-ONLINE",
+          "faults": {},
+          "request_errors": {},
+          "method_delays": {},
+          "result_fields": {},
+          "response_delay_ms": 0,
+          "fragment_delay_ms": 0,
+          "fragment_bytes": 0
+        },
+        "active": null,
+        "last": {
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "123456",
+            "date": "28/09/2026",
+            "time": "05:07:05",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "0000",
+            "rrn": "000000000001",
+            "transactionResult": "APPROVED-ONLINE",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "512f26680784"
+          },
+          "code": "",
+          "scenario": {
+            "id": "bad_length",
+            "phases": [
+              {
+                "status": "S02",
+                "ms": 100
+              },
+              {
+                "status": "S04",
+                "ms": 100
+              }
+            ],
+            "error_code": "",
+            "response_code": "0000",
+            "transaction_result": "APPROVED-ONLINE",
+            "faults": {
+              "Purchase": "bad_length"
+            },
+            "request_errors": {},
+            "method_delays": {},
+            "result_fields": {},
+            "response_delay_ms": 0,
+            "fragment_delay_ms": 0,
+            "fragment_bytes": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "bad_json",
+      "scenario": {
+        "id": "bad_json",
+        "faults": {
+          "Purchase": "bad_json"
+        }
+      },
+      "device": {
+        "id": "f4640459-e500-4c30-9de0-25b8804e842c",
+        "name": "transport-bad_json",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 57556,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:57556",
+        "control_url": "http://127.0.0.1:57562",
+        "wire_path": "runs\\transport\\bad_json-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "6b748229-2729-4795-a888-556692d2167c",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 9301,
+        "error": "Було отримано невірний формат JSON повідомлення. Зверніться в службу підтримки Checkbox.",
+        "description": "Json message format description : Unexpected character encountered while parsing value: !. Path '', line 0, position 0."
+      },
+      "duration_ms": 298.25440000000003,
+      "connection_error": null,
+      "recovery_status": 200,
+      "terminal": {
+        "generation": 1,
+        "status": "S02",
+        "armed": {
+          "id": "bad_json-recovery",
+          "phases": [
+            {
+              "status": "S02",
+              "ms": 100
+            },
+            {
+              "status": "S04",
+              "ms": 100
+            }
+          ],
+          "error_code": "",
+          "response_code": "0000",
+          "transaction_result": "APPROVED-ONLINE",
+          "faults": {},
+          "request_errors": {},
+          "method_delays": {},
+          "result_fields": {},
+          "response_delay_ms": 0,
+          "fragment_delay_ms": 0,
+          "fragment_bytes": 0
+        },
+        "active": {
+          "start": 1367.8702,
+          "scenario": {
+            "id": "bad_json",
+            "phases": [
+              {
+                "status": "S02",
+                "ms": 100
+              },
+              {
+                "status": "S04",
+                "ms": 100
+              }
+            ],
+            "error_code": "",
+            "response_code": "0000",
+            "transaction_result": "APPROVED-ONLINE",
+            "faults": {
+              "Purchase": "bad_json"
+            },
+            "request_errors": {},
+            "method_delays": {},
+            "result_fields": {},
+            "response_delay_ms": 0,
+            "fragment_delay_ms": 0,
+            "fragment_bytes": 0
+          },
+          "result": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "123456",
+            "date": "28/09/2026",
+            "time": "05:07:05",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "0000",
+            "rrn": "000000000001",
+            "transactionResult": "APPROVED-ONLINE",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "91c8776e6662"
+          },
+          "status": "S02"
+        },
+        "last": null
+      }
+    },
+    {
+      "id": "unknown_status",
+      "scenario": {
+        "id": "unknown_status",
+        "faults": {
+          "Purchase": "unknown_status"
+        }
+      },
+      "device": {
+        "id": "0ed798a5-3542-490c-953d-0eb491765ce8",
+        "name": "transport-unknown_status",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 57557,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:57557",
+        "control_url": "http://127.0.0.1:57563",
+        "wire_path": "runs\\transport\\unknown_status-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "f1f5534c-1e66-49c7-aca6-fedbfdb23930",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 200,
+      "body": {
+        "success": true,
+        "terminal_status": "None",
+        "code": 0,
+        "error": "",
+        "id": "abdf66c84e0d",
+        "result": {
+          "terminal_id": "TEST0001",
+          "terminal": "TEST0001",
+          "merchant_id": "TEST-MERCHANT",
+          "pan": "4111XXXXXXXX1111",
+          "card_mask": "4111XXXXXXXX1111",
+          "rrn": "000000000001",
+          "auth_code": "123456",
+          "date_time": "28.09.2026 8:07:07",
+          "invoice_num": 1,
+          "receipt_no": "1",
+          "exp_date": "2609",
+          "card_holder": "TEST USER",
+          "owner_name": "TEST USER",
+          "payment_system": "VISA",
+          "totals_debit_num": 0,
+          "totals_debit_amt": 0,
+          "totals_credit_num": 0,
+          "totals_credit_amt": 0,
+          "totals_cancelled_num": 0,
+          "totals_cancelled_amt": 0,
+          "sign_verif": false,
+          "signature_required": false,
+          "txn_num": 0,
+          "amount": 100,
+          "value": 100,
+          "add_amount": 0,
+          "discountedAmount": 0,
+          "txn_type": 1,
+          "entry_mode": 3,
+          "receipt": "",
+          "bank_acquirer": "SIMULATED",
+          "bank_name": "SIMULATED",
+          "acquirer_and_seller": "SIMULATED",
+          "provider_type": "POSCONTROL",
+          "additional_properties": {
+            "responseCode": "0000",
+            "transactionResult": "APPROVED-ONLINE",
+            "errorDetails": "",
+            "transactionUid": "abdf66c84e0d"
+          }
+        }
+      },
+      "duration_ms": 2346.1592,
+      "connection_error": null,
+      "recovery_status": 200,
+      "terminal": {
+        "generation": 1,
+        "status": "S00",
+        "armed": {
+          "id": "unknown_status-recovery",
+          "phases": [
+            {
+              "status": "S02",
+              "ms": 100
+            },
+            {
+              "status": "S04",
+              "ms": 100
+            }
+          ],
+          "error_code": "",
+          "response_code": "0000",
+          "transaction_result": "APPROVED-ONLINE",
+          "faults": {},
+          "request_errors": {},
+          "method_delays": {},
+          "result_fields": {},
+          "response_delay_ms": 0,
+          "fragment_delay_ms": 0,
+          "fragment_bytes": 0
+        },
+        "active": null,
+        "last": {
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "123456",
+            "date": "28/09/2026",
+            "time": "05:07:05",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "0000",
+            "rrn": "000000000001",
+            "transactionResult": "APPROVED-ONLINE",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "abdf66c84e0d"
+          },
+          "code": "",
+          "scenario": {
+            "id": "unknown_status",
+            "phases": [
+              {
+                "status": "S02",
+                "ms": 100
+              },
+              {
+                "status": "S04",
+                "ms": 100
+              }
+            ],
+            "error_code": "",
+            "response_code": "0000",
+            "transaction_result": "APPROVED-ONLINE",
+            "faults": {
+              "Purchase": "unknown_status"
+            },
+            "request_errors": {},
+            "method_delays": {},
+            "result_fields": {},
+            "response_delay_ms": 0,
+            "fragment_delay_ms": 0,
+            "fragment_bytes": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "close-result",
+      "scenario": {
+        "id": "close-result",
+        "faults": {
+          "GetLastResult": "close"
+        }
+      },
+      "device": {
+        "id": "f3f44dc6-6b93-44d4-ba09-bd8556672949",
+        "name": "transport-close-result",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 57558,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:57558",
+        "control_url": "http://127.0.0.1:57564",
+        "wire_path": "runs\\transport\\close-result-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "0e9677ae-5f4d-4ff7-9537-6afb637f5b6a",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 1000,
+        "error": "Загальна помилка вводу-виводу.",
+        "description": "Input/Output exception : Connection lost during read operation."
+      },
+      "duration_ms": 2327.1661000000004,
+      "connection_error": null,
+      "recovery_status": 200,
+      "terminal": {
+        "generation": 1,
+        "status": "S00",
+        "armed": {
+          "id": "close-result-recovery",
+          "phases": [
+            {
+              "status": "S02",
+              "ms": 100
+            },
+            {
+              "status": "S04",
+              "ms": 100
+            }
+          ],
+          "error_code": "",
+          "response_code": "0000",
+          "transaction_result": "APPROVED-ONLINE",
+          "faults": {},
+          "request_errors": {},
+          "method_delays": {},
+          "result_fields": {},
+          "response_delay_ms": 0,
+          "fragment_delay_ms": 0,
+          "fragment_bytes": 0
+        },
+        "active": null,
+        "last": {
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "123456",
+            "date": "28/09/2026",
+            "time": "05:07:05",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "0000",
+            "rrn": "000000000001",
+            "transactionResult": "APPROVED-ONLINE",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "1bd0da37d1ba"
+          },
+          "code": "",
+          "scenario": {
+            "id": "close-result",
+            "phases": [
+              {
+                "status": "S02",
+                "ms": 100
+              },
+              {
+                "status": "S04",
+                "ms": 100
+              }
+            ],
+            "error_code": "",
+            "response_code": "0000",
+            "transaction_result": "APPROVED-ONLINE",
+            "faults": {
+              "GetLastResult": "close"
+            },
+            "request_errors": {},
+            "method_delays": {},
+            "result_fields": {},
+            "response_delay_ms": 0,
+            "fragment_delay_ms": 0,
+            "fragment_bytes": 0
+          }
+        }
+      }
+    }
+  ]
+}

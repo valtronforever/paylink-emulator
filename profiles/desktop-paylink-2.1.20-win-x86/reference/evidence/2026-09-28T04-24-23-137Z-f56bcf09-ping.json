@@ -1,0 +1,222 @@
+{
+  "run_id": "2026-09-28T04-24-23-137Z-f56bcf09",
+  "scenario": {
+    "id": "ping",
+    "ssi": {},
+    "emulator": {
+      "id": "ping"
+    },
+    "request": {
+      "method": "GET",
+      "path": "/api/pos/00000000-0000-4000-8000-000000000001/ping"
+    }
+  },
+  "http": {
+    "run_id": "2026-09-28T04-24-23-137Z-f56bcf09",
+    "scenario_id": "ping",
+    "start_utc": "2026-09-28T04:24:24.110Z",
+    "start_ms": 712.9395000000002,
+    "client_timeout_ms": 30000,
+    "request": {
+      "url": "http://127.0.0.1:9020/api/pos/00000000-0000-4000-8000-000000000001/ping",
+      "method": "GET",
+      "headers": {},
+      "body": null
+    },
+    "status": 200,
+    "headers": {
+      "date": "Mon, 28 Sep 2026 04:24:23 GMT",
+      "content-type": "application/json",
+      "server": "Kestrel",
+      "transfer-encoding": "chunked"
+    },
+    "raw_headers": [
+      "Date",
+      "Mon, 28 Sep 2026 04:24:23 GMT",
+      "Content-Type",
+      "application/json",
+      "Server",
+      "Kestrel",
+      "Transfer-Encoding",
+      "chunked"
+    ],
+    "end_utc": "2026-09-28T04:24:24.132Z",
+    "duration_ms": 21.268299999999954,
+    "body_hex": "7b2273756363657373223a747275652c227465726d696e616c5f737461747573223a224e6f6e65222c22636f6465223a302c226d657373616765223a2270696e67222c226572726f72223a22227d",
+    "body_text": "{\"success\":true,\"terminal_status\":\"None\",\"code\":0,\"message\":\"ping\",\"error\":\"\"}",
+    "body": {
+      "success": true,
+      "terminal_status": "None",
+      "code": 0,
+      "message": "ping",
+      "error": ""
+    },
+    "connection_error": null
+  },
+  "ssi": [
+    {
+      "seq": 5,
+      "utc": "2026-09-28T04:24:24.115Z",
+      "elapsed_ms": 1091.3808000000001,
+      "run_id": "2026-09-28T04-24-23-137Z-f56bcf09",
+      "scenario_id": "ping",
+      "kind": "connected",
+      "connection_id": 1,
+      "peer": "127.0.0.1"
+    },
+    {
+      "seq": 6,
+      "utc": "2026-09-28T04:24:24.116Z",
+      "elapsed_ms": 1092.7920000000001,
+      "run_id": "2026-09-28T04-24-23-137Z-f56bcf09",
+      "scenario_id": "ping",
+      "kind": "bytes",
+      "connection_id": 1,
+      "direction": "rx",
+      "hex": "026601001c7b226d6574686f64223a224765745465726d696e616c496e666f227d7f"
+    },
+    {
+      "seq": 7,
+      "utc": "2026-09-28T04:24:24.118Z",
+      "elapsed_ms": 1094.6422,
+      "run_id": "2026-09-28T04-24-23-137Z-f56bcf09",
+      "scenario_id": "ping",
+      "kind": "frame",
+      "connection_id": 1,
+      "direction": "rx",
+      "hex": "026601001c7b226d6574686f64223a224765745465726d696e616c496e666f227d7f",
+      "json": {
+        "method": "GetTerminalInfo"
+      }
+    },
+    {
+      "seq": 8,
+      "utc": "2026-09-28T04:24:24.120Z",
+      "elapsed_ms": 1096.2937,
+      "run_id": "2026-09-28T04-24-23-137Z-f56bcf09",
+      "scenario_id": "ping",
+      "kind": "response_prepared",
+      "connection_id": 1,
+      "json": {
+        "method": "GetTerminalInfo",
+        "error": false,
+        "errorCode": "",
+        "errorDescription": "",
+        "params": {
+          "terminalModel": "Verifone X990",
+          "terminalSerialNumber": "SYNTHETIC001",
+          "sdkVersion": 25,
+          "androidVersion": "7.1.2",
+          "securityDriver": {
+            "name": "Simulator",
+            "versionName": "1"
+          },
+          "currentApp": {
+            "name": "SSI simulator",
+            "packageName": "local.ssi.simulator",
+            "versionName": "1"
+          },
+          "serviceApps": [],
+          "thirdPartyApps": [],
+          "paymentApps": [],
+          "externalRegisterApps": [],
+          "rom": {
+            "name": "Simulator",
+            "versionName": "1"
+          }
+        }
+      },
+      "fault": "normal"
+    },
+    {
+      "seq": 9,
+      "utc": "2026-09-28T04:24:24.121Z",
+      "elapsed_ms": 1097.8454,
+      "run_id": "2026-09-28T04-24-23-137Z-f56bcf09",
+      "scenario_id": "ping",
+      "kind": "frame",
+      "connection_id": 1,
+      "direction": "tx",
+      "hex": "02660101da7b226d6574686f64223a224765745465726d696e616c496e666f222c226572726f72223a66616c73652c226572726f72436f6465223a22222c226572726f724465736372697074696f6e223a22222c22706172616d73223a7b227465726d696e616c4d6f64656c223a2256657269666f6e652058393930222c227465726d696e616c53657269616c4e756d626572223a2253594e544845544943303031222c2273646b56657273696f6e223a32352c22616e64726f696456657273696f6e223a22372e312e32222c227365637572697479447269766572223a7b226e616d65223a2253696d756c61746f72222c2276657273696f6e4e616d65223a2231227d2c2263757272656e74417070223a7b226e616d65223a225353492073696d756c61746f72222c227061636b6167654e616d65223a226c6f63616c2e7373692e73696d756c61746f72222c2276657273696f6e4e616d65223a2231227d2c227365727669636541707073223a5b5d2c227468697264506172747941707073223a5b5d2c227061796d656e7441707073223a5b5d2c2265787465726e616c526567697374657241707073223a5b5d2c22726f6d223a7b226e616d65223a2253696d756c61746f72222c2276657273696f6e4e616d65223a2231227d7d7d50",
+      "json": {
+        "method": "GetTerminalInfo",
+        "error": false,
+        "errorCode": "",
+        "errorDescription": "",
+        "params": {
+          "terminalModel": "Verifone X990",
+          "terminalSerialNumber": "SYNTHETIC001",
+          "sdkVersion": 25,
+          "androidVersion": "7.1.2",
+          "securityDriver": {
+            "name": "Simulator",
+            "versionName": "1"
+          },
+          "currentApp": {
+            "name": "SSI simulator",
+            "packageName": "local.ssi.simulator",
+            "versionName": "1"
+          },
+          "serviceApps": [],
+          "thirdPartyApps": [],
+          "paymentApps": [],
+          "externalRegisterApps": [],
+          "rom": {
+            "name": "Simulator",
+            "versionName": "1"
+          }
+        }
+      }
+    },
+    {
+      "seq": 10,
+      "utc": "2026-09-28T04:24:24.123Z",
+      "elapsed_ms": 1099.7835,
+      "run_id": "2026-09-28T04-24-23-137Z-f56bcf09",
+      "scenario_id": "ping",
+      "kind": "bytes",
+      "connection_id": 1,
+      "direction": "tx",
+      "hex": "02660101da7b226d6574686f64223a224765745465726d696e616c496e666f222c226572726f72223a66616c73652c226572726f72436f6465223a22222c226572726f724465736372697074696f6e223a22222c22706172616d73223a7b227465726d696e616c4d6f64656c223a2256657269666f6e652058393930222c227465726d696e616c53657269616c4e756d626572223a2253594e544845544943303031222c2273646b56657273696f6e223a32352c22616e64726f696456657273696f6e223a22372e312e32222c227365637572697479447269766572223a7b226e616d65223a2253696d756c61746f72222c2276657273696f6e4e616d65223a2231227d2c2263757272656e74417070223a7b226e616d65223a225353492073696d756c61746f72222c227061636b6167654e616d65223a226c6f63616c2e7373692e73696d756c61746f72222c2276657273696f6e4e616d65223a2231227d2c227365727669636541707073223a5b5d2c227468697264506172747941707073223a5b5d2c227061796d656e7441707073223a5b5d2c2265787465726e616c526567697374657241707073223a5b5d2c22726f6d223a7b226e616d65223a2253696d756c61746f72222c2276657273696f6e4e616d65223a2231227d7d7d50"
+    },
+    {
+      "seq": 11,
+      "utc": "2026-09-28T04:24:24.125Z",
+      "elapsed_ms": 1101.0617,
+      "run_id": "2026-09-28T04-24-23-137Z-f56bcf09",
+      "scenario_id": "ping",
+      "kind": "response_written",
+      "connection_id": 1,
+      "method": "GetTerminalInfo"
+    },
+    {
+      "seq": 12,
+      "utc": "2026-09-28T04:24:24.127Z",
+      "elapsed_ms": 1103.9216000000001,
+      "run_id": "2026-09-28T04-24-23-137Z-f56bcf09",
+      "scenario_id": "ping",
+      "kind": "disconnected",
+      "connection_id": 1,
+      "pending_hex": ""
+    }
+  ],
+  "build": {
+    "commit": "32ea20432597141d9fab3effa646353a1405ffe6",
+    "dirty": true,
+    "executable_sha256": "85d1bf9280e7c63e1099ecc2db480813f439e68c41a5eca8a453094a948ab465",
+    "installer_sha256": "62d0e7a539380937ecb5af2f1c50438e4b84a070de4a20c1c848c11a5e395491",
+    "ssi": {
+      "revision": "1.4.6",
+      "date": "2026-09-12",
+      "wire_version": 1,
+      "sha256": "8e4b459ade28f4ee301de7751659d4bf365f9c0f2ac3508a6745a597158e1a65"
+    },
+    "host": {
+      "platform": "win32",
+      "release": "10.0.26200",
+      "version": "Windows 11 Home",
+      "architecture": "x64",
+      "node": "v24.16.0"
+    }
+  }
+}

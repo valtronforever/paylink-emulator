@@ -1,0 +1,43 @@
+{
+  "profile": "desktop-paylink-2.1.20-win-x86",
+  "evidence": {
+    "provenance": "real_paylink_simulated_ssi_json",
+    "installer_sha256": "62d0e7a539380937ecb5af2f1c50438e4b84a070de4a20c1c848c11a5e395491",
+    "executable_sha256": "85d1bf9280e7c63e1099ecc2db480813f439e68c41a5eca8a453094a948ab465",
+    "bank": "SIMULATED",
+    "protocol": "SSIJson",
+    "capture_date": "2026-09-28",
+    "ssi_revision": "1.4.6",
+    "ssi_sha256": "8e4b459ade28f4ee301de7751659d4bf365f9c0f2ac3508a6745a597158e1a65",
+    "scenario_id": "E08",
+    "raw_trace": "evidence/2026-09-28T04-12-07-742Z-f75a1328-E08.json",
+    "raw_trace_sha256": "f993d72d408307d7a64edb4f5eccd84bfa75585be864c2e369509a397b4c3856"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+    "body": {
+      "amount": 100,
+      "merchant_id": "TEST-MERCHANT"
+    }
+  },
+  "scenario": {
+    "id": "E08",
+    "outcome": "error",
+    "error_id": "terminal_general",
+    "reference_error": "E08"
+  },
+  "response": {
+    "status": 503,
+    "content_type": "application/json",
+    "body": {
+      "success": false,
+      "code": 9304,
+      "error": "Переривання операції заборонене. Очікуйте її завершення.",
+      "description": "Interrupt prohibited => (E08) Interrupt prohibited"
+    },
+    "duration_ms": 22.51859999999988
+  },
+  "variable_fields": [],
+  "id_mapping": []
+}

@@ -1,0 +1,498 @@
+{
+  "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+  "scenario": {
+    "id": "E15",
+    "request": {
+      "method": "POST",
+      "path": "/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+      "body": {
+        "amount": 100,
+        "merchant_id": "TEST-MERCHANT"
+      }
+    },
+    "ssi": {
+      "error_code": "E15",
+      "response_code": "",
+      "transaction_result": "FAILED"
+    },
+    "timeout_ms": 30000
+  },
+  "http": {
+    "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+    "scenario_id": "E15",
+    "start_utc": "2026-09-28T04:12:41.428Z",
+    "start_ms": 33366.60279999999,
+    "client_timeout_ms": 30000,
+    "request": {
+      "url": "http://127.0.0.1:9020/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": 44
+      },
+      "body": "{\"amount\":100,\"merchant_id\":\"TEST-MERCHANT\"}"
+    },
+    "status": 503,
+    "headers": {
+      "date": "Mon, 28 Sep 2026 04:12:42 GMT",
+      "content-type": "application/json",
+      "server": "Kestrel",
+      "transfer-encoding": "chunked"
+    },
+    "raw_headers": [
+      "Date",
+      "Mon, 28 Sep 2026 04:12:42 GMT",
+      "Content-Type",
+      "application/json",
+      "Server",
+      "Kestrel",
+      "Transfer-Encoding",
+      "chunked"
+    ],
+    "end_utc": "2026-09-28T04:12:43.490Z",
+    "duration_ms": 2062.593200000003,
+    "body_hex": "7b2273756363657373223a66616c73652c22636f6465223a393330372c226572726f72223a22d09fd0bed182d180d196d0b1d0bdd0be20d0b2d0b8d0bad0bed0bdd0b0d182d0b820d0b7d0b2d196d180d0bad18320d0b720d0bfd180d0bed186d0b5d181d0b8d0bdd0b3d0bed0b2d0b8d0bc20d186d0b5d0bdd182d180d0bed0bc20d0b1d0b0d0bdd0bad1832e20d092d0b8d0bad0bed0bdd0b0d0b9d182d0b520d0b7d0b0d0bad180d0b8d182d182d18f20d0b1d0b0d0bdd0bad196d0b2d181d18cd0bad0bed19720d0b7d0bcd196d0bdd0b82e222c226465736372697074696f6e223a224e656564205a207265706f7274203d3e202845313529204e656564207a207265706f7274227d",
+    "body_text": "{\"success\":false,\"code\":9307,\"error\":\"Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.\",\"description\":\"Need Z report => (E15) Need z report\"}",
+    "body": {
+      "success": false,
+      "code": 9307,
+      "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+      "description": "Need Z report => (E15) Need z report"
+    },
+    "connection_error": null
+  },
+  "ssi": [
+    {
+      "seq": 440,
+      "utc": "2026-09-28T04:12:41.436Z",
+      "elapsed_ms": 292098.4035,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E15",
+      "kind": "connected",
+      "connection_id": 46,
+      "peer": "127.0.0.1"
+    },
+    {
+      "seq": 441,
+      "utc": "2026-09-28T04:12:41.437Z",
+      "elapsed_ms": 292099.6236,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E15",
+      "kind": "bytes",
+      "connection_id": 46,
+      "direction": "rx",
+      "hex": "02660100877b226d6574686f64223a225075726368617365222c22706172616d73223a7b227472616e73616374696f6e556964223a22356437626665343837363263222c226d65726368616e744964223a22544553542d4d45524348414e54222c227472616e7343757272656e6379223a22393830222c227472616e73416d6f756e74223a22313030227d7d52"
+    },
+    {
+      "seq": 442,
+      "utc": "2026-09-28T04:12:41.438Z",
+      "elapsed_ms": 292100.7507,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E15",
+      "kind": "frame",
+      "connection_id": 46,
+      "direction": "rx",
+      "hex": "02660100877b226d6574686f64223a225075726368617365222c22706172616d73223a7b227472616e73616374696f6e556964223a22356437626665343837363263222c226d65726368616e744964223a22544553542d4d45524348414e54222c227472616e7343757272656e6379223a22393830222c227472616e73416d6f756e74223a22313030227d7d52",
+      "json": {
+        "method": "Purchase",
+        "params": {
+          "transactionUid": "5d7bfe48762c",
+          "merchantId": "TEST-MERCHANT",
+          "transCurrency": "980",
+          "transAmount": "100"
+        }
+      }
+    },
+    {
+      "seq": 443,
+      "utc": "2026-09-28T04:12:41.439Z",
+      "elapsed_ms": 292102.2608,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E15",
+      "kind": "accepted",
+      "request": {
+        "method": "Purchase",
+        "params": {
+          "transactionUid": "5d7bfe48762c",
+          "merchantId": "TEST-MERCHANT",
+          "transCurrency": "980",
+          "transAmount": "100"
+        }
+      }
+    },
+    {
+      "seq": 444,
+      "utc": "2026-09-28T04:12:41.440Z",
+      "elapsed_ms": 292103.2749,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E15",
+      "kind": "response_prepared",
+      "connection_id": 46,
+      "json": {
+        "method": "Purchase",
+        "error": false,
+        "errorCode": "",
+        "errorDescription": "",
+        "params": {}
+      },
+      "fault": "normal"
+    },
+    {
+      "seq": 445,
+      "utc": "2026-09-28T04:12:41.441Z",
+      "elapsed_ms": 292104.1265,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E15",
+      "kind": "frame",
+      "connection_id": 46,
+      "direction": "tx",
+      "hex": "02660100547b226d6574686f64223a225075726368617365222c226572726f72223a66616c73652c226572726f72436f6465223a22222c226572726f724465736372697074696f6e223a22222c22706172616d73223a7b7d7d7c",
+      "json": {
+        "method": "Purchase",
+        "error": false,
+        "errorCode": "",
+        "errorDescription": "",
+        "params": {}
+      }
+    },
+    {
+      "seq": 446,
+      "utc": "2026-09-28T04:12:41.442Z",
+      "elapsed_ms": 292105.2705,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E15",
+      "kind": "bytes",
+      "connection_id": 46,
+      "direction": "tx",
+      "hex": "02660100547b226d6574686f64223a225075726368617365222c226572726f72223a66616c73652c226572726f72436f6465223a22222c226572726f724465736372697074696f6e223a22222c22706172616d73223a7b7d7d7c"
+    },
+    {
+      "seq": 447,
+      "utc": "2026-09-28T04:12:41.443Z",
+      "elapsed_ms": 292106.2907,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E15",
+      "kind": "response_written",
+      "connection_id": 46,
+      "method": "Purchase"
+    },
+    {
+      "seq": 448,
+      "utc": "2026-09-28T04:12:41.445Z",
+      "elapsed_ms": 292107.3389,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E15",
+      "kind": "phase",
+      "status": "S02"
+    },
+    {
+      "seq": 449,
+      "utc": "2026-09-28T04:12:41.548Z",
+      "elapsed_ms": 292211.1804,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E15",
+      "kind": "phase",
+      "status": "S04"
+    },
+    {
+      "seq": 450,
+      "utc": "2026-09-28T04:12:41.653Z",
+      "elapsed_ms": 292315.6951,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E15",
+      "kind": "completed",
+      "error_code": "E15",
+      "result": {
+        "originalTrnName": "Purchase",
+        "transAmount": "100",
+        "authCode": "",
+        "date": "28/09/2026",
+        "time": "04:12:41",
+        "invoiceNum": "000001",
+        "bankName": "SIMULATED",
+        "merchantId": "TEST-MERCHANT",
+        "pan": "4111XXXXXXXX1111",
+        "responseCode": "",
+        "rrn": "000000000001",
+        "transactionResult": "FAILED",
+        "terminalId": "TEST0001",
+        "posEntryMode": "CONTACTLESS",
+        "binName": "VISA",
+        "cardHolderName": "TEST USER",
+        "errorDetails": "",
+        "transactionUid": "5d7bfe48762c"
+      }
+    },
+    {
+      "seq": 451,
+      "utc": "2026-09-28T04:12:42.445Z",
+      "elapsed_ms": 293108.28859999997,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E15",
+      "kind": "disconnected",
+      "connection_id": 46,
+      "pending_hex": ""
+    },
+    {
+      "seq": 452,
+      "utc": "2026-09-28T04:12:42.448Z",
+      "elapsed_ms": 293110.3663,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E15",
+      "kind": "connected",
+      "connection_id": 47,
+      "peer": "127.0.0.1"
+    },
+    {
+      "seq": 453,
+      "utc": "2026-09-28T04:12:42.449Z",
+      "elapsed_ms": 293111.745,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E15",
+      "kind": "bytes",
+      "connection_id": 47,
+      "direction": "rx",
+      "hex": "02660100167b226d6574686f64223a22476574537461747573227d41"
+    },
+    {
+      "seq": 454,
+      "utc": "2026-09-28T04:12:42.450Z",
+      "elapsed_ms": 293113.0024,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E15",
+      "kind": "frame",
+      "connection_id": 47,
+      "direction": "rx",
+      "hex": "02660100167b226d6574686f64223a22476574537461747573227d41",
+      "json": {
+        "method": "GetStatus"
+      }
+    },
+    {
+      "seq": 455,
+      "utc": "2026-09-28T04:12:42.451Z",
+      "elapsed_ms": 293114.1945,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E15",
+      "kind": "response_prepared",
+      "connection_id": 47,
+      "json": {
+        "method": "GetStatus",
+        "error": false,
+        "errorCode": "",
+        "errorDescription": "",
+        "params": {},
+        "status": "S00"
+      },
+      "fault": "normal"
+    },
+    {
+      "seq": 456,
+      "utc": "2026-09-28T04:12:42.452Z",
+      "elapsed_ms": 293115.3088,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E15",
+      "kind": "frame",
+      "connection_id": 47,
+      "direction": "tx",
+      "hex": "02660100647b226d6574686f64223a22476574537461747573222c226572726f72223a66616c73652c226572726f72436f6465223a22222c226572726f724465736372697074696f6e223a22222c22706172616d73223a7b7d2c22737461747573223a22533030227d64",
+      "json": {
+        "method": "GetStatus",
+        "error": false,
+        "errorCode": "",
+        "errorDescription": "",
+        "params": {},
+        "status": "S00"
+      }
+    },
+    {
+      "seq": 457,
+      "utc": "2026-09-28T04:12:42.454Z",
+      "elapsed_ms": 293116.8222,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E15",
+      "kind": "bytes",
+      "connection_id": 47,
+      "direction": "tx",
+      "hex": "02660100647b226d6574686f64223a22476574537461747573222c226572726f72223a66616c73652c226572726f72436f6465223a22222c226572726f724465736372697074696f6e223a22222c22706172616d73223a7b7d2c22737461747573223a22533030227d64"
+    },
+    {
+      "seq": 458,
+      "utc": "2026-09-28T04:12:42.455Z",
+      "elapsed_ms": 293118.1667,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E15",
+      "kind": "response_written",
+      "connection_id": 47,
+      "method": "GetStatus"
+    },
+    {
+      "seq": 459,
+      "utc": "2026-09-28T04:12:43.463Z",
+      "elapsed_ms": 294125.9788,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E15",
+      "kind": "disconnected",
+      "connection_id": 47,
+      "pending_hex": ""
+    },
+    {
+      "seq": 460,
+      "utc": "2026-09-28T04:12:43.465Z",
+      "elapsed_ms": 294127.8679,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E15",
+      "kind": "connected",
+      "connection_id": 48,
+      "peer": "127.0.0.1"
+    },
+    {
+      "seq": 461,
+      "utc": "2026-09-28T04:12:43.466Z",
+      "elapsed_ms": 294129.13409999997,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E15",
+      "kind": "bytes",
+      "connection_id": 48,
+      "direction": "rx",
+      "hex": "026601001a7b226d6574686f64223a224765744c617374526573756c74227d76"
+    },
+    {
+      "seq": 462,
+      "utc": "2026-09-28T04:12:43.468Z",
+      "elapsed_ms": 294130.4799,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E15",
+      "kind": "frame",
+      "connection_id": 48,
+      "direction": "rx",
+      "hex": "026601001a7b226d6574686f64223a224765744c617374526573756c74227d76",
+      "json": {
+        "method": "GetLastResult"
+      }
+    },
+    {
+      "seq": 463,
+      "utc": "2026-09-28T04:12:43.469Z",
+      "elapsed_ms": 294131.6303,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E15",
+      "kind": "response_prepared",
+      "connection_id": 48,
+      "json": {
+        "method": "GetLastResult",
+        "error": true,
+        "errorCode": "E15",
+        "errorDescription": "Need z report",
+        "params": {
+          "originalTrnName": "Purchase",
+          "transAmount": "100",
+          "authCode": "",
+          "date": "28/09/2026",
+          "time": "04:12:41",
+          "invoiceNum": "000001",
+          "bankName": "SIMULATED",
+          "merchantId": "TEST-MERCHANT",
+          "pan": "4111XXXXXXXX1111",
+          "responseCode": "",
+          "rrn": "000000000001",
+          "transactionResult": "FAILED",
+          "terminalId": "TEST0001",
+          "posEntryMode": "CONTACTLESS",
+          "binName": "VISA",
+          "cardHolderName": "TEST USER",
+          "errorDetails": "",
+          "transactionUid": "5d7bfe48762c"
+        }
+      },
+      "fault": "normal"
+    },
+    {
+      "seq": 464,
+      "utc": "2026-09-28T04:12:43.470Z",
+      "elapsed_ms": 294132.798,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E15",
+      "kind": "frame",
+      "connection_id": 48,
+      "direction": "tx",
+      "hex": "02660102087b226d6574686f64223a224765744c617374526573756c74222c226572726f72223a747275652c226572726f72436f6465223a22453135222c226572726f724465736372697074696f6e223a224e656564207a207265706f7274222c22706172616d73223a7b226f726967696e616c54726e4e616d65223a225075726368617365222c227472616e73416d6f756e74223a22313030222c2261757468436f6465223a22222c2264617465223a2232382f30392f32303236222c2274696d65223a2230343a31323a3431222c22696e766f6963654e756d223a22303030303031222c2262616e6b4e616d65223a2253494d554c41544544222c226d65726368616e744964223a22544553542d4d45524348414e54222c2270616e223a2234313131585858585858585831313131222c22726573706f6e7365436f6465223a22222c2272726e223a22303030303030303030303031222c227472616e73616374696f6e526573756c74223a224641494c4544222c227465726d696e616c4964223a225445535430303031222c22706f73456e7472794d6f6465223a22434f4e544143544c455353222c2262696e4e616d65223a2256495341222c2263617264486f6c6465724e616d65223a22544553542055534552222c226572726f7244657461696c73223a22222c227472616e73616374696f6e556964223a22356437626665343837363263227d7d2f",
+      "json": {
+        "method": "GetLastResult",
+        "error": true,
+        "errorCode": "E15",
+        "errorDescription": "Need z report",
+        "params": {
+          "originalTrnName": "Purchase",
+          "transAmount": "100",
+          "authCode": "",
+          "date": "28/09/2026",
+          "time": "04:12:41",
+          "invoiceNum": "000001",
+          "bankName": "SIMULATED",
+          "merchantId": "TEST-MERCHANT",
+          "pan": "4111XXXXXXXX1111",
+          "responseCode": "",
+          "rrn": "000000000001",
+          "transactionResult": "FAILED",
+          "terminalId": "TEST0001",
+          "posEntryMode": "CONTACTLESS",
+          "binName": "VISA",
+          "cardHolderName": "TEST USER",
+          "errorDetails": "",
+          "transactionUid": "5d7bfe48762c"
+        }
+      }
+    },
+    {
+      "seq": 465,
+      "utc": "2026-09-28T04:12:43.472Z",
+      "elapsed_ms": 294134.3593,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E15",
+      "kind": "bytes",
+      "connection_id": 48,
+      "direction": "tx",
+      "hex": "02660102087b226d6574686f64223a224765744c617374526573756c74222c226572726f72223a747275652c226572726f72436f6465223a22453135222c226572726f724465736372697074696f6e223a224e656564207a207265706f7274222c22706172616d73223a7b226f726967696e616c54726e4e616d65223a225075726368617365222c227472616e73416d6f756e74223a22313030222c2261757468436f6465223a22222c2264617465223a2232382f30392f32303236222c2274696d65223a2230343a31323a3431222c22696e766f6963654e756d223a22303030303031222c2262616e6b4e616d65223a2253494d554c41544544222c226d65726368616e744964223a22544553542d4d45524348414e54222c2270616e223a2234313131585858585858585831313131222c22726573706f6e7365436f6465223a22222c2272726e223a22303030303030303030303031222c227472616e73616374696f6e526573756c74223a224641494c4544222c227465726d696e616c4964223a225445535430303031222c22706f73456e7472794d6f6465223a22434f4e544143544c455353222c2262696e4e616d65223a2256495341222c2263617264486f6c6465724e616d65223a22544553542055534552222c226572726f7244657461696c73223a22222c227472616e73616374696f6e556964223a22356437626665343837363263227d7d2f"
+    },
+    {
+      "seq": 466,
+      "utc": "2026-09-28T04:12:43.473Z",
+      "elapsed_ms": 294135.42339999997,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E15",
+      "kind": "response_written",
+      "connection_id": 48,
+      "method": "GetLastResult"
+    },
+    {
+      "seq": 467,
+      "utc": "2026-09-28T04:12:43.474Z",
+      "elapsed_ms": 294137.3256,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E15",
+      "kind": "disconnected",
+      "connection_id": 48,
+      "pending_hex": ""
+    }
+  ],
+  "build": {
+    "commit": "32ea20432597141d9fab3effa646353a1405ffe6",
+    "dirty": true,
+    "executable_sha256": "85d1bf9280e7c63e1099ecc2db480813f439e68c41a5eca8a453094a948ab465",
+    "installer_sha256": "62d0e7a539380937ecb5af2f1c50438e4b84a070de4a20c1c848c11a5e395491",
+    "ssi": {
+      "revision": "1.4.6",
+      "date": "2026-09-12",
+      "wire_version": 1,
+      "sha256": "8e4b459ade28f4ee301de7751659d4bf365f9c0f2ac3508a6745a597158e1a65"
+    },
+    "host": {
+      "platform": "win32",
+      "release": "10.0.26200",
+      "version": "Windows 11 Home",
+      "architecture": "x64",
+      "node": "v24.16.0"
+    }
+  }
+}

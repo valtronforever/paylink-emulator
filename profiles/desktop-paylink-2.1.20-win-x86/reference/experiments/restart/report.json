@@ -1,0 +1,38 @@
+{
+  "provenance": "real_paylink_simulated_ssi_json",
+  "simulator_restart": "observed",
+  "boot_changed": true,
+  "last_result_ids": [
+    {
+      "phase": "before",
+      "id": "2aacef7c88be",
+      "status": 200
+    },
+    {
+      "phase": "before",
+      "id": "2aacef7c88be",
+      "status": 200
+    },
+    {
+      "phase": "after-ssi",
+      "id": "2aacef7c88be",
+      "status": 200
+    }
+  ],
+  "ssi_methods": [
+    {
+      "utc": "2026-09-28T05:01:21.032Z",
+      "method": "Purchase"
+    },
+    {
+      "utc": "2026-09-28T05:01:22.052Z",
+      "method": "GetStatus"
+    },
+    {
+      "utc": "2026-09-28T05:01:23.069Z",
+      "method": "GetLastResult"
+    }
+  ],
+  "paylink_restart": "not_run_automatic_approval_policy_blocked_process_restart",
+  "active_operation_restart": "simulator unit tested only; native active operation restart not measured"
+}

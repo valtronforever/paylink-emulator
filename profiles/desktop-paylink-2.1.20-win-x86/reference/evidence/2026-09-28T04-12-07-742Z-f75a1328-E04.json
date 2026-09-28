@@ -1,0 +1,190 @@
+{
+  "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+  "scenario": {
+    "id": "E04",
+    "request": {
+      "method": "POST",
+      "path": "/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+      "body": {
+        "amount": 100,
+        "merchant_id": "TEST-MERCHANT"
+      }
+    },
+    "ssi": {
+      "request_errors": {
+        "Purchase": "E04"
+      }
+    },
+    "timeout_ms": 30000
+  },
+  "http": {
+    "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+    "scenario_id": "E04",
+    "start_utc": "2026-09-28T04:12:09.554Z",
+    "start_ms": 1492.6961999999999,
+    "client_timeout_ms": 30000,
+    "request": {
+      "url": "http://127.0.0.1:9020/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": 44
+      },
+      "body": "{\"amount\":100,\"merchant_id\":\"TEST-MERCHANT\"}"
+    },
+    "status": 503,
+    "headers": {
+      "date": "Mon, 28 Sep 2026 04:12:09 GMT",
+      "content-type": "application/json",
+      "server": "Kestrel",
+      "transfer-encoding": "chunked"
+    },
+    "raw_headers": [
+      "Date",
+      "Mon, 28 Sep 2026 04:12:09 GMT",
+      "Content-Type",
+      "application/json",
+      "Server",
+      "Kestrel",
+      "Transfer-Encoding",
+      "chunked"
+    ],
+    "end_utc": "2026-09-28T04:12:09.577Z",
+    "duration_ms": 23.074699999999893,
+    "body_hex": "7b2273756363657373223a66616c73652c22636f6465223a393330322c226572726f72223a22d092d196d0b4d181d183d182d0bdd19620d0bed0b1d0bed0b2e28099d18fd0b7d0bad0bed0b2d19620d0bfd0bed0bbd18f20d0b220d0b7d0b0d0bfd0b8d182d19620d0b4d0be20d182d0b5d180d0bcd196d0bdd0b0d0bbd1832e20d097d0b2d0b5d180d0bdd196d182d18cd181d18f20d0b220d181d0bbd183d0b6d0b1d18320d0bfd196d0b4d182d180d0b8d0bcd0bad0b820436865636b626f782e222c226465736372697074696f6e223a225265717569726564206669656c647320617265206d697373696e67203d3e202845303429205265717569726564206669656c647320617265206d697373696e67227d",
+    "body_text": "{\"success\":false,\"code\":9302,\"error\":\"Відсутні обов’язкові поля в запиті до терміналу. Зверніться в службу підтримки Checkbox.\",\"description\":\"Required fields are missing => (E04) Required fields are missing\"}",
+    "body": {
+      "success": false,
+      "code": 9302,
+      "error": "Відсутні обов’язкові поля в запиті до терміналу. Зверніться в службу підтримки Checkbox.",
+      "description": "Required fields are missing => (E04) Required fields are missing"
+    },
+    "connection_error": null
+  },
+  "ssi": [
+    {
+      "seq": 158,
+      "utc": "2026-09-28T04:12:09.563Z",
+      "elapsed_ms": 260226.2776,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E04",
+      "kind": "connected",
+      "connection_id": 17,
+      "peer": "127.0.0.1"
+    },
+    {
+      "seq": 159,
+      "utc": "2026-09-28T04:12:09.565Z",
+      "elapsed_ms": 260227.6023,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E04",
+      "kind": "bytes",
+      "connection_id": 17,
+      "direction": "rx",
+      "hex": "02660100877b226d6574686f64223a225075726368617365222c22706172616d73223a7b227472616e73616374696f6e556964223a22643464383337356166393931222c226d65726368616e744964223a22544553542d4d45524348414e54222c227472616e7343757272656e6379223a22393830222c227472616e73416d6f756e74223a22313030227d7d02"
+    },
+    {
+      "seq": 160,
+      "utc": "2026-09-28T04:12:09.566Z",
+      "elapsed_ms": 260228.75259999998,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E04",
+      "kind": "frame",
+      "connection_id": 17,
+      "direction": "rx",
+      "hex": "02660100877b226d6574686f64223a225075726368617365222c22706172616d73223a7b227472616e73616374696f6e556964223a22643464383337356166393931222c226d65726368616e744964223a22544553542d4d45524348414e54222c227472616e7343757272656e6379223a22393830222c227472616e73416d6f756e74223a22313030227d7d02",
+      "json": {
+        "method": "Purchase",
+        "params": {
+          "transactionUid": "d4d8375af991",
+          "merchantId": "TEST-MERCHANT",
+          "transCurrency": "980",
+          "transAmount": "100"
+        }
+      }
+    },
+    {
+      "seq": 161,
+      "utc": "2026-09-28T04:12:09.567Z",
+      "elapsed_ms": 260229.913,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E04",
+      "kind": "response_prepared",
+      "connection_id": 17,
+      "json": {
+        "method": "Purchase",
+        "error": true,
+        "errorCode": "E04",
+        "errorDescription": "Required fields are missing"
+      },
+      "fault": "normal"
+    },
+    {
+      "seq": 162,
+      "utc": "2026-09-28T04:12:09.568Z",
+      "elapsed_ms": 260231.21769999998,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E04",
+      "kind": "frame",
+      "connection_id": 17,
+      "direction": "tx",
+      "hex": "02660100657b226d6574686f64223a225075726368617365222c226572726f72223a747275652c226572726f72436f6465223a22453034222c226572726f724465736372697074696f6e223a225265717569726564206669656c647320617265206d697373696e67227d50",
+      "json": {
+        "method": "Purchase",
+        "error": true,
+        "errorCode": "E04",
+        "errorDescription": "Required fields are missing"
+      }
+    },
+    {
+      "seq": 163,
+      "utc": "2026-09-28T04:12:09.570Z",
+      "elapsed_ms": 260232.7779,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E04",
+      "kind": "bytes",
+      "connection_id": 17,
+      "direction": "tx",
+      "hex": "02660100657b226d6574686f64223a225075726368617365222c226572726f72223a747275652c226572726f72436f6465223a22453034222c226572726f724465736372697074696f6e223a225265717569726564206669656c647320617265206d697373696e67227d50"
+    },
+    {
+      "seq": 164,
+      "utc": "2026-09-28T04:12:09.571Z",
+      "elapsed_ms": 260234.04129999998,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E04",
+      "kind": "response_written",
+      "connection_id": 17,
+      "method": "Purchase"
+    },
+    {
+      "seq": 165,
+      "utc": "2026-09-28T04:12:09.573Z",
+      "elapsed_ms": 260236.1955,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E04",
+      "kind": "disconnected",
+      "connection_id": 17,
+      "pending_hex": ""
+    }
+  ],
+  "build": {
+    "commit": "32ea20432597141d9fab3effa646353a1405ffe6",
+    "dirty": true,
+    "executable_sha256": "85d1bf9280e7c63e1099ecc2db480813f439e68c41a5eca8a453094a948ab465",
+    "installer_sha256": "62d0e7a539380937ecb5af2f1c50438e4b84a070de4a20c1c848c11a5e395491",
+    "ssi": {
+      "revision": "1.4.6",
+      "date": "2026-09-12",
+      "wire_version": 1,
+      "sha256": "8e4b459ade28f4ee301de7751659d4bf365f9c0f2ac3508a6745a597158e1a65"
+    },
+    "host": {
+      "platform": "win32",
+      "release": "10.0.26200",
+      "version": "Windows 11 Home",
+      "architecture": "x64",
+      "node": "v24.16.0"
+    }
+  }
+}

@@ -1,0 +1,2992 @@
+{
+  "spec": {
+    "url": "https://www.ssi.com.ua/_files/ugd/c8ff39_c33c4ea4837842229ecb6331cb310d28.pdf",
+    "revision": "1.4.6",
+    "date": "2026-09-12",
+    "wire_version": 1,
+    "sha256": "8e4b459ade28f4ee301de7751659d4bf365f9c0f2ac3508a6745a597158e1a65",
+    "ambiguities": [
+      "§4.3.5 says params is absent except GetLastResult, but individual method examples require params.",
+      "§4.3.2 lists APPROVED_ONLINE; §5.5.1 example uses APPROVED-ONLINE.",
+      "§4.3.2 describes 2/3-character responseCode; §5.5.1 example uses 0000.",
+      "Request examples contain punctuation errors; codec tests use valid JSON and the §6.1 XOR algorithm."
+    ]
+  },
+  "scope": "All errorCode and status values, and all transactionResult examples in this document. Bank responseCode is not exhaustively enumerated by SSI.",
+  "errors": [
+    {
+      "status": "verified_recorded_injection",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E00.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9024,
+          "error": "Загальна помилка. Зверніться в службу підтримки Checkbox.",
+          "description": "Error => (E00) General error"
+        },
+        "duration_ms": 28.607499999999845
+      },
+      "emulator_case": {
+        "id": "E00",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E00"
+      },
+      "fixture": "reference/E00.json",
+      "reason": "Exact injected HTTP response replay passed. Injection does not prove legitimate method/phase reachability or physical-terminal behavior.",
+      "code": "E00",
+      "description": "General error",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "request",
+      "method": "Purchase",
+      "phase": "acceptance",
+      "injection": "request_errors.Purchase",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections",
+      "differential_report": "reference/experiments/differential.json",
+      "legitimate_context": "A request/protocol validation failure; this probe injects the response and does not induce its underlying cause."
+    },
+    {
+      "status": "verified_recorded_injection",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E01.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9022,
+          "error": "Термінал не підтримує поточний тип протоколу. Потрібно звернутися в банк.",
+          "description": "The protocol is not supported => (E01) Protocol version is not supported by the terminal"
+        },
+        "duration_ms": 26.943599999999833
+      },
+      "emulator_case": {
+        "id": "E01",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E01"
+      },
+      "fixture": "reference/E01.json",
+      "reason": "Exact injected HTTP response replay passed. Injection does not prove legitimate method/phase reachability or physical-terminal behavior.",
+      "code": "E01",
+      "description": "Protocol version is not supported by the terminal",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "request",
+      "method": "Purchase",
+      "phase": "acceptance",
+      "injection": "request_errors.Purchase",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections",
+      "differential_report": "reference/experiments/differential.json",
+      "legitimate_context": "A request/protocol validation failure; this probe injects the response and does not induce its underlying cause."
+    },
+    {
+      "status": "verified_recorded_injection",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E02.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9300,
+          "error": "Виникла помилка контрольної суми. Зверніться в службу підтримки Checkbox.",
+          "description": "Checksum description => (E02) Checksum error"
+        },
+        "duration_ms": 26.448699999999917
+      },
+      "emulator_case": {
+        "id": "E02",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E02"
+      },
+      "fixture": "reference/E02.json",
+      "reason": "Exact injected HTTP response replay passed. Injection does not prove legitimate method/phase reachability or physical-terminal behavior.",
+      "code": "E02",
+      "description": "Checksum error",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "request",
+      "method": "Purchase",
+      "phase": "acceptance",
+      "injection": "request_errors.Purchase",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections",
+      "differential_report": "reference/experiments/differential.json",
+      "legitimate_context": "A request/protocol validation failure; this probe injects the response and does not induce its underlying cause."
+    },
+    {
+      "status": "verified_recorded_injection",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E03.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9301,
+          "error": "Було отримано невірний формат JSON повідомлення. Зверніться в службу підтримки Checkbox.",
+          "description": "Json message format description => (E03) Json message format error"
+        },
+        "duration_ms": 31.10850000000005
+      },
+      "emulator_case": {
+        "id": "E03",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E03"
+      },
+      "fixture": "reference/E03.json",
+      "reason": "Exact injected HTTP response replay passed. Injection does not prove legitimate method/phase reachability or physical-terminal behavior.",
+      "code": "E03",
+      "description": "Json message format error",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "request",
+      "method": "Purchase",
+      "phase": "acceptance",
+      "injection": "request_errors.Purchase",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections",
+      "differential_report": "reference/experiments/differential.json",
+      "legitimate_context": "A request/protocol validation failure; this probe injects the response and does not induce its underlying cause."
+    },
+    {
+      "status": "verified_recorded_injection",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E04.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9302,
+          "error": "Відсутні обов’язкові поля в запиті до терміналу. Зверніться в службу підтримки Checkbox.",
+          "description": "Required fields are missing => (E04) Required fields are missing"
+        },
+        "duration_ms": 23.074699999999893
+      },
+      "emulator_case": {
+        "id": "E04",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E04"
+      },
+      "fixture": "reference/E04.json",
+      "reason": "Exact injected HTTP response replay passed. Injection does not prove legitimate method/phase reachability or physical-terminal behavior.",
+      "code": "E04",
+      "description": "Required fields are missing",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "request",
+      "method": "Purchase",
+      "phase": "acceptance",
+      "injection": "request_errors.Purchase",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections",
+      "differential_report": "reference/experiments/differential.json",
+      "legitimate_context": "A request/protocol validation failure; this probe injects the response and does not induce its underlying cause."
+    },
+    {
+      "status": "verified_recorded_injection",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E05.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9008,
+          "error": "Помилка виконання операції на терміналі.",
+          "description": "Command execution description => (E05) Unknown method"
+        },
+        "duration_ms": 22.270300000000134
+      },
+      "emulator_case": {
+        "id": "E05",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E05"
+      },
+      "fixture": "reference/E05.json",
+      "reason": "Exact injected HTTP response replay passed. Injection does not prove legitimate method/phase reachability or physical-terminal behavior.",
+      "code": "E05",
+      "description": "Unknown method",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "request",
+      "method": "Purchase",
+      "phase": "acceptance",
+      "injection": "request_errors.Purchase",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections",
+      "differential_report": "reference/experiments/differential.json",
+      "legitimate_context": "A request/protocol validation failure; this probe injects the response and does not induce its underlying cause."
+    },
+    {
+      "status": "verified_recorded_injection",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E06.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9009,
+          "error": "Пристрій вже зайнятий виконанням команди. Потрібно зачекати декілька секунд та повторити спробу.",
+          "description": "Device is busy => (E06) Terminal Busy"
+        },
+        "duration_ms": 23.521799999999985
+      },
+      "emulator_case": {
+        "id": "E06",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E06"
+      },
+      "fixture": "reference/E06.json",
+      "reason": "Exact injected HTTP response replay passed. Injection does not prove legitimate method/phase reachability or physical-terminal behavior.",
+      "code": "E06",
+      "description": "Terminal Busy",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "request",
+      "method": "Purchase",
+      "phase": "acceptance",
+      "injection": "request_errors.Purchase",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections",
+      "differential_report": "reference/experiments/differential.json",
+      "legitimate_context": "A request/protocol validation failure; this probe injects the response and does not induce its underlying cause."
+    },
+    {
+      "status": "verified_recorded_injection",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E07.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9303,
+          "error": "Не знайдено торговця з вказаним Merchant ID. Перевірте в параметрах підключення до терміналу значення Merchant ID. В разі потреби зверніться до служби підтримки банку.",
+          "description": "Merchant Id is not found => (E07) Merchant Id is not found"
+        },
+        "duration_ms": 22.405199999999695
+      },
+      "emulator_case": {
+        "id": "E07",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E07"
+      },
+      "fixture": "reference/E07.json",
+      "reason": "Exact injected HTTP response replay passed. Injection does not prove legitimate method/phase reachability or physical-terminal behavior.",
+      "code": "E07",
+      "description": "Merchant Id is not found",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "request",
+      "method": "Purchase",
+      "phase": "acceptance",
+      "injection": "request_errors.Purchase",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections",
+      "differential_report": "reference/experiments/differential.json",
+      "legitimate_context": "A request/protocol validation failure; this probe injects the response and does not induce its underlying cause."
+    },
+    {
+      "status": "verified_recorded_injection",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E08.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9304,
+          "error": "Переривання операції заборонене. Очікуйте її завершення.",
+          "description": "Interrupt prohibited => (E08) Interrupt prohibited"
+        },
+        "duration_ms": 22.51859999999988
+      },
+      "emulator_case": {
+        "id": "E08",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E08"
+      },
+      "fixture": "reference/E08.json",
+      "reason": "Exact injected HTTP response replay passed. Injection does not prove legitimate method/phase reachability or physical-terminal behavior.",
+      "code": "E08",
+      "description": "Interrupt prohibited",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "request",
+      "method": "Purchase",
+      "phase": "acceptance",
+      "injection": "request_errors.Purchase",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections",
+      "differential_report": "reference/experiments/differential.json",
+      "legitimate_context": "Interrupt outside S02/S03/S08 is rejected in simulator tests. Native HTTP operation-interruption endpoint was not established; /cancel is financial Void."
+    },
+    {
+      "status": "verified_recorded_injection",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E09.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9021,
+          "error": "Неправильно вказані параметри.",
+          "description": "Argument description => (E09) Format error"
+        },
+        "duration_ms": 23.6541000000002
+      },
+      "emulator_case": {
+        "id": "E09",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E09"
+      },
+      "fixture": "reference/E09.json",
+      "reason": "Exact injected HTTP response replay passed. Injection does not prove legitimate method/phase reachability or physical-terminal behavior.",
+      "code": "E09",
+      "description": "Format error",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "request",
+      "method": "Purchase",
+      "phase": "acceptance",
+      "injection": "request_errors.Purchase",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections",
+      "differential_report": "reference/experiments/differential.json",
+      "legitimate_context": "A request/protocol validation failure; this probe injects the response and does not induce its underlying cause."
+    },
+    {
+      "status": "verified_recorded_injection",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E10.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9204,
+          "error": "Відсутній зв'язок з платіжним терміналом. Перевірте доступність терміналу в локальній мережі та відповідного банківського ПЗ на ньому.",
+          "description": "No connection with host => (E10) Connection error"
+        },
+        "duration_ms": 23220.088099999997
+      },
+      "emulator_case": {
+        "id": "E10",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E10"
+      },
+      "fixture": "reference/E10.json",
+      "reason": "Exact injected HTTP response replay passed. Injection does not prove legitimate method/phase reachability or physical-terminal behavior.",
+      "code": "E10",
+      "description": "Connection error",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "operation",
+      "method": "GetLastResult",
+      "phase": "completed",
+      "injection": "error_code",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections",
+      "differential_report": "reference/experiments/differential.json",
+      "legitimate_context": "Completed operation error returned with its result; underlying card/bank cause is not simulated."
+    },
+    {
+      "status": "verified_recorded_injection",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E11.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9305,
+          "error": "Виникла помилка верифікації (ПІН-код, підпису). Перевірте ПІН-код. В разі потреби зверніться в службу підтримки банку.",
+          "description": "Verification description => (E11) Verification error (pin, signature)"
+        },
+        "duration_ms": 2076.985099999998
+      },
+      "emulator_case": {
+        "id": "E11",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E11"
+      },
+      "fixture": "reference/E11.json",
+      "reason": "Exact injected HTTP response replay passed. Injection does not prove legitimate method/phase reachability or physical-terminal behavior.",
+      "code": "E11",
+      "description": "Verification error (pin, signature)",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "operation",
+      "method": "GetLastResult",
+      "phase": "completed",
+      "injection": "error_code",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections",
+      "differential_report": "reference/experiments/differential.json",
+      "legitimate_context": "Completed operation error returned with its result; underlying card/bank cause is not simulated."
+    },
+    {
+      "status": "verified_recorded_injection",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E12.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9201,
+          "error": "Операція була перервана користувачем.",
+          "description": "Transaction canceled by user => (E12) Transaction canceled"
+        },
+        "duration_ms": 2070.0882999999994
+      },
+      "emulator_case": {
+        "id": "E12",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E12"
+      },
+      "fixture": "reference/E12.json",
+      "reason": "Exact injected HTTP response replay passed. Injection does not prove legitimate method/phase reachability or physical-terminal behavior.",
+      "code": "E12",
+      "description": "Transaction canceled",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "operation",
+      "method": "GetLastResult",
+      "phase": "completed",
+      "injection": "error_code",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections",
+      "differential_report": "reference/experiments/differential.json",
+      "legitimate_context": "Completed operation error returned with its result; underlying card/bank cause is not simulated."
+    },
+    {
+      "status": "verified_recorded_injection",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E13.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9029,
+          "error": "На термінал було передано невірне поле MAC. Зверніться до служби підтримки Checkbox.",
+          "description": "Wrong MAC => (E13) MAC Error - MAC"
+        },
+        "duration_ms": 2066.131999999998
+      },
+      "emulator_case": {
+        "id": "E13",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E13"
+      },
+      "fixture": "reference/E13.json",
+      "reason": "Exact injected HTTP response replay passed. Injection does not prove legitimate method/phase reachability or physical-terminal behavior.",
+      "code": "E13",
+      "description": "MAC Error - MAC",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "operation",
+      "method": "GetLastResult",
+      "phase": "completed",
+      "injection": "error_code",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections",
+      "differential_report": "reference/experiments/differential.json",
+      "legitimate_context": "Completed operation error returned with its result; underlying card/bank cause is not simulated."
+    },
+    {
+      "status": "verified_recorded_injection",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E14.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9306,
+          "error": "На терміналі відсутні ключі. Зверніться до служби підтримки банку.",
+          "description": "Key description => (E14) Key error"
+        },
+        "duration_ms": 2060.373300000003
+      },
+      "emulator_case": {
+        "id": "E14",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E14"
+      },
+      "fixture": "reference/E14.json",
+      "reason": "Exact injected HTTP response replay passed. Injection does not prove legitimate method/phase reachability or physical-terminal behavior.",
+      "code": "E14",
+      "description": "Key error",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "operation",
+      "method": "GetLastResult",
+      "phase": "completed",
+      "injection": "error_code",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections",
+      "differential_report": "reference/experiments/differential.json",
+      "legitimate_context": "Completed operation error returned with its result; underlying card/bank cause is not simulated."
+    },
+    {
+      "status": "verified_recorded_injection",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E15.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9307,
+          "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+          "description": "Need Z report => (E15) Need z report"
+        },
+        "duration_ms": 2062.593200000003
+      },
+      "emulator_case": {
+        "id": "E15",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E15"
+      },
+      "fixture": "reference/E15.json",
+      "reason": "Exact injected HTTP response replay passed. Injection does not prove legitimate method/phase reachability or physical-terminal behavior.",
+      "code": "E15",
+      "description": "Need z report",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "operation",
+      "method": "GetLastResult",
+      "phase": "completed",
+      "injection": "error_code",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections",
+      "differential_report": "reference/experiments/differential.json",
+      "legitimate_context": "Completed operation error returned with its result; underlying card/bank cause is not simulated."
+    },
+    {
+      "status": "verified_recorded_injection",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E16.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9308,
+          "error": "Виникла помилка зчитування карти. Перевірте картку на ушкодження та спробуйте повторити операцію.",
+          "description": "Card description => (E16) Card error"
+        },
+        "duration_ms": 2088.246300000006
+      },
+      "emulator_case": {
+        "id": "E16",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E16"
+      },
+      "fixture": "reference/E16.json",
+      "reason": "Exact injected HTTP response replay passed. Injection does not prove legitimate method/phase reachability or physical-terminal behavior.",
+      "code": "E16",
+      "description": "Card error",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "operation",
+      "method": "GetLastResult",
+      "phase": "completed",
+      "injection": "error_code",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections",
+      "differential_report": "reference/experiments/differential.json",
+      "legitimate_context": "Completed operation error returned with its result; underlying card/bank cause is not simulated."
+    },
+    {
+      "status": "verified_recorded_injection",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E17.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9202,
+          "error": "EMV Decline.",
+          "description": "EMV Decline => (E17) EMV error"
+        },
+        "duration_ms": 2083.006999999998
+      },
+      "emulator_case": {
+        "id": "E17",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E17"
+      },
+      "fixture": "reference/E17.json",
+      "reason": "Exact injected HTTP response replay passed. Injection does not prove legitimate method/phase reachability or physical-terminal behavior.",
+      "code": "E17",
+      "description": "EMV error",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "operation",
+      "method": "GetLastResult",
+      "phase": "completed",
+      "injection": "error_code",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections",
+      "differential_report": "reference/experiments/differential.json",
+      "legitimate_context": "Completed operation error returned with its result; underlying card/bank cause is not simulated."
+    },
+    {
+      "status": "verified_recorded_injection",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E18.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9024,
+          "error": "Загальна помилка. Зверніться в службу підтримки Checkbox.",
+          "description": "Error => (E18) Printer is out of paper or inoperational"
+        },
+        "duration_ms": 20.325400000001537
+      },
+      "emulator_case": {
+        "id": "E18",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E18"
+      },
+      "fixture": "reference/E18.json",
+      "reason": "Exact injected HTTP response replay passed. Injection does not prove legitimate method/phase reachability or physical-terminal behavior.",
+      "code": "E18",
+      "description": "Printer is out of paper or inoperational",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "request",
+      "method": "Purchase",
+      "phase": "acceptance",
+      "injection": "request_errors.Purchase",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections",
+      "differential_report": "reference/experiments/differential.json",
+      "legitimate_context": "A request/protocol validation failure; this probe injects the response and does not induce its underlying cause."
+    },
+    {
+      "status": "verified_recorded_injection",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E19.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9024,
+          "error": "Загальна помилка. Зверніться в службу підтримки Checkbox.",
+          "description": "Error => (E19) Transaction amount out of limit"
+        },
+        "duration_ms": 18.964799999994284
+      },
+      "emulator_case": {
+        "id": "E19",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E19"
+      },
+      "fixture": "reference/E19.json",
+      "reason": "Exact injected HTTP response replay passed. Injection does not prove legitimate method/phase reachability or physical-terminal behavior.",
+      "code": "E19",
+      "description": "Transaction amount out of limit",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "request",
+      "method": "Purchase",
+      "phase": "acceptance",
+      "injection": "request_errors.Purchase",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections",
+      "differential_report": "reference/experiments/differential.json",
+      "legitimate_context": "A request/protocol validation failure; this probe injects the response and does not induce its underlying cause."
+    },
+    {
+      "status": "verified_recorded_injection",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E20.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9024,
+          "error": "Загальна помилка. Зверніться в службу підтримки Checkbox.",
+          "description": "Error => (E20) No last transactions found"
+        },
+        "duration_ms": 2075.1452999999965
+      },
+      "emulator_case": {
+        "id": "E20",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E20"
+      },
+      "fixture": "reference/E20.json",
+      "reason": "Exact injected HTTP response replay passed. Injection does not prove legitimate method/phase reachability or physical-terminal behavior.",
+      "code": "E20",
+      "description": "No last transactions found",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "operation",
+      "method": "GetLastResult",
+      "phase": "completed",
+      "injection": "error_code",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections",
+      "differential_report": "reference/experiments/differential.json",
+      "legitimate_context": "GetResultByUid for an absent UID; actual native timeout recovery probes this method. Isolated fixture remains a mapper injection."
+    },
+    {
+      "status": "verified_recorded_injection",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E21.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9307,
+          "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+          "description": "Need Z report => (E21) General error in transaction"
+        },
+        "duration_ms": 2058.2909
+      },
+      "emulator_case": {
+        "id": "E21",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E21"
+      },
+      "fixture": "reference/E21.json",
+      "reason": "Exact injected HTTP response replay passed. Injection does not prove legitimate method/phase reachability or physical-terminal behavior.",
+      "code": "E21",
+      "description": "General error in transaction",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "operation",
+      "method": "GetLastResult",
+      "phase": "completed",
+      "injection": "error_code",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections",
+      "differential_report": "reference/experiments/differential.json",
+      "legitimate_context": "Completed operation error returned with its result; underlying card/bank cause is not simulated."
+    },
+    {
+      "status": "verified_recorded_injection",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E22.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9024,
+          "error": "Загальна помилка. Зверніться в службу підтримки Checkbox.",
+          "description": "Error => (E22) Transaction with such transactionUid is already processing"
+        },
+        "duration_ms": 2063.969799999999
+      },
+      "emulator_case": {
+        "id": "E22",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E22"
+      },
+      "fixture": "reference/E22.json",
+      "reason": "Exact injected HTTP response replay passed. Injection does not prove legitimate method/phase reachability or physical-terminal behavior.",
+      "code": "E22",
+      "description": "Transaction with such transactionUid is already processing",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "operation",
+      "method": "GetLastResult",
+      "phase": "completed",
+      "injection": "error_code",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections",
+      "differential_report": "reference/experiments/differential.json",
+      "legitimate_context": "GetResultByUid for a still-active UID is supported by the simulator; native active-UID recovery was not separately induced."
+    }
+  ],
+  "states": [
+    {
+      "status": "observed",
+      "raw_ssi": "reference/evidence/2026-09-28T04-24-23-137Z-f56bcf09-approved.json",
+      "paylink_reaction": {
+        "status": 200,
+        "content_type": "application/json",
+        "body": {
+          "success": true,
+          "terminal_status": "None",
+          "code": 0,
+          "error": "",
+          "id": "a91121f89a49",
+          "result": {
+            "terminal_id": "TEST0001",
+            "terminal": "TEST0001",
+            "merchant_id": "TEST-MERCHANT",
+            "pan": "4444 44** **** 1111",
+            "card_mask": "4444 44** **** 1111",
+            "rrn": "000000000001",
+            "auth_code": "123456",
+            "date_time": "28.09.2026 7:24:26",
+            "invoice_num": 1,
+            "receipt_no": "1",
+            "exp_date": "2609",
+            "card_holder": "TEST CARD",
+            "owner_name": "TEST CARD",
+            "payment_system": "VISA",
+            "totals_debit_num": 0,
+            "totals_debit_amt": 0,
+            "totals_credit_num": 0,
+            "totals_credit_amt": 0,
+            "totals_cancelled_num": 0,
+            "totals_cancelled_amt": 0,
+            "sign_verif": false,
+            "signature_required": false,
+            "txn_num": 0,
+            "amount": 100,
+            "value": 100,
+            "add_amount": 0,
+            "discountedAmount": 0,
+            "txn_type": 1,
+            "entry_mode": 3,
+            "receipt": "",
+            "bank_acquirer": "TEST ACQUIRER / TEST MERCHANT",
+            "bank_name": "TEST ACQUIRER / TEST MERCHANT",
+            "acquirer_and_seller": "TEST ACQUIRER / TEST MERCHANT",
+            "provider_type": "POSCONTROL",
+            "additional_properties": {
+              "responseCode": "0000",
+              "transactionResult": "APPROVED-ONLINE",
+              "errorDetails": "",
+              "transactionUid": "a91121f89a49"
+            }
+          }
+        },
+        "duration_ms": 2104.8764
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Completed operation returned S00 before successful GetLastResult; approved HTTP replay passed.",
+      "code": "S00",
+      "description": "idle",
+      "section": "4.3.4",
+      "pages": [
+        31
+      ],
+      "method": "GetStatus",
+      "injection": "complete operation"
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/S01-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 200,
+        "body": {
+          "success": true,
+          "terminal_status": "None",
+          "code": 0,
+          "error": "",
+          "id": "92506ab735a1",
+          "result": {
+            "terminal_id": "TEST0001",
+            "terminal": "TEST0001",
+            "merchant_id": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "card_mask": "4111XXXXXXXX1111",
+            "rrn": "000000000001",
+            "auth_code": "123456",
+            "date_time": "28.09.2026 7:59:34",
+            "invoice_num": 1,
+            "receipt_no": "1",
+            "exp_date": "2609",
+            "card_holder": "TEST USER",
+            "owner_name": "TEST USER",
+            "payment_system": "VISA",
+            "totals_debit_num": 0,
+            "totals_debit_amt": 0,
+            "totals_credit_num": 0,
+            "totals_credit_amt": 0,
+            "totals_cancelled_num": 0,
+            "totals_cancelled_amt": 0,
+            "sign_verif": false,
+            "signature_required": false,
+            "txn_num": 0,
+            "amount": 100,
+            "value": 100,
+            "add_amount": 0,
+            "discountedAmount": 0,
+            "txn_type": 1,
+            "entry_mode": 3,
+            "receipt": "",
+            "bank_acquirer": "SIMULATED",
+            "bank_name": "SIMULATED",
+            "acquirer_and_seller": "SIMULATED",
+            "provider_type": "POSCONTROL",
+            "additional_properties": {
+              "responseCode": "0000",
+              "transactionResult": "APPROVED-ONLINE",
+              "errorDetails": "",
+              "transactionUid": "92506ab735a1"
+            }
+          }
+        },
+        "duration_ms": 4351.7559
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native polling reaction to the explicit phase is recorded. Rust HTTP contract exposes no SSI status selector; no one-to-one state replay is claimed.",
+      "code": "S01",
+      "description": "busy",
+      "section": "4.3.4",
+      "pages": [
+        31
+      ],
+      "method": "GetStatus",
+      "injection": "phases[].status=S01",
+      "scenario": {
+        "id": "S01",
+        "phases": [
+          {
+            "status": "S01",
+            "ms": 3000
+          }
+        ]
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/S02-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 200,
+        "body": {
+          "success": true,
+          "terminal_status": "None",
+          "code": 0,
+          "error": "",
+          "id": "5bca1a45907c",
+          "result": {
+            "terminal_id": "TEST0001",
+            "terminal": "TEST0001",
+            "merchant_id": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "card_mask": "4111XXXXXXXX1111",
+            "rrn": "000000000001",
+            "auth_code": "123456",
+            "date_time": "28.09.2026 7:59:34",
+            "invoice_num": 1,
+            "receipt_no": "1",
+            "exp_date": "2609",
+            "card_holder": "TEST USER",
+            "owner_name": "TEST USER",
+            "payment_system": "VISA",
+            "totals_debit_num": 0,
+            "totals_debit_amt": 0,
+            "totals_credit_num": 0,
+            "totals_credit_amt": 0,
+            "totals_cancelled_num": 0,
+            "totals_cancelled_amt": 0,
+            "sign_verif": false,
+            "signature_required": false,
+            "txn_num": 0,
+            "amount": 100,
+            "value": 100,
+            "add_amount": 0,
+            "discountedAmount": 0,
+            "txn_type": 1,
+            "entry_mode": 3,
+            "receipt": "",
+            "bank_acquirer": "SIMULATED",
+            "bank_name": "SIMULATED",
+            "acquirer_and_seller": "SIMULATED",
+            "provider_type": "POSCONTROL",
+            "additional_properties": {
+              "responseCode": "0000",
+              "transactionResult": "APPROVED-ONLINE",
+              "errorDetails": "",
+              "transactionUid": "5bca1a45907c"
+            }
+          }
+        },
+        "duration_ms": 4416.9185
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native polling reaction to the explicit phase is recorded. Rust HTTP contract exposes no SSI status selector; no one-to-one state replay is claimed.",
+      "code": "S02",
+      "description": "awaiting_card",
+      "section": "4.3.4",
+      "pages": [
+        31
+      ],
+      "method": "GetStatus",
+      "injection": "phases[].status=S02",
+      "scenario": {
+        "id": "S02",
+        "phases": [
+          {
+            "status": "S02",
+            "ms": 3000
+          }
+        ]
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/S03-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 200,
+        "body": {
+          "success": true,
+          "terminal_status": "None",
+          "code": 0,
+          "error": "",
+          "id": "e2fa2f829b32",
+          "result": {
+            "terminal_id": "TEST0001",
+            "terminal": "TEST0001",
+            "merchant_id": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "card_mask": "4111XXXXXXXX1111",
+            "rrn": "000000000001",
+            "auth_code": "123456",
+            "date_time": "28.09.2026 7:59:34",
+            "invoice_num": 1,
+            "receipt_no": "1",
+            "exp_date": "2609",
+            "card_holder": "TEST USER",
+            "owner_name": "TEST USER",
+            "payment_system": "VISA",
+            "totals_debit_num": 0,
+            "totals_debit_amt": 0,
+            "totals_credit_num": 0,
+            "totals_credit_amt": 0,
+            "totals_cancelled_num": 0,
+            "totals_cancelled_amt": 0,
+            "sign_verif": false,
+            "signature_required": false,
+            "txn_num": 0,
+            "amount": 100,
+            "value": 100,
+            "add_amount": 0,
+            "discountedAmount": 0,
+            "txn_type": 1,
+            "entry_mode": 3,
+            "receipt": "",
+            "bank_acquirer": "SIMULATED",
+            "bank_name": "SIMULATED",
+            "acquirer_and_seller": "SIMULATED",
+            "provider_type": "POSCONTROL",
+            "additional_properties": {
+              "responseCode": "0000",
+              "transactionResult": "APPROVED-ONLINE",
+              "errorDetails": "",
+              "transactionUid": "e2fa2f829b32"
+            }
+          }
+        },
+        "duration_ms": 4425.573
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native polling reaction to the explicit phase is recorded. Rust HTTP contract exposes no SSI status selector; no one-to-one state replay is claimed.",
+      "code": "S03",
+      "description": "awaiting_verification",
+      "section": "4.3.4",
+      "pages": [
+        31
+      ],
+      "method": "GetStatus",
+      "injection": "phases[].status=S03",
+      "scenario": {
+        "id": "S03",
+        "phases": [
+          {
+            "status": "S03",
+            "ms": 3000
+          }
+        ]
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/S04-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 200,
+        "body": {
+          "success": true,
+          "terminal_status": "None",
+          "code": 0,
+          "error": "",
+          "id": "662701acbcdf",
+          "result": {
+            "terminal_id": "TEST0001",
+            "terminal": "TEST0001",
+            "merchant_id": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "card_mask": "4111XXXXXXXX1111",
+            "rrn": "000000000001",
+            "auth_code": "123456",
+            "date_time": "28.09.2026 7:59:34",
+            "invoice_num": 1,
+            "receipt_no": "1",
+            "exp_date": "2609",
+            "card_holder": "TEST USER",
+            "owner_name": "TEST USER",
+            "payment_system": "VISA",
+            "totals_debit_num": 0,
+            "totals_debit_amt": 0,
+            "totals_credit_num": 0,
+            "totals_credit_amt": 0,
+            "totals_cancelled_num": 0,
+            "totals_cancelled_amt": 0,
+            "sign_verif": false,
+            "signature_required": false,
+            "txn_num": 0,
+            "amount": 100,
+            "value": 100,
+            "add_amount": 0,
+            "discountedAmount": 0,
+            "txn_type": 1,
+            "entry_mode": 3,
+            "receipt": "",
+            "bank_acquirer": "SIMULATED",
+            "bank_name": "SIMULATED",
+            "acquirer_and_seller": "SIMULATED",
+            "provider_type": "POSCONTROL",
+            "additional_properties": {
+              "responseCode": "0000",
+              "transactionResult": "APPROVED-ONLINE",
+              "errorDetails": "",
+              "transactionUid": "662701acbcdf"
+            }
+          }
+        },
+        "duration_ms": 4378.1956
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native polling reaction to the explicit phase is recorded. Rust HTTP contract exposes no SSI status selector; no one-to-one state replay is claimed.",
+      "code": "S04",
+      "description": "bank_communication",
+      "section": "4.3.4",
+      "pages": [
+        31
+      ],
+      "method": "GetStatus",
+      "injection": "phases[].status=S04",
+      "scenario": {
+        "id": "S04",
+        "phases": [
+          {
+            "status": "S04",
+            "ms": 3000
+          }
+        ]
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/S05-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 200,
+        "body": {
+          "success": true,
+          "terminal_status": "None",
+          "code": 0,
+          "error": "",
+          "id": "9567b0a6ab62",
+          "result": {
+            "terminal_id": "TEST0001",
+            "terminal": "TEST0001",
+            "merchant_id": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "card_mask": "4111XXXXXXXX1111",
+            "rrn": "000000000001",
+            "auth_code": "123456",
+            "date_time": "28.09.2026 7:59:38",
+            "invoice_num": 1,
+            "receipt_no": "1",
+            "exp_date": "2609",
+            "card_holder": "TEST USER",
+            "owner_name": "TEST USER",
+            "payment_system": "VISA",
+            "totals_debit_num": 0,
+            "totals_debit_amt": 0,
+            "totals_credit_num": 0,
+            "totals_credit_amt": 0,
+            "totals_cancelled_num": 0,
+            "totals_cancelled_amt": 0,
+            "sign_verif": false,
+            "signature_required": false,
+            "txn_num": 0,
+            "amount": 100,
+            "value": 100,
+            "add_amount": 0,
+            "discountedAmount": 0,
+            "txn_type": 1,
+            "entry_mode": 3,
+            "receipt": "",
+            "bank_acquirer": "SIMULATED",
+            "bank_name": "SIMULATED",
+            "acquirer_and_seller": "SIMULATED",
+            "provider_type": "POSCONTROL",
+            "additional_properties": {
+              "responseCode": "0000",
+              "transactionResult": "APPROVED-ONLINE",
+              "errorDetails": "",
+              "transactionUid": "9567b0a6ab62"
+            }
+          }
+        },
+        "duration_ms": 4141.444099999999
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native polling reaction to the explicit phase is recorded. Rust HTTP contract exposes no SSI status selector; no one-to-one state replay is claimed.",
+      "code": "S05",
+      "description": "printing",
+      "section": "4.3.4",
+      "pages": [
+        31
+      ],
+      "method": "GetStatus",
+      "injection": "phases[].status=S05",
+      "scenario": {
+        "id": "S05",
+        "phases": [
+          {
+            "status": "S05",
+            "ms": 3000
+          }
+        ]
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/S06-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 200,
+        "body": {
+          "success": true,
+          "terminal_status": "None",
+          "code": 0,
+          "error": "",
+          "id": "8d16e6974451",
+          "result": {
+            "terminal_id": "TEST0001",
+            "terminal": "TEST0001",
+            "merchant_id": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "card_mask": "4111XXXXXXXX1111",
+            "rrn": "000000000001",
+            "auth_code": "123456",
+            "date_time": "28.09.2026 7:59:38",
+            "invoice_num": 1,
+            "receipt_no": "1",
+            "exp_date": "2609",
+            "card_holder": "TEST USER",
+            "owner_name": "TEST USER",
+            "payment_system": "VISA",
+            "totals_debit_num": 0,
+            "totals_debit_amt": 0,
+            "totals_credit_num": 0,
+            "totals_credit_amt": 0,
+            "totals_cancelled_num": 0,
+            "totals_cancelled_amt": 0,
+            "sign_verif": false,
+            "signature_required": false,
+            "txn_num": 0,
+            "amount": 100,
+            "value": 100,
+            "add_amount": 0,
+            "discountedAmount": 0,
+            "txn_type": 1,
+            "entry_mode": 3,
+            "receipt": "",
+            "bank_acquirer": "SIMULATED",
+            "bank_name": "SIMULATED",
+            "acquirer_and_seller": "SIMULATED",
+            "provider_type": "POSCONTROL",
+            "additional_properties": {
+              "responseCode": "0000",
+              "transactionResult": "APPROVED-ONLINE",
+              "errorDetails": "",
+              "transactionUid": "8d16e6974451"
+            }
+          }
+        },
+        "duration_ms": 4125.3183
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native polling reaction to the explicit phase is recorded. Rust HTTP contract exposes no SSI status selector; no one-to-one state replay is claimed.",
+      "code": "S06",
+      "description": "settlement_required",
+      "section": "4.3.4",
+      "pages": [
+        31
+      ],
+      "method": "GetStatus",
+      "injection": "phases[].status=S06",
+      "scenario": {
+        "id": "S06",
+        "phases": [
+          {
+            "status": "S06",
+            "ms": 3000
+          }
+        ]
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/S07-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 200,
+        "body": {
+          "success": true,
+          "terminal_status": "None",
+          "code": 0,
+          "error": "",
+          "id": "b73ddbbdee55",
+          "result": {
+            "terminal_id": "TEST0001",
+            "terminal": "TEST0001",
+            "merchant_id": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "card_mask": "4111XXXXXXXX1111",
+            "rrn": "000000000001",
+            "auth_code": "123456",
+            "date_time": "28.09.2026 7:59:38",
+            "invoice_num": 1,
+            "receipt_no": "1",
+            "exp_date": "2609",
+            "card_holder": "TEST USER",
+            "owner_name": "TEST USER",
+            "payment_system": "VISA",
+            "totals_debit_num": 0,
+            "totals_debit_amt": 0,
+            "totals_credit_num": 0,
+            "totals_credit_amt": 0,
+            "totals_cancelled_num": 0,
+            "totals_cancelled_amt": 0,
+            "sign_verif": false,
+            "signature_required": false,
+            "txn_num": 0,
+            "amount": 100,
+            "value": 100,
+            "add_amount": 0,
+            "discountedAmount": 0,
+            "txn_type": 1,
+            "entry_mode": 3,
+            "receipt": "",
+            "bank_acquirer": "SIMULATED",
+            "bank_name": "SIMULATED",
+            "acquirer_and_seller": "SIMULATED",
+            "provider_type": "POSCONTROL",
+            "additional_properties": {
+              "responseCode": "0000",
+              "transactionResult": "APPROVED-ONLINE",
+              "errorDetails": "",
+              "transactionUid": "b73ddbbdee55"
+            }
+          }
+        },
+        "duration_ms": 4101.9229000000005
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native polling reaction to the explicit phase is recorded. Rust HTTP contract exposes no SSI status selector; no one-to-one state replay is claimed.",
+      "code": "S07",
+      "description": "remove_card",
+      "section": "4.3.4",
+      "pages": [
+        31
+      ],
+      "method": "GetStatus",
+      "injection": "phases[].status=S07",
+      "scenario": {
+        "id": "S07",
+        "phases": [
+          {
+            "status": "S07",
+            "ms": 3000
+          }
+        ]
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/S08-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 503,
+        "body": {
+          "success": false,
+          "code": 9009,
+          "error": "Пристрій вже зайнятий виконанням команди. Потрібно зачекати декілька секунд та повторити спробу.",
+          "description": "Device is busy => (E06) Terminal Busy"
+        },
+        "duration_ms": 2066.4525000000003
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native polling reaction to the explicit phase is recorded. Rust HTTP contract exposes no SSI status selector; no one-to-one state replay is claimed.",
+      "code": "S08",
+      "description": "awaiting_second_step",
+      "section": "4.3.4",
+      "pages": [
+        31
+      ],
+      "method": "GetStatus",
+      "injection": "phases[].status=S08",
+      "scenario": {
+        "id": "S08",
+        "phases": [
+          {
+            "status": "S08",
+            "ms": 3000
+          }
+        ]
+      }
+    }
+  ],
+  "financial_results": [
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/FAILED-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 503,
+        "body": {
+          "success": false,
+          "code": 9307,
+          "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+          "description": "Need Z report => (E21) General error in transaction"
+        },
+        "duration_ms": 2064.719
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "FAILED",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "FAILED",
+        "transaction_result": "FAILED",
+        "error_code": "E21",
+        "response_code": "51"
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/TRY_AGAIN-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 503,
+        "body": {
+          "success": false,
+          "code": 9307,
+          "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+          "description": "Need Z report => (E21) General error in transaction"
+        },
+        "duration_ms": 2123.949700000001
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "TRY_AGAIN",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "TRY_AGAIN",
+        "transaction_result": "TRY_AGAIN",
+        "error_code": "E21",
+        "response_code": "51"
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/TRY_AGAIN_PHONE-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 503,
+        "body": {
+          "success": false,
+          "code": 9307,
+          "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+          "description": "Need Z report => (E21) General error in transaction"
+        },
+        "duration_ms": 2089.3539
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "TRY_AGAIN_PHONE",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "TRY_AGAIN_PHONE",
+        "transaction_result": "TRY_AGAIN_PHONE",
+        "error_code": "E21",
+        "response_code": "51"
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/CARD_ERROR-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 503,
+        "body": {
+          "success": false,
+          "code": 9307,
+          "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+          "description": "Need Z report => (E21) General error in transaction"
+        },
+        "duration_ms": 2091.178899999999
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "CARD_ERROR",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "CARD_ERROR",
+        "transaction_result": "CARD_ERROR",
+        "error_code": "E21",
+        "response_code": "51"
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/MESSAGE_ERROR-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 503,
+        "body": {
+          "success": false,
+          "code": 9307,
+          "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+          "description": "Need Z report => (E21) General error in transaction"
+        },
+        "duration_ms": 2082.6284000000014
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "MESSAGE_ERROR",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "MESSAGE_ERROR",
+        "transaction_result": "MESSAGE_ERROR",
+        "error_code": "E21",
+        "response_code": "51"
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/NO_CONNECTION-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 503,
+        "body": {
+          "success": false,
+          "code": 9307,
+          "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+          "description": "Need Z report => (E21) General error in transaction"
+        },
+        "duration_ms": 2090.175800000001
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "NO_CONNECTION",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "NO_CONNECTION",
+        "transaction_result": "NO_CONNECTION",
+        "error_code": "E21",
+        "response_code": "51"
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/CONNECTION_ERROR-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 503,
+        "body": {
+          "success": false,
+          "code": 9307,
+          "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+          "description": "Need Z report => (E21) General error in transaction"
+        },
+        "duration_ms": 2066.1373999999996
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "CONNECTION_ERROR",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "CONNECTION_ERROR",
+        "transaction_result": "CONNECTION_ERROR",
+        "error_code": "E21",
+        "response_code": "51"
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/INTERNAL_ERROR-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 503,
+        "body": {
+          "success": false,
+          "code": 9307,
+          "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+          "description": "Need Z report => (E21) General error in transaction"
+        },
+        "duration_ms": 2093.2263000000003
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "INTERNAL_ERROR",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "INTERNAL_ERROR",
+        "transaction_result": "INTERNAL_ERROR",
+        "error_code": "E21",
+        "response_code": "51"
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/EMV_ERROR-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 503,
+        "body": {
+          "success": false,
+          "code": 9307,
+          "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+          "description": "Need Z report => (E21) General error in transaction"
+        },
+        "duration_ms": 2095.418600000001
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "EMV_ERROR",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "EMV_ERROR",
+        "transaction_result": "EMV_ERROR",
+        "error_code": "E21",
+        "response_code": "51"
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/CONNECTION_TIMEOUT-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 503,
+        "body": {
+          "success": false,
+          "code": 9307,
+          "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+          "description": "Need Z report => (E21) General error in transaction"
+        },
+        "duration_ms": 2092.0991999999987
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "CONNECTION_TIMEOUT",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "CONNECTION_TIMEOUT",
+        "transaction_result": "CONNECTION_TIMEOUT",
+        "error_code": "E21",
+        "response_code": "51"
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/INSUFFICIENT_BALANCE-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 503,
+        "body": {
+          "success": false,
+          "code": 9307,
+          "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+          "description": "Need Z report => (E21) General error in transaction"
+        },
+        "duration_ms": 2130.6592
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "INSUFFICIENT_BALANCE",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "INSUFFICIENT_BALANCE",
+        "transaction_result": "INSUFFICIENT_BALANCE",
+        "error_code": "E21",
+        "response_code": "51"
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/CARD_BLOCKED-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 503,
+        "body": {
+          "success": false,
+          "code": 9307,
+          "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+          "description": "Need Z report => (E21) General error in transaction"
+        },
+        "duration_ms": 2096.8222000000005
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "CARD_BLOCKED",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "CARD_BLOCKED",
+        "transaction_result": "CARD_BLOCKED",
+        "error_code": "E21",
+        "response_code": "51"
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/CANCELLED-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 503,
+        "body": {
+          "success": false,
+          "code": 9307,
+          "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+          "description": "Need Z report => (E21) General error in transaction"
+        },
+        "duration_ms": 2102.3624999999993
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "CANCELLED",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "CANCELLED",
+        "transaction_result": "CANCELLED",
+        "error_code": "E21",
+        "response_code": "51"
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/UNSUPPORTED_CARD-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 503,
+        "body": {
+          "success": false,
+          "code": 9307,
+          "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+          "description": "Need Z report => (E21) General error in transaction"
+        },
+        "duration_ms": 2087.2639000000017
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "UNSUPPORTED_CARD",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "UNSUPPORTED_CARD",
+        "transaction_result": "UNSUPPORTED_CARD",
+        "error_code": "E21",
+        "response_code": "51"
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/DECLINED_ONLINE-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 503,
+        "body": {
+          "success": false,
+          "code": 9307,
+          "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+          "description": "Need Z report => (E21) General error in transaction"
+        },
+        "duration_ms": 2074.0616999999984
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "DECLINED_ONLINE",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "DECLINED_ONLINE",
+        "transaction_result": "DECLINED_ONLINE",
+        "error_code": "E21",
+        "response_code": "51"
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/APPROVED_ONLINE-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 200,
+        "body": {
+          "success": true,
+          "terminal_status": "None",
+          "code": 0,
+          "error": "",
+          "id": "08b00fa1a080",
+          "result": {
+            "terminal_id": "TEST0001",
+            "terminal": "TEST0001",
+            "merchant_id": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "card_mask": "4111XXXXXXXX1111",
+            "rrn": "000000000001",
+            "auth_code": "123456",
+            "date_time": "28.09.2026 7:59:47",
+            "invoice_num": 1,
+            "receipt_no": "1",
+            "exp_date": "2609",
+            "card_holder": "TEST USER",
+            "owner_name": "TEST USER",
+            "payment_system": "VISA",
+            "totals_debit_num": 0,
+            "totals_debit_amt": 0,
+            "totals_credit_num": 0,
+            "totals_credit_amt": 0,
+            "totals_cancelled_num": 0,
+            "totals_cancelled_amt": 0,
+            "sign_verif": false,
+            "signature_required": false,
+            "txn_num": 0,
+            "amount": 100,
+            "value": 100,
+            "add_amount": 0,
+            "discountedAmount": 0,
+            "txn_type": 1,
+            "entry_mode": 3,
+            "receipt": "",
+            "bank_acquirer": "SIMULATED",
+            "bank_name": "SIMULATED",
+            "acquirer_and_seller": "SIMULATED",
+            "provider_type": "POSCONTROL",
+            "additional_properties": {
+              "responseCode": "00",
+              "transactionResult": "APPROVED_ONLINE",
+              "errorDetails": "",
+              "transactionUid": "08b00fa1a080"
+            }
+          }
+        },
+        "duration_ms": 2087.5401999999995
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "APPROVED_ONLINE",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "APPROVED_ONLINE",
+        "transaction_result": "APPROVED_ONLINE",
+        "error_code": "",
+        "response_code": "00"
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/DECLINED_OFFLINE-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 503,
+        "body": {
+          "success": false,
+          "code": 9307,
+          "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+          "description": "Need Z report => (E21) General error in transaction"
+        },
+        "duration_ms": 2093.0948000000008
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "DECLINED_OFFLINE",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "DECLINED_OFFLINE",
+        "transaction_result": "DECLINED_OFFLINE",
+        "error_code": "E21",
+        "response_code": "51"
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/CARD_DECLINED_ONLINE-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 503,
+        "body": {
+          "success": false,
+          "code": 9307,
+          "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+          "description": "Need Z report => (E21) General error in transaction"
+        },
+        "duration_ms": 2072.266200000002
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "CARD_DECLINED_ONLINE",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "CARD_DECLINED_ONLINE",
+        "transaction_result": "CARD_DECLINED_ONLINE",
+        "error_code": "E21",
+        "response_code": "51"
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/APPROVED_OFFLINE-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 200,
+        "body": {
+          "success": true,
+          "terminal_status": "None",
+          "code": 0,
+          "error": "",
+          "id": "a75703fa63a8",
+          "result": {
+            "terminal_id": "TEST0001",
+            "terminal": "TEST0001",
+            "merchant_id": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "card_mask": "4111XXXXXXXX1111",
+            "rrn": "000000000001",
+            "auth_code": "123456",
+            "date_time": "28.09.2026 7:59:49",
+            "invoice_num": 1,
+            "receipt_no": "1",
+            "exp_date": "2609",
+            "card_holder": "TEST USER",
+            "owner_name": "TEST USER",
+            "payment_system": "VISA",
+            "totals_debit_num": 0,
+            "totals_debit_amt": 0,
+            "totals_credit_num": 0,
+            "totals_credit_amt": 0,
+            "totals_cancelled_num": 0,
+            "totals_cancelled_amt": 0,
+            "sign_verif": false,
+            "signature_required": false,
+            "txn_num": 0,
+            "amount": 100,
+            "value": 100,
+            "add_amount": 0,
+            "discountedAmount": 0,
+            "txn_type": 1,
+            "entry_mode": 3,
+            "receipt": "",
+            "bank_acquirer": "SIMULATED",
+            "bank_name": "SIMULATED",
+            "acquirer_and_seller": "SIMULATED",
+            "provider_type": "POSCONTROL",
+            "additional_properties": {
+              "responseCode": "00",
+              "transactionResult": "APPROVED_OFFLINE",
+              "errorDetails": "",
+              "transactionUid": "a75703fa63a8"
+            }
+          }
+        },
+        "duration_ms": 2077.1051000000007
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "APPROVED_OFFLINE",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "APPROVED_OFFLINE",
+        "transaction_result": "APPROVED_OFFLINE",
+        "error_code": "",
+        "response_code": "00"
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/KEY_ERROR-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 503,
+        "body": {
+          "success": false,
+          "code": 9307,
+          "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+          "description": "Need Z report => (E21) General error in transaction"
+        },
+        "duration_ms": 2083.392799999998
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "KEY_ERROR",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "KEY_ERROR",
+        "transaction_result": "KEY_ERROR",
+        "error_code": "E21",
+        "response_code": "51"
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/BATCH_UPLOAD_NEEDED-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 503,
+        "body": {
+          "success": false,
+          "code": 9307,
+          "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+          "description": "Need Z report => (E21) General error in transaction"
+        },
+        "duration_ms": 2109.877199999999
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "BATCH_UPLOAD_NEEDED",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "BATCH_UPLOAD_NEEDED",
+        "transaction_result": "BATCH_UPLOAD_NEEDED",
+        "error_code": "E21",
+        "response_code": "51"
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/SIGNATURE_VERIFICATION_ERROR-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 503,
+        "body": {
+          "success": false,
+          "code": 9307,
+          "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+          "description": "Need Z report => (E21) General error in transaction"
+        },
+        "duration_ms": 2100.0792
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "SIGNATURE_VERIFICATION_ERROR",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "SIGNATURE_VERIFICATION_ERROR",
+        "transaction_result": "SIGNATURE_VERIFICATION_ERROR",
+        "error_code": "E21",
+        "response_code": "51"
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/COMPLETED-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 200,
+        "body": {
+          "success": true,
+          "terminal_status": "None",
+          "code": 0,
+          "error": "",
+          "id": "50a0efaf2c76",
+          "result": {
+            "terminal_id": "TEST0001",
+            "terminal": "TEST0001",
+            "merchant_id": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "card_mask": "4111XXXXXXXX1111",
+            "rrn": "000000000001",
+            "auth_code": "123456",
+            "date_time": "28.09.2026 7:59:51",
+            "invoice_num": 1,
+            "receipt_no": "1",
+            "exp_date": "2609",
+            "card_holder": "TEST USER",
+            "owner_name": "TEST USER",
+            "payment_system": "VISA",
+            "totals_debit_num": 0,
+            "totals_debit_amt": 0,
+            "totals_credit_num": 0,
+            "totals_credit_amt": 0,
+            "totals_cancelled_num": 0,
+            "totals_cancelled_amt": 0,
+            "sign_verif": false,
+            "signature_required": false,
+            "txn_num": 0,
+            "amount": 100,
+            "value": 100,
+            "add_amount": 0,
+            "discountedAmount": 0,
+            "txn_type": 1,
+            "entry_mode": 3,
+            "receipt": "",
+            "bank_acquirer": "SIMULATED",
+            "bank_name": "SIMULATED",
+            "acquirer_and_seller": "SIMULATED",
+            "provider_type": "POSCONTROL",
+            "additional_properties": {
+              "responseCode": "00",
+              "transactionResult": "COMPLETED",
+              "errorDetails": "",
+              "transactionUid": "50a0efaf2c76"
+            }
+          }
+        },
+        "duration_ms": 2121.4003999999986
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "COMPLETED",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "COMPLETED",
+        "transaction_result": "COMPLETED",
+        "error_code": "",
+        "response_code": "00"
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/APPROVED-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 200,
+        "body": {
+          "success": true,
+          "terminal_status": "None",
+          "code": 0,
+          "error": "",
+          "id": "dd3b59b7851e",
+          "result": {
+            "terminal_id": "TEST0001",
+            "terminal": "TEST0001",
+            "merchant_id": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "card_mask": "4111XXXXXXXX1111",
+            "rrn": "000000000001",
+            "auth_code": "123456",
+            "date_time": "28.09.2026 7:59:51",
+            "invoice_num": 1,
+            "receipt_no": "1",
+            "exp_date": "2609",
+            "card_holder": "TEST USER",
+            "owner_name": "TEST USER",
+            "payment_system": "VISA",
+            "totals_debit_num": 0,
+            "totals_debit_amt": 0,
+            "totals_credit_num": 0,
+            "totals_credit_amt": 0,
+            "totals_cancelled_num": 0,
+            "totals_cancelled_amt": 0,
+            "sign_verif": false,
+            "signature_required": false,
+            "txn_num": 0,
+            "amount": 100,
+            "value": 100,
+            "add_amount": 0,
+            "discountedAmount": 0,
+            "txn_type": 1,
+            "entry_mode": 3,
+            "receipt": "",
+            "bank_acquirer": "SIMULATED",
+            "bank_name": "SIMULATED",
+            "acquirer_and_seller": "SIMULATED",
+            "provider_type": "POSCONTROL",
+            "additional_properties": {
+              "responseCode": "00",
+              "transactionResult": "APPROVED",
+              "errorDetails": "",
+              "transactionUid": "dd3b59b7851e"
+            }
+          }
+        },
+        "duration_ms": 2130.387300000002
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "APPROVED",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "APPROVED",
+        "transaction_result": "APPROVED",
+        "error_code": "",
+        "response_code": "00"
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/IN_PROGRESS-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 503,
+        "body": {
+          "success": false,
+          "code": 9307,
+          "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+          "description": "Need Z report => (E21) General error in transaction"
+        },
+        "duration_ms": 2128.757099999999
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "IN_PROGRESS",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "IN_PROGRESS",
+        "transaction_result": "IN_PROGRESS",
+        "error_code": "E21",
+        "response_code": "51"
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/FORCED_DECLINED_OFFLINE-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 503,
+        "body": {
+          "success": false,
+          "code": 9307,
+          "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+          "description": "Need Z report => (E21) General error in transaction"
+        },
+        "duration_ms": 2062.4915
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "FORCED_DECLINED_OFFLINE",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "FORCED_DECLINED_OFFLINE",
+        "transaction_result": "FORCED_DECLINED_OFFLINE",
+        "error_code": "E21",
+        "response_code": "51"
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/CANCELLED_BEFORE_START-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 503,
+        "body": {
+          "success": false,
+          "code": 9307,
+          "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+          "description": "Need Z report => (E21) General error in transaction"
+        },
+        "duration_ms": 2116.8136000000013
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "CANCELLED_BEFORE_START",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "CANCELLED_BEFORE_START",
+        "transaction_result": "CANCELLED_BEFORE_START",
+        "error_code": "E21",
+        "response_code": "51"
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/PIN_ERROR-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 503,
+        "body": {
+          "success": false,
+          "code": 9307,
+          "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+          "description": "Need Z report => (E21) General error in transaction"
+        },
+        "duration_ms": 2119.4275000000016
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "PIN_ERROR",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "PIN_ERROR",
+        "transaction_result": "PIN_ERROR",
+        "error_code": "E21",
+        "response_code": "51"
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/BATCH_CLOSE_NEEDED-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 503,
+        "body": {
+          "success": false,
+          "code": 9307,
+          "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+          "description": "Need Z report => (E21) General error in transaction"
+        },
+        "duration_ms": 2077.3191000000006
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "BATCH_CLOSE_NEEDED",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "BATCH_CLOSE_NEEDED",
+        "transaction_result": "BATCH_CLOSE_NEEDED",
+        "error_code": "E21",
+        "response_code": "51"
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/OK-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 200,
+        "body": {
+          "success": true,
+          "terminal_status": "None",
+          "code": 0,
+          "error": "",
+          "id": "fd2bfd9647e4",
+          "result": {
+            "terminal_id": "TEST0001",
+            "terminal": "TEST0001",
+            "merchant_id": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "card_mask": "4111XXXXXXXX1111",
+            "rrn": "000000000001",
+            "auth_code": "123456",
+            "date_time": "28.09.2026 7:59:56",
+            "invoice_num": 1,
+            "receipt_no": "1",
+            "exp_date": "2609",
+            "card_holder": "TEST USER",
+            "owner_name": "TEST USER",
+            "payment_system": "VISA",
+            "totals_debit_num": 0,
+            "totals_debit_amt": 0,
+            "totals_credit_num": 0,
+            "totals_credit_amt": 0,
+            "totals_cancelled_num": 0,
+            "totals_cancelled_amt": 0,
+            "sign_verif": false,
+            "signature_required": false,
+            "txn_num": 0,
+            "amount": 100,
+            "value": 100,
+            "add_amount": 0,
+            "discountedAmount": 0,
+            "txn_type": 1,
+            "entry_mode": 3,
+            "receipt": "",
+            "bank_acquirer": "SIMULATED",
+            "bank_name": "SIMULATED",
+            "acquirer_and_seller": "SIMULATED",
+            "provider_type": "POSCONTROL",
+            "additional_properties": {
+              "responseCode": "00",
+              "transactionResult": "OK",
+              "errorDetails": "",
+              "transactionUid": "fd2bfd9647e4"
+            }
+          }
+        },
+        "duration_ms": 2056.1429000000026
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "OK",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "OK",
+        "transaction_result": "OK",
+        "error_code": "",
+        "response_code": "00"
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/catalog/PRINTER_ERROR-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 503,
+        "body": {
+          "success": false,
+          "code": 9307,
+          "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+          "description": "Need Z report => (E21) General error in transaction"
+        },
+        "duration_ms": 2067.2573999999986
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Native reaction is recorded for this exact errorCode/responseCode/result combination. SSI examples do not define a normative mapping; Rust has no arbitrary transactionResult selector.",
+      "code": "PRINTER_ERROR",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result",
+      "scenario": {
+        "id": "PRINTER_ERROR",
+        "transaction_result": "PRINTER_ERROR",
+        "error_code": "E21",
+        "response_code": "51"
+      }
+    }
+  ],
+  "transport": [
+    {
+      "status": "verified_recorded_injection",
+      "raw_ssi": "reference/evidence/2026-09-28T04-25-29-892Z-56319baf-timeout.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9016,
+          "error": "Вичерпано час очікування відповіді від терміналу. Перевірте параметри підключення до терміналу та сам термінал.",
+          "description": "Timed out : Unable to read data from the transport connection: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond."
+        },
+        "duration_ms": 166184.4786
+      },
+      "emulator_case": {
+        "id": "timeout",
+        "outcome": "approved",
+        "reference_error": "transport_timeout"
+      },
+      "fixture": "reference/timeout.json",
+      "reason": "Native timeout and uncertain approved terminal result recorded; HTTP response replay passed. Native delay is not enforced by this fixture.",
+      "code": "silence",
+      "category": "transport_or_invalid_message"
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/transport/close-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 503,
+        "body": {
+          "success": false,
+          "code": 1000,
+          "error": "Загальна помилка вводу-виводу.",
+          "description": "Input/Output exception : Connection lost during read operation."
+        },
+        "duration_ms": 335.1576,
+        "recovery_ping_status": 200
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Malformed bytes or socket closure on SSI transport; Rust is an HTTP emulator and has no SSI socket fault endpoint. Recorded native response is not equated with an explicit E-code injection.",
+      "code": "close",
+      "category": "transport_or_invalid_message",
+      "scenario": {
+        "id": "close",
+        "faults": {
+          "Purchase": "close"
+        }
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/transport/bad_lrc-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 503,
+        "body": {
+          "success": false,
+          "code": 9008,
+          "error": "Помилка виконання операції на терміналі.",
+          "description": "Command execution description => Purchase"
+        },
+        "duration_ms": 255.5054,
+        "recovery_ping_status": 200
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Malformed bytes or socket closure on SSI transport; Rust is an HTTP emulator and has no SSI socket fault endpoint. Recorded native response is not equated with an explicit E-code injection.",
+      "code": "bad_lrc",
+      "category": "transport_or_invalid_message",
+      "scenario": {
+        "id": "bad_lrc",
+        "faults": {
+          "Purchase": "bad_lrc"
+        }
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/transport/bad_length-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 200,
+        "body": {
+          "success": true,
+          "terminal_status": "None",
+          "code": 0,
+          "error": "",
+          "id": "512f26680784",
+          "result": {
+            "terminal_id": "TEST0001",
+            "terminal": "TEST0001",
+            "merchant_id": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "card_mask": "4111XXXXXXXX1111",
+            "rrn": "000000000001",
+            "auth_code": "123456",
+            "date_time": "28.09.2026 8:09:30",
+            "invoice_num": 1,
+            "receipt_no": "1",
+            "exp_date": "2609",
+            "card_holder": "TEST USER",
+            "owner_name": "TEST USER",
+            "payment_system": "VISA",
+            "totals_debit_num": 0,
+            "totals_debit_amt": 0,
+            "totals_credit_num": 0,
+            "totals_credit_amt": 0,
+            "totals_cancelled_num": 0,
+            "totals_cancelled_amt": 0,
+            "sign_verif": false,
+            "signature_required": false,
+            "txn_num": 0,
+            "amount": 100,
+            "value": 100,
+            "add_amount": 0,
+            "discountedAmount": 0,
+            "txn_type": 1,
+            "entry_mode": 3,
+            "receipt": "",
+            "bank_acquirer": "SIMULATED",
+            "bank_name": "SIMULATED",
+            "acquirer_and_seller": "SIMULATED",
+            "provider_type": "POSCONTROL",
+            "additional_properties": {
+              "responseCode": "0000",
+              "transactionResult": "APPROVED-ONLINE",
+              "errorDetails": "",
+              "transactionUid": "512f26680784"
+            }
+          }
+        },
+        "duration_ms": 145289.575,
+        "recovery_ping_status": 200
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Malformed bytes or socket closure on SSI transport; Rust is an HTTP emulator and has no SSI socket fault endpoint. Recorded native response is not equated with an explicit E-code injection.",
+      "code": "bad_length",
+      "category": "transport_or_invalid_message",
+      "scenario": {
+        "id": "bad_length",
+        "faults": {
+          "Purchase": "bad_length"
+        }
+      }
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/transport/bad_json-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 503,
+        "body": {
+          "success": false,
+          "code": 9301,
+          "error": "Було отримано невірний формат JSON повідомлення. Зверніться в службу підтримки Checkbox.",
+          "description": "Json message format description : Unexpected character encountered while parsing value: !. Path '', line 0, position 0."
+        },
+        "duration_ms": 298.25440000000003,
+        "recovery_ping_status": 200
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Malformed bytes or socket closure on SSI transport; Rust is an HTTP emulator and has no SSI socket fault endpoint. Recorded native response is not equated with an explicit E-code injection.",
+      "code": "bad_json",
+      "category": "transport_or_invalid_message",
+      "scenario": {
+        "id": "bad_json",
+        "faults": {
+          "Purchase": "bad_json"
+        }
+      }
+    },
+    {
+      "status": "verified",
+      "raw_ssi": "reference/experiments/sequences-final/reference/ssi-wire.jsonl",
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "3-byte reply fragments were accepted by native PayLink; paired HTTP ping matched. TCP splitting at every offset also unit tested.",
+      "code": "fragmented_frames",
+      "category": "transport_or_invalid_message"
+    },
+    {
+      "status": "unit_tested_native_not_observed",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Independent real TCP test processes two requests in one write. Native PayLink used separate connections; unsolicited coalesced replies would not be a valid equivalent experiment.",
+      "code": "coalesced_frames",
+      "category": "transport_or_invalid_message",
+      "test": "scripts/ssi/server.test.mjs"
+    },
+    {
+      "status": "native_observed_emulator_not_run",
+      "raw_ssi": "reference/experiments/transport/unknown_status-ssi.jsonl",
+      "paylink_reaction": {
+        "status": 200,
+        "body": {
+          "success": true,
+          "terminal_status": "None",
+          "code": 0,
+          "error": "",
+          "id": "abdf66c84e0d",
+          "result": {
+            "terminal_id": "TEST0001",
+            "terminal": "TEST0001",
+            "merchant_id": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "card_mask": "4111XXXXXXXX1111",
+            "rrn": "000000000001",
+            "auth_code": "123456",
+            "date_time": "28.09.2026 8:07:07",
+            "invoice_num": 1,
+            "receipt_no": "1",
+            "exp_date": "2609",
+            "card_holder": "TEST USER",
+            "owner_name": "TEST USER",
+            "payment_system": "VISA",
+            "totals_debit_num": 0,
+            "totals_debit_amt": 0,
+            "totals_credit_num": 0,
+            "totals_credit_amt": 0,
+            "totals_cancelled_num": 0,
+            "totals_cancelled_amt": 0,
+            "sign_verif": false,
+            "signature_required": false,
+            "txn_num": 0,
+            "amount": 100,
+            "value": 100,
+            "add_amount": 0,
+            "discountedAmount": 0,
+            "txn_type": 1,
+            "entry_mode": 3,
+            "receipt": "",
+            "bank_acquirer": "SIMULATED",
+            "bank_name": "SIMULATED",
+            "acquirer_and_seller": "SIMULATED",
+            "provider_type": "POSCONTROL",
+            "additional_properties": {
+              "responseCode": "0000",
+              "transactionResult": "APPROVED-ONLINE",
+              "errorDetails": "",
+              "transactionUid": "abdf66c84e0d"
+            }
+          }
+        },
+        "duration_ms": 2346.1592,
+        "recovery_ping_status": 200
+      },
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "Malformed bytes or socket closure on SSI transport; Rust is an HTTP emulator and has no SSI socket fault endpoint. Recorded native response is not equated with an explicit E-code injection.",
+      "code": "unknown_status",
+      "category": "transport_or_invalid_message",
+      "scenario": {
+        "id": "unknown_status",
+        "faults": {
+          "Purchase": "unknown_status"
+        }
+      }
+    }
+  ],
+  "local_paylink_errors": [
+    {
+      "code": 9009,
+      "scope": "Native concurrent purchase/ping busy guard",
+      "status": "verified",
+      "raw_http": "reference/experiments/sequences-final/reference/http.jsonl",
+      "report": "reference/experiments/sequences-final/comparison.json"
+    },
+    {
+      "code": 9016,
+      "scope": "Native transport deadline after unsuccessful UID recovery",
+      "status": "verified_recorded_response_timing_unverified",
+      "fixture": "reference/timeout.json"
+    }
+  ]
+}

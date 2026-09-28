@@ -1,0 +1,3 @@
+# Raw evidence hashes must survive checkout on Windows and Linux.
+profiles/desktop-paylink-2.1.20-win-x86/reference/evidence/*.json text eol=lf
+profiles/desktop-paylink-2.1.20-win-x86/reference/experiments/** -text

@@ -1,0 +1,37 @@
+[
+  {
+    "kind": "response",
+    "url": "https://example.com/",
+    "status": 200,
+    "headers": {
+      "age": "12609",
+      "allow": "GET, HEAD",
+      "cf-cache-status": "HIT",
+      "cf-ray": "a42043c51dc8c247-VIE",
+      "content-encoding": "br",
+      "content-type": "text/html",
+      "date": "Mon, 28 Sep 2026 05:14:28 GMT",
+      "last-modified": "Sat, 26 Sep 2026 09:09:07 GMT",
+      "server": "cloudflare"
+    }
+  },
+  {
+    "kind": "console",
+    "utc": "2026-09-28T05:14:28.300Z",
+    "type": "error",
+    "text": "Access to fetch at 'http://127.0.0.1:13012/api/pos/00000000-0000-4000-8000-000000000001/ping' from origin 'https://example.com' has been blocked by CORS policy: Permission was denied for this request to access the `loopback` address space."
+  },
+  {
+    "kind": "request_failed",
+    "url": "http://127.0.0.1:13012/api/pos/00000000-0000-4000-8000-000000000001/ping",
+    "error": {
+      "errorText": "net::ERR_FAILED"
+    }
+  },
+  {
+    "kind": "console",
+    "utc": "2026-09-28T05:14:28.304Z",
+    "type": "error",
+    "text": "Failed to load resource: net::ERR_FAILED"
+  }
+]

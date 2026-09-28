@@ -1,0 +1,93 @@
+[
+  {
+    "id": "paylink_not_running",
+    "message": "PayLink is not running",
+    "category": "transport",
+    "wire_status": "unverified",
+    "source": "https://wiki.checkbox.ua/app/pc/desktop_paylink_errors"
+  },
+  {
+    "id": "terminal_unknown_0",
+    "message": "ErrorCode=0 : Unknown error",
+    "category": "terminal",
+    "wire_status": "unverified",
+    "source": "https://wiki.checkbox.ua/app/pc/desktop_paylink_errors"
+  },
+  {
+    "id": "terminal_general",
+    "message": "General error",
+    "category": "terminal",
+    "wire_status": "unverified",
+    "source": "https://wiki.checkbox.ua/app/pc/desktop_paylink_errors"
+  },
+  {
+    "id": "merchant_profile_invalid",
+    "message": "ОПЛАТА: ПОМИЛКОВИЙ ПРОФІЛЬ!",
+    "category": "terminal",
+    "wire_status": "unverified",
+    "source": "https://wiki.checkbox.ua/app/pc/desktop_paylink_errors"
+  },
+  {
+    "id": "host_clock_invalid",
+    "message": "НЕВІДОМА ПОМИЛКА rr",
+    "category": "terminal",
+    "wire_status": "unverified",
+    "source": "https://wiki.checkbox.ua/app/pc/desktop_paylink_errors"
+  },
+  {
+    "id": "bank_host_unreachable",
+    "message": "No connection with host",
+    "category": "terminal",
+    "wire_status": "unverified",
+    "source": "https://wiki.checkbox.ua/app/pc/desktop_paylink_errors"
+  },
+  {
+    "id": "customer_cancelled",
+    "message": "Transaction canceled by user",
+    "category": "terminal",
+    "wire_status": "unverified",
+    "source": "https://wiki.checkbox.ua/app/pc/desktop_paylink_errors"
+  },
+  {
+    "id": "terminal_connection_refused",
+    "message": "Connection refused",
+    "category": "terminal",
+    "wire_status": "unverified",
+    "source": "https://wiki.checkbox.ua/app/pc/desktop_paylink_errors"
+  },
+  {
+    "id": "terminal_busy",
+    "message": "Device is busy",
+    "category": "terminal",
+    "wire_status": "unverified",
+    "source": "https://wiki.checkbox.ua/app/pc/desktop_paylink_errors"
+  },
+  {
+    "id": "terminal_timeout",
+    "message": "Timed out",
+    "category": "terminal",
+    "wire_status": "unverified",
+    "source": "https://wiki.checkbox.ua/app/pc/desktop_paylink_errors"
+  },
+  {
+    "id": "terminal_id_invalid",
+    "message": "Invalid terminal identifier",
+    "category": "terminal",
+    "wire_status": "unverified",
+    "source": "https://wiki.checkbox.ua/app/pc/desktop_paylink_errors"
+  },
+  {
+    "id": "verification_fault",
+    "message": "Verification fault",
+    "category": "terminal",
+    "wire_status": "unverified",
+    "source": "https://wiki.checkbox.ua/app/pc/desktop_paylink_errors"
+  },
+  {
+    "id": "driver_install_9011",
+    "message": "Driver installation error 9011",
+    "category": "setup_only",
+    "wire_status": "unverified",
+    "source": "https://wiki.checkbox.ua/app/pc/desktop_paylink_errors"
+  }
+]

@@ -1,0 +1,43 @@
+{
+  "profile": "desktop-paylink-2.1.20-win-x86",
+  "evidence": {
+    "provenance": "real_paylink_simulated_ssi_json",
+    "installer_sha256": "62d0e7a539380937ecb5af2f1c50438e4b84a070de4a20c1c848c11a5e395491",
+    "executable_sha256": "85d1bf9280e7c63e1099ecc2db480813f439e68c41a5eca8a453094a948ab465",
+    "bank": "SIMULATED",
+    "protocol": "SSIJson",
+    "capture_date": "2026-09-28",
+    "ssi_revision": "1.4.6",
+    "ssi_sha256": "8e4b459ade28f4ee301de7751659d4bf365f9c0f2ac3508a6745a597158e1a65",
+    "scenario_id": "E10",
+    "raw_trace": "evidence/2026-09-28T04-12-07-742Z-f75a1328-E10.json",
+    "raw_trace_sha256": "6f1206bd1013812f40366f7601f88ed8428a8eba8437d0999772cac7e3bc7a75"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+    "body": {
+      "amount": 100,
+      "merchant_id": "TEST-MERCHANT"
+    }
+  },
+  "scenario": {
+    "id": "E10",
+    "outcome": "error",
+    "error_id": "terminal_general",
+    "reference_error": "E10"
+  },
+  "response": {
+    "status": 503,
+    "content_type": "application/json",
+    "body": {
+      "success": false,
+      "code": 9204,
+      "error": "Відсутній зв'язок з платіжним терміналом. Перевірте доступність терміналу в локальній мережі та відповідного банківського ПЗ на ньому.",
+      "description": "No connection with host => (E10) Connection error"
+    },
+    "duration_ms": 23220.088099999997
+  },
+  "variable_fields": [],
+  "id_mapping": []
+}

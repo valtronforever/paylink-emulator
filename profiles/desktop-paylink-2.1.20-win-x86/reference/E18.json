@@ -1,0 +1,43 @@
+{
+  "profile": "desktop-paylink-2.1.20-win-x86",
+  "evidence": {
+    "provenance": "real_paylink_simulated_ssi_json",
+    "installer_sha256": "62d0e7a539380937ecb5af2f1c50438e4b84a070de4a20c1c848c11a5e395491",
+    "executable_sha256": "85d1bf9280e7c63e1099ecc2db480813f439e68c41a5eca8a453094a948ab465",
+    "bank": "SIMULATED",
+    "protocol": "SSIJson",
+    "capture_date": "2026-09-28",
+    "ssi_revision": "1.4.6",
+    "ssi_sha256": "8e4b459ade28f4ee301de7751659d4bf365f9c0f2ac3508a6745a597158e1a65",
+    "scenario_id": "E18",
+    "raw_trace": "evidence/2026-09-28T04-12-07-742Z-f75a1328-E18.json",
+    "raw_trace_sha256": "6dad0b8f3159ff767dabc733e2f173a81f46dae25bcbc0d70e92c0414bb60a83"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+    "body": {
+      "amount": 100,
+      "merchant_id": "TEST-MERCHANT"
+    }
+  },
+  "scenario": {
+    "id": "E18",
+    "outcome": "error",
+    "error_id": "terminal_general",
+    "reference_error": "E18"
+  },
+  "response": {
+    "status": 503,
+    "content_type": "application/json",
+    "body": {
+      "success": false,
+      "code": 9024,
+      "error": "Загальна помилка. Зверніться в службу підтримки Checkbox.",
+      "description": "Error => (E18) Printer is out of paper or inoperational"
+    },
+    "duration_ms": 20.325400000001537
+  },
+  "variable_fields": [],
+  "id_mapping": []
+}

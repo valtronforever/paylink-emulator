@@ -1,0 +1,101 @@
+{
+  "profile": "desktop-paylink-2.1.20-win-x86",
+  "evidence": {
+    "provenance": "real_paylink_simulated_ssi_json",
+    "installer_sha256": "62d0e7a539380937ecb5af2f1c50438e4b84a070de4a20c1c848c11a5e395491",
+    "executable_sha256": "85d1bf9280e7c63e1099ecc2db480813f439e68c41a5eca8a453094a948ab465",
+    "bank": "SIMULATED",
+    "protocol": "SSIJson",
+    "capture_date": "2026-09-28",
+    "ssi_revision": "1.4.6",
+    "ssi_sha256": "8e4b459ade28f4ee301de7751659d4bf365f9c0f2ac3508a6745a597158e1a65",
+    "scenario_id": "approved",
+    "raw_trace": "evidence/2026-09-28T04-24-23-137Z-f56bcf09-approved.json",
+    "raw_trace_sha256": "06150de1c0092e3dea3360bb1c4896e5712d2e8225702681160a83d49335b0b7"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+    "body": {
+      "amount": 100,
+      "merchant_id": "TEST-MERCHANT"
+    }
+  },
+  "scenario": {
+    "id": "approved",
+    "outcome": "approved"
+  },
+  "response": {
+    "status": 200,
+    "content_type": "application/json",
+    "body": {
+      "success": true,
+      "terminal_status": "None",
+      "code": 0,
+      "error": "",
+      "id": "a91121f89a49",
+      "result": {
+        "terminal_id": "TEST0001",
+        "terminal": "TEST0001",
+        "merchant_id": "TEST-MERCHANT",
+        "pan": "4444 44** **** 1111",
+        "card_mask": "4444 44** **** 1111",
+        "rrn": "000000000001",
+        "auth_code": "123456",
+        "date_time": "28.09.2026 7:24:26",
+        "invoice_num": 1,
+        "receipt_no": "1",
+        "exp_date": "2609",
+        "card_holder": "TEST CARD",
+        "owner_name": "TEST CARD",
+        "payment_system": "VISA",
+        "totals_debit_num": 0,
+        "totals_debit_amt": 0,
+        "totals_credit_num": 0,
+        "totals_credit_amt": 0,
+        "totals_cancelled_num": 0,
+        "totals_cancelled_amt": 0,
+        "sign_verif": false,
+        "signature_required": false,
+        "txn_num": 0,
+        "amount": 100,
+        "value": 100,
+        "add_amount": 0,
+        "discountedAmount": 0,
+        "txn_type": 1,
+        "entry_mode": 3,
+        "receipt": "",
+        "bank_acquirer": "TEST ACQUIRER / TEST MERCHANT",
+        "bank_name": "TEST ACQUIRER / TEST MERCHANT",
+        "acquirer_and_seller": "TEST ACQUIRER / TEST MERCHANT",
+        "provider_type": "POSCONTROL",
+        "additional_properties": {
+          "responseCode": "0000",
+          "transactionResult": "APPROVED-ONLINE",
+          "errorDetails": "",
+          "transactionUid": "a91121f89a49"
+        }
+      }
+    },
+    "duration_ms": 2104.8764
+  },
+  "variable_fields": [
+    "id",
+    "result.rrn",
+    "result.auth_code",
+    "result.invoice_num",
+    "result.receipt_no",
+    "result.date_time",
+    "result.additional_properties.transactionUid"
+  ],
+  "id_mapping": [
+    {
+      "paths": [
+        "result.terminal",
+        "result.terminal_id"
+      ],
+      "reference": "TEST0001",
+      "emulator": "00000000-0000-4000-8000-000000000001"
+    }
+  ]
+}

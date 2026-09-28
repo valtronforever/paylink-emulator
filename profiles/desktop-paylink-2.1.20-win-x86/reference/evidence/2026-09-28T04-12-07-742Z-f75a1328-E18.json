@@ -1,0 +1,190 @@
+{
+  "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+  "scenario": {
+    "id": "E18",
+    "request": {
+      "method": "POST",
+      "path": "/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+      "body": {
+        "amount": 100,
+        "merchant_id": "TEST-MERCHANT"
+      }
+    },
+    "ssi": {
+      "request_errors": {
+        "Purchase": "E18"
+      }
+    },
+    "timeout_ms": 30000
+  },
+  "http": {
+    "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+    "scenario_id": "E18",
+    "start_utc": "2026-09-28T04:12:47.722Z",
+    "start_ms": 39661.270599999996,
+    "client_timeout_ms": 30000,
+    "request": {
+      "url": "http://127.0.0.1:9020/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": 44
+      },
+      "body": "{\"amount\":100,\"merchant_id\":\"TEST-MERCHANT\"}"
+    },
+    "status": 503,
+    "headers": {
+      "date": "Mon, 28 Sep 2026 04:12:47 GMT",
+      "content-type": "application/json",
+      "server": "Kestrel",
+      "transfer-encoding": "chunked"
+    },
+    "raw_headers": [
+      "Date",
+      "Mon, 28 Sep 2026 04:12:47 GMT",
+      "Content-Type",
+      "application/json",
+      "Server",
+      "Kestrel",
+      "Transfer-Encoding",
+      "chunked"
+    ],
+    "end_utc": "2026-09-28T04:12:47.743Z",
+    "duration_ms": 20.325400000001537,
+    "body_hex": "7b2273756363657373223a66616c73652c22636f6465223a393032342c226572726f72223a22d097d0b0d0b3d0b0d0bbd18cd0bdd0b020d0bfd0bed0bcd0b8d0bbd0bad0b02e20d097d0b2d0b5d180d0bdd196d182d18cd181d18f20d0b220d181d0bbd183d0b6d0b1d18320d0bfd196d0b4d182d180d0b8d0bcd0bad0b820436865636b626f782e222c226465736372697074696f6e223a224572726f72203d3e202845313829205072696e746572206973206f7574206f66207061706572206f7220696e6f7065726174696f6e616c227d",
+    "body_text": "{\"success\":false,\"code\":9024,\"error\":\"Загальна помилка. Зверніться в службу підтримки Checkbox.\",\"description\":\"Error => (E18) Printer is out of paper or inoperational\"}",
+    "body": {
+      "success": false,
+      "code": 9024,
+      "error": "Загальна помилка. Зверніться в службу підтримки Checkbox.",
+      "description": "Error => (E18) Printer is out of paper or inoperational"
+    },
+    "connection_error": null
+  },
+  "ssi": [
+    {
+      "seq": 530,
+      "utc": "2026-09-28T04:12:47.731Z",
+      "elapsed_ms": 298393.8941,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E18",
+      "kind": "connected",
+      "connection_id": 55,
+      "peer": "127.0.0.1"
+    },
+    {
+      "seq": 531,
+      "utc": "2026-09-28T04:12:47.732Z",
+      "elapsed_ms": 298395.1106,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E18",
+      "kind": "bytes",
+      "connection_id": 55,
+      "direction": "rx",
+      "hex": "02660100877b226d6574686f64223a225075726368617365222c22706172616d73223a7b227472616e73616374696f6e556964223a22356165373166666533316364222c226d65726368616e744964223a22544553542d4d45524348414e54222c227472616e7343757272656e6379223a22393830222c227472616e73416d6f756e74223a22313030227d7d5e"
+    },
+    {
+      "seq": 532,
+      "utc": "2026-09-28T04:12:47.733Z",
+      "elapsed_ms": 298396.1327,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E18",
+      "kind": "frame",
+      "connection_id": 55,
+      "direction": "rx",
+      "hex": "02660100877b226d6574686f64223a225075726368617365222c22706172616d73223a7b227472616e73616374696f6e556964223a22356165373166666533316364222c226d65726368616e744964223a22544553542d4d45524348414e54222c227472616e7343757272656e6379223a22393830222c227472616e73416d6f756e74223a22313030227d7d5e",
+      "json": {
+        "method": "Purchase",
+        "params": {
+          "transactionUid": "5ae71ffe31cd",
+          "merchantId": "TEST-MERCHANT",
+          "transCurrency": "980",
+          "transAmount": "100"
+        }
+      }
+    },
+    {
+      "seq": 533,
+      "utc": "2026-09-28T04:12:47.734Z",
+      "elapsed_ms": 298397.0931,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E18",
+      "kind": "response_prepared",
+      "connection_id": 55,
+      "json": {
+        "method": "Purchase",
+        "error": true,
+        "errorCode": "E18",
+        "errorDescription": "Printer is out of paper or inoperational"
+      },
+      "fault": "normal"
+    },
+    {
+      "seq": 534,
+      "utc": "2026-09-28T04:12:47.736Z",
+      "elapsed_ms": 298398.391,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E18",
+      "kind": "frame",
+      "connection_id": 55,
+      "direction": "tx",
+      "hex": "02660100727b226d6574686f64223a225075726368617365222c226572726f72223a747275652c226572726f72436f6465223a22453138222c226572726f724465736372697074696f6e223a225072696e746572206973206f7574206f66207061706572206f7220696e6f7065726174696f6e616c227d78",
+      "json": {
+        "method": "Purchase",
+        "error": true,
+        "errorCode": "E18",
+        "errorDescription": "Printer is out of paper or inoperational"
+      }
+    },
+    {
+      "seq": 535,
+      "utc": "2026-09-28T04:12:47.737Z",
+      "elapsed_ms": 298399.4545,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E18",
+      "kind": "bytes",
+      "connection_id": 55,
+      "direction": "tx",
+      "hex": "02660100727b226d6574686f64223a225075726368617365222c226572726f72223a747275652c226572726f72436f6465223a22453138222c226572726f724465736372697074696f6e223a225072696e746572206973206f7574206f66207061706572206f7220696e6f7065726174696f6e616c227d78"
+    },
+    {
+      "seq": 536,
+      "utc": "2026-09-28T04:12:47.738Z",
+      "elapsed_ms": 298400.5505,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E18",
+      "kind": "response_written",
+      "connection_id": 55,
+      "method": "Purchase"
+    },
+    {
+      "seq": 537,
+      "utc": "2026-09-28T04:12:47.740Z",
+      "elapsed_ms": 298402.6468,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E18",
+      "kind": "disconnected",
+      "connection_id": 55,
+      "pending_hex": ""
+    }
+  ],
+  "build": {
+    "commit": "32ea20432597141d9fab3effa646353a1405ffe6",
+    "dirty": true,
+    "executable_sha256": "85d1bf9280e7c63e1099ecc2db480813f439e68c41a5eca8a453094a948ab465",
+    "installer_sha256": "62d0e7a539380937ecb5af2f1c50438e4b84a070de4a20c1c848c11a5e395491",
+    "ssi": {
+      "revision": "1.4.6",
+      "date": "2026-09-12",
+      "wire_version": 1,
+      "sha256": "8e4b459ade28f4ee301de7751659d4bf365f9c0f2ac3508a6745a597158e1a65"
+    },
+    "host": {
+      "platform": "win32",
+      "release": "10.0.26200",
+      "version": "Windows 11 Home",
+      "architecture": "x64",
+      "node": "v24.16.0"
+    }
+  }
+}

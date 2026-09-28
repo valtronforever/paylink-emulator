@@ -1,0 +1,10 @@
+{
+  "ready": true,
+  "run_id": "manual",
+  "boot_id": "74e85d6b-9bc9-4a42-aac4-802cb460e3cf",
+  "source_hashes": {
+    "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+    "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+    "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+  }
+}

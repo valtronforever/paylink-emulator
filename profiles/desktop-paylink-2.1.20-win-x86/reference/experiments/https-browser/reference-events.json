@@ -1,0 +1,56 @@
+[
+  {
+    "kind": "response",
+    "url": "https://example.com/",
+    "status": 200,
+    "headers": {
+      "age": "11077",
+      "allow": "GET, HEAD",
+      "cf-cache-status": "HIT",
+      "cf-ray": "a4201e61dd26f562-VIE",
+      "content-encoding": "br",
+      "content-type": "text/html",
+      "date": "Mon, 28 Sep 2026 04:48:56 GMT",
+      "last-modified": "Sat, 26 Sep 2026 09:09:07 GMT",
+      "server": "cloudflare"
+    }
+  },
+  {
+    "kind": "console",
+    "utc": "2026-09-28T04:48:57.199Z",
+    "type": "error",
+    "text": "Access to fetch at 'http://127.0.0.1:9020/api/pos/00000000-0000-4000-8000-000000000001/ping' from origin 'https://example.com' has been blocked by CORS policy: Permission was denied for this request to access the `loopback` address space."
+  },
+  {
+    "kind": "request_failed",
+    "url": "http://127.0.0.1:9020/api/pos/00000000-0000-4000-8000-000000000001/ping",
+    "error": {
+      "errorText": "net::ERR_FAILED"
+    }
+  },
+  {
+    "kind": "console",
+    "utc": "2026-09-28T04:48:57.199Z",
+    "type": "error",
+    "text": "Failed to load resource: net::ERR_FAILED"
+  },
+  {
+    "kind": "console",
+    "utc": "2026-09-28T04:48:57.380Z",
+    "type": "error",
+    "text": "Access to fetch at 'http://127.0.0.1:9020/api/pos/00000000-0000-4000-8000-000000000001/purchase' from origin 'https://example.com' has been blocked by CORS policy: Permission was denied for this request to access the `loopback` address space."
+  },
+  {
+    "kind": "request_failed",
+    "url": "http://127.0.0.1:9020/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+    "error": {
+      "errorText": "net::ERR_FAILED"
+    }
+  },
+  {
+    "kind": "console",
+    "utc": "2026-09-28T04:48:57.380Z",
+    "type": "error",
+    "text": "Failed to load resource: net::ERR_FAILED"
+  }
+]

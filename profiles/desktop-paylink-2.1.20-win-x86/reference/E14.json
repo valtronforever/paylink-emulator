@@ -1,0 +1,43 @@
+{
+  "profile": "desktop-paylink-2.1.20-win-x86",
+  "evidence": {
+    "provenance": "real_paylink_simulated_ssi_json",
+    "installer_sha256": "62d0e7a539380937ecb5af2f1c50438e4b84a070de4a20c1c848c11a5e395491",
+    "executable_sha256": "85d1bf9280e7c63e1099ecc2db480813f439e68c41a5eca8a453094a948ab465",
+    "bank": "SIMULATED",
+    "protocol": "SSIJson",
+    "capture_date": "2026-09-28",
+    "ssi_revision": "1.4.6",
+    "ssi_sha256": "8e4b459ade28f4ee301de7751659d4bf365f9c0f2ac3508a6745a597158e1a65",
+    "scenario_id": "E14",
+    "raw_trace": "evidence/2026-09-28T04-12-07-742Z-f75a1328-E14.json",
+    "raw_trace_sha256": "3e8862f17ea7e76423ef424e1d1df889a2fb2aa9db59fdfbb1e62b9682ad725f"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+    "body": {
+      "amount": 100,
+      "merchant_id": "TEST-MERCHANT"
+    }
+  },
+  "scenario": {
+    "id": "E14",
+    "outcome": "error",
+    "error_id": "terminal_general",
+    "reference_error": "E14"
+  },
+  "response": {
+    "status": 503,
+    "content_type": "application/json",
+    "body": {
+      "success": false,
+      "code": 9306,
+      "error": "На терміналі відсутні ключі. Зверніться до служби підтримки банку.",
+      "description": "Key description => (E14) Key error"
+    },
+    "duration_ms": 2060.373300000003
+  },
+  "variable_fields": [],
+  "id_mapping": []
+}

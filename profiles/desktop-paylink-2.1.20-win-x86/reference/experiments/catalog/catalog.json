@@ -1,0 +1,4356 @@
+{
+  "spec": {
+    "url": "https://www.ssi.com.ua/_files/ugd/c8ff39_c33c4ea4837842229ecb6331cb310d28.pdf",
+    "revision": "1.4.6",
+    "date": "2026-09-12",
+    "wire_version": 1,
+    "sha256": "8e4b459ade28f4ee301de7751659d4bf365f9c0f2ac3508a6745a597158e1a65",
+    "ambiguities": [
+      "§4.3.5 says params is absent except GetLastResult, but individual method examples require params.",
+      "§4.3.2 lists APPROVED_ONLINE; §5.5.1 example uses APPROVED-ONLINE.",
+      "§4.3.2 describes 2/3-character responseCode; §5.5.1 example uses 0000.",
+      "Request examples contain punctuation errors; codec tests use valid JSON and the §6.1 XOR algorithm."
+    ]
+  },
+  "executable_sha256": "85d1bf9280e7c63e1099ecc2db480813f439e68c41a5eca8a453094a948ab465",
+  "scope": "Synthetic state/result probes; explicit code/result combinations are test inputs, not a normative financial mapping",
+  "results": [
+    {
+      "id": "S01",
+      "scenario": {
+        "id": "S01",
+        "phases": [
+          {
+            "status": "S01",
+            "ms": 3000
+          }
+        ]
+      },
+      "device": {
+        "id": "7e61ed1c-7d93-46d8-af4e-3ba128affc81",
+        "name": "catalog-S01",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 49889,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:49889",
+        "control_url": "http://127.0.0.1:49893",
+        "wire_path": "runs\\catalog\\S01-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "8cc3f047-e43b-45a7-97d7-c08758336514",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 200,
+      "body": {
+        "success": true,
+        "terminal_status": "None",
+        "code": 0,
+        "error": "",
+        "id": "92506ab735a1",
+        "result": {
+          "terminal_id": "TEST0001",
+          "terminal": "TEST0001",
+          "merchant_id": "TEST-MERCHANT",
+          "pan": "4111XXXXXXXX1111",
+          "card_mask": "4111XXXXXXXX1111",
+          "rrn": "000000000001",
+          "auth_code": "123456",
+          "date_time": "28.09.2026 7:59:34",
+          "invoice_num": 1,
+          "receipt_no": "1",
+          "exp_date": "2609",
+          "card_holder": "TEST USER",
+          "owner_name": "TEST USER",
+          "payment_system": "VISA",
+          "totals_debit_num": 0,
+          "totals_debit_amt": 0,
+          "totals_credit_num": 0,
+          "totals_credit_amt": 0,
+          "totals_cancelled_num": 0,
+          "totals_cancelled_amt": 0,
+          "sign_verif": false,
+          "signature_required": false,
+          "txn_num": 0,
+          "amount": 100,
+          "value": 100,
+          "add_amount": 0,
+          "discountedAmount": 0,
+          "txn_type": 1,
+          "entry_mode": 3,
+          "receipt": "",
+          "bank_acquirer": "SIMULATED",
+          "bank_name": "SIMULATED",
+          "acquirer_and_seller": "SIMULATED",
+          "provider_type": "POSCONTROL",
+          "additional_properties": {
+            "responseCode": "0000",
+            "transactionResult": "APPROVED-ONLINE",
+            "errorDetails": "",
+            "transactionUid": "92506ab735a1"
+          }
+        }
+      },
+      "duration_ms": 4351.7559,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S01"
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S01"
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "123456",
+            "date": "28/09/2026",
+            "time": "04:59:30",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "0000",
+            "rrn": "000000000001",
+            "transactionResult": "APPROVED-ONLINE",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "92506ab735a1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "S04",
+      "scenario": {
+        "id": "S04",
+        "phases": [
+          {
+            "status": "S04",
+            "ms": 3000
+          }
+        ]
+      },
+      "device": {
+        "id": "f8cdf517-30d2-4650-ac97-32e73807ff9c",
+        "name": "catalog-S04",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 49892,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:49892",
+        "control_url": "http://127.0.0.1:49896",
+        "wire_path": "runs\\catalog\\S04-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "3301882f-6532-4a80-8778-9f2ebe75dc46",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 200,
+      "body": {
+        "success": true,
+        "terminal_status": "None",
+        "code": 0,
+        "error": "",
+        "id": "662701acbcdf",
+        "result": {
+          "terminal_id": "TEST0001",
+          "terminal": "TEST0001",
+          "merchant_id": "TEST-MERCHANT",
+          "pan": "4111XXXXXXXX1111",
+          "card_mask": "4111XXXXXXXX1111",
+          "rrn": "000000000001",
+          "auth_code": "123456",
+          "date_time": "28.09.2026 7:59:34",
+          "invoice_num": 1,
+          "receipt_no": "1",
+          "exp_date": "2609",
+          "card_holder": "TEST USER",
+          "owner_name": "TEST USER",
+          "payment_system": "VISA",
+          "totals_debit_num": 0,
+          "totals_debit_amt": 0,
+          "totals_credit_num": 0,
+          "totals_credit_amt": 0,
+          "totals_cancelled_num": 0,
+          "totals_cancelled_amt": 0,
+          "sign_verif": false,
+          "signature_required": false,
+          "txn_num": 0,
+          "amount": 100,
+          "value": 100,
+          "add_amount": 0,
+          "discountedAmount": 0,
+          "txn_type": 1,
+          "entry_mode": 3,
+          "receipt": "",
+          "bank_acquirer": "SIMULATED",
+          "bank_name": "SIMULATED",
+          "acquirer_and_seller": "SIMULATED",
+          "provider_type": "POSCONTROL",
+          "additional_properties": {
+            "responseCode": "0000",
+            "transactionResult": "APPROVED-ONLINE",
+            "errorDetails": "",
+            "transactionUid": "662701acbcdf"
+          }
+        }
+      },
+      "duration_ms": 4378.1956,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S04"
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S04"
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "123456",
+            "date": "28/09/2026",
+            "time": "04:59:30",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "0000",
+            "rrn": "000000000001",
+            "transactionResult": "APPROVED-ONLINE",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "662701acbcdf"
+          }
+        }
+      ]
+    },
+    {
+      "id": "S02",
+      "scenario": {
+        "id": "S02",
+        "phases": [
+          {
+            "status": "S02",
+            "ms": 3000
+          }
+        ]
+      },
+      "device": {
+        "id": "8705d4ed-3abb-4379-a18f-cb8ed853164d",
+        "name": "catalog-S02",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 49890,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:49890",
+        "control_url": "http://127.0.0.1:49894",
+        "wire_path": "runs\\catalog\\S02-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "5c24a6e2-f1a2-4033-ba00-702184cbbc13",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 200,
+      "body": {
+        "success": true,
+        "terminal_status": "None",
+        "code": 0,
+        "error": "",
+        "id": "5bca1a45907c",
+        "result": {
+          "terminal_id": "TEST0001",
+          "terminal": "TEST0001",
+          "merchant_id": "TEST-MERCHANT",
+          "pan": "4111XXXXXXXX1111",
+          "card_mask": "4111XXXXXXXX1111",
+          "rrn": "000000000001",
+          "auth_code": "123456",
+          "date_time": "28.09.2026 7:59:34",
+          "invoice_num": 1,
+          "receipt_no": "1",
+          "exp_date": "2609",
+          "card_holder": "TEST USER",
+          "owner_name": "TEST USER",
+          "payment_system": "VISA",
+          "totals_debit_num": 0,
+          "totals_debit_amt": 0,
+          "totals_credit_num": 0,
+          "totals_credit_amt": 0,
+          "totals_cancelled_num": 0,
+          "totals_cancelled_amt": 0,
+          "sign_verif": false,
+          "signature_required": false,
+          "txn_num": 0,
+          "amount": 100,
+          "value": 100,
+          "add_amount": 0,
+          "discountedAmount": 0,
+          "txn_type": 1,
+          "entry_mode": 3,
+          "receipt": "",
+          "bank_acquirer": "SIMULATED",
+          "bank_name": "SIMULATED",
+          "acquirer_and_seller": "SIMULATED",
+          "provider_type": "POSCONTROL",
+          "additional_properties": {
+            "responseCode": "0000",
+            "transactionResult": "APPROVED-ONLINE",
+            "errorDetails": "",
+            "transactionUid": "5bca1a45907c"
+          }
+        }
+      },
+      "duration_ms": 4416.9185,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S02"
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S02"
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "123456",
+            "date": "28/09/2026",
+            "time": "04:59:30",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "0000",
+            "rrn": "000000000001",
+            "transactionResult": "APPROVED-ONLINE",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "5bca1a45907c"
+          }
+        }
+      ]
+    },
+    {
+      "id": "S03",
+      "scenario": {
+        "id": "S03",
+        "phases": [
+          {
+            "status": "S03",
+            "ms": 3000
+          }
+        ]
+      },
+      "device": {
+        "id": "3bdd1463-64c8-4785-a845-57e1bf0c673b",
+        "name": "catalog-S03",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 49891,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:49891",
+        "control_url": "http://127.0.0.1:49895",
+        "wire_path": "runs\\catalog\\S03-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "cf11f665-e7e3-4ef3-ab44-3afd0bc9af9b",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 200,
+      "body": {
+        "success": true,
+        "terminal_status": "None",
+        "code": 0,
+        "error": "",
+        "id": "e2fa2f829b32",
+        "result": {
+          "terminal_id": "TEST0001",
+          "terminal": "TEST0001",
+          "merchant_id": "TEST-MERCHANT",
+          "pan": "4111XXXXXXXX1111",
+          "card_mask": "4111XXXXXXXX1111",
+          "rrn": "000000000001",
+          "auth_code": "123456",
+          "date_time": "28.09.2026 7:59:34",
+          "invoice_num": 1,
+          "receipt_no": "1",
+          "exp_date": "2609",
+          "card_holder": "TEST USER",
+          "owner_name": "TEST USER",
+          "payment_system": "VISA",
+          "totals_debit_num": 0,
+          "totals_debit_amt": 0,
+          "totals_credit_num": 0,
+          "totals_credit_amt": 0,
+          "totals_cancelled_num": 0,
+          "totals_cancelled_amt": 0,
+          "sign_verif": false,
+          "signature_required": false,
+          "txn_num": 0,
+          "amount": 100,
+          "value": 100,
+          "add_amount": 0,
+          "discountedAmount": 0,
+          "txn_type": 1,
+          "entry_mode": 3,
+          "receipt": "",
+          "bank_acquirer": "SIMULATED",
+          "bank_name": "SIMULATED",
+          "acquirer_and_seller": "SIMULATED",
+          "provider_type": "POSCONTROL",
+          "additional_properties": {
+            "responseCode": "0000",
+            "transactionResult": "APPROVED-ONLINE",
+            "errorDetails": "",
+            "transactionUid": "e2fa2f829b32"
+          }
+        }
+      },
+      "duration_ms": 4425.573,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S03"
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S03"
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "123456",
+            "date": "28/09/2026",
+            "time": "04:59:30",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "0000",
+            "rrn": "000000000001",
+            "transactionResult": "APPROVED-ONLINE",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "e2fa2f829b32"
+          }
+        }
+      ]
+    },
+    {
+      "id": "S08",
+      "scenario": {
+        "id": "S08",
+        "phases": [
+          {
+            "status": "S08",
+            "ms": 3000
+          }
+        ]
+      },
+      "device": {
+        "id": "a7356442-3e3a-4ade-a3df-8605b0ebaa99",
+        "name": "catalog-S08",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 49934,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:49934",
+        "control_url": "http://127.0.0.1:49935",
+        "wire_path": "runs\\catalog\\S08-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "5b5c31b0-0339-4683-a1f9-a7df7605a9ae",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 9009,
+        "error": "Пристрій вже зайнятий виконанням команди. Потрібно зачекати декілька секунд та повторити спробу.",
+        "description": "Device is busy => (E06) Terminal Busy"
+      },
+      "duration_ms": 2066.4525000000003,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S08"
+        },
+        {
+          "method": "GetLastResult",
+          "error": true,
+          "errorCode": "E06",
+          "errorDescription": "Terminal Busy"
+        }
+      ]
+    },
+    {
+      "id": "S05",
+      "scenario": {
+        "id": "S05",
+        "phases": [
+          {
+            "status": "S05",
+            "ms": 3000
+          }
+        ]
+      },
+      "device": {
+        "id": "343dd1d1-6d27-482f-b974-c429a8e3a0cf",
+        "name": "catalog-S05",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 49923,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:49923",
+        "control_url": "http://127.0.0.1:49924",
+        "wire_path": "runs\\catalog\\S05-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "e05f0731-18a7-4e60-b872-b52bce802276",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 200,
+      "body": {
+        "success": true,
+        "terminal_status": "None",
+        "code": 0,
+        "error": "",
+        "id": "9567b0a6ab62",
+        "result": {
+          "terminal_id": "TEST0001",
+          "terminal": "TEST0001",
+          "merchant_id": "TEST-MERCHANT",
+          "pan": "4111XXXXXXXX1111",
+          "card_mask": "4111XXXXXXXX1111",
+          "rrn": "000000000001",
+          "auth_code": "123456",
+          "date_time": "28.09.2026 7:59:38",
+          "invoice_num": 1,
+          "receipt_no": "1",
+          "exp_date": "2609",
+          "card_holder": "TEST USER",
+          "owner_name": "TEST USER",
+          "payment_system": "VISA",
+          "totals_debit_num": 0,
+          "totals_debit_amt": 0,
+          "totals_credit_num": 0,
+          "totals_credit_amt": 0,
+          "totals_cancelled_num": 0,
+          "totals_cancelled_amt": 0,
+          "sign_verif": false,
+          "signature_required": false,
+          "txn_num": 0,
+          "amount": 100,
+          "value": 100,
+          "add_amount": 0,
+          "discountedAmount": 0,
+          "txn_type": 1,
+          "entry_mode": 3,
+          "receipt": "",
+          "bank_acquirer": "SIMULATED",
+          "bank_name": "SIMULATED",
+          "acquirer_and_seller": "SIMULATED",
+          "provider_type": "POSCONTROL",
+          "additional_properties": {
+            "responseCode": "0000",
+            "transactionResult": "APPROVED-ONLINE",
+            "errorDetails": "",
+            "transactionUid": "9567b0a6ab62"
+          }
+        }
+      },
+      "duration_ms": 4141.444099999999,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S05"
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S05"
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "123456",
+            "date": "28/09/2026",
+            "time": "04:59:34",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "0000",
+            "rrn": "000000000001",
+            "transactionResult": "APPROVED-ONLINE",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "9567b0a6ab62"
+          }
+        }
+      ]
+    },
+    {
+      "id": "S06",
+      "scenario": {
+        "id": "S06",
+        "phases": [
+          {
+            "status": "S06",
+            "ms": 3000
+          }
+        ]
+      },
+      "device": {
+        "id": "fac29df0-dd7a-41f8-af70-e8776bd52694",
+        "name": "catalog-S06",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 49928,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:49928",
+        "control_url": "http://127.0.0.1:49929",
+        "wire_path": "runs\\catalog\\S06-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "8bfbac94-96e1-4fbf-a9e8-cd414c913338",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 200,
+      "body": {
+        "success": true,
+        "terminal_status": "None",
+        "code": 0,
+        "error": "",
+        "id": "8d16e6974451",
+        "result": {
+          "terminal_id": "TEST0001",
+          "terminal": "TEST0001",
+          "merchant_id": "TEST-MERCHANT",
+          "pan": "4111XXXXXXXX1111",
+          "card_mask": "4111XXXXXXXX1111",
+          "rrn": "000000000001",
+          "auth_code": "123456",
+          "date_time": "28.09.2026 7:59:38",
+          "invoice_num": 1,
+          "receipt_no": "1",
+          "exp_date": "2609",
+          "card_holder": "TEST USER",
+          "owner_name": "TEST USER",
+          "payment_system": "VISA",
+          "totals_debit_num": 0,
+          "totals_debit_amt": 0,
+          "totals_credit_num": 0,
+          "totals_credit_amt": 0,
+          "totals_cancelled_num": 0,
+          "totals_cancelled_amt": 0,
+          "sign_verif": false,
+          "signature_required": false,
+          "txn_num": 0,
+          "amount": 100,
+          "value": 100,
+          "add_amount": 0,
+          "discountedAmount": 0,
+          "txn_type": 1,
+          "entry_mode": 3,
+          "receipt": "",
+          "bank_acquirer": "SIMULATED",
+          "bank_name": "SIMULATED",
+          "acquirer_and_seller": "SIMULATED",
+          "provider_type": "POSCONTROL",
+          "additional_properties": {
+            "responseCode": "0000",
+            "transactionResult": "APPROVED-ONLINE",
+            "errorDetails": "",
+            "transactionUid": "8d16e6974451"
+          }
+        }
+      },
+      "duration_ms": 4125.3183,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S06"
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S06"
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "123456",
+            "date": "28/09/2026",
+            "time": "04:59:34",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "0000",
+            "rrn": "000000000001",
+            "transactionResult": "APPROVED-ONLINE",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "8d16e6974451"
+          }
+        }
+      ]
+    },
+    {
+      "id": "S07",
+      "scenario": {
+        "id": "S07",
+        "phases": [
+          {
+            "status": "S07",
+            "ms": 3000
+          }
+        ]
+      },
+      "device": {
+        "id": "cbba7d86-24c5-48b0-9b19-88fc3cf735e3",
+        "name": "catalog-S07",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 49931,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:49931",
+        "control_url": "http://127.0.0.1:49932",
+        "wire_path": "runs\\catalog\\S07-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "aadce062-5fc0-49f1-80f5-8dc4707f9da7",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 200,
+      "body": {
+        "success": true,
+        "terminal_status": "None",
+        "code": 0,
+        "error": "",
+        "id": "b73ddbbdee55",
+        "result": {
+          "terminal_id": "TEST0001",
+          "terminal": "TEST0001",
+          "merchant_id": "TEST-MERCHANT",
+          "pan": "4111XXXXXXXX1111",
+          "card_mask": "4111XXXXXXXX1111",
+          "rrn": "000000000001",
+          "auth_code": "123456",
+          "date_time": "28.09.2026 7:59:38",
+          "invoice_num": 1,
+          "receipt_no": "1",
+          "exp_date": "2609",
+          "card_holder": "TEST USER",
+          "owner_name": "TEST USER",
+          "payment_system": "VISA",
+          "totals_debit_num": 0,
+          "totals_debit_amt": 0,
+          "totals_credit_num": 0,
+          "totals_credit_amt": 0,
+          "totals_cancelled_num": 0,
+          "totals_cancelled_amt": 0,
+          "sign_verif": false,
+          "signature_required": false,
+          "txn_num": 0,
+          "amount": 100,
+          "value": 100,
+          "add_amount": 0,
+          "discountedAmount": 0,
+          "txn_type": 1,
+          "entry_mode": 3,
+          "receipt": "",
+          "bank_acquirer": "SIMULATED",
+          "bank_name": "SIMULATED",
+          "acquirer_and_seller": "SIMULATED",
+          "provider_type": "POSCONTROL",
+          "additional_properties": {
+            "responseCode": "0000",
+            "transactionResult": "APPROVED-ONLINE",
+            "errorDetails": "",
+            "transactionUid": "b73ddbbdee55"
+          }
+        }
+      },
+      "duration_ms": 4101.9229000000005,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S07"
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S07"
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "123456",
+            "date": "28/09/2026",
+            "time": "04:59:34",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "0000",
+            "rrn": "000000000001",
+            "transactionResult": "APPROVED-ONLINE",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "b73ddbbdee55"
+          }
+        }
+      ]
+    },
+    {
+      "id": "FAILED",
+      "scenario": {
+        "id": "FAILED",
+        "transaction_result": "FAILED",
+        "error_code": "E21",
+        "response_code": "51"
+      },
+      "device": {
+        "id": "aca14d77-50ba-4d92-9027-89320920d237",
+        "name": "catalog-FAILED",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 49949,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:49949",
+        "control_url": "http://127.0.0.1:49950",
+        "wire_path": "runs\\catalog\\FAILED-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "882a454f-a272-4937-82ae-afd9a9c89398",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 9307,
+        "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+        "description": "Need Z report => (E21) General error in transaction"
+      },
+      "duration_ms": 2064.719,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": true,
+          "errorCode": "E21",
+          "errorDescription": "General error in transaction",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "",
+            "date": "28/09/2026",
+            "time": "04:59:36",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "51",
+            "rrn": "000000000001",
+            "transactionResult": "FAILED",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "adeec270aaeb"
+          }
+        }
+      ]
+    },
+    {
+      "id": "TRY_AGAIN_PHONE",
+      "scenario": {
+        "id": "TRY_AGAIN_PHONE",
+        "transaction_result": "TRY_AGAIN_PHONE",
+        "error_code": "E21",
+        "response_code": "51"
+      },
+      "device": {
+        "id": "3f8d95f1-4509-4e09-b015-04742a0bf6a9",
+        "name": "catalog-TRY_AGAIN_PHONE",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 49963,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:49963",
+        "control_url": "http://127.0.0.1:49964",
+        "wire_path": "runs\\catalog\\TRY_AGAIN_PHONE-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "43e3754c-3669-4de4-83a8-65111badf448",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 9307,
+        "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+        "description": "Need Z report => (E21) General error in transaction"
+      },
+      "duration_ms": 2089.3539,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": true,
+          "errorCode": "E21",
+          "errorDescription": "General error in transaction",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "",
+            "date": "28/09/2026",
+            "time": "04:59:38",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "51",
+            "rrn": "000000000001",
+            "transactionResult": "TRY_AGAIN_PHONE",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "b205bf5cc3fa"
+          }
+        }
+      ]
+    },
+    {
+      "id": "CARD_ERROR",
+      "scenario": {
+        "id": "CARD_ERROR",
+        "transaction_result": "CARD_ERROR",
+        "error_code": "E21",
+        "response_code": "51"
+      },
+      "device": {
+        "id": "dff56ae1-1577-44b1-8e99-9078521ecde2",
+        "name": "catalog-CARD_ERROR",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 49965,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:49965",
+        "control_url": "http://127.0.0.1:49967",
+        "wire_path": "runs\\catalog\\CARD_ERROR-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "ed6a48cc-1af0-4945-add3-fe0cbb449d7a",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 9307,
+        "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+        "description": "Need Z report => (E21) General error in transaction"
+      },
+      "duration_ms": 2091.178899999999,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": true,
+          "errorCode": "E21",
+          "errorDescription": "General error in transaction",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "",
+            "date": "28/09/2026",
+            "time": "04:59:38",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "51",
+            "rrn": "000000000001",
+            "transactionResult": "CARD_ERROR",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "7974fbb9c73f"
+          }
+        }
+      ]
+    },
+    {
+      "id": "TRY_AGAIN",
+      "scenario": {
+        "id": "TRY_AGAIN",
+        "transaction_result": "TRY_AGAIN",
+        "error_code": "E21",
+        "response_code": "51"
+      },
+      "device": {
+        "id": "4a3af562-4f31-4088-a62d-d00689516df3",
+        "name": "catalog-TRY_AGAIN",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 49961,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:49961",
+        "control_url": "http://127.0.0.1:49962",
+        "wire_path": "runs\\catalog\\TRY_AGAIN-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "c263e39e-a9ee-4273-aba6-11697a1408b1",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 9307,
+        "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+        "description": "Need Z report => (E21) General error in transaction"
+      },
+      "duration_ms": 2123.949700000001,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": true,
+          "errorCode": "E21",
+          "errorDescription": "General error in transaction",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "",
+            "date": "28/09/2026",
+            "time": "04:59:38",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "51",
+            "rrn": "000000000001",
+            "transactionResult": "TRY_AGAIN",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "f9d4b33560e6"
+          }
+        }
+      ]
+    },
+    {
+      "id": "MESSAGE_ERROR",
+      "scenario": {
+        "id": "MESSAGE_ERROR",
+        "transaction_result": "MESSAGE_ERROR",
+        "error_code": "E21",
+        "response_code": "51"
+      },
+      "device": {
+        "id": "abb9b716-08b4-4df4-9d90-2e5db2a1e05f",
+        "name": "catalog-MESSAGE_ERROR",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 49971,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:49971",
+        "control_url": "http://127.0.0.1:49972",
+        "wire_path": "runs\\catalog\\MESSAGE_ERROR-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "bb4a3087-7d90-42af-9b49-db4dbecf1da7",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 9307,
+        "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+        "description": "Need Z report => (E21) General error in transaction"
+      },
+      "duration_ms": 2082.6284000000014,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": true,
+          "errorCode": "E21",
+          "errorDescription": "General error in transaction",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "",
+            "date": "28/09/2026",
+            "time": "04:59:38",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "51",
+            "rrn": "000000000001",
+            "transactionResult": "MESSAGE_ERROR",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "97db631db792"
+          }
+        }
+      ]
+    },
+    {
+      "id": "CONNECTION_ERROR",
+      "scenario": {
+        "id": "CONNECTION_ERROR",
+        "transaction_result": "CONNECTION_ERROR",
+        "error_code": "E21",
+        "response_code": "51"
+      },
+      "device": {
+        "id": "eeca4ca2-38e6-48e0-9992-14222fef1366",
+        "name": "catalog-CONNECTION_ERROR",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 49989,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:49989",
+        "control_url": "http://127.0.0.1:49990",
+        "wire_path": "runs\\catalog\\CONNECTION_ERROR-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "b774fac2-9b39-45cd-bdb2-5fd1eb4977c1",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 9307,
+        "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+        "description": "Need Z report => (E21) General error in transaction"
+      },
+      "duration_ms": 2066.1373999999996,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": true,
+          "errorCode": "E21",
+          "errorDescription": "General error in transaction",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "",
+            "date": "28/09/2026",
+            "time": "04:59:41",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "51",
+            "rrn": "000000000001",
+            "transactionResult": "CONNECTION_ERROR",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "3bb0b6fa5f56"
+          }
+        }
+      ]
+    },
+    {
+      "id": "NO_CONNECTION",
+      "scenario": {
+        "id": "NO_CONNECTION",
+        "transaction_result": "NO_CONNECTION",
+        "error_code": "E21",
+        "response_code": "51"
+      },
+      "device": {
+        "id": "40a94880-8e10-43e6-bef7-b29d7b56b83e",
+        "name": "catalog-NO_CONNECTION",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 49987,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:49987",
+        "control_url": "http://127.0.0.1:49988",
+        "wire_path": "runs\\catalog\\NO_CONNECTION-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "277c9a1e-9e27-40c5-9192-ed3584789a3c",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 9307,
+        "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+        "description": "Need Z report => (E21) General error in transaction"
+      },
+      "duration_ms": 2090.175800000001,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": true,
+          "errorCode": "E21",
+          "errorDescription": "General error in transaction",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "",
+            "date": "28/09/2026",
+            "time": "04:59:41",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "51",
+            "rrn": "000000000001",
+            "transactionResult": "NO_CONNECTION",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "e630185718b9"
+          }
+        }
+      ]
+    },
+    {
+      "id": "INTERNAL_ERROR",
+      "scenario": {
+        "id": "INTERNAL_ERROR",
+        "transaction_result": "INTERNAL_ERROR",
+        "error_code": "E21",
+        "response_code": "51"
+      },
+      "device": {
+        "id": "aae00285-46d3-4851-87fb-1c63b8f32525",
+        "name": "catalog-INTERNAL_ERROR",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 49992,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:49992",
+        "control_url": "http://127.0.0.1:49993",
+        "wire_path": "runs\\catalog\\INTERNAL_ERROR-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "3bc859fc-b707-4999-b976-19268b430226",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 9307,
+        "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+        "description": "Need Z report => (E21) General error in transaction"
+      },
+      "duration_ms": 2093.2263000000003,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": true,
+          "errorCode": "E21",
+          "errorDescription": "General error in transaction",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "",
+            "date": "28/09/2026",
+            "time": "04:59:41",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "51",
+            "rrn": "000000000001",
+            "transactionResult": "INTERNAL_ERROR",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "0b7b945535e9"
+          }
+        }
+      ]
+    },
+    {
+      "id": "EMV_ERROR",
+      "scenario": {
+        "id": "EMV_ERROR",
+        "transaction_result": "EMV_ERROR",
+        "error_code": "E21",
+        "response_code": "51"
+      },
+      "device": {
+        "id": "aab6ac2c-eb50-4e65-921b-15c7cb2c251d",
+        "name": "catalog-EMV_ERROR",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 49995,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:49995",
+        "control_url": "http://127.0.0.1:49996",
+        "wire_path": "runs\\catalog\\EMV_ERROR-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "18144801-a980-4f7a-9f24-3802a4014275",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 9307,
+        "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+        "description": "Need Z report => (E21) General error in transaction"
+      },
+      "duration_ms": 2095.418600000001,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": true,
+          "errorCode": "E21",
+          "errorDescription": "General error in transaction",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "",
+            "date": "28/09/2026",
+            "time": "04:59:41",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "51",
+            "rrn": "000000000001",
+            "transactionResult": "EMV_ERROR",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "452fe331f589"
+          }
+        }
+      ]
+    },
+    {
+      "id": "CONNECTION_TIMEOUT",
+      "scenario": {
+        "id": "CONNECTION_TIMEOUT",
+        "transaction_result": "CONNECTION_TIMEOUT",
+        "error_code": "E21",
+        "response_code": "51"
+      },
+      "device": {
+        "id": "de2db2f8-2018-4afc-99b8-9a661ee7ff3d",
+        "name": "catalog-CONNECTION_TIMEOUT",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 50071,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:50071",
+        "control_url": "http://127.0.0.1:50072",
+        "wire_path": "runs\\catalog\\CONNECTION_TIMEOUT-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "476a13fa-8ea0-44fe-a3d9-f32e7870488a",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 9307,
+        "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+        "description": "Need Z report => (E21) General error in transaction"
+      },
+      "duration_ms": 2092.0991999999987,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": true,
+          "errorCode": "E21",
+          "errorDescription": "General error in transaction",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "",
+            "date": "28/09/2026",
+            "time": "04:59:43",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "51",
+            "rrn": "000000000001",
+            "transactionResult": "CONNECTION_TIMEOUT",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "4d88c15a9967"
+          }
+        }
+      ]
+    },
+    {
+      "id": "CARD_BLOCKED",
+      "scenario": {
+        "id": "CARD_BLOCKED",
+        "transaction_result": "CARD_BLOCKED",
+        "error_code": "E21",
+        "response_code": "51"
+      },
+      "device": {
+        "id": "ec5f4bbf-8a67-4434-9675-c2af387b2280",
+        "name": "catalog-CARD_BLOCKED",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 50075,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:50075",
+        "control_url": "http://127.0.0.1:50076",
+        "wire_path": "runs\\catalog\\CARD_BLOCKED-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "e413ec6a-8e22-4650-a3d5-e7fa917b4b0f",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 9307,
+        "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+        "description": "Need Z report => (E21) General error in transaction"
+      },
+      "duration_ms": 2096.8222000000005,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": true,
+          "errorCode": "E21",
+          "errorDescription": "General error in transaction",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "",
+            "date": "28/09/2026",
+            "time": "04:59:43",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "51",
+            "rrn": "000000000001",
+            "transactionResult": "CARD_BLOCKED",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "e3211f89af64"
+          }
+        }
+      ]
+    },
+    {
+      "id": "CANCELLED",
+      "scenario": {
+        "id": "CANCELLED",
+        "transaction_result": "CANCELLED",
+        "error_code": "E21",
+        "response_code": "51"
+      },
+      "device": {
+        "id": "cf7540c3-1fdd-4835-bd90-e0b37a400097",
+        "name": "catalog-CANCELLED",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 50077,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:50077",
+        "control_url": "http://127.0.0.1:50078",
+        "wire_path": "runs\\catalog\\CANCELLED-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "347f1087-5f49-4a50-bec0-52b9800ecdad",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 9307,
+        "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+        "description": "Need Z report => (E21) General error in transaction"
+      },
+      "duration_ms": 2102.3624999999993,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": true,
+          "errorCode": "E21",
+          "errorDescription": "General error in transaction",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "",
+            "date": "28/09/2026",
+            "time": "04:59:43",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "51",
+            "rrn": "000000000001",
+            "transactionResult": "CANCELLED",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "ece06676cb29"
+          }
+        }
+      ]
+    },
+    {
+      "id": "INSUFFICIENT_BALANCE",
+      "scenario": {
+        "id": "INSUFFICIENT_BALANCE",
+        "transaction_result": "INSUFFICIENT_BALANCE",
+        "error_code": "E21",
+        "response_code": "51"
+      },
+      "device": {
+        "id": "c702e8e2-0124-4ec5-b9be-cdce0ad11803",
+        "name": "catalog-INSUFFICIENT_BALANCE",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 50073,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:50073",
+        "control_url": "http://127.0.0.1:50074",
+        "wire_path": "runs\\catalog\\INSUFFICIENT_BALANCE-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "7f69ddf9-5e68-45ee-92aa-0d28058b3646",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 9307,
+        "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+        "description": "Need Z report => (E21) General error in transaction"
+      },
+      "duration_ms": 2130.6592,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": true,
+          "errorCode": "E21",
+          "errorDescription": "General error in transaction",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "",
+            "date": "28/09/2026",
+            "time": "04:59:43",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "51",
+            "rrn": "000000000001",
+            "transactionResult": "INSUFFICIENT_BALANCE",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "b911b80b457d"
+          }
+        }
+      ]
+    },
+    {
+      "id": "UNSUPPORTED_CARD",
+      "scenario": {
+        "id": "UNSUPPORTED_CARD",
+        "transaction_result": "UNSUPPORTED_CARD",
+        "error_code": "E21",
+        "response_code": "51"
+      },
+      "device": {
+        "id": "d7077c71-7faa-443f-9ae2-758f0b671147",
+        "name": "catalog-UNSUPPORTED_CARD",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 50095,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:50095",
+        "control_url": "http://127.0.0.1:50096",
+        "wire_path": "runs\\catalog\\UNSUPPORTED_CARD-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "8106930a-3761-4b62-85ad-6ffe5b37be66",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 9307,
+        "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+        "description": "Need Z report => (E21) General error in transaction"
+      },
+      "duration_ms": 2087.2639000000017,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": true,
+          "errorCode": "E21",
+          "errorDescription": "General error in transaction",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "",
+            "date": "28/09/2026",
+            "time": "04:59:45",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "51",
+            "rrn": "000000000001",
+            "transactionResult": "UNSUPPORTED_CARD",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "c9f6c2283f3a"
+          }
+        }
+      ]
+    },
+    {
+      "id": "DECLINED_ONLINE",
+      "scenario": {
+        "id": "DECLINED_ONLINE",
+        "transaction_result": "DECLINED_ONLINE",
+        "error_code": "E21",
+        "response_code": "51"
+      },
+      "device": {
+        "id": "796b450b-8029-484e-90f9-52a094428842",
+        "name": "catalog-DECLINED_ONLINE",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 50097,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:50097",
+        "control_url": "http://127.0.0.1:50098",
+        "wire_path": "runs\\catalog\\DECLINED_ONLINE-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "67c53cc1-80e4-4655-9f1f-d8f8d10fbdee",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 9307,
+        "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+        "description": "Need Z report => (E21) General error in transaction"
+      },
+      "duration_ms": 2074.0616999999984,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": true,
+          "errorCode": "E21",
+          "errorDescription": "General error in transaction",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "",
+            "date": "28/09/2026",
+            "time": "04:59:45",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "51",
+            "rrn": "000000000001",
+            "transactionResult": "DECLINED_ONLINE",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "60a7b64075b2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "APPROVED_ONLINE",
+      "scenario": {
+        "id": "APPROVED_ONLINE",
+        "transaction_result": "APPROVED_ONLINE",
+        "error_code": "",
+        "response_code": "00"
+      },
+      "device": {
+        "id": "ef8e3345-fda6-46b6-b118-b3d8aada3a75",
+        "name": "catalog-APPROVED_ONLINE",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 50100,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:50100",
+        "control_url": "http://127.0.0.1:50101",
+        "wire_path": "runs\\catalog\\APPROVED_ONLINE-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "156ffda9-edb4-42c0-a37b-5da9ca9f721e",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 200,
+      "body": {
+        "success": true,
+        "terminal_status": "None",
+        "code": 0,
+        "error": "",
+        "id": "08b00fa1a080",
+        "result": {
+          "terminal_id": "TEST0001",
+          "terminal": "TEST0001",
+          "merchant_id": "TEST-MERCHANT",
+          "pan": "4111XXXXXXXX1111",
+          "card_mask": "4111XXXXXXXX1111",
+          "rrn": "000000000001",
+          "auth_code": "123456",
+          "date_time": "28.09.2026 7:59:47",
+          "invoice_num": 1,
+          "receipt_no": "1",
+          "exp_date": "2609",
+          "card_holder": "TEST USER",
+          "owner_name": "TEST USER",
+          "payment_system": "VISA",
+          "totals_debit_num": 0,
+          "totals_debit_amt": 0,
+          "totals_credit_num": 0,
+          "totals_credit_amt": 0,
+          "totals_cancelled_num": 0,
+          "totals_cancelled_amt": 0,
+          "sign_verif": false,
+          "signature_required": false,
+          "txn_num": 0,
+          "amount": 100,
+          "value": 100,
+          "add_amount": 0,
+          "discountedAmount": 0,
+          "txn_type": 1,
+          "entry_mode": 3,
+          "receipt": "",
+          "bank_acquirer": "SIMULATED",
+          "bank_name": "SIMULATED",
+          "acquirer_and_seller": "SIMULATED",
+          "provider_type": "POSCONTROL",
+          "additional_properties": {
+            "responseCode": "00",
+            "transactionResult": "APPROVED_ONLINE",
+            "errorDetails": "",
+            "transactionUid": "08b00fa1a080"
+          }
+        }
+      },
+      "duration_ms": 2087.5401999999995,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "123456",
+            "date": "28/09/2026",
+            "time": "04:59:45",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "00",
+            "rrn": "000000000001",
+            "transactionResult": "APPROVED_ONLINE",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "08b00fa1a080"
+          }
+        }
+      ]
+    },
+    {
+      "id": "DECLINED_OFFLINE",
+      "scenario": {
+        "id": "DECLINED_OFFLINE",
+        "transaction_result": "DECLINED_OFFLINE",
+        "error_code": "E21",
+        "response_code": "51"
+      },
+      "device": {
+        "id": "ef768660-80ac-4a04-866b-c9e4b1f841f8",
+        "name": "catalog-DECLINED_OFFLINE",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 50103,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:50103",
+        "control_url": "http://127.0.0.1:50104",
+        "wire_path": "runs\\catalog\\DECLINED_OFFLINE-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "e163d1a1-d937-497a-9a2a-8563f456c5ee",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 9307,
+        "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+        "description": "Need Z report => (E21) General error in transaction"
+      },
+      "duration_ms": 2093.0948000000008,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": true,
+          "errorCode": "E21",
+          "errorDescription": "General error in transaction",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "",
+            "date": "28/09/2026",
+            "time": "04:59:45",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "51",
+            "rrn": "000000000001",
+            "transactionResult": "DECLINED_OFFLINE",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "6b4186858a4b"
+          }
+        }
+      ]
+    },
+    {
+      "id": "CARD_DECLINED_ONLINE",
+      "scenario": {
+        "id": "CARD_DECLINED_ONLINE",
+        "transaction_result": "CARD_DECLINED_ONLINE",
+        "error_code": "E21",
+        "response_code": "51"
+      },
+      "device": {
+        "id": "dc9a8a6e-03af-4dbf-b06e-ea04ff0e43ab",
+        "name": "catalog-CARD_DECLINED_ONLINE",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 50119,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:50119",
+        "control_url": "http://127.0.0.1:50120",
+        "wire_path": "runs\\catalog\\CARD_DECLINED_ONLINE-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "44fb8d83-d2d4-47cb-99ab-87e73bb564dd",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 9307,
+        "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+        "description": "Need Z report => (E21) General error in transaction"
+      },
+      "duration_ms": 2072.266200000002,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": true,
+          "errorCode": "E21",
+          "errorDescription": "General error in transaction",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "",
+            "date": "28/09/2026",
+            "time": "04:59:47",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "51",
+            "rrn": "000000000001",
+            "transactionResult": "CARD_DECLINED_ONLINE",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "b7e1c1e2f26f"
+          }
+        }
+      ]
+    },
+    {
+      "id": "APPROVED_OFFLINE",
+      "scenario": {
+        "id": "APPROVED_OFFLINE",
+        "transaction_result": "APPROVED_OFFLINE",
+        "error_code": "",
+        "response_code": "00"
+      },
+      "device": {
+        "id": "9f27575e-b7b2-4e70-badd-97956c018a3d",
+        "name": "catalog-APPROVED_OFFLINE",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 50121,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:50121",
+        "control_url": "http://127.0.0.1:50122",
+        "wire_path": "runs\\catalog\\APPROVED_OFFLINE-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "459745cd-c10e-406c-9ecb-e203c3038d68",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 200,
+      "body": {
+        "success": true,
+        "terminal_status": "None",
+        "code": 0,
+        "error": "",
+        "id": "a75703fa63a8",
+        "result": {
+          "terminal_id": "TEST0001",
+          "terminal": "TEST0001",
+          "merchant_id": "TEST-MERCHANT",
+          "pan": "4111XXXXXXXX1111",
+          "card_mask": "4111XXXXXXXX1111",
+          "rrn": "000000000001",
+          "auth_code": "123456",
+          "date_time": "28.09.2026 7:59:49",
+          "invoice_num": 1,
+          "receipt_no": "1",
+          "exp_date": "2609",
+          "card_holder": "TEST USER",
+          "owner_name": "TEST USER",
+          "payment_system": "VISA",
+          "totals_debit_num": 0,
+          "totals_debit_amt": 0,
+          "totals_credit_num": 0,
+          "totals_credit_amt": 0,
+          "totals_cancelled_num": 0,
+          "totals_cancelled_amt": 0,
+          "sign_verif": false,
+          "signature_required": false,
+          "txn_num": 0,
+          "amount": 100,
+          "value": 100,
+          "add_amount": 0,
+          "discountedAmount": 0,
+          "txn_type": 1,
+          "entry_mode": 3,
+          "receipt": "",
+          "bank_acquirer": "SIMULATED",
+          "bank_name": "SIMULATED",
+          "acquirer_and_seller": "SIMULATED",
+          "provider_type": "POSCONTROL",
+          "additional_properties": {
+            "responseCode": "00",
+            "transactionResult": "APPROVED_OFFLINE",
+            "errorDetails": "",
+            "transactionUid": "a75703fa63a8"
+          }
+        }
+      },
+      "duration_ms": 2077.1051000000007,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "123456",
+            "date": "28/09/2026",
+            "time": "04:59:47",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "00",
+            "rrn": "000000000001",
+            "transactionResult": "APPROVED_OFFLINE",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "a75703fa63a8"
+          }
+        }
+      ]
+    },
+    {
+      "id": "KEY_ERROR",
+      "scenario": {
+        "id": "KEY_ERROR",
+        "transaction_result": "KEY_ERROR",
+        "error_code": "E21",
+        "response_code": "51"
+      },
+      "device": {
+        "id": "fbaa4aff-769f-4c36-ac08-f7d72bbc328f",
+        "name": "catalog-KEY_ERROR",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 50124,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:50124",
+        "control_url": "http://127.0.0.1:50125",
+        "wire_path": "runs\\catalog\\KEY_ERROR-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "abb649aa-aa88-47ed-bfb5-a0a61f2661f4",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 9307,
+        "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+        "description": "Need Z report => (E21) General error in transaction"
+      },
+      "duration_ms": 2083.392799999998,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": true,
+          "errorCode": "E21",
+          "errorDescription": "General error in transaction",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "",
+            "date": "28/09/2026",
+            "time": "04:59:47",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "51",
+            "rrn": "000000000001",
+            "transactionResult": "KEY_ERROR",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "9414a15fe364"
+          }
+        }
+      ]
+    },
+    {
+      "id": "BATCH_UPLOAD_NEEDED",
+      "scenario": {
+        "id": "BATCH_UPLOAD_NEEDED",
+        "transaction_result": "BATCH_UPLOAD_NEEDED",
+        "error_code": "E21",
+        "response_code": "51"
+      },
+      "device": {
+        "id": "66d20bf8-9e09-41cd-8088-a7d19aa03bf6",
+        "name": "catalog-BATCH_UPLOAD_NEEDED",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 50127,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:50127",
+        "control_url": "http://127.0.0.1:50128",
+        "wire_path": "runs\\catalog\\BATCH_UPLOAD_NEEDED-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "61aad861-0d55-4dc9-bf7d-77978f3942f9",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 9307,
+        "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+        "description": "Need Z report => (E21) General error in transaction"
+      },
+      "duration_ms": 2109.877199999999,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": true,
+          "errorCode": "E21",
+          "errorDescription": "General error in transaction",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "",
+            "date": "28/09/2026",
+            "time": "04:59:47",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "51",
+            "rrn": "000000000001",
+            "transactionResult": "BATCH_UPLOAD_NEEDED",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "b4f98c704c2d"
+          }
+        }
+      ]
+    },
+    {
+      "id": "SIGNATURE_VERIFICATION_ERROR",
+      "scenario": {
+        "id": "SIGNATURE_VERIFICATION_ERROR",
+        "transaction_result": "SIGNATURE_VERIFICATION_ERROR",
+        "error_code": "E21",
+        "response_code": "51"
+      },
+      "device": {
+        "id": "2178aa7a-60e6-480a-b281-98aa1c6023f1",
+        "name": "catalog-SIGNATURE_VERIFICATION_ERROR",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 50143,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:50143",
+        "control_url": "http://127.0.0.1:50144",
+        "wire_path": "runs\\catalog\\SIGNATURE_VERIFICATION_ERROR-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "1507c0cc-6fd6-4879-ba82-288c7ba2cc86",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 9307,
+        "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+        "description": "Need Z report => (E21) General error in transaction"
+      },
+      "duration_ms": 2100.0792,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": true,
+          "errorCode": "E21",
+          "errorDescription": "General error in transaction",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "",
+            "date": "28/09/2026",
+            "time": "04:59:49",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "51",
+            "rrn": "000000000001",
+            "transactionResult": "SIGNATURE_VERIFICATION_ERROR",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "9ab21cda0d05"
+          }
+        }
+      ]
+    },
+    {
+      "id": "COMPLETED",
+      "scenario": {
+        "id": "COMPLETED",
+        "transaction_result": "COMPLETED",
+        "error_code": "",
+        "response_code": "00"
+      },
+      "device": {
+        "id": "905f923d-cd9d-43bc-9f05-96841306ee6f",
+        "name": "catalog-COMPLETED",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 50145,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:50145",
+        "control_url": "http://127.0.0.1:50146",
+        "wire_path": "runs\\catalog\\COMPLETED-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "5aa1e81a-4530-4d88-8a53-fd49039f0205",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 200,
+      "body": {
+        "success": true,
+        "terminal_status": "None",
+        "code": 0,
+        "error": "",
+        "id": "50a0efaf2c76",
+        "result": {
+          "terminal_id": "TEST0001",
+          "terminal": "TEST0001",
+          "merchant_id": "TEST-MERCHANT",
+          "pan": "4111XXXXXXXX1111",
+          "card_mask": "4111XXXXXXXX1111",
+          "rrn": "000000000001",
+          "auth_code": "123456",
+          "date_time": "28.09.2026 7:59:51",
+          "invoice_num": 1,
+          "receipt_no": "1",
+          "exp_date": "2609",
+          "card_holder": "TEST USER",
+          "owner_name": "TEST USER",
+          "payment_system": "VISA",
+          "totals_debit_num": 0,
+          "totals_debit_amt": 0,
+          "totals_credit_num": 0,
+          "totals_credit_amt": 0,
+          "totals_cancelled_num": 0,
+          "totals_cancelled_amt": 0,
+          "sign_verif": false,
+          "signature_required": false,
+          "txn_num": 0,
+          "amount": 100,
+          "value": 100,
+          "add_amount": 0,
+          "discountedAmount": 0,
+          "txn_type": 1,
+          "entry_mode": 3,
+          "receipt": "",
+          "bank_acquirer": "SIMULATED",
+          "bank_name": "SIMULATED",
+          "acquirer_and_seller": "SIMULATED",
+          "provider_type": "POSCONTROL",
+          "additional_properties": {
+            "responseCode": "00",
+            "transactionResult": "COMPLETED",
+            "errorDetails": "",
+            "transactionUid": "50a0efaf2c76"
+          }
+        }
+      },
+      "duration_ms": 2121.4003999999986,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "123456",
+            "date": "28/09/2026",
+            "time": "04:59:49",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "00",
+            "rrn": "000000000001",
+            "transactionResult": "COMPLETED",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "50a0efaf2c76"
+          }
+        }
+      ]
+    },
+    {
+      "id": "APPROVED",
+      "scenario": {
+        "id": "APPROVED",
+        "transaction_result": "APPROVED",
+        "error_code": "",
+        "response_code": "00"
+      },
+      "device": {
+        "id": "c0a0aa1d-4e81-4f83-b4ce-17e39fb83b24",
+        "name": "catalog-APPROVED",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 50148,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:50148",
+        "control_url": "http://127.0.0.1:50149",
+        "wire_path": "runs\\catalog\\APPROVED-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "ce87a1f1-2fe7-4791-b450-62040ceb61a3",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 200,
+      "body": {
+        "success": true,
+        "terminal_status": "None",
+        "code": 0,
+        "error": "",
+        "id": "dd3b59b7851e",
+        "result": {
+          "terminal_id": "TEST0001",
+          "terminal": "TEST0001",
+          "merchant_id": "TEST-MERCHANT",
+          "pan": "4111XXXXXXXX1111",
+          "card_mask": "4111XXXXXXXX1111",
+          "rrn": "000000000001",
+          "auth_code": "123456",
+          "date_time": "28.09.2026 7:59:51",
+          "invoice_num": 1,
+          "receipt_no": "1",
+          "exp_date": "2609",
+          "card_holder": "TEST USER",
+          "owner_name": "TEST USER",
+          "payment_system": "VISA",
+          "totals_debit_num": 0,
+          "totals_debit_amt": 0,
+          "totals_credit_num": 0,
+          "totals_credit_amt": 0,
+          "totals_cancelled_num": 0,
+          "totals_cancelled_amt": 0,
+          "sign_verif": false,
+          "signature_required": false,
+          "txn_num": 0,
+          "amount": 100,
+          "value": 100,
+          "add_amount": 0,
+          "discountedAmount": 0,
+          "txn_type": 1,
+          "entry_mode": 3,
+          "receipt": "",
+          "bank_acquirer": "SIMULATED",
+          "bank_name": "SIMULATED",
+          "acquirer_and_seller": "SIMULATED",
+          "provider_type": "POSCONTROL",
+          "additional_properties": {
+            "responseCode": "00",
+            "transactionResult": "APPROVED",
+            "errorDetails": "",
+            "transactionUid": "dd3b59b7851e"
+          }
+        }
+      },
+      "duration_ms": 2130.387300000002,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "123456",
+            "date": "28/09/2026",
+            "time": "04:59:49",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "00",
+            "rrn": "000000000001",
+            "transactionResult": "APPROVED",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "dd3b59b7851e"
+          }
+        }
+      ]
+    },
+    {
+      "id": "IN_PROGRESS",
+      "scenario": {
+        "id": "IN_PROGRESS",
+        "transaction_result": "IN_PROGRESS",
+        "error_code": "E21",
+        "response_code": "51"
+      },
+      "device": {
+        "id": "1b24816c-0b86-40a9-a9be-c6fa216db4f9",
+        "name": "catalog-IN_PROGRESS",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 50152,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:50152",
+        "control_url": "http://127.0.0.1:50153",
+        "wire_path": "runs\\catalog\\IN_PROGRESS-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "fc8eb64e-1bc8-43f2-b56a-9ab820a8ebef",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 9307,
+        "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+        "description": "Need Z report => (E21) General error in transaction"
+      },
+      "duration_ms": 2128.757099999999,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": true,
+          "errorCode": "E21",
+          "errorDescription": "General error in transaction",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "",
+            "date": "28/09/2026",
+            "time": "04:59:49",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "51",
+            "rrn": "000000000001",
+            "transactionResult": "IN_PROGRESS",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "0ccf2c810440"
+          }
+        }
+      ]
+    },
+    {
+      "id": "FORCED_DECLINED_OFFLINE",
+      "scenario": {
+        "id": "FORCED_DECLINED_OFFLINE",
+        "transaction_result": "FORCED_DECLINED_OFFLINE",
+        "error_code": "E21",
+        "response_code": "51"
+      },
+      "device": {
+        "id": "7b17353a-b5dc-410d-b084-7ea8c344a652",
+        "name": "catalog-FORCED_DECLINED_OFFLINE",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 50167,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:50167",
+        "control_url": "http://127.0.0.1:50168",
+        "wire_path": "runs\\catalog\\FORCED_DECLINED_OFFLINE-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "bf9931a9-4a9b-4f51-8cfe-b409be6b3dd8",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 9307,
+        "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+        "description": "Need Z report => (E21) General error in transaction"
+      },
+      "duration_ms": 2062.4915,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": true,
+          "errorCode": "E21",
+          "errorDescription": "General error in transaction",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "",
+            "date": "28/09/2026",
+            "time": "04:59:52",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "51",
+            "rrn": "000000000001",
+            "transactionResult": "FORCED_DECLINED_OFFLINE",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "ca9c5d9ffae7"
+          }
+        }
+      ]
+    },
+    {
+      "id": "BATCH_CLOSE_NEEDED",
+      "scenario": {
+        "id": "BATCH_CLOSE_NEEDED",
+        "transaction_result": "BATCH_CLOSE_NEEDED",
+        "error_code": "E21",
+        "response_code": "51"
+      },
+      "device": {
+        "id": "cdc4e0fe-aedb-48d6-b0b2-3fd01fbcd813",
+        "name": "catalog-BATCH_CLOSE_NEEDED",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 50174,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:50174",
+        "control_url": "http://127.0.0.1:50175",
+        "wire_path": "runs\\catalog\\BATCH_CLOSE_NEEDED-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "d6497f1e-e410-4cb1-9bd1-d653204e9e00",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 9307,
+        "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+        "description": "Need Z report => (E21) General error in transaction"
+      },
+      "duration_ms": 2077.3191000000006,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": true,
+          "errorCode": "E21",
+          "errorDescription": "General error in transaction",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "",
+            "date": "28/09/2026",
+            "time": "04:59:52",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "51",
+            "rrn": "000000000001",
+            "transactionResult": "BATCH_CLOSE_NEEDED",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "344b0adaa70b"
+          }
+        }
+      ]
+    },
+    {
+      "id": "CANCELLED_BEFORE_START",
+      "scenario": {
+        "id": "CANCELLED_BEFORE_START",
+        "transaction_result": "CANCELLED_BEFORE_START",
+        "error_code": "E21",
+        "response_code": "51"
+      },
+      "device": {
+        "id": "7ed1b59b-652b-44ea-9154-c943a88fcd5c",
+        "name": "catalog-CANCELLED_BEFORE_START",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 50169,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:50169",
+        "control_url": "http://127.0.0.1:50170",
+        "wire_path": "runs\\catalog\\CANCELLED_BEFORE_START-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "c5b2249d-a3df-4c6e-912c-ef53abfaa527",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 9307,
+        "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+        "description": "Need Z report => (E21) General error in transaction"
+      },
+      "duration_ms": 2116.8136000000013,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": true,
+          "errorCode": "E21",
+          "errorDescription": "General error in transaction",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "",
+            "date": "28/09/2026",
+            "time": "04:59:52",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "51",
+            "rrn": "000000000001",
+            "transactionResult": "CANCELLED_BEFORE_START",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "271309d4c1f2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "PIN_ERROR",
+      "scenario": {
+        "id": "PIN_ERROR",
+        "transaction_result": "PIN_ERROR",
+        "error_code": "E21",
+        "response_code": "51"
+      },
+      "device": {
+        "id": "0e8ae7e5-1bb5-4f8c-92ca-404a3d2c5d7b",
+        "name": "catalog-PIN_ERROR",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 50171,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:50171",
+        "control_url": "http://127.0.0.1:50172",
+        "wire_path": "runs\\catalog\\PIN_ERROR-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "a0226ebc-ab9b-427b-b55f-d7509732fd57",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 9307,
+        "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+        "description": "Need Z report => (E21) General error in transaction"
+      },
+      "duration_ms": 2119.4275000000016,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": true,
+          "errorCode": "E21",
+          "errorDescription": "General error in transaction",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "",
+            "date": "28/09/2026",
+            "time": "04:59:52",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "51",
+            "rrn": "000000000001",
+            "transactionResult": "PIN_ERROR",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "ebac663eb366"
+          }
+        }
+      ]
+    },
+    {
+      "id": "OK",
+      "scenario": {
+        "id": "OK",
+        "transaction_result": "OK",
+        "error_code": "",
+        "response_code": "00"
+      },
+      "device": {
+        "id": "ea22593b-a774-4de7-8db2-b46a65129931",
+        "name": "catalog-OK",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 58071,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:58071",
+        "control_url": "http://127.0.0.1:58072",
+        "wire_path": "runs\\catalog\\OK-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "81046b28-d920-44d4-ad5f-672124867fa9",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 200,
+      "body": {
+        "success": true,
+        "terminal_status": "None",
+        "code": 0,
+        "error": "",
+        "id": "fd2bfd9647e4",
+        "result": {
+          "terminal_id": "TEST0001",
+          "terminal": "TEST0001",
+          "merchant_id": "TEST-MERCHANT",
+          "pan": "4111XXXXXXXX1111",
+          "card_mask": "4111XXXXXXXX1111",
+          "rrn": "000000000001",
+          "auth_code": "123456",
+          "date_time": "28.09.2026 7:59:56",
+          "invoice_num": 1,
+          "receipt_no": "1",
+          "exp_date": "2609",
+          "card_holder": "TEST USER",
+          "owner_name": "TEST USER",
+          "payment_system": "VISA",
+          "totals_debit_num": 0,
+          "totals_debit_amt": 0,
+          "totals_credit_num": 0,
+          "totals_credit_amt": 0,
+          "totals_cancelled_num": 0,
+          "totals_cancelled_amt": 0,
+          "sign_verif": false,
+          "signature_required": false,
+          "txn_num": 0,
+          "amount": 100,
+          "value": 100,
+          "add_amount": 0,
+          "discountedAmount": 0,
+          "txn_type": 1,
+          "entry_mode": 3,
+          "receipt": "",
+          "bank_acquirer": "SIMULATED",
+          "bank_name": "SIMULATED",
+          "acquirer_and_seller": "SIMULATED",
+          "provider_type": "POSCONTROL",
+          "additional_properties": {
+            "responseCode": "00",
+            "transactionResult": "OK",
+            "errorDetails": "",
+            "transactionUid": "fd2bfd9647e4"
+          }
+        }
+      },
+      "duration_ms": 2056.1429000000026,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "123456",
+            "date": "28/09/2026",
+            "time": "04:59:54",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "00",
+            "rrn": "000000000001",
+            "transactionResult": "OK",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "fd2bfd9647e4"
+          }
+        }
+      ]
+    },
+    {
+      "id": "PRINTER_ERROR",
+      "scenario": {
+        "id": "PRINTER_ERROR",
+        "transaction_result": "PRINTER_ERROR",
+        "error_code": "E21",
+        "response_code": "51"
+      },
+      "device": {
+        "id": "0f4bca62-9e56-4b25-ab72-b301be390fab",
+        "name": "catalog-PRINTER_ERROR",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 58074,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:58074",
+        "control_url": "http://127.0.0.1:58075",
+        "wire_path": "runs\\catalog\\PRINTER_ERROR-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "bb269fd9-a408-46a8-9b57-68ffbb2e6389",
+        "source_hashes": {
+          "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+          "model.mjs": "e00d5f9dfec26ba1437024f68e8399aa93bc6962363924f0491340754640151f",
+          "server.mjs": "408c03f2b5c72c93a56863dbf1f38eb45b87382aee13d25b8702bbd61a31313d"
+        }
+      },
+      "status": 503,
+      "body": {
+        "success": false,
+        "code": 9307,
+        "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+        "description": "Need Z report => (E21) General error in transaction"
+      },
+      "duration_ms": 2067.2573999999986,
+      "connection_error": null,
+      "ssi_responses": [
+        {
+          "method": "Purchase",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {}
+        },
+        {
+          "method": "GetStatus",
+          "error": false,
+          "errorCode": "",
+          "errorDescription": "",
+          "params": {},
+          "status": "S00"
+        },
+        {
+          "method": "GetLastResult",
+          "error": true,
+          "errorCode": "E21",
+          "errorDescription": "General error in transaction",
+          "params": {
+            "originalTrnName": "Purchase",
+            "transAmount": "100",
+            "authCode": "",
+            "date": "28/09/2026",
+            "time": "04:59:54",
+            "invoiceNum": "000001",
+            "bankName": "SIMULATED",
+            "merchantId": "TEST-MERCHANT",
+            "pan": "4111XXXXXXXX1111",
+            "responseCode": "51",
+            "rrn": "000000000001",
+            "transactionResult": "PRINTER_ERROR",
+            "terminalId": "TEST0001",
+            "posEntryMode": "CONTACTLESS",
+            "binName": "VISA",
+            "cardHolderName": "TEST USER",
+            "errorDetails": "",
+            "transactionUid": "3b618009b87b"
+          }
+        }
+      ]
+    }
+  ]
+}

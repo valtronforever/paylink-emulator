@@ -1,0 +1,28 @@
+{
+  "id": "timeout",
+  "ssi": {
+    "faults": {
+      "Purchase": "silence"
+    },
+    "request_errors": {
+      "GetResultByUid": "E20"
+    }
+  },
+  "emulator": {
+    "id": "timeout",
+    "outcome": "approved",
+    "reference_error": "transport_timeout"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+    "body": {
+      "amount": 100,
+      "merchant_id": "TEST-MERCHANT"
+    }
+  },
+  "timeout_ms": 210000,
+  "variable_fields": [
+    "id"
+  ]
+}
