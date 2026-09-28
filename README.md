@@ -2,6 +2,10 @@
 
 [Українська документація](README.uk.md)
 
+[Install, run and connect Inerix to localhost (Ukrainian)](docs/INSTALL_AND_USE.uk.md):
+macOS development, Linux CI, CLI/GUI scenarios, JavaScript and browser permissions;
+Windows instructions are included for the reference bench and alternate clients.
+
 A Rust terminal simulator for manual testing and browser automation, targeting **Checkbox Desktop PayLink 2.1.20 win-x86**. Run a headless local service in CI, control it with an API/CLI, or use a native GPUI terminal with a display, keypad and card/customer actions.
 
 **Documentation-based contract:** the profile targets PayLink 2.1.20 using the published setup/error documentation and the pinned build's API contract evidence. Physical terminal recordings are optional; they are not an acceptance gate. Defaults for undocumented behavior are listed in [the contract and assumptions](docs/DOCUMENTATION_CONTRACT.md). Reference compatibility remains unverified; the emulator cannot contact a bank or charge a real card.
