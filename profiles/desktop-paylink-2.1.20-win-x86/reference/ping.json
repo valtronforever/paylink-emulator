@@ -1,0 +1,37 @@
+{
+  "profile": "desktop-paylink-2.1.20-win-x86",
+  "evidence": {
+    "provenance": "real_paylink_simulated_ssi_json",
+    "installer_sha256": "62d0e7a539380937ecb5af2f1c50438e4b84a070de4a20c1c848c11a5e395491",
+    "executable_sha256": "85d1bf9280e7c63e1099ecc2db480813f439e68c41a5eca8a453094a948ab465",
+    "bank": "SIMULATED",
+    "protocol": "SSIJson",
+    "capture_date": "2026-09-28",
+    "ssi_revision": "1.4.6",
+    "ssi_sha256": "8e4b459ade28f4ee301de7751659d4bf365f9c0f2ac3508a6745a597158e1a65",
+    "scenario_id": "ping",
+    "raw_trace": "evidence/2026-09-28T04-24-23-137Z-f56bcf09-ping.json",
+    "raw_trace_sha256": "efe2ebbf689ca5cdf5f72e3ea3ba4a2c3c10710bd6a562290467baedac312032"
+  },
+  "request": {
+    "method": "GET",
+    "path": "/api/pos/00000000-0000-4000-8000-000000000001/ping"
+  },
+  "scenario": {
+    "id": "ping"
+  },
+  "response": {
+    "status": 200,
+    "content_type": "application/json",
+    "body": {
+      "success": true,
+      "terminal_status": "None",
+      "code": 0,
+      "message": "ping",
+      "error": ""
+    },
+    "duration_ms": 21.268299999999954
+  },
+  "variable_fields": [],
+  "id_mapping": []
+}

@@ -39,6 +39,13 @@ Errors use `{"error":{"code":"command_rejected","message":"..."}}` with 409 for 
 
 ## Scenario fields
 
+`reference_error` optionally selects the measured response mapping for SSI cases
+`E00`–`E22` or `transport_timeout` (see `SSI_FINDINGS.md`). Set a failure outcome
+and normal `error_id` for error scenarios. `transport_timeout` also permits
+`outcome=approved`: the recorded terminal completed before PayLink returned an
+HTTP error. This preserves the approval counter while returning recorded HTTP 503.
+These are explicit simulated-SSI mappings; the generic wiki error catalog is unchanged.
+
 `id`, `device_id`, optional exact `amount`/`merchant`, `uses` (1–10000), `mode` (`automatic`/`manual`), `outcome` (`approved`/`declined`/`error`), `error_id`, `failure_stage`, `timing`, `delivery`, `require_confirmation`, `manual_bank`, `seed`. Unknown fields are rejected. Amounts are 1–999999999 minor units. A first queued scenario for that device must match; mismatches do not skip to a later scenario or consume it.
 
 Timing fields are `connect_ms`, `card_ms`, `customer_ms`, `authorize_ms`, `confirm_ms`, `response_ms`, `timeout_ms`. Each is at most one hour; timeout must be positive. Stage defaults are 300/2000/500/1200/500 milliseconds; response delay defaults to zero and timeout to 120000. These are synthetic, configurable defaults.

@@ -1,0 +1,41 @@
+{
+  "origin": "http://127.0.0.1:13020",
+  "browser": "154.0.4258.37",
+  "loopback_permission": "default",
+  "inerix": "not_run_dependency_476",
+  "https_to_localhost": "not_run_no_trusted_harness_certificate",
+  "results": [
+    {
+      "target": "reference",
+      "scenario_id": "ping",
+      "origin": "http://127.0.0.1:13020",
+      "status": 200,
+      "body": "{\"success\":true,\"terminal_status\":\"None\",\"code\":0,\"message\":\"ping\",\"error\":\"\"}",
+      "elapsed_ms": 44.200000000186265
+    },
+    {
+      "target": "reference",
+      "scenario_id": "approved",
+      "origin": "http://127.0.0.1:13020",
+      "status": 200,
+      "body": "{\"success\":true,\"terminal_status\":\"None\",\"code\":0,\"error\":\"\",\"id\":\"a84a53ef83f8\",\"result\":{\"terminal_id\":\"TEST0001\",\"terminal\":\"TEST0001\",\"merchant_id\":\"TEST-MERCHANT\",\"pan\":\"4444 44** **** 1111\",\"card_mask\":\"4444 44** **** 1111\",\"rrn\":\"000000000001\",\"auth_code\":\"123456\",\"date_time\":\"28.09.2026 7:57:46\",\"invoice_num\":1,\"receipt_no\":\"1\",\"exp_date\":\"2609\",\"card_holder\":\"TEST CARD\",\"owner_name\":\"TEST CARD\",\"payment_system\":\"VISA\",\"totals_debit_num\":0,\"totals_debit_amt\":0,\"totals_credit_num\":0,\"totals_credit_amt\":0,\"totals_cancelled_num\":0,\"totals_cancelled_amt\":0,\"sign_verif\":false,\"signature_required\":false,\"txn_num\":0,\"amount\":100,\"value\":100,\"add_amount\":0,\"discountedAmount\":0,\"txn_type\":1,\"entry_mode\":3,\"receipt\":\"\",\"bank_acquirer\":\"TEST ACQUIRER / TEST MERCHANT\",\"bank_name\":\"TEST ACQUIRER / TEST MERCHANT\",\"acquirer_and_seller\":\"TEST ACQUIRER / TEST MERCHANT\",\"provider_type\":\"POSCONTROL\",\"additional_properties\":{\"responseCode\":\"0000\",\"transactionResult\":\"APPROVED-ONLINE\",\"errorDetails\":\"\",\"transactionUid\":\"a84a53ef83f8\"}}}",
+      "elapsed_ms": 2081.7999999998137
+    },
+    {
+      "target": "reference",
+      "scenario_id": "declined",
+      "origin": "http://127.0.0.1:13020",
+      "status": 503,
+      "body": "{\"success\":false,\"code\":9307,\"error\":\"Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.\",\"description\":\"Need Z report => (E21) General error in transaction\"}",
+      "elapsed_ms": 2087.800000000745
+    },
+    {
+      "target": "reference",
+      "scenario_id": "timeout",
+      "origin": "http://127.0.0.1:13020",
+      "status": 503,
+      "body": "{\"success\":false,\"code\":9016,\"error\":\"Вичерпано час очікування відповіді від терміналу. Перевірте параметри підключення до терміналу та сам термінал.\",\"description\":\"Timed out : Unable to read data from the transport connection: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.\"}",
+      "elapsed_ms": 166167.7999999998
+    }
+  ]
+}

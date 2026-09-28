@@ -1,0 +1,14 @@
+{
+  "id": "fragmented-ping",
+  "ssi": {
+    "fragment_bytes": 3,
+    "fragment_delay_ms": 1
+  },
+  "emulator": {
+    "id": "fragmented-ping"
+  },
+  "request": {
+    "method": "GET",
+    "path": "/api/pos/00000000-0000-4000-8000-000000000001/ping"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "origin": "http://127.0.0.1:13020",
+  "browser": "154.0.4258.37",
+  "loopback_permission": "default",
+  "inerix": "not_run_dependency_476",
+  "https_to_localhost": "not_run_no_trusted_harness_certificate",
+  "results": [
+    {
+      "target": "emulator",
+      "scenario_id": "ping",
+      "origin": "http://127.0.0.1:13020",
+      "status": 200,
+      "body": "{\"code\":0,\"error\":\"\",\"message\":\"ping\",\"success\":true,\"terminal_status\":\"None\"}",
+      "elapsed_ms": 6
+    },
+    {
+      "target": "emulator",
+      "scenario_id": "approved",
+      "origin": "http://127.0.0.1:13020",
+      "status": 200,
+      "body": "{\"code\":0,\"error\":\"\",\"id\":\"g30-op1\",\"result\":{\"acquirer_and_seller\":\"TEST ACQUIRER / TEST MERCHANT\",\"add_amount\":0,\"additional_properties\":{\"errorDetails\":\"\",\"responseCode\":\"0000\",\"transactionResult\":\"APPROVED-ONLINE\",\"transactionUid\":\"g30-op1\"},\"amount\":100,\"auth_code\":\"000043\",\"bank_acquirer\":\"TEST ACQUIRER / TEST MERCHANT\",\"bank_name\":\"TEST ACQUIRER / TEST MERCHANT\",\"card_holder\":\"TEST CARD\",\"card_mask\":\"4444 44** **** 1111\",\"date_time\":\"28.09.2026 4:56:07\",\"discountedAmount\":0,\"entry_mode\":3,\"exp_date\":\"2609\",\"invoice_num\":1,\"merchant_id\":\"TEST-MERCHANT\",\"owner_name\":\"TEST CARD\",\"pan\":\"4444 44** **** 1111\",\"payment_system\":\"VISA\",\"provider_type\":\"POSCONTROL\",\"receipt\":\"\",\"receipt_no\":\"1\",\"rrn\":\"000030000001\",\"sign_verif\":false,\"signature_required\":false,\"terminal\":\"00000000-0000-4000-8000-000000000001\",\"terminal_id\":\"00000000-0000-4000-8000-000000000001\",\"totals_cancelled_amt\":0,\"totals_cancelled_num\":0,\"totals_credit_amt\":0,\"totals_credit_num\":0,\"totals_debit_amt\":0,\"totals_debit_num\":0,\"txn_num\":0,\"txn_type\":1,\"value\":100},\"success\":true,\"terminal_status\":\"None\"}",
+      "elapsed_ms": 4029.5
+    },
+    {
+      "target": "emulator",
+      "scenario_id": "declined",
+      "origin": "http://127.0.0.1:13020",
+      "status": 503,
+      "body": "{\"code\":9307,\"description\":\"Need Z report => (E21) General error in transaction\",\"error\":\"Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.\",\"success\":false}",
+      "elapsed_ms": 4015.7999999998137
+    },
+    {
+      "target": "emulator",
+      "scenario_id": "timeout",
+      "origin": "http://127.0.0.1:13020",
+      "status": 503,
+      "body": "{\"code\":9016,\"description\":\"Timed out : Unable to read data from the transport connection: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.\",\"error\":\"Вичерпано час очікування відповіді від терміналу. Перевірте параметри підключення до терміналу та сам термінал.\",\"success\":false}",
+      "elapsed_ms": 4031
+    }
+  ]
+}

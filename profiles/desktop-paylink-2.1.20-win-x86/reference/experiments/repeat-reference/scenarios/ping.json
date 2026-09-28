@@ -1,0 +1,11 @@
+{
+  "id": "ping",
+  "ssi": {},
+  "emulator": {
+    "id": "ping"
+  },
+  "request": {
+    "method": "GET",
+    "path": "/api/pos/00000000-0000-4000-8000-000000000001/ping"
+  }
+}

@@ -38,11 +38,49 @@
       "source": "https://github.com/MakarovIgor/checkbox.paylink.php.sdk",
       "scope": "Provisional routes and response wrapper; NOT version-specific reference proof",
       "status": "secondary_unverified"
+    },
+    {
+      "source": "reference/",
+      "scope": "27 recorded HTTP response cases from real POSServer with simulated SSI JSON; no physical or bank verification",
+      "status": "runtime_recordings_scoped_to_simulator"
+    },
+    {
+      "source": "reference/experiments/index.json",
+      "scope": "27 fixture replays, 5 paired sequence checks, state/result catalog, repeated boundaries, transport, browser and simulator restart captures",
+      "status": "scoped_runtime_evidence_with_explicit_remaining_gaps"
     }
   ],
   "verified_banks": [],
   "verified_protocols": [],
-  "reference_traces": [],
+  "reference_traces": [
+    "reference/approved.json",
+    "reference/declined.json",
+    "reference/E00.json",
+    "reference/E01.json",
+    "reference/E02.json",
+    "reference/E03.json",
+    "reference/E04.json",
+    "reference/E05.json",
+    "reference/E06.json",
+    "reference/E07.json",
+    "reference/E08.json",
+    "reference/E09.json",
+    "reference/E10.json",
+    "reference/E11.json",
+    "reference/E12.json",
+    "reference/E13.json",
+    "reference/E14.json",
+    "reference/E15.json",
+    "reference/E16.json",
+    "reference/E17.json",
+    "reference/E18.json",
+    "reference/E19.json",
+    "reference/E20.json",
+    "reference/E21.json",
+    "reference/E22.json",
+    "reference/ping.json",
+    "reference/timeout.json"
+  ],
   "restart_policy": "Fresh in-memory model; exported journal is evidence and is not automatically replayed",
   "timing": {
     "kind": "synthetic configurable defaults",
@@ -66,7 +104,7 @@
     "reports",
     "automatic reconciliation",
     "purchase id/deduplication and confirmation fields",
-    "native status catalog beyond the 13 common wiki scenarios"
+    "Native status catalog beyond the 13 wiki scenarios and the 24 opt-in recorded SSI response mappings"
   ],
   "release_gate": "Pass documented-contract model/API/browser tests and cross-platform CI. Physical reference comparison is optional and must not block this documentation-based scope.",
   "reference_compatibility": "unverified",

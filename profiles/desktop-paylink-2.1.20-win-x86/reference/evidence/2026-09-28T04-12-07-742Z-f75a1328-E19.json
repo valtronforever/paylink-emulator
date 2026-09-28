@@ -1,0 +1,190 @@
+{
+  "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+  "scenario": {
+    "id": "E19",
+    "request": {
+      "method": "POST",
+      "path": "/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+      "body": {
+        "amount": 100,
+        "merchant_id": "TEST-MERCHANT"
+      }
+    },
+    "ssi": {
+      "request_errors": {
+        "Purchase": "E19"
+      }
+    },
+    "timeout_ms": 30000
+  },
+  "http": {
+    "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+    "scenario_id": "E19",
+    "start_utc": "2026-09-28T04:12:47.761Z",
+    "start_ms": 39699.7552,
+    "client_timeout_ms": 30000,
+    "request": {
+      "url": "http://127.0.0.1:9020/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": 44
+      },
+      "body": "{\"amount\":100,\"merchant_id\":\"TEST-MERCHANT\"}"
+    },
+    "status": 503,
+    "headers": {
+      "date": "Mon, 28 Sep 2026 04:12:47 GMT",
+      "content-type": "application/json",
+      "server": "Kestrel",
+      "transfer-encoding": "chunked"
+    },
+    "raw_headers": [
+      "Date",
+      "Mon, 28 Sep 2026 04:12:47 GMT",
+      "Content-Type",
+      "application/json",
+      "Server",
+      "Kestrel",
+      "Transfer-Encoding",
+      "chunked"
+    ],
+    "end_utc": "2026-09-28T04:12:47.780Z",
+    "duration_ms": 18.964799999994284,
+    "body_hex": "7b2273756363657373223a66616c73652c22636f6465223a393032342c226572726f72223a22d097d0b0d0b3d0b0d0bbd18cd0bdd0b020d0bfd0bed0bcd0b8d0bbd0bad0b02e20d097d0b2d0b5d180d0bdd196d182d18cd181d18f20d0b220d181d0bbd183d0b6d0b1d18320d0bfd196d0b4d182d180d0b8d0bcd0bad0b820436865636b626f782e222c226465736372697074696f6e223a224572726f72203d3e202845313929205472616e73616374696f6e20616d6f756e74206f7574206f66206c696d6974227d",
+    "body_text": "{\"success\":false,\"code\":9024,\"error\":\"Загальна помилка. Зверніться в службу підтримки Checkbox.\",\"description\":\"Error => (E19) Transaction amount out of limit\"}",
+    "body": {
+      "success": false,
+      "code": 9024,
+      "error": "Загальна помилка. Зверніться в службу підтримки Checkbox.",
+      "description": "Error => (E19) Transaction amount out of limit"
+    },
+    "connection_error": null
+  },
+  "ssi": [
+    {
+      "seq": 540,
+      "utc": "2026-09-28T04:12:47.768Z",
+      "elapsed_ms": 298430.92209999997,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E19",
+      "kind": "connected",
+      "connection_id": 56,
+      "peer": "127.0.0.1"
+    },
+    {
+      "seq": 541,
+      "utc": "2026-09-28T04:12:47.769Z",
+      "elapsed_ms": 298432.1833,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E19",
+      "kind": "bytes",
+      "connection_id": 56,
+      "direction": "rx",
+      "hex": "02660100877b226d6574686f64223a225075726368617365222c22706172616d73223a7b227472616e73616374696f6e556964223a22393537383463323938626630222c226d65726368616e744964223a22544553542d4d45524348414e54222c227472616e7343757272656e6379223a22393830222c227472616e73416d6f756e74223a22313030227d7d5a"
+    },
+    {
+      "seq": 542,
+      "utc": "2026-09-28T04:12:47.770Z",
+      "elapsed_ms": 298433.1209,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E19",
+      "kind": "frame",
+      "connection_id": 56,
+      "direction": "rx",
+      "hex": "02660100877b226d6574686f64223a225075726368617365222c22706172616d73223a7b227472616e73616374696f6e556964223a22393537383463323938626630222c226d65726368616e744964223a22544553542d4d45524348414e54222c227472616e7343757272656e6379223a22393830222c227472616e73416d6f756e74223a22313030227d7d5a",
+      "json": {
+        "method": "Purchase",
+        "params": {
+          "transactionUid": "95784c298bf0",
+          "merchantId": "TEST-MERCHANT",
+          "transCurrency": "980",
+          "transAmount": "100"
+        }
+      }
+    },
+    {
+      "seq": 543,
+      "utc": "2026-09-28T04:12:47.771Z",
+      "elapsed_ms": 298434.0095,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E19",
+      "kind": "response_prepared",
+      "connection_id": 56,
+      "json": {
+        "method": "Purchase",
+        "error": true,
+        "errorCode": "E19",
+        "errorDescription": "Transaction amount out of limit"
+      },
+      "fault": "normal"
+    },
+    {
+      "seq": 544,
+      "utc": "2026-09-28T04:12:47.772Z",
+      "elapsed_ms": 298434.8649,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E19",
+      "kind": "frame",
+      "connection_id": 56,
+      "direction": "tx",
+      "hex": "02660100697b226d6574686f64223a225075726368617365222c226572726f72223a747275652c226572726f72436f6465223a22453139222c226572726f724465736372697074696f6e223a225472616e73616374696f6e20616d6f756e74206f7574206f66206c696d6974227d0c",
+      "json": {
+        "method": "Purchase",
+        "error": true,
+        "errorCode": "E19",
+        "errorDescription": "Transaction amount out of limit"
+      }
+    },
+    {
+      "seq": 545,
+      "utc": "2026-09-28T04:12:47.774Z",
+      "elapsed_ms": 298436.66599999997,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E19",
+      "kind": "bytes",
+      "connection_id": 56,
+      "direction": "tx",
+      "hex": "02660100697b226d6574686f64223a225075726368617365222c226572726f72223a747275652c226572726f72436f6465223a22453139222c226572726f724465736372697074696f6e223a225472616e73616374696f6e20616d6f756e74206f7574206f66206c696d6974227d0c"
+    },
+    {
+      "seq": 546,
+      "utc": "2026-09-28T04:12:47.775Z",
+      "elapsed_ms": 298437.5882,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E19",
+      "kind": "response_written",
+      "connection_id": 56,
+      "method": "Purchase"
+    },
+    {
+      "seq": 547,
+      "utc": "2026-09-28T04:12:47.777Z",
+      "elapsed_ms": 298439.341,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E19",
+      "kind": "disconnected",
+      "connection_id": 56,
+      "pending_hex": ""
+    }
+  ],
+  "build": {
+    "commit": "32ea20432597141d9fab3effa646353a1405ffe6",
+    "dirty": true,
+    "executable_sha256": "85d1bf9280e7c63e1099ecc2db480813f439e68c41a5eca8a453094a948ab465",
+    "installer_sha256": "62d0e7a539380937ecb5af2f1c50438e4b84a070de4a20c1c848c11a5e395491",
+    "ssi": {
+      "revision": "1.4.6",
+      "date": "2026-09-12",
+      "wire_version": 1,
+      "sha256": "8e4b459ade28f4ee301de7751659d4bf365f9c0f2ac3508a6745a597158e1a65"
+    },
+    "host": {
+      "platform": "win32",
+      "release": "10.0.26200",
+      "version": "Windows 11 Home",
+      "architecture": "x64",
+      "node": "v24.16.0"
+    }
+  }
+}

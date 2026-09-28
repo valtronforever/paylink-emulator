@@ -1,8 +1,14 @@
 # Compatibility evidence
 
+Issue #9 now has real **PayLink + simulated SSI JSON** recordings, a terminal-side
+responder and a recorder. See [Windows runbook](WINDOWS_SSI_LAB.md) and
+[findings/remaining acceptance gaps](SSI_FINDINGS.md). This evidence does not
+verify physical terminals or banks. The success/ping shape is calibrated to the
+captured subset; broad error, timing and integration compatibility remains unverified.
+
 Target: **Checkbox Desktop PayLink 2.1.20, win-x86**. Emulator host platforms are independent of this target.
 
-The [manifest](../profiles/desktop-paylink-2.1.20-win-x86/manifest.json) records the official installer URL and SHA-256 actually computed on 2026-09-21. Acceptance follows the user’s documentation-only decision. Physical terminal comparison is optional and does not block delivery. See [documented scope and assumptions](DOCUMENTATION_CONTRACT.md). The executable has **not** been run against a physical terminal. API bodies, error channels, numeric codes, model-specific phases, timeout boundaries and browser headers remain **unverified**. Passing emulator tests proves its own model behaves consistently, not compatibility with a bank.
+The [manifest](../profiles/desktop-paylink-2.1.20-win-x86/manifest.json) records the official installer URL and SHA-256 actually computed on 2026-09-21. The original documentation-based acceptance gate remains unchanged; issue #9 adds a separate reference research gate. See [documented scope and assumptions](DOCUMENTATION_CONTRACT.md). The executable has **not** been run against a physical terminal. Recorded HTTP bodies/codes, busy behavior and browser HTTP requests are verified only for the supplied SSI simulator scenarios. The bench also measures native timeout boundaries, without claiming emulator timing equivalence. Other provider behavior and permission-granted HTTPS remain unverified. Passing emulator tests alone does not establish bank compatibility.
 
 ## Static evidence from the pinned build
 
@@ -14,7 +20,7 @@ Statically established facts applied to this draft:
 
 - The purchase DTO uses unsigned integer `amount` and string `merchant_id`. The model/control API still calls its configuration field `merchant`.
 - Discovery supports both `/api/devices` and `/api/pos/devices`, including the device ID variants. A missing configuration returns HTTP 404 with `loc`, `msg`, and `type` fields.
-- Ping of an unknown device returns HTTP 404 and native code 9524 (`InvalidTerminalId`). A concurrent purchase/ping against a locked device returns HTTP 400 and code 9009 (`DeviceBusy`). These are distinct from an injected terminal-error scenario.
+- Ping of an unknown device returns HTTP 404 and native code 9524 (`InvalidTerminalId`). Real SSI bench recordings corrected concurrent purchase/ping against a locked device to HTTP 503 and code 9009 (`DeviceBusy`). These are distinct from an injected terminal-error scenario.
 - `BaseResponseDTO` serializes `terminal_status` as a string and initializes `error` to an empty string. A purchase response carries an operation `id`. The provisional success body now follows these rules.
 - In `ResponseDTO`, `terminal` aliases `terminal_id`, `value` aliases `amount`, and `receipt_no` is the string form of numeric `invoice_num`. The test body no longer invents `card_name`, nested `code` or `commission` fields.
 

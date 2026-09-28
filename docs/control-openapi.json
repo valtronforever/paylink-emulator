@@ -1195,6 +1195,13 @@
                 "$ref": "#/components/schemas/Engine/$defs/Outcome",
                 "default": "approved"
               },
+              "reference_error": {
+                "default": null,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
               "require_confirmation": {
                 "default": false,
                 "type": "boolean"
@@ -1517,6 +1524,13 @@
           "outcome": {
             "$ref": "#/components/schemas/Scenario/$defs/Outcome",
             "default": "approved"
+          },
+          "reference_error": {
+            "default": null,
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "require_confirmation": {
             "default": false,

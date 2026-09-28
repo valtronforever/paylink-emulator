@@ -1,0 +1,190 @@
+{
+  "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+  "scenario": {
+    "id": "E01",
+    "request": {
+      "method": "POST",
+      "path": "/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+      "body": {
+        "amount": 100,
+        "merchant_id": "TEST-MERCHANT"
+      }
+    },
+    "ssi": {
+      "request_errors": {
+        "Purchase": "E01"
+      }
+    },
+    "timeout_ms": 30000
+  },
+  "http": {
+    "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+    "scenario_id": "E01",
+    "start_utc": "2026-09-28T04:12:09.394Z",
+    "start_ms": 1332.9005000000002,
+    "client_timeout_ms": 30000,
+    "request": {
+      "url": "http://127.0.0.1:9020/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": 44
+      },
+      "body": "{\"amount\":100,\"merchant_id\":\"TEST-MERCHANT\"}"
+    },
+    "status": 503,
+    "headers": {
+      "date": "Mon, 28 Sep 2026 04:12:09 GMT",
+      "content-type": "application/json",
+      "server": "Kestrel",
+      "transfer-encoding": "chunked"
+    },
+    "raw_headers": [
+      "Date",
+      "Mon, 28 Sep 2026 04:12:09 GMT",
+      "Content-Type",
+      "application/json",
+      "Server",
+      "Kestrel",
+      "Transfer-Encoding",
+      "chunked"
+    ],
+    "end_utc": "2026-09-28T04:12:09.421Z",
+    "duration_ms": 26.943599999999833,
+    "body_hex": "7b2273756363657373223a66616c73652c22636f6465223a393032322c226572726f72223a22d0a2d0b5d180d0bcd196d0bdd0b0d0bb20d0bdd0b520d0bfd196d0b4d182d180d0b8d0bcd183d19420d0bfd0bed182d0bed187d0bdd0b8d0b920d182d0b8d0bf20d0bfd180d0bed182d0bed0bad0bed0bbd1832e20d09fd0bed182d180d196d0b1d0bdd0be20d0b7d0b2d0b5d180d0bdd183d182d0b8d181d18f20d0b220d0b1d0b0d0bdd0ba2e222c226465736372697074696f6e223a225468652070726f746f636f6c206973206e6f7420737570706f72746564203d3e2028453031292050726f746f636f6c2076657273696f6e206973206e6f7420737570706f7274656420627920746865207465726d696e616c227d",
+    "body_text": "{\"success\":false,\"code\":9022,\"error\":\"Термінал не підтримує поточний тип протоколу. Потрібно звернутися в банк.\",\"description\":\"The protocol is not supported => (E01) Protocol version is not supported by the terminal\"}",
+    "body": {
+      "success": false,
+      "code": 9022,
+      "error": "Термінал не підтримує поточний тип протоколу. Потрібно звернутися в банк.",
+      "description": "The protocol is not supported => (E01) Protocol version is not supported by the terminal"
+    },
+    "connection_error": null
+  },
+  "ssi": [
+    {
+      "seq": 128,
+      "utc": "2026-09-28T04:12:09.405Z",
+      "elapsed_ms": 260067.9728,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E01",
+      "kind": "connected",
+      "connection_id": 14,
+      "peer": "127.0.0.1"
+    },
+    {
+      "seq": 129,
+      "utc": "2026-09-28T04:12:09.407Z",
+      "elapsed_ms": 260069.39789999998,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E01",
+      "kind": "bytes",
+      "connection_id": 14,
+      "direction": "rx",
+      "hex": "02660100877b226d6574686f64223a225075726368617365222c22706172616d73223a7b227472616e73616374696f6e556964223a22396162323762653464376335222c226d65726368616e744964223a22544553542d4d45524348414e54222c227472616e7343757272656e6379223a22393830222c227472616e73416d6f756e74223a22313030227d7d00"
+    },
+    {
+      "seq": 130,
+      "utc": "2026-09-28T04:12:09.408Z",
+      "elapsed_ms": 260070.79869999998,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E01",
+      "kind": "frame",
+      "connection_id": 14,
+      "direction": "rx",
+      "hex": "02660100877b226d6574686f64223a225075726368617365222c22706172616d73223a7b227472616e73616374696f6e556964223a22396162323762653464376335222c226d65726368616e744964223a22544553542d4d45524348414e54222c227472616e7343757272656e6379223a22393830222c227472616e73416d6f756e74223a22313030227d7d00",
+      "json": {
+        "method": "Purchase",
+        "params": {
+          "transactionUid": "9ab27be4d7c5",
+          "merchantId": "TEST-MERCHANT",
+          "transCurrency": "980",
+          "transAmount": "100"
+        }
+      }
+    },
+    {
+      "seq": 131,
+      "utc": "2026-09-28T04:12:09.409Z",
+      "elapsed_ms": 260071.9314,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E01",
+      "kind": "response_prepared",
+      "connection_id": 14,
+      "json": {
+        "method": "Purchase",
+        "error": true,
+        "errorCode": "E01",
+        "errorDescription": "Protocol version is not supported by the terminal"
+      },
+      "fault": "normal"
+    },
+    {
+      "seq": 132,
+      "utc": "2026-09-28T04:12:09.410Z",
+      "elapsed_ms": 260072.9244,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E01",
+      "kind": "frame",
+      "connection_id": 14,
+      "direction": "tx",
+      "hex": "026601007b7b226d6574686f64223a225075726368617365222c226572726f72223a747275652c226572726f72436f6465223a22453031222c226572726f724465736372697074696f6e223a2250726f746f636f6c2076657273696f6e206973206e6f7420737570706f7274656420627920746865207465726d696e616c227d54",
+      "json": {
+        "method": "Purchase",
+        "error": true,
+        "errorCode": "E01",
+        "errorDescription": "Protocol version is not supported by the terminal"
+      }
+    },
+    {
+      "seq": 133,
+      "utc": "2026-09-28T04:12:09.412Z",
+      "elapsed_ms": 260074.4888,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E01",
+      "kind": "bytes",
+      "connection_id": 14,
+      "direction": "tx",
+      "hex": "026601007b7b226d6574686f64223a225075726368617365222c226572726f72223a747275652c226572726f72436f6465223a22453031222c226572726f724465736372697074696f6e223a2250726f746f636f6c2076657273696f6e206973206e6f7420737570706f7274656420627920746865207465726d696e616c227d54"
+    },
+    {
+      "seq": 134,
+      "utc": "2026-09-28T04:12:09.413Z",
+      "elapsed_ms": 260075.6807,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E01",
+      "kind": "response_written",
+      "connection_id": 14,
+      "method": "Purchase"
+    },
+    {
+      "seq": 135,
+      "utc": "2026-09-28T04:12:09.415Z",
+      "elapsed_ms": 260077.8087,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E01",
+      "kind": "disconnected",
+      "connection_id": 14,
+      "pending_hex": ""
+    }
+  ],
+  "build": {
+    "commit": "32ea20432597141d9fab3effa646353a1405ffe6",
+    "dirty": true,
+    "executable_sha256": "85d1bf9280e7c63e1099ecc2db480813f439e68c41a5eca8a453094a948ab465",
+    "installer_sha256": "62d0e7a539380937ecb5af2f1c50438e4b84a070de4a20c1c848c11a5e395491",
+    "ssi": {
+      "revision": "1.4.6",
+      "date": "2026-09-12",
+      "wire_version": 1,
+      "sha256": "8e4b459ade28f4ee301de7751659d4bf365f9c0f2ac3508a6745a597158e1a65"
+    },
+    "host": {
+      "platform": "win32",
+      "release": "10.0.26200",
+      "version": "Windows 11 Home",
+      "architecture": "x64",
+      "node": "v24.16.0"
+    }
+  }
+}

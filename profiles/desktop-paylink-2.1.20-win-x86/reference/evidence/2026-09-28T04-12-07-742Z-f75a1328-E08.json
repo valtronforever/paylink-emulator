@@ -1,0 +1,190 @@
+{
+  "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+  "scenario": {
+    "id": "E08",
+    "request": {
+      "method": "POST",
+      "path": "/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+      "body": {
+        "amount": 100,
+        "merchant_id": "TEST-MERCHANT"
+      }
+    },
+    "ssi": {
+      "request_errors": {
+        "Purchase": "E08"
+      }
+    },
+    "timeout_ms": 30000
+  },
+  "http": {
+    "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+    "scenario_id": "E08",
+    "start_utc": "2026-09-28T04:12:09.731Z",
+    "start_ms": 1669.5641,
+    "client_timeout_ms": 30000,
+    "request": {
+      "url": "http://127.0.0.1:9020/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": 44
+      },
+      "body": "{\"amount\":100,\"merchant_id\":\"TEST-MERCHANT\"}"
+    },
+    "status": 503,
+    "headers": {
+      "date": "Mon, 28 Sep 2026 04:12:09 GMT",
+      "content-type": "application/json",
+      "server": "Kestrel",
+      "transfer-encoding": "chunked"
+    },
+    "raw_headers": [
+      "Date",
+      "Mon, 28 Sep 2026 04:12:09 GMT",
+      "Content-Type",
+      "application/json",
+      "Server",
+      "Kestrel",
+      "Transfer-Encoding",
+      "chunked"
+    ],
+    "end_utc": "2026-09-28T04:12:09.753Z",
+    "duration_ms": 22.51859999999988,
+    "body_hex": "7b2273756363657373223a66616c73652c22636f6465223a393330342c226572726f72223a22d09fd0b5d180d0b5d180d0b8d0b2d0b0d0bdd0bdd18f20d0bed0bfd0b5d180d0b0d186d196d19720d0b7d0b0d0b1d0bed180d0bed0bdd0b5d0bdd0b52e20d09ed187d196d0bad183d0b9d182d0b520d197d19720d0b7d0b0d0b2d0b5d180d188d0b5d0bdd0bdd18f2e222c226465736372697074696f6e223a22496e746572727570742070726f68696269746564203d3e20284530382920496e746572727570742070726f68696269746564227d",
+    "body_text": "{\"success\":false,\"code\":9304,\"error\":\"Переривання операції заборонене. Очікуйте її завершення.\",\"description\":\"Interrupt prohibited => (E08) Interrupt prohibited\"}",
+    "body": {
+      "success": false,
+      "code": 9304,
+      "error": "Переривання операції заборонене. Очікуйте її завершення.",
+      "description": "Interrupt prohibited => (E08) Interrupt prohibited"
+    },
+    "connection_error": null
+  },
+  "ssi": [
+    {
+      "seq": 198,
+      "utc": "2026-09-28T04:12:09.741Z",
+      "elapsed_ms": 260403.4462,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E08",
+      "kind": "connected",
+      "connection_id": 21,
+      "peer": "127.0.0.1"
+    },
+    {
+      "seq": 199,
+      "utc": "2026-09-28T04:12:09.742Z",
+      "elapsed_ms": 260404.78889999999,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E08",
+      "kind": "bytes",
+      "connection_id": 21,
+      "direction": "rx",
+      "hex": "02660100877b226d6574686f64223a225075726368617365222c22706172616d73223a7b227472616e73616374696f6e556964223a22356362383166646337393062222c226d65726368616e744964223a22544553542d4d45524348414e54222c227472616e7343757272656e6379223a22393830222c227472616e73416d6f756e74223a22313030227d7d09"
+    },
+    {
+      "seq": 200,
+      "utc": "2026-09-28T04:12:09.743Z",
+      "elapsed_ms": 260406.014,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E08",
+      "kind": "frame",
+      "connection_id": 21,
+      "direction": "rx",
+      "hex": "02660100877b226d6574686f64223a225075726368617365222c22706172616d73223a7b227472616e73616374696f6e556964223a22356362383166646337393062222c226d65726368616e744964223a22544553542d4d45524348414e54222c227472616e7343757272656e6379223a22393830222c227472616e73416d6f756e74223a22313030227d7d09",
+      "json": {
+        "method": "Purchase",
+        "params": {
+          "transactionUid": "5cb81fdc790b",
+          "merchantId": "TEST-MERCHANT",
+          "transCurrency": "980",
+          "transAmount": "100"
+        }
+      }
+    },
+    {
+      "seq": 201,
+      "utc": "2026-09-28T04:12:09.744Z",
+      "elapsed_ms": 260407.1095,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E08",
+      "kind": "response_prepared",
+      "connection_id": 21,
+      "json": {
+        "method": "Purchase",
+        "error": true,
+        "errorCode": "E08",
+        "errorDescription": "Interrupt prohibited"
+      },
+      "fault": "normal"
+    },
+    {
+      "seq": 202,
+      "utc": "2026-09-28T04:12:09.745Z",
+      "elapsed_ms": 260408.3136,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E08",
+      "kind": "frame",
+      "connection_id": 21,
+      "direction": "tx",
+      "hex": "026601005e7b226d6574686f64223a225075726368617365222c226572726f72223a747275652c226572726f72436f6465223a22453038222c226572726f724465736372697074696f6e223a22496e746572727570742070726f68696269746564227d23",
+      "json": {
+        "method": "Purchase",
+        "error": true,
+        "errorCode": "E08",
+        "errorDescription": "Interrupt prohibited"
+      }
+    },
+    {
+      "seq": 203,
+      "utc": "2026-09-28T04:12:09.747Z",
+      "elapsed_ms": 260409.577,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E08",
+      "kind": "bytes",
+      "connection_id": 21,
+      "direction": "tx",
+      "hex": "026601005e7b226d6574686f64223a225075726368617365222c226572726f72223a747275652c226572726f72436f6465223a22453038222c226572726f724465736372697074696f6e223a22496e746572727570742070726f68696269746564227d23"
+    },
+    {
+      "seq": 204,
+      "utc": "2026-09-28T04:12:09.748Z",
+      "elapsed_ms": 260410.5833,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E08",
+      "kind": "response_written",
+      "connection_id": 21,
+      "method": "Purchase"
+    },
+    {
+      "seq": 205,
+      "utc": "2026-09-28T04:12:09.750Z",
+      "elapsed_ms": 260412.68769999998,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E08",
+      "kind": "disconnected",
+      "connection_id": 21,
+      "pending_hex": ""
+    }
+  ],
+  "build": {
+    "commit": "32ea20432597141d9fab3effa646353a1405ffe6",
+    "dirty": true,
+    "executable_sha256": "85d1bf9280e7c63e1099ecc2db480813f439e68c41a5eca8a453094a948ab465",
+    "installer_sha256": "62d0e7a539380937ecb5af2f1c50438e4b84a070de4a20c1c848c11a5e395491",
+    "ssi": {
+      "revision": "1.4.6",
+      "date": "2026-09-12",
+      "wire_version": 1,
+      "sha256": "8e4b459ade28f4ee301de7751659d4bf365f9c0f2ac3508a6745a597158e1a65"
+    },
+    "host": {
+      "platform": "win32",
+      "release": "10.0.26200",
+      "version": "Windows 11 Home",
+      "architecture": "x64",
+      "node": "v24.16.0"
+    }
+  }
+}

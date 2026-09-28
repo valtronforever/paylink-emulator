@@ -1,4 +1,80 @@
 use paylink_core::*;
+#[test]
+fn reference_errors_require_failure_and_preserve_bank_outcome() {
+    assert!(
+        Scenario {
+            reference_error: Some("E21".into()),
+            ..Scenario::default()
+        }
+        .validate()
+        .is_err()
+    );
+    assert!(
+        Scenario {
+            reference_error: Some("E99".into()),
+            outcome: Outcome::Declined,
+            ..Scenario::default()
+        }
+        .validate()
+        .is_err()
+    );
+    let mut e = Engine::default();
+    e.arm(Scenario {
+        reference_error: Some("E21".into()),
+        outcome: Outcome::Declined,
+        ..instant()
+    })
+    .unwrap();
+    let id = e.start(DEVICE_ID, 100, None).unwrap();
+    assert_eq!(e.result(&id).unwrap()["code"], 9307);
+    assert_eq!(e.counters.approvals, 0);
+}
+
+#[test]
+fn approved_shape_matches_recorded_paylink_with_simulated_ssi() {
+    let fixture: serde_json::Value = serde_json::from_str(include_str!(
+        "../../../profiles/desktop-paylink-2.1.20-win-x86/reference/approved.json"
+    ))
+    .unwrap();
+    let date = chrono::NaiveDate::parse_from_str(
+        fixture["evidence"]["capture_date"].as_str().unwrap(),
+        "%Y-%m-%d",
+    )
+    .unwrap();
+    let mut e = Engine::default().with_epoch(
+        date.and_hms_opt(0, 0, 0)
+            .unwrap()
+            .and_utc()
+            .timestamp_millis() as u64,
+    );
+    e.arm(instant()).unwrap();
+    let id = e.start(DEVICE_ID, 100, Some("TEST-MERCHANT")).unwrap();
+    let mut actual = e.result(&id).unwrap();
+    let mut expected = fixture["response"]["body"].clone();
+    assert_eq!(
+        actual["id"],
+        actual["result"]["additional_properties"]["transactionUid"]
+    );
+    for path in fixture["variable_fields"].as_array().unwrap() {
+        let pointer = format!("/{}", path.as_str().unwrap().replace('.', "/"));
+        let a = actual.pointer_mut(&pointer).unwrap();
+        let b = expected.pointer_mut(&pointer).unwrap();
+        assert_eq!(a.is_string(), b.is_string(), "{pointer}");
+        assert_eq!(a.is_number(), b.is_number(), "{pointer}");
+        *a = serde_json::Value::Null;
+        *b = serde_json::Value::Null;
+    }
+    for mapping in fixture["id_mapping"].as_array().unwrap() {
+        for path in mapping["paths"].as_array().unwrap() {
+            let pointer = format!("/{}", path.as_str().unwrap().replace('.', "/"));
+            let value = actual.pointer_mut(&pointer).unwrap();
+            assert_eq!(value, &mapping["emulator"]);
+            *value = mapping["reference"].clone();
+        }
+    }
+    assert_eq!(actual, expected);
+}
+
 fn instant() -> Scenario {
     Scenario {
         timing: Timing {

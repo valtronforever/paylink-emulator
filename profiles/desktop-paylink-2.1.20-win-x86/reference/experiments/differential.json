@@ -1,0 +1,388 @@
+{
+  "profile": "desktop-paylink-2.1.20-win-x86",
+  "status": "verified",
+  "verified": 27,
+  "mismatched": 0,
+  "skipped": 0,
+  "errors": 0,
+  "results": [
+    {
+      "file": "approved.json",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 2104.8764,
+      "emulator_ms": 4039.2955,
+      "classification": null
+    },
+    {
+      "file": "declined.json",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 2055.5391999999997,
+      "emulator_ms": 4027.4957000000004,
+      "classification": null
+    },
+    {
+      "file": "E00.json",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 28.607499999999845,
+      "emulator_ms": 4024.4781999999996,
+      "classification": null
+    },
+    {
+      "file": "E01.json",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 26.943599999999833,
+      "emulator_ms": 4013.3621999999996,
+      "classification": null
+    },
+    {
+      "file": "E02.json",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 26.448699999999917,
+      "emulator_ms": 4012.228500000001,
+      "classification": null
+    },
+    {
+      "file": "E03.json",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 31.10850000000005,
+      "emulator_ms": 4010.645999999997,
+      "classification": null
+    },
+    {
+      "file": "E04.json",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 23.074699999999893,
+      "emulator_ms": 4021.193299999999,
+      "classification": null
+    },
+    {
+      "file": "E05.json",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 22.270300000000134,
+      "emulator_ms": 4017.7815999999984,
+      "classification": null
+    },
+    {
+      "file": "E06.json",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 23.521799999999985,
+      "emulator_ms": 4017.9156000000003,
+      "classification": null
+    },
+    {
+      "file": "E07.json",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 22.405199999999695,
+      "emulator_ms": 4016.515999999996,
+      "classification": null
+    },
+    {
+      "file": "E08.json",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 22.51859999999988,
+      "emulator_ms": 4004.4167000000016,
+      "classification": null
+    },
+    {
+      "file": "E09.json",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 23.6541000000002,
+      "emulator_ms": 4011.750899999999,
+      "classification": null
+    },
+    {
+      "file": "E10.json",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 23220.088099999997,
+      "emulator_ms": 4012.148500000003,
+      "classification": null
+    },
+    {
+      "file": "E11.json",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 2076.985099999998,
+      "emulator_ms": 4024.244700000003,
+      "classification": null
+    },
+    {
+      "file": "E12.json",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 2070.0882999999994,
+      "emulator_ms": 4010.354499999994,
+      "classification": null
+    },
+    {
+      "file": "E13.json",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 2066.131999999998,
+      "emulator_ms": 4010.4177999999956,
+      "classification": null
+    },
+    {
+      "file": "E14.json",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 2060.373300000003,
+      "emulator_ms": 4020.2244999999966,
+      "classification": null
+    },
+    {
+      "file": "E15.json",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 2062.593200000003,
+      "emulator_ms": 4014.4107000000076,
+      "classification": null
+    },
+    {
+      "file": "E16.json",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 2088.246300000006,
+      "emulator_ms": 4020.4616000000096,
+      "classification": null
+    },
+    {
+      "file": "E17.json",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 2083.006999999998,
+      "emulator_ms": 4010.965299999996,
+      "classification": null
+    },
+    {
+      "file": "E18.json",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 20.325400000001537,
+      "emulator_ms": 4011.7667000000074,
+      "classification": null
+    },
+    {
+      "file": "E19.json",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 18.964799999994284,
+      "emulator_ms": 4019.3647000000055,
+      "classification": null
+    },
+    {
+      "file": "E20.json",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 2075.1452999999965,
+      "emulator_ms": 4013.2291000000114,
+      "classification": null
+    },
+    {
+      "file": "E21.json",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 2058.2909,
+      "emulator_ms": 4013.653600000005,
+      "classification": null
+    },
+    {
+      "file": "E22.json",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 2063.969799999999,
+      "emulator_ms": 4008.4551999999967,
+      "classification": null
+    },
+    {
+      "file": "ping.json",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 21.268299999999954,
+      "emulator_ms": 4.783500000005006,
+      "classification": null
+    },
+    {
+      "file": "timeout.json",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 166184.4786,
+      "emulator_ms": 4023.830799999996,
+      "classification": null
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "profile": "desktop-paylink-2.1.20-win-x86",
+  "evidence": {
+    "provenance": "real_paylink_simulated_ssi_json",
+    "installer_sha256": "62d0e7a539380937ecb5af2f1c50438e4b84a070de4a20c1c848c11a5e395491",
+    "executable_sha256": "85d1bf9280e7c63e1099ecc2db480813f439e68c41a5eca8a453094a948ab465",
+    "bank": "SIMULATED",
+    "protocol": "SSIJson",
+    "capture_date": "2026-09-28",
+    "ssi_revision": "1.4.6",
+    "ssi_sha256": "8e4b459ade28f4ee301de7751659d4bf365f9c0f2ac3508a6745a597158e1a65",
+    "scenario_id": "E07",
+    "raw_trace": "evidence/2026-09-28T04-12-07-742Z-f75a1328-E07.json",
+    "raw_trace_sha256": "dee1ba9871f3036485389bbf3ebb45403c2fd48e8021540e33153c684cac4892"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+    "body": {
+      "amount": 100,
+      "merchant_id": "TEST-MERCHANT"
+    }
+  },
+  "scenario": {
+    "id": "E07",
+    "outcome": "error",
+    "error_id": "terminal_general",
+    "reference_error": "E07"
+  },
+  "response": {
+    "status": 503,
+    "content_type": "application/json",
+    "body": {
+      "success": false,
+      "code": 9303,
+      "error": "Не знайдено торговця з вказаним Merchant ID. Перевірте в параметрах підключення до терміналу значення Merchant ID. В разі потреби зверніться до служби підтримки банку.",
+      "description": "Merchant Id is not found => (E07) Merchant Id is not found"
+    },
+    "duration_ms": 22.405199999999695
+  },
+  "variable_fields": [],
+  "id_mapping": []
+}

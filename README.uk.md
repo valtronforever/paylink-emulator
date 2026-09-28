@@ -2,9 +2,18 @@
 
 Кросплатформений емулятор еквайрингового термінала на Rust для ручних перевірок і UI-тестів у браузері. Цільовий профіль — **Checkbox Desktop PayLink 2.1.20 win-x86**. Сам емулятор запускається на Linux, macOS та Windows.
 
+**Почніть тут:** [встановлення, запуск і підключення Inerix через localhost](docs/INSTALL_AND_USE.uk.md).
+Основний шлях — macOS для розробки й Linux для CI; також описано Windows,
+CLI/GUI, JavaScript-приклад, CORS та дозволи браузера.
+
 Профіль має статус **documentation_based**: працюємо за документацією PayLink 2.1.20, без обов’язкового реального стенда. Усі 13 поширених документованих випадків мають автоматизовані перевірки. Затримки та поведінку, яку джерела не визначають точно, описано як [налаштовувані припущення](docs/DOCUMENTATION_CONTRACT.md). Стендове порівняння залишається додатковою можливістю, а `reference_compatibility` — `unverified`. Емулятор не проводить справжніх платежів.
 
 ## Запуск
+
+Для дослідження зі справжнім PayLink додано [Windows-стенд SSI JSON](docs/WINDOWS_SSI_LAB.md).
+Емулятор узгоджено з 27 записаними HTTP-випадками та 5 перевірками конкурентності
+й фрагментації. [Висновки й неперевірені випадки](docs/SSI_FINDINGS.md) відокремлюють
+ці результати від фізичної або банківської сумісності.
 
 Потрібен [Rust](https://rustup.rs/). Версію компілятора зафіксовано у `rust-toolchain.toml`.
 
@@ -73,3 +82,8 @@ npm run test:browser
 - [Версійний профіль](profiles/desktop-paylink-2.1.20-win-x86/manifest.json), [межі сумісності та калібрування](docs/COMPATIBILITY.md).
 - [Задачі репозиторію](https://github.com/valtronforever/paylink-emulator/issues), [інтеграція Inerix](https://github.com/valtronforever/inerix/issues/476).
 - Офіційні джерела: [підключення PayLink](https://wiki.checkbox.ua/app/pc/portal_acquiring), [поширені помилки](https://wiki.checkbox.ua/app/pc/desktop_paylink_errors).
+# Windows-стенд SSI JSON
+
+Для дослідження сумісності зі справжнім PayLink див. [інструкцію стенду](docs/WINDOWS_SSI_LAB.md)
+та [записані спостереження й межі перевірки](docs/SSI_FINDINGS.md). Headless SSI-симулятор
+і recorder не потребують фізичного термінала або GPUI.

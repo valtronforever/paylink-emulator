@@ -1,0 +1,190 @@
+{
+  "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+  "scenario": {
+    "id": "E00",
+    "request": {
+      "method": "POST",
+      "path": "/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+      "body": {
+        "amount": 100,
+        "merchant_id": "TEST-MERCHANT"
+      }
+    },
+    "ssi": {
+      "request_errors": {
+        "Purchase": "E00"
+      }
+    },
+    "timeout_ms": 30000
+  },
+  "http": {
+    "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+    "scenario_id": "E00",
+    "start_utc": "2026-09-28T04:12:09.335Z",
+    "start_ms": 1274.0663,
+    "client_timeout_ms": 30000,
+    "request": {
+      "url": "http://127.0.0.1:9020/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": 44
+      },
+      "body": "{\"amount\":100,\"merchant_id\":\"TEST-MERCHANT\"}"
+    },
+    "status": 503,
+    "headers": {
+      "date": "Mon, 28 Sep 2026 04:12:09 GMT",
+      "content-type": "application/json",
+      "server": "Kestrel",
+      "transfer-encoding": "chunked"
+    },
+    "raw_headers": [
+      "Date",
+      "Mon, 28 Sep 2026 04:12:09 GMT",
+      "Content-Type",
+      "application/json",
+      "Server",
+      "Kestrel",
+      "Transfer-Encoding",
+      "chunked"
+    ],
+    "end_utc": "2026-09-28T04:12:09.364Z",
+    "duration_ms": 28.607499999999845,
+    "body_hex": "7b2273756363657373223a66616c73652c22636f6465223a393032342c226572726f72223a22d097d0b0d0b3d0b0d0bbd18cd0bdd0b020d0bfd0bed0bcd0b8d0bbd0bad0b02e20d097d0b2d0b5d180d0bdd196d182d18cd181d18f20d0b220d181d0bbd183d0b6d0b1d18320d0bfd196d0b4d182d180d0b8d0bcd0bad0b820436865636b626f782e222c226465736372697074696f6e223a224572726f72203d3e2028453030292047656e6572616c206572726f72227d",
+    "body_text": "{\"success\":false,\"code\":9024,\"error\":\"Загальна помилка. Зверніться в службу підтримки Checkbox.\",\"description\":\"Error => (E00) General error\"}",
+    "body": {
+      "success": false,
+      "code": 9024,
+      "error": "Загальна помилка. Зверніться в службу підтримки Checkbox.",
+      "description": "Error => (E00) General error"
+    },
+    "connection_error": null
+  },
+  "ssi": [
+    {
+      "seq": 118,
+      "utc": "2026-09-28T04:12:09.348Z",
+      "elapsed_ms": 260010.71779999998,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E00",
+      "kind": "connected",
+      "connection_id": 13,
+      "peer": "127.0.0.1"
+    },
+    {
+      "seq": 119,
+      "utc": "2026-09-28T04:12:09.350Z",
+      "elapsed_ms": 260012.71099999998,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E00",
+      "kind": "bytes",
+      "connection_id": 13,
+      "direction": "rx",
+      "hex": "02660100877b226d6574686f64223a225075726368617365222c22706172616d73223a7b227472616e73616374696f6e556964223a22333865666663623062633933222c226d65726368616e744964223a22544553542d4d45524348414e54222c227472616e7343757272656e6379223a22393830222c227472616e73416d6f756e74223a22313030227d7d5d"
+    },
+    {
+      "seq": 120,
+      "utc": "2026-09-28T04:12:09.351Z",
+      "elapsed_ms": 260014.1692,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E00",
+      "kind": "frame",
+      "connection_id": 13,
+      "direction": "rx",
+      "hex": "02660100877b226d6574686f64223a225075726368617365222c22706172616d73223a7b227472616e73616374696f6e556964223a22333865666663623062633933222c226d65726368616e744964223a22544553542d4d45524348414e54222c227472616e7343757272656e6379223a22393830222c227472616e73416d6f756e74223a22313030227d7d5d",
+      "json": {
+        "method": "Purchase",
+        "params": {
+          "transactionUid": "38effcb0bc93",
+          "merchantId": "TEST-MERCHANT",
+          "transCurrency": "980",
+          "transAmount": "100"
+        }
+      }
+    },
+    {
+      "seq": 121,
+      "utc": "2026-09-28T04:12:09.353Z",
+      "elapsed_ms": 260015.63079999998,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E00",
+      "kind": "response_prepared",
+      "connection_id": 13,
+      "json": {
+        "method": "Purchase",
+        "error": true,
+        "errorCode": "E00",
+        "errorDescription": "General error"
+      },
+      "fault": "normal"
+    },
+    {
+      "seq": 122,
+      "utc": "2026-09-28T04:12:09.354Z",
+      "elapsed_ms": 260017.04669999998,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E00",
+      "kind": "frame",
+      "connection_id": 13,
+      "direction": "tx",
+      "hex": "02660100577b226d6574686f64223a225075726368617365222c226572726f72223a747275652c226572726f72436f6465223a22453030222c226572726f724465736372697074696f6e223a2247656e6572616c206572726f72227d50",
+      "json": {
+        "method": "Purchase",
+        "error": true,
+        "errorCode": "E00",
+        "errorDescription": "General error"
+      }
+    },
+    {
+      "seq": 123,
+      "utc": "2026-09-28T04:12:09.356Z",
+      "elapsed_ms": 260018.83359999998,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E00",
+      "kind": "bytes",
+      "connection_id": 13,
+      "direction": "tx",
+      "hex": "02660100577b226d6574686f64223a225075726368617365222c226572726f72223a747275652c226572726f72436f6465223a22453030222c226572726f724465736372697074696f6e223a2247656e6572616c206572726f72227d50"
+    },
+    {
+      "seq": 124,
+      "utc": "2026-09-28T04:12:09.357Z",
+      "elapsed_ms": 260019.95789999998,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E00",
+      "kind": "response_written",
+      "connection_id": 13,
+      "method": "Purchase"
+    },
+    {
+      "seq": 125,
+      "utc": "2026-09-28T04:12:09.359Z",
+      "elapsed_ms": 260022.15219999998,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E00",
+      "kind": "disconnected",
+      "connection_id": 13,
+      "pending_hex": ""
+    }
+  ],
+  "build": {
+    "commit": "32ea20432597141d9fab3effa646353a1405ffe6",
+    "dirty": true,
+    "executable_sha256": "85d1bf9280e7c63e1099ecc2db480813f439e68c41a5eca8a453094a948ab465",
+    "installer_sha256": "62d0e7a539380937ecb5af2f1c50438e4b84a070de4a20c1c848c11a5e395491",
+    "ssi": {
+      "revision": "1.4.6",
+      "date": "2026-09-12",
+      "wire_version": 1,
+      "sha256": "8e4b459ade28f4ee301de7751659d4bf365f9c0f2ac3508a6745a597158e1a65"
+    },
+    "host": {
+      "platform": "win32",
+      "release": "10.0.26200",
+      "version": "Windows 11 Home",
+      "architecture": "x64",
+      "node": "v24.16.0"
+    }
+  }
+}

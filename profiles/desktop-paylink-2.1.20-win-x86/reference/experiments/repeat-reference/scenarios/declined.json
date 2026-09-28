@@ -1,0 +1,24 @@
+{
+  "id": "declined",
+  "ssi": {
+    "error_code": "E21",
+    "response_code": "51",
+    "transaction_result": "DECLINED_ONLINE"
+  },
+  "emulator": {
+    "id": "declined",
+    "outcome": "declined",
+    "reference_error": "E21"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+    "body": {
+      "amount": 100,
+      "merchant_id": "TEST-MERCHANT"
+    }
+  },
+  "variable_fields": [
+    "id"
+  ]
+}

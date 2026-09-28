@@ -1,6 +1,9 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {normalizeReference as normalized} from './normalize-reference.mjs';
+test('operation identity must remain correlated before normalization', () => {
+  assert.throws(() => normalized({id:'one',result:{additional_properties:{transactionUid:'two'}}},['id','result.additional_properties.transactionUid']), /correlation/);
+});
 test('normalize explicit identifiers without hiding type/nullability/contract differences', () => {
   const fields = ['id', 'result.invoice_num', 'result.receipt_no'];
   const reference = {id:'uuid-reference', result:{invoice_num:12,receipt_no:'12',amount:100}};

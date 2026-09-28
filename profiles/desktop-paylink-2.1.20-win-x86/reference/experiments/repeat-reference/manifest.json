@@ -1,0 +1,90 @@
+{
+  "run_id": "2026-09-28T04-53-17-403Z-74d678fe",
+  "started_utc": "2026-09-28T04:53:17.410Z",
+  "provenance": "real_paylink_simulated_ssi_json",
+  "profile": "desktop-paylink-2.1.20-win-x86",
+  "installer_sha256": "62d0e7a539380937ecb5af2f1c50438e4b84a070de4a20c1c848c11a5e395491",
+  "executable_sha256": "85d1bf9280e7c63e1099ecc2db480813f439e68c41a5eca8a453094a948ab465",
+  "ssi": {
+    "revision": "1.4.6",
+    "date": "2026-09-12",
+    "wire_version": 1,
+    "sha256": "8e4b459ade28f4ee301de7751659d4bf365f9c0f2ac3508a6745a597158e1a65"
+  },
+  "commit": "a1da1d72448c90ef21d558fb7ec9966c65d8764f",
+  "dirty": true,
+  "source_hashes": {
+    "scripts/ssi/codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+    "scripts/ssi/model.mjs": "4e894eaf26a3a1a1fd9d108ea8c66a7eb81caec0ee23cd75962e88a653c9e59b",
+    "scripts/ssi/server.mjs": "9208877c63b5ba348ad6baa0809a2657ddf514476b6adbe59ea38c033bdab08d",
+    "scripts/record-paylink.mjs": "714a67429eb828c55349e3255707b89b5f2174f5b170c7fcd9f31ad96539128c",
+    "scripts/lab/http.mjs": "f336869d7af477dce50ae0df3965937c4256c841b9e2e029e231136adbf68d13"
+  },
+  "emulator_binary": {
+    "sha256": "75902939efb0f1891410ff6c69f2385361e67d9715816366cb4e091289e61ec2",
+    "commit": "a1da1d72448c90ef21d558fb7ec9966c65d8764f"
+  },
+  "host": {
+    "platform": "win32",
+    "release": "10.0.26200",
+    "version": "Windows 11 Home",
+    "architecture": "x64",
+    "node": "v24.16.0"
+  },
+  "reference_url": "http://127.0.0.1:9020",
+  "emulator_url": null,
+  "device_configuration": {
+    "id": "00000000-0000-4000-8000-000000000001",
+    "name": "SSI synthetic lab",
+    "device_category": "pos",
+    "type": "none",
+    "bank_name": "SIMULATED",
+    "model": "Verifone_All",
+    "protocol": "SSIJson",
+    "properties": {
+      "host": "127.0.0.1",
+      "port": 3000,
+      "mac": "",
+      "mode": "tcp",
+      "merchant_id": "TEST-MERCHANT",
+      "resolve_ip_by_mac": false
+    },
+    "code_registration": "",
+    "last_operation_id": "",
+    "verify_payment_system": false,
+    "connected": false,
+    "used_payment_sign_mode": false
+  },
+  "id_mapping": {},
+  "native_logs": [
+    {
+      "source": ".runtime/ssi-lab/paylink/logs/pos_20260928.log",
+      "file": "native-0.log",
+      "sha256": "af588029a0a421864b70b5e1bd47d1f23f73e0b34fd8488c6b6aa08d33c1118f"
+    }
+  ],
+  "missing_evidence": [
+    "Browser recordings are a separate stage"
+  ],
+  "verified_banks": [],
+  "status": "recorded",
+  "ssi_runtime": {
+    "ready": true,
+    "run_id": "manual",
+    "boot_id": "d9d385ec-f99d-427a-994a-03623622f899",
+    "source_hashes": {
+      "codec.mjs": "7a82a5a44b428644022c603637bdab91740fe317f17a387a4aa767cd8ce22eca",
+      "model.mjs": "4e894eaf26a3a1a1fd9d108ea8c66a7eb81caec0ee23cd75962e88a653c9e59b",
+      "server.mjs": "9208877c63b5ba348ad6baa0809a2657ddf514476b6adbe59ea38c033bdab08d"
+    }
+  },
+  "database": {
+    "captured_utc": "2026-09-28T04:56:09.270601+00:00",
+    "method": "sqlite_backup_api",
+    "source": "C:\\Users\\valtr\\paylink-emulator\\.runtime\\ssi-lab\\paylink\\db\\response.db",
+    "file": "C:\\Users\\valtr\\paylink-emulator\\runs\\repeat-reference\\reference\\paylink-logs\\response.db",
+    "sha256": "442f53eb77490cb3864b310a3d2632027d7dfd10a21c765340c14b94afc76072"
+  },
+  "finished_utc": "2026-09-28T04:56:09.281Z",
+  "executable_sha256_after": "85d1bf9280e7c63e1099ecc2db480813f439e68c41a5eca8a453094a948ab465"
+}

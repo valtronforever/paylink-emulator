@@ -1,0 +1,141 @@
+{
+  "installer_path": ".runtime/ssi-lab/installer.exe",
+  "executable_path": ".runtime/ssi-lab/paylink/POSServer.exe",
+  "spec_path": ".runtime/ssi-lab/spec.pdf",
+  "reference_url": "http://127.0.0.1:9020",
+  "ssi_control_url": "http://127.0.0.1:13001",
+  "wire_path": ".runtime/ssi-lab/ssi-wire.jsonl",
+  "emulator_url": "http://127.0.0.1:13010",
+  "emulator_control_url": "http://127.0.0.1:13011",
+  "native_logs": [
+    ".runtime/ssi-lab/paylink/logs/pos_20260928.log"
+  ],
+  "device": {
+    "id": "00000000-0000-4000-8000-000000000001",
+    "name": "SSI synthetic lab",
+    "device_category": "pos",
+    "type": "none",
+    "bank_name": "SIMULATED",
+    "model": "Verifone_All",
+    "protocol": "SSIJson",
+    "properties": {
+      "host": "127.0.0.1",
+      "port": 3000,
+      "mac": "",
+      "mode": "tcp",
+      "merchant_id": "TEST-MERCHANT",
+      "resolve_ip_by_mac": false
+    },
+    "code_registration": "",
+    "last_operation_id": "",
+    "verify_payment_system": false,
+    "connected": false,
+    "used_payment_sign_mode": false
+  },
+  "scenarios": [
+    {
+      "id": "ping",
+      "ssi": {},
+      "emulator": {
+        "id": "ping"
+      },
+      "request": {
+        "method": "GET",
+        "path": "/api/pos/00000000-0000-4000-8000-000000000001/ping"
+      }
+    },
+    {
+      "id": "approved",
+      "ssi": {
+        "result_fields": {
+          "pan": "4444 44** **** 1111",
+          "cardHolderName": "TEST CARD",
+          "bankName": "TEST ACQUIRER / TEST MERCHANT"
+        }
+      },
+      "emulator": {
+        "id": "approved",
+        "outcome": "approved"
+      },
+      "request": {
+        "method": "POST",
+        "path": "/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+        "body": {
+          "amount": 100,
+          "merchant_id": "TEST-MERCHANT"
+        }
+      },
+      "variable_fields": [
+        "id",
+        "result.rrn",
+        "result.auth_code",
+        "result.invoice_num",
+        "result.receipt_no",
+        "result.date_time",
+        "result.additional_properties.transactionUid"
+      ],
+      "id_mapping": [
+        {
+          "paths": [
+            "result.terminal",
+            "result.terminal_id"
+          ],
+          "reference": "TEST0001",
+          "emulator": "00000000-0000-4000-8000-000000000001"
+        }
+      ]
+    },
+    {
+      "id": "declined",
+      "ssi": {
+        "error_code": "E21",
+        "response_code": "51",
+        "transaction_result": "DECLINED_ONLINE"
+      },
+      "emulator": {
+        "id": "declined",
+        "outcome": "declined",
+        "reference_error": "E21"
+      },
+      "request": {
+        "method": "POST",
+        "path": "/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+        "body": {
+          "amount": 100,
+          "merchant_id": "TEST-MERCHANT"
+        }
+      },
+      "variable_fields": [
+        "id"
+      ]
+    },
+    {
+      "id": "timeout",
+      "ssi": {
+        "faults": {
+          "Purchase": "silence"
+        },
+        "request_errors": {
+          "GetResultByUid": "E20"
+        }
+      },
+      "emulator": {
+        "id": "timeout",
+        "outcome": "approved",
+        "reference_error": "transport_timeout"
+      },
+      "request": {
+        "method": "POST",
+        "path": "/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+        "body": {
+          "amount": 100,
+          "merchant_id": "TEST-MERCHANT"
+        }
+      },
+      "timeout_ms": 210000,
+      "variable_fields": [
+        "id"
+      ]
+    }
+  ]
+}

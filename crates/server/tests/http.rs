@@ -87,6 +87,64 @@ fn instant() -> Scenario {
     }
 }
 #[tokio::test]
+async fn ping_matches_recorded_paylink_ssi_response() {
+    let h = Harness::new(true).await;
+    let fixture: Value = serde_json::from_str(include_str!(
+        "../../../profiles/desktop-paylink-2.1.20-win-x86/reference/ping.json"
+    ))
+    .unwrap();
+    let response = h
+        .client
+        .get(format!(
+            "{}/api/pos/{DEVICE_ID}/ping",
+            h.server.ready.payment_url
+        ))
+        .send()
+        .await
+        .unwrap();
+    assert_eq!(
+        response.status().as_u16(),
+        fixture["response"]["status"].as_u64().unwrap() as u16
+    );
+    assert_eq!(
+        response.json::<Value>().await.unwrap(),
+        fixture["response"]["body"]
+    );
+    h.server.shutdown().await.unwrap();
+}
+
+#[tokio::test]
+async fn ssi_error_responses_match_all_recorded_injections() {
+    let mut h = Harness::new(true).await;
+    let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../../profiles/desktop-paylink-2.1.20-win-x86/reference");
+    let mut cases: Vec<String> = (0..=22).map(|n| format!("E{n:02}")).collect();
+    cases.push("timeout".into());
+    for case in cases {
+        let f: Value = serde_json::from_str(
+            &std::fs::read_to_string(root.join(format!("{case}.json"))).unwrap(),
+        )
+        .unwrap();
+        let scenario: Scenario = serde_json::from_value(f["scenario"].clone()).unwrap();
+        h.arm(Scenario {
+            timing: instant().timing,
+            ..scenario
+        })
+        .await;
+        let response = h.payment().send().await.unwrap();
+        assert_eq!(response.status().as_u16(), 503, "{case}");
+        assert_eq!(
+            response.json::<Value>().await.unwrap(),
+            f["response"]["body"],
+            "{case}"
+        );
+    }
+    // The recorded silence case completed on the terminal before the HTTP error.
+    assert_eq!(h.read("state").await["counters"]["approvals"], 1);
+    h.server.shutdown().await.unwrap();
+}
+
+#[tokio::test]
 async fn authentication_origin_and_idempotent_control() {
     let h = Harness::new(true).await;
     let profile = h.read("profile").await;
@@ -250,7 +308,7 @@ async fn controlled_time_manual_actions_busy_reset_and_listener_recovery() {
         tokio::time::sleep(Duration::from_millis(5)).await;
     };
     let busy = h.payment().send().await.unwrap();
-    assert_eq!(busy.status(), 400);
+    assert_eq!(busy.status(), 503);
     let busy: Value = busy.json().await.unwrap();
     assert_eq!(busy["description"], "Device is busy");
     assert_eq!(busy["code"], 9009);
@@ -263,7 +321,7 @@ async fn controlled_time_manual_actions_busy_reset_and_listener_recovery() {
         .send()
         .await
         .unwrap();
-    assert_eq!(ping.status(), 400);
+    assert_eq!(ping.status(), 503);
     assert_eq!(ping.json::<Value>().await.unwrap()["code"], 9009);
     h.command(
         "action",

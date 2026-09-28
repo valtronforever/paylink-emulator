@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "test:lab": "node --test scripts/ssi/*.test.mjs scripts/lab/*.test.mjs scripts/normalize-reference.test.mjs scripts/differential-policy.test.mjs",
     "test:browser": "playwright test",
     "test:coverage": "node scripts/coverage.mjs"
   },
