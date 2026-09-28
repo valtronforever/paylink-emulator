@@ -330,6 +330,13 @@
             "$ref": "#/$defs/Outcome",
             "default": "approved"
           },
+          "reference_error": {
+            "default": null,
+            "type": [
+              "string",
+              "null"
+            ]
+          },
           "require_confirmation": {
             "default": false,
             "type": "boolean"
@@ -654,6 +661,13 @@
       "outcome": {
         "$ref": "#/$defs/Outcome",
         "default": "approved"
+      },
+      "reference_error": {
+        "default": null,
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "require_confirmation": {
         "default": false,

@@ -1,0 +1,1043 @@
+{
+  "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+  "scenario": {
+    "id": "timeout",
+    "ssi": {
+      "faults": {
+        "Purchase": "silence"
+      },
+      "request_errors": {
+        "GetResultByUid": "E20"
+      }
+    },
+    "emulator": {
+      "id": "timeout",
+      "delivery": "hang"
+    },
+    "request": {
+      "method": "POST",
+      "path": "/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+      "body": {
+        "amount": 100,
+        "merchant_id": "TEST-MERCHANT"
+      }
+    },
+    "timeout_ms": 210000,
+    "variable_fields": [
+      "id"
+    ]
+  },
+  "http": {
+    "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+    "scenario_id": "timeout",
+    "start_utc": "2026-09-28T04:25:30.735Z",
+    "start_ms": 551.7451,
+    "client_timeout_ms": 210000,
+    "request": {
+      "url": "http://127.0.0.1:9020/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": 44
+      },
+      "body": "{\"amount\":100,\"merchant_id\":\"TEST-MERCHANT\"}"
+    },
+    "status": 503,
+    "headers": {
+      "date": "Mon, 28 Sep 2026 04:28:16 GMT",
+      "content-type": "application/json",
+      "server": "Kestrel",
+      "transfer-encoding": "chunked"
+    },
+    "raw_headers": [
+      "Date",
+      "Mon, 28 Sep 2026 04:28:16 GMT",
+      "Content-Type",
+      "application/json",
+      "Server",
+      "Kestrel",
+      "Transfer-Encoding",
+      "chunked"
+    ],
+    "end_utc": "2026-09-28T04:28:16.918Z",
+    "duration_ms": 166184.4786,
+    "body_hex": "7b2273756363657373223a66616c73652c22636f6465223a393031362c226572726f72223a22d092d0b8d187d0b5d180d0bfd0b0d0bdd0be20d187d0b0d18120d0bed187d196d0bad183d0b2d0b0d0bdd0bdd18f20d0b2d196d0b4d0bfd0bed0b2d196d0b4d19620d0b2d196d0b420d182d0b5d180d0bcd196d0bdd0b0d0bbd1832e20d09fd0b5d180d0b5d0b2d196d180d182d0b520d0bfd0b0d180d0b0d0bcd0b5d182d180d0b820d0bfd196d0b4d0bad0bbd18ed187d0b5d0bdd0bdd18f20d0b4d0be20d182d0b5d180d0bcd196d0bdd0b0d0bbd18320d182d0b020d181d0b0d0bc20d182d0b5d180d0bcd196d0bdd0b0d0bb2e222c226465736372697074696f6e223a2254696d6564206f7574203a20556e61626c6520746f207265616420646174612066726f6d20746865207472616e73706f727420636f6e6e656374696f6e3a204120636f6e6e656374696f6e20617474656d7074206661696c656420626563617573652074686520636f6e6e656374656420706172747920646964206e6f742070726f7065726c7920726573706f6e64206166746572206120706572696f64206f662074696d652c206f722065737461626c697368656420636f6e6e656374696f6e206661696c6564206265636175736520636f6e6e656374656420686f737420686173206661696c656420746f20726573706f6e642e227d",
+    "body_text": "{\"success\":false,\"code\":9016,\"error\":\"Вичерпано час очікування відповіді від терміналу. Перевірте параметри підключення до терміналу та сам термінал.\",\"description\":\"Timed out : Unable to read data from the transport connection: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.\"}",
+    "body": {
+      "success": false,
+      "code": 9016,
+      "error": "Вичерпано час очікування відповіді від терміналу. Перевірте параметри підключення до терміналу та сам термінал.",
+      "description": "Timed out : Unable to read data from the transport connection: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond."
+    },
+    "connection_error": null
+  },
+  "ssi": [
+    {
+      "seq": 75,
+      "utc": "2026-09-28T04:25:30.742Z",
+      "elapsed_ms": 67717.8578,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "connected",
+      "connection_id": 8,
+      "peer": "127.0.0.1"
+    },
+    {
+      "seq": 76,
+      "utc": "2026-09-28T04:25:30.743Z",
+      "elapsed_ms": 67719.0482,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "bytes",
+      "connection_id": 8,
+      "direction": "rx",
+      "hex": "02660100877b226d6574686f64223a225075726368617365222c22706172616d73223a7b227472616e73616374696f6e556964223a22623361613032656164623663222c226d65726368616e744964223a22544553542d4d45524348414e54222c227472616e7343757272656e6379223a22393830222c227472616e73416d6f756e74223a22313030227d7d0d"
+    },
+    {
+      "seq": 77,
+      "utc": "2026-09-28T04:25:30.744Z",
+      "elapsed_ms": 67720.0413,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "frame",
+      "connection_id": 8,
+      "direction": "rx",
+      "hex": "02660100877b226d6574686f64223a225075726368617365222c22706172616d73223a7b227472616e73616374696f6e556964223a22623361613032656164623663222c226d65726368616e744964223a22544553542d4d45524348414e54222c227472616e7343757272656e6379223a22393830222c227472616e73416d6f756e74223a22313030227d7d0d",
+      "json": {
+        "method": "Purchase",
+        "params": {
+          "transactionUid": "b3aa02eadb6c",
+          "merchantId": "TEST-MERCHANT",
+          "transCurrency": "980",
+          "transAmount": "100"
+        }
+      }
+    },
+    {
+      "seq": 78,
+      "utc": "2026-09-28T04:25:30.746Z",
+      "elapsed_ms": 67721.4133,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "accepted",
+      "request": {
+        "method": "Purchase",
+        "params": {
+          "transactionUid": "b3aa02eadb6c",
+          "merchantId": "TEST-MERCHANT",
+          "transCurrency": "980",
+          "transAmount": "100"
+        }
+      }
+    },
+    {
+      "seq": 79,
+      "utc": "2026-09-28T04:25:30.747Z",
+      "elapsed_ms": 67722.39289999999,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "response_prepared",
+      "connection_id": 8,
+      "json": {
+        "method": "Purchase",
+        "error": false,
+        "errorCode": "",
+        "errorDescription": "",
+        "params": {}
+      },
+      "fault": "silence"
+    },
+    {
+      "seq": 80,
+      "utc": "2026-09-28T04:25:30.747Z",
+      "elapsed_ms": 67723.01729999999,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "phase",
+      "status": "S02"
+    },
+    {
+      "seq": 81,
+      "utc": "2026-09-28T04:25:30.849Z",
+      "elapsed_ms": 67825.0719,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "phase",
+      "status": "S04"
+    },
+    {
+      "seq": 82,
+      "utc": "2026-09-28T04:25:30.954Z",
+      "elapsed_ms": 67929.8514,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "completed",
+      "error_code": "",
+      "result": {
+        "originalTrnName": "Purchase",
+        "transAmount": "100",
+        "authCode": "123456",
+        "date": "28/09/2026",
+        "time": "04:25:30",
+        "invoiceNum": "000001",
+        "bankName": "SIMULATED",
+        "merchantId": "TEST-MERCHANT",
+        "pan": "4111XXXXXXXX1111",
+        "responseCode": "0000",
+        "rrn": "000000000001",
+        "transactionResult": "APPROVED-ONLINE",
+        "terminalId": "TEST0001",
+        "posEntryMode": "CONTACTLESS",
+        "binName": "VISA",
+        "cardHolderName": "TEST USER",
+        "errorDetails": "",
+        "transactionUid": "b3aa02eadb6c"
+      }
+    },
+    {
+      "seq": 83,
+      "utc": "2026-09-28T04:27:55.753Z",
+      "elapsed_ms": 212729.2527,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "disconnected",
+      "connection_id": 8,
+      "pending_hex": ""
+    },
+    {
+      "seq": 84,
+      "utc": "2026-09-28T04:27:55.755Z",
+      "elapsed_ms": 212731.6761,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "connected",
+      "connection_id": 9,
+      "peer": "127.0.0.1"
+    },
+    {
+      "seq": 85,
+      "utc": "2026-09-28T04:27:55.757Z",
+      "elapsed_ms": 212733.6375,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "bytes",
+      "connection_id": 9,
+      "direction": "rx",
+      "hex": "02660100467b226d6574686f64223a22476574526573756c744279556964222c22706172616d73223a7b227472616e73616374696f6e556964223a22623361613032656164623663227d7d31"
+    },
+    {
+      "seq": 86,
+      "utc": "2026-09-28T04:27:55.759Z",
+      "elapsed_ms": 212735.62099999998,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "frame",
+      "connection_id": 9,
+      "direction": "rx",
+      "hex": "02660100467b226d6574686f64223a22476574526573756c744279556964222c22706172616d73223a7b227472616e73616374696f6e556964223a22623361613032656164623663227d7d31",
+      "json": {
+        "method": "GetResultByUid",
+        "params": {
+          "transactionUid": "b3aa02eadb6c"
+        }
+      }
+    },
+    {
+      "seq": 87,
+      "utc": "2026-09-28T04:27:55.761Z",
+      "elapsed_ms": 212736.9393,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "response_prepared",
+      "connection_id": 9,
+      "json": {
+        "method": "GetResultByUid",
+        "error": true,
+        "errorCode": "E20",
+        "errorDescription": "No last transactions found"
+      },
+      "fault": "normal"
+    },
+    {
+      "seq": 88,
+      "utc": "2026-09-28T04:27:55.762Z",
+      "elapsed_ms": 212738.2304,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "frame",
+      "connection_id": 9,
+      "direction": "tx",
+      "hex": "026601006a7b226d6574686f64223a22476574526573756c744279556964222c226572726f72223a747275652c226572726f72436f6465223a22453230222c226572726f724465736372697074696f6e223a224e6f206c617374207472616e73616374696f6e7320666f756e64227d01",
+      "json": {
+        "method": "GetResultByUid",
+        "error": true,
+        "errorCode": "E20",
+        "errorDescription": "No last transactions found"
+      }
+    },
+    {
+      "seq": 89,
+      "utc": "2026-09-28T04:27:55.764Z",
+      "elapsed_ms": 212739.6992,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "bytes",
+      "connection_id": 9,
+      "direction": "tx",
+      "hex": "026601006a7b226d6574686f64223a22476574526573756c744279556964222c226572726f72223a747275652c226572726f72436f6465223a22453230222c226572726f724465736372697074696f6e223a224e6f206c617374207472616e73616374696f6e7320666f756e64227d01"
+    },
+    {
+      "seq": 90,
+      "utc": "2026-09-28T04:27:55.764Z",
+      "elapsed_ms": 212740.63629999998,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "response_written",
+      "connection_id": 9,
+      "method": "GetResultByUid"
+    },
+    {
+      "seq": 91,
+      "utc": "2026-09-28T04:27:58.771Z",
+      "elapsed_ms": 215747.2664,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "disconnected",
+      "connection_id": 9,
+      "pending_hex": ""
+    },
+    {
+      "seq": 92,
+      "utc": "2026-09-28T04:27:58.773Z",
+      "elapsed_ms": 215749.5846,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "connected",
+      "connection_id": 10,
+      "peer": "127.0.0.1"
+    },
+    {
+      "seq": 93,
+      "utc": "2026-09-28T04:27:58.775Z",
+      "elapsed_ms": 215750.9452,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "bytes",
+      "connection_id": 10,
+      "direction": "rx",
+      "hex": "02660100467b226d6574686f64223a22476574526573756c744279556964222c22706172616d73223a7b227472616e73616374696f6e556964223a22623361613032656164623663227d7d31"
+    },
+    {
+      "seq": 94,
+      "utc": "2026-09-28T04:27:58.776Z",
+      "elapsed_ms": 215752.3558,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "frame",
+      "connection_id": 10,
+      "direction": "rx",
+      "hex": "02660100467b226d6574686f64223a22476574526573756c744279556964222c22706172616d73223a7b227472616e73616374696f6e556964223a22623361613032656164623663227d7d31",
+      "json": {
+        "method": "GetResultByUid",
+        "params": {
+          "transactionUid": "b3aa02eadb6c"
+        }
+      }
+    },
+    {
+      "seq": 95,
+      "utc": "2026-09-28T04:27:58.777Z",
+      "elapsed_ms": 215753.5899,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "response_prepared",
+      "connection_id": 10,
+      "json": {
+        "method": "GetResultByUid",
+        "error": true,
+        "errorCode": "E20",
+        "errorDescription": "No last transactions found"
+      },
+      "fault": "normal"
+    },
+    {
+      "seq": 96,
+      "utc": "2026-09-28T04:27:58.779Z",
+      "elapsed_ms": 215754.7099,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "frame",
+      "connection_id": 10,
+      "direction": "tx",
+      "hex": "026601006a7b226d6574686f64223a22476574526573756c744279556964222c226572726f72223a747275652c226572726f72436f6465223a22453230222c226572726f724465736372697074696f6e223a224e6f206c617374207472616e73616374696f6e7320666f756e64227d01",
+      "json": {
+        "method": "GetResultByUid",
+        "error": true,
+        "errorCode": "E20",
+        "errorDescription": "No last transactions found"
+      }
+    },
+    {
+      "seq": 97,
+      "utc": "2026-09-28T04:27:58.780Z",
+      "elapsed_ms": 215756.2234,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "bytes",
+      "connection_id": 10,
+      "direction": "tx",
+      "hex": "026601006a7b226d6574686f64223a22476574526573756c744279556964222c226572726f72223a747275652c226572726f72436f6465223a22453230222c226572726f724465736372697074696f6e223a224e6f206c617374207472616e73616374696f6e7320666f756e64227d01"
+    },
+    {
+      "seq": 98,
+      "utc": "2026-09-28T04:27:58.781Z",
+      "elapsed_ms": 215757.287,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "response_written",
+      "connection_id": 10,
+      "method": "GetResultByUid"
+    },
+    {
+      "seq": 99,
+      "utc": "2026-09-28T04:28:01.797Z",
+      "elapsed_ms": 218773.2027,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "disconnected",
+      "connection_id": 10,
+      "pending_hex": ""
+    },
+    {
+      "seq": 100,
+      "utc": "2026-09-28T04:28:01.799Z",
+      "elapsed_ms": 218774.91999999998,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "connected",
+      "connection_id": 11,
+      "peer": "127.0.0.1"
+    },
+    {
+      "seq": 101,
+      "utc": "2026-09-28T04:28:01.800Z",
+      "elapsed_ms": 218776.1759,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "bytes",
+      "connection_id": 11,
+      "direction": "rx",
+      "hex": "02660100467b226d6574686f64223a22476574526573756c744279556964222c22706172616d73223a7b227472616e73616374696f6e556964223a22623361613032656164623663227d7d31"
+    },
+    {
+      "seq": 102,
+      "utc": "2026-09-28T04:28:01.801Z",
+      "elapsed_ms": 218777.4484,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "frame",
+      "connection_id": 11,
+      "direction": "rx",
+      "hex": "02660100467b226d6574686f64223a22476574526573756c744279556964222c22706172616d73223a7b227472616e73616374696f6e556964223a22623361613032656164623663227d7d31",
+      "json": {
+        "method": "GetResultByUid",
+        "params": {
+          "transactionUid": "b3aa02eadb6c"
+        }
+      }
+    },
+    {
+      "seq": 103,
+      "utc": "2026-09-28T04:28:01.803Z",
+      "elapsed_ms": 218779.3145,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "response_prepared",
+      "connection_id": 11,
+      "json": {
+        "method": "GetResultByUid",
+        "error": true,
+        "errorCode": "E20",
+        "errorDescription": "No last transactions found"
+      },
+      "fault": "normal"
+    },
+    {
+      "seq": 104,
+      "utc": "2026-09-28T04:28:01.805Z",
+      "elapsed_ms": 218781.3462,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "frame",
+      "connection_id": 11,
+      "direction": "tx",
+      "hex": "026601006a7b226d6574686f64223a22476574526573756c744279556964222c226572726f72223a747275652c226572726f72436f6465223a22453230222c226572726f724465736372697074696f6e223a224e6f206c617374207472616e73616374696f6e7320666f756e64227d01",
+      "json": {
+        "method": "GetResultByUid",
+        "error": true,
+        "errorCode": "E20",
+        "errorDescription": "No last transactions found"
+      }
+    },
+    {
+      "seq": 105,
+      "utc": "2026-09-28T04:28:01.807Z",
+      "elapsed_ms": 218783.0729,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "bytes",
+      "connection_id": 11,
+      "direction": "tx",
+      "hex": "026601006a7b226d6574686f64223a22476574526573756c744279556964222c226572726f72223a747275652c226572726f72436f6465223a22453230222c226572726f724465736372697074696f6e223a224e6f206c617374207472616e73616374696f6e7320666f756e64227d01"
+    },
+    {
+      "seq": 106,
+      "utc": "2026-09-28T04:28:01.808Z",
+      "elapsed_ms": 218784.4731,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "response_written",
+      "connection_id": 11,
+      "method": "GetResultByUid"
+    },
+    {
+      "seq": 107,
+      "utc": "2026-09-28T04:28:04.815Z",
+      "elapsed_ms": 221790.8923,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "disconnected",
+      "connection_id": 11,
+      "pending_hex": ""
+    },
+    {
+      "seq": 108,
+      "utc": "2026-09-28T04:28:04.817Z",
+      "elapsed_ms": 221792.7631,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "connected",
+      "connection_id": 12,
+      "peer": "127.0.0.1"
+    },
+    {
+      "seq": 109,
+      "utc": "2026-09-28T04:28:04.820Z",
+      "elapsed_ms": 221796.097,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "bytes",
+      "connection_id": 12,
+      "direction": "rx",
+      "hex": "02660100467b226d6574686f64223a22476574526573756c744279556964222c22706172616d73223a7b227472616e73616374696f6e556964223a22623361613032656164623663227d7d31"
+    },
+    {
+      "seq": 110,
+      "utc": "2026-09-28T04:28:04.822Z",
+      "elapsed_ms": 221798.0381,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "frame",
+      "connection_id": 12,
+      "direction": "rx",
+      "hex": "02660100467b226d6574686f64223a22476574526573756c744279556964222c22706172616d73223a7b227472616e73616374696f6e556964223a22623361613032656164623663227d7d31",
+      "json": {
+        "method": "GetResultByUid",
+        "params": {
+          "transactionUid": "b3aa02eadb6c"
+        }
+      }
+    },
+    {
+      "seq": 111,
+      "utc": "2026-09-28T04:28:04.824Z",
+      "elapsed_ms": 221799.9429,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "response_prepared",
+      "connection_id": 12,
+      "json": {
+        "method": "GetResultByUid",
+        "error": true,
+        "errorCode": "E20",
+        "errorDescription": "No last transactions found"
+      },
+      "fault": "normal"
+    },
+    {
+      "seq": 112,
+      "utc": "2026-09-28T04:28:04.825Z",
+      "elapsed_ms": 221801.1756,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "frame",
+      "connection_id": 12,
+      "direction": "tx",
+      "hex": "026601006a7b226d6574686f64223a22476574526573756c744279556964222c226572726f72223a747275652c226572726f72436f6465223a22453230222c226572726f724465736372697074696f6e223a224e6f206c617374207472616e73616374696f6e7320666f756e64227d01",
+      "json": {
+        "method": "GetResultByUid",
+        "error": true,
+        "errorCode": "E20",
+        "errorDescription": "No last transactions found"
+      }
+    },
+    {
+      "seq": 113,
+      "utc": "2026-09-28T04:28:04.827Z",
+      "elapsed_ms": 221802.9975,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "bytes",
+      "connection_id": 12,
+      "direction": "tx",
+      "hex": "026601006a7b226d6574686f64223a22476574526573756c744279556964222c226572726f72223a747275652c226572726f72436f6465223a22453230222c226572726f724465736372697074696f6e223a224e6f206c617374207472616e73616374696f6e7320666f756e64227d01"
+    },
+    {
+      "seq": 114,
+      "utc": "2026-09-28T04:28:04.829Z",
+      "elapsed_ms": 221804.741,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "response_written",
+      "connection_id": 12,
+      "method": "GetResultByUid"
+    },
+    {
+      "seq": 115,
+      "utc": "2026-09-28T04:28:07.835Z",
+      "elapsed_ms": 224811.0755,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "disconnected",
+      "connection_id": 12,
+      "pending_hex": ""
+    },
+    {
+      "seq": 116,
+      "utc": "2026-09-28T04:28:07.837Z",
+      "elapsed_ms": 224813.06829999998,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "connected",
+      "connection_id": 13,
+      "peer": "127.0.0.1"
+    },
+    {
+      "seq": 117,
+      "utc": "2026-09-28T04:28:07.838Z",
+      "elapsed_ms": 224814.2834,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "bytes",
+      "connection_id": 13,
+      "direction": "rx",
+      "hex": "02660100467b226d6574686f64223a22476574526573756c744279556964222c22706172616d73223a7b227472616e73616374696f6e556964223a22623361613032656164623663227d7d31"
+    },
+    {
+      "seq": 118,
+      "utc": "2026-09-28T04:28:07.839Z",
+      "elapsed_ms": 224815.4633,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "frame",
+      "connection_id": 13,
+      "direction": "rx",
+      "hex": "02660100467b226d6574686f64223a22476574526573756c744279556964222c22706172616d73223a7b227472616e73616374696f6e556964223a22623361613032656164623663227d7d31",
+      "json": {
+        "method": "GetResultByUid",
+        "params": {
+          "transactionUid": "b3aa02eadb6c"
+        }
+      }
+    },
+    {
+      "seq": 119,
+      "utc": "2026-09-28T04:28:07.840Z",
+      "elapsed_ms": 224816.5895,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "response_prepared",
+      "connection_id": 13,
+      "json": {
+        "method": "GetResultByUid",
+        "error": true,
+        "errorCode": "E20",
+        "errorDescription": "No last transactions found"
+      },
+      "fault": "normal"
+    },
+    {
+      "seq": 120,
+      "utc": "2026-09-28T04:28:07.841Z",
+      "elapsed_ms": 224817.65099999998,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "frame",
+      "connection_id": 13,
+      "direction": "tx",
+      "hex": "026601006a7b226d6574686f64223a22476574526573756c744279556964222c226572726f72223a747275652c226572726f72436f6465223a22453230222c226572726f724465736372697074696f6e223a224e6f206c617374207472616e73616374696f6e7320666f756e64227d01",
+      "json": {
+        "method": "GetResultByUid",
+        "error": true,
+        "errorCode": "E20",
+        "errorDescription": "No last transactions found"
+      }
+    },
+    {
+      "seq": 121,
+      "utc": "2026-09-28T04:28:07.843Z",
+      "elapsed_ms": 224819.085,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "bytes",
+      "connection_id": 13,
+      "direction": "tx",
+      "hex": "026601006a7b226d6574686f64223a22476574526573756c744279556964222c226572726f72223a747275652c226572726f72436f6465223a22453230222c226572726f724465736372697074696f6e223a224e6f206c617374207472616e73616374696f6e7320666f756e64227d01"
+    },
+    {
+      "seq": 122,
+      "utc": "2026-09-28T04:28:07.844Z",
+      "elapsed_ms": 224820.0266,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "response_written",
+      "connection_id": 13,
+      "method": "GetResultByUid"
+    },
+    {
+      "seq": 123,
+      "utc": "2026-09-28T04:28:10.860Z",
+      "elapsed_ms": 227836.3861,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "disconnected",
+      "connection_id": 13,
+      "pending_hex": ""
+    },
+    {
+      "seq": 124,
+      "utc": "2026-09-28T04:28:10.862Z",
+      "elapsed_ms": 227838.3456,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "connected",
+      "connection_id": 14,
+      "peer": "127.0.0.1"
+    },
+    {
+      "seq": 125,
+      "utc": "2026-09-28T04:28:10.863Z",
+      "elapsed_ms": 227839.6634,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "bytes",
+      "connection_id": 14,
+      "direction": "rx",
+      "hex": "02660100467b226d6574686f64223a22476574526573756c744279556964222c22706172616d73223a7b227472616e73616374696f6e556964223a22623361613032656164623663227d7d31"
+    },
+    {
+      "seq": 126,
+      "utc": "2026-09-28T04:28:10.865Z",
+      "elapsed_ms": 227840.9762,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "frame",
+      "connection_id": 14,
+      "direction": "rx",
+      "hex": "02660100467b226d6574686f64223a22476574526573756c744279556964222c22706172616d73223a7b227472616e73616374696f6e556964223a22623361613032656164623663227d7d31",
+      "json": {
+        "method": "GetResultByUid",
+        "params": {
+          "transactionUid": "b3aa02eadb6c"
+        }
+      }
+    },
+    {
+      "seq": 127,
+      "utc": "2026-09-28T04:28:10.866Z",
+      "elapsed_ms": 227842.61549999999,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "response_prepared",
+      "connection_id": 14,
+      "json": {
+        "method": "GetResultByUid",
+        "error": true,
+        "errorCode": "E20",
+        "errorDescription": "No last transactions found"
+      },
+      "fault": "normal"
+    },
+    {
+      "seq": 128,
+      "utc": "2026-09-28T04:28:10.868Z",
+      "elapsed_ms": 227843.9981,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "frame",
+      "connection_id": 14,
+      "direction": "tx",
+      "hex": "026601006a7b226d6574686f64223a22476574526573756c744279556964222c226572726f72223a747275652c226572726f72436f6465223a22453230222c226572726f724465736372697074696f6e223a224e6f206c617374207472616e73616374696f6e7320666f756e64227d01",
+      "json": {
+        "method": "GetResultByUid",
+        "error": true,
+        "errorCode": "E20",
+        "errorDescription": "No last transactions found"
+      }
+    },
+    {
+      "seq": 129,
+      "utc": "2026-09-28T04:28:10.870Z",
+      "elapsed_ms": 227845.74539999999,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "bytes",
+      "connection_id": 14,
+      "direction": "tx",
+      "hex": "026601006a7b226d6574686f64223a22476574526573756c744279556964222c226572726f72223a747275652c226572726f72436f6465223a22453230222c226572726f724465736372697074696f6e223a224e6f206c617374207472616e73616374696f6e7320666f756e64227d01"
+    },
+    {
+      "seq": 130,
+      "utc": "2026-09-28T04:28:10.871Z",
+      "elapsed_ms": 227847.0691,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "response_written",
+      "connection_id": 14,
+      "method": "GetResultByUid"
+    },
+    {
+      "seq": 131,
+      "utc": "2026-09-28T04:28:13.873Z",
+      "elapsed_ms": 230848.9496,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "disconnected",
+      "connection_id": 14,
+      "pending_hex": ""
+    },
+    {
+      "seq": 132,
+      "utc": "2026-09-28T04:28:13.875Z",
+      "elapsed_ms": 230850.8502,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "connected",
+      "connection_id": 15,
+      "peer": "127.0.0.1"
+    },
+    {
+      "seq": 133,
+      "utc": "2026-09-28T04:28:13.876Z",
+      "elapsed_ms": 230852.14549999998,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "bytes",
+      "connection_id": 15,
+      "direction": "rx",
+      "hex": "02660100467b226d6574686f64223a22476574526573756c744279556964222c22706172616d73223a7b227472616e73616374696f6e556964223a22623361613032656164623663227d7d31"
+    },
+    {
+      "seq": 134,
+      "utc": "2026-09-28T04:28:13.877Z",
+      "elapsed_ms": 230853.3549,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "frame",
+      "connection_id": 15,
+      "direction": "rx",
+      "hex": "02660100467b226d6574686f64223a22476574526573756c744279556964222c22706172616d73223a7b227472616e73616374696f6e556964223a22623361613032656164623663227d7d31",
+      "json": {
+        "method": "GetResultByUid",
+        "params": {
+          "transactionUid": "b3aa02eadb6c"
+        }
+      }
+    },
+    {
+      "seq": 135,
+      "utc": "2026-09-28T04:28:13.878Z",
+      "elapsed_ms": 230854.4369,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "response_prepared",
+      "connection_id": 15,
+      "json": {
+        "method": "GetResultByUid",
+        "error": true,
+        "errorCode": "E20",
+        "errorDescription": "No last transactions found"
+      },
+      "fault": "normal"
+    },
+    {
+      "seq": 136,
+      "utc": "2026-09-28T04:28:13.879Z",
+      "elapsed_ms": 230855.4884,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "frame",
+      "connection_id": 15,
+      "direction": "tx",
+      "hex": "026601006a7b226d6574686f64223a22476574526573756c744279556964222c226572726f72223a747275652c226572726f72436f6465223a22453230222c226572726f724465736372697074696f6e223a224e6f206c617374207472616e73616374696f6e7320666f756e64227d01",
+      "json": {
+        "method": "GetResultByUid",
+        "error": true,
+        "errorCode": "E20",
+        "errorDescription": "No last transactions found"
+      }
+    },
+    {
+      "seq": 137,
+      "utc": "2026-09-28T04:28:13.881Z",
+      "elapsed_ms": 230856.8478,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "bytes",
+      "connection_id": 15,
+      "direction": "tx",
+      "hex": "026601006a7b226d6574686f64223a22476574526573756c744279556964222c226572726f72223a747275652c226572726f72436f6465223a22453230222c226572726f724465736372697074696f6e223a224e6f206c617374207472616e73616374696f6e7320666f756e64227d01"
+    },
+    {
+      "seq": 138,
+      "utc": "2026-09-28T04:28:13.882Z",
+      "elapsed_ms": 230858.4689,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "response_written",
+      "connection_id": 15,
+      "method": "GetResultByUid"
+    },
+    {
+      "seq": 139,
+      "utc": "2026-09-28T04:28:16.895Z",
+      "elapsed_ms": 233871.2125,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "disconnected",
+      "connection_id": 15,
+      "pending_hex": ""
+    },
+    {
+      "seq": 140,
+      "utc": "2026-09-28T04:28:16.897Z",
+      "elapsed_ms": 233873.0571,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "connected",
+      "connection_id": 16,
+      "peer": "127.0.0.1"
+    },
+    {
+      "seq": 141,
+      "utc": "2026-09-28T04:28:16.900Z",
+      "elapsed_ms": 233876.367,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "bytes",
+      "connection_id": 16,
+      "direction": "rx",
+      "hex": "02660100467b226d6574686f64223a22476574526573756c744279556964222c22706172616d73223a7b227472616e73616374696f6e556964223a22623361613032656164623663227d7d31"
+    },
+    {
+      "seq": 142,
+      "utc": "2026-09-28T04:28:16.902Z",
+      "elapsed_ms": 233878.1881,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "frame",
+      "connection_id": 16,
+      "direction": "rx",
+      "hex": "02660100467b226d6574686f64223a22476574526573756c744279556964222c22706172616d73223a7b227472616e73616374696f6e556964223a22623361613032656164623663227d7d31",
+      "json": {
+        "method": "GetResultByUid",
+        "params": {
+          "transactionUid": "b3aa02eadb6c"
+        }
+      }
+    },
+    {
+      "seq": 143,
+      "utc": "2026-09-28T04:28:16.904Z",
+      "elapsed_ms": 233879.7678,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "response_prepared",
+      "connection_id": 16,
+      "json": {
+        "method": "GetResultByUid",
+        "error": true,
+        "errorCode": "E20",
+        "errorDescription": "No last transactions found"
+      },
+      "fault": "normal"
+    },
+    {
+      "seq": 144,
+      "utc": "2026-09-28T04:28:16.905Z",
+      "elapsed_ms": 233881.0325,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "frame",
+      "connection_id": 16,
+      "direction": "tx",
+      "hex": "026601006a7b226d6574686f64223a22476574526573756c744279556964222c226572726f72223a747275652c226572726f72436f6465223a22453230222c226572726f724465736372697074696f6e223a224e6f206c617374207472616e73616374696f6e7320666f756e64227d01",
+      "json": {
+        "method": "GetResultByUid",
+        "error": true,
+        "errorCode": "E20",
+        "errorDescription": "No last transactions found"
+      }
+    },
+    {
+      "seq": 145,
+      "utc": "2026-09-28T04:28:16.906Z",
+      "elapsed_ms": 233882.4937,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "bytes",
+      "connection_id": 16,
+      "direction": "tx",
+      "hex": "026601006a7b226d6574686f64223a22476574526573756c744279556964222c226572726f72223a747275652c226572726f72436f6465223a22453230222c226572726f724465736372697074696f6e223a224e6f206c617374207472616e73616374696f6e7320666f756e64227d01"
+    },
+    {
+      "seq": 146,
+      "utc": "2026-09-28T04:28:16.907Z",
+      "elapsed_ms": 233883.6932,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "response_written",
+      "connection_id": 16,
+      "method": "GetResultByUid"
+    },
+    {
+      "seq": 147,
+      "utc": "2026-09-28T04:28:16.909Z",
+      "elapsed_ms": 233885.3834,
+      "run_id": "2026-09-28T04-25-29-892Z-56319baf",
+      "scenario_id": "timeout",
+      "kind": "disconnected",
+      "connection_id": 16,
+      "pending_hex": ""
+    }
+  ],
+  "build": {
+    "commit": "32ea20432597141d9fab3effa646353a1405ffe6",
+    "dirty": true,
+    "executable_sha256": "85d1bf9280e7c63e1099ecc2db480813f439e68c41a5eca8a453094a948ab465",
+    "installer_sha256": "62d0e7a539380937ecb5af2f1c50438e4b84a070de4a20c1c848c11a5e395491",
+    "ssi": {
+      "revision": "1.4.6",
+      "date": "2026-09-12",
+      "wire_version": 1,
+      "sha256": "8e4b459ade28f4ee301de7751659d4bf365f9c0f2ac3508a6745a597158e1a65"
+    },
+    "host": {
+      "platform": "win32",
+      "release": "10.0.26200",
+      "version": "Windows 11 Home",
+      "architecture": "x64",
+      "node": "v24.16.0"
+    }
+  }
+}

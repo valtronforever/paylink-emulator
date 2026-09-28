@@ -1,0 +1,190 @@
+{
+  "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+  "scenario": {
+    "id": "E07",
+    "request": {
+      "method": "POST",
+      "path": "/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+      "body": {
+        "amount": 100,
+        "merchant_id": "TEST-MERCHANT"
+      }
+    },
+    "ssi": {
+      "request_errors": {
+        "Purchase": "E07"
+      }
+    },
+    "timeout_ms": 30000
+  },
+  "http": {
+    "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+    "scenario_id": "E07",
+    "start_utc": "2026-09-28T04:12:09.687Z",
+    "start_ms": 1625.9175,
+    "client_timeout_ms": 30000,
+    "request": {
+      "url": "http://127.0.0.1:9020/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": 44
+      },
+      "body": "{\"amount\":100,\"merchant_id\":\"TEST-MERCHANT\"}"
+    },
+    "status": 503,
+    "headers": {
+      "date": "Mon, 28 Sep 2026 04:12:09 GMT",
+      "content-type": "application/json",
+      "server": "Kestrel",
+      "transfer-encoding": "chunked"
+    },
+    "raw_headers": [
+      "Date",
+      "Mon, 28 Sep 2026 04:12:09 GMT",
+      "Content-Type",
+      "application/json",
+      "Server",
+      "Kestrel",
+      "Transfer-Encoding",
+      "chunked"
+    ],
+    "end_utc": "2026-09-28T04:12:09.709Z",
+    "duration_ms": 22.405199999999695,
+    "body_hex": "7b2273756363657373223a66616c73652c22636f6465223a393330332c226572726f72223a22d09dd0b520d0b7d0bdd0b0d0b9d0b4d0b5d0bdd0be20d182d0bed180d0b3d0bed0b2d186d18f20d0b720d0b2d0bad0b0d0b7d0b0d0bdd0b8d0bc204d65726368616e742049442e20d09fd0b5d180d0b5d0b2d196d180d182d0b520d0b220d0bfd0b0d180d0b0d0bcd0b5d182d180d0b0d18520d0bfd196d0b4d0bad0bbd18ed187d0b5d0bdd0bdd18f20d0b4d0be20d182d0b5d180d0bcd196d0bdd0b0d0bbd18320d0b7d0bdd0b0d187d0b5d0bdd0bdd18f204d65726368616e742049442e20d09220d180d0b0d0b7d19620d0bfd0bed182d180d0b5d0b1d0b820d0b7d0b2d0b5d180d0bdd196d182d18cd181d18f20d0b4d0be20d181d0bbd183d0b6d0b1d0b820d0bfd196d0b4d182d180d0b8d0bcd0bad0b820d0b1d0b0d0bdd0bad1832e222c226465736372697074696f6e223a224d65726368616e74204964206973206e6f7420666f756e64203d3e202845303729204d65726368616e74204964206973206e6f7420666f756e64227d",
+    "body_text": "{\"success\":false,\"code\":9303,\"error\":\"Не знайдено торговця з вказаним Merchant ID. Перевірте в параметрах підключення до терміналу значення Merchant ID. В разі потреби зверніться до служби підтримки банку.\",\"description\":\"Merchant Id is not found => (E07) Merchant Id is not found\"}",
+    "body": {
+      "success": false,
+      "code": 9303,
+      "error": "Не знайдено торговця з вказаним Merchant ID. Перевірте в параметрах підключення до терміналу значення Merchant ID. В разі потреби зверніться до служби підтримки банку.",
+      "description": "Merchant Id is not found => (E07) Merchant Id is not found"
+    },
+    "connection_error": null
+  },
+  "ssi": [
+    {
+      "seq": 188,
+      "utc": "2026-09-28T04:12:09.695Z",
+      "elapsed_ms": 260358.2553,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E07",
+      "kind": "connected",
+      "connection_id": 20,
+      "peer": "127.0.0.1"
+    },
+    {
+      "seq": 189,
+      "utc": "2026-09-28T04:12:09.697Z",
+      "elapsed_ms": 260359.62029999998,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E07",
+      "kind": "bytes",
+      "connection_id": 20,
+      "direction": "rx",
+      "hex": "02660100877b226d6574686f64223a225075726368617365222c22706172616d73223a7b227472616e73616374696f6e556964223a22386265336134356233303161222c226d65726368616e744964223a22544553542d4d45524348414e54222c227472616e7343757272656e6379223a22393830222c227472616e73416d6f756e74223a22313030227d7d54"
+    },
+    {
+      "seq": 190,
+      "utc": "2026-09-28T04:12:09.698Z",
+      "elapsed_ms": 260360.7375,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E07",
+      "kind": "frame",
+      "connection_id": 20,
+      "direction": "rx",
+      "hex": "02660100877b226d6574686f64223a225075726368617365222c22706172616d73223a7b227472616e73616374696f6e556964223a22386265336134356233303161222c226d65726368616e744964223a22544553542d4d45524348414e54222c227472616e7343757272656e6379223a22393830222c227472616e73416d6f756e74223a22313030227d7d54",
+      "json": {
+        "method": "Purchase",
+        "params": {
+          "transactionUid": "8be3a45b301a",
+          "merchantId": "TEST-MERCHANT",
+          "transCurrency": "980",
+          "transAmount": "100"
+        }
+      }
+    },
+    {
+      "seq": 191,
+      "utc": "2026-09-28T04:12:09.699Z",
+      "elapsed_ms": 260361.8541,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E07",
+      "kind": "response_prepared",
+      "connection_id": 20,
+      "json": {
+        "method": "Purchase",
+        "error": true,
+        "errorCode": "E07",
+        "errorDescription": "Merchant Id is not found"
+      },
+      "fault": "normal"
+    },
+    {
+      "seq": 192,
+      "utc": "2026-09-28T04:12:09.700Z",
+      "elapsed_ms": 260363.12519999998,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E07",
+      "kind": "frame",
+      "connection_id": 20,
+      "direction": "tx",
+      "hex": "02660100627b226d6574686f64223a225075726368617365222c226572726f72223a747275652c226572726f72436f6465223a22453037222c226572726f724465736372697074696f6e223a224d65726368616e74204964206973206e6f7420666f756e64227d47",
+      "json": {
+        "method": "Purchase",
+        "error": true,
+        "errorCode": "E07",
+        "errorDescription": "Merchant Id is not found"
+      }
+    },
+    {
+      "seq": 193,
+      "utc": "2026-09-28T04:12:09.702Z",
+      "elapsed_ms": 260364.47439999998,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E07",
+      "kind": "bytes",
+      "connection_id": 20,
+      "direction": "tx",
+      "hex": "02660100627b226d6574686f64223a225075726368617365222c226572726f72223a747275652c226572726f72436f6465223a22453037222c226572726f724465736372697074696f6e223a224d65726368616e74204964206973206e6f7420666f756e64227d47"
+    },
+    {
+      "seq": 194,
+      "utc": "2026-09-28T04:12:09.703Z",
+      "elapsed_ms": 260365.46589999998,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E07",
+      "kind": "response_written",
+      "connection_id": 20,
+      "method": "Purchase"
+    },
+    {
+      "seq": 195,
+      "utc": "2026-09-28T04:12:09.704Z",
+      "elapsed_ms": 260367.0692,
+      "run_id": "2026-09-28T04-12-07-742Z-f75a1328",
+      "scenario_id": "E07",
+      "kind": "disconnected",
+      "connection_id": 20,
+      "pending_hex": ""
+    }
+  ],
+  "build": {
+    "commit": "32ea20432597141d9fab3effa646353a1405ffe6",
+    "dirty": true,
+    "executable_sha256": "85d1bf9280e7c63e1099ecc2db480813f439e68c41a5eca8a453094a948ab465",
+    "installer_sha256": "62d0e7a539380937ecb5af2f1c50438e4b84a070de4a20c1c848c11a5e395491",
+    "ssi": {
+      "revision": "1.4.6",
+      "date": "2026-09-12",
+      "wire_version": 1,
+      "sha256": "8e4b459ade28f4ee301de7751659d4bf365f9c0f2ac3508a6745a597158e1a65"
+    },
+    "host": {
+      "platform": "win32",
+      "release": "10.0.26200",
+      "version": "Windows 11 Home",
+      "architecture": "x64",
+      "node": "v24.16.0"
+    }
+  }
+}

@@ -1,5 +1,6 @@
 //! Deterministic terminal model. It has no network, UI or wall-clock dependency.
 pub mod catalog;
+pub mod ssi;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, VecDeque};
@@ -117,6 +118,7 @@ pub struct Scenario {
     pub mode: Mode,
     pub outcome: Outcome,
     pub error_id: Option<String>,
+    pub reference_error: Option<String>,
     pub failure_stage: Stage,
     pub timing: Timing,
     pub delivery: Delivery,
@@ -135,6 +137,7 @@ impl Default for Scenario {
             mode: Mode::Automatic,
             outcome: Outcome::Approved,
             error_id: None,
+            reference_error: None,
             failure_stage: Stage::Authorizing,
             timing: Timing::default(),
             delivery: Delivery::Normal,
@@ -146,6 +149,15 @@ impl Default for Scenario {
 }
 impl Scenario {
     pub fn validate(&self) -> Result<()> {
+        if let Some(case) = &self.reference_error
+            && ((self.outcome == Outcome::Approved && case != "transport_timeout")
+                || ssi::error_response(case).is_none())
+        {
+            return Err(fail(
+                "invalid_reference_error",
+                "reference_error requires a recorded failure; only lost-reply timeout allows approval",
+            ));
+        }
         if self.id.is_empty() || self.id.len() > 128 || self.uses == 0 || self.uses > 10_000 {
             return Err(fail(
                 "invalid_scenario",
@@ -623,6 +635,12 @@ impl Engine {
         if !op.stage.terminal() {
             return Err(fail("not_complete", "operation still active"));
         }
+        // A lost reply may coexist with an approved terminal operation. This
+        // projection must not change its stage, approvals or financial state.
+        if let Some(case) = &op.scenario.reference_error {
+            return ssi::error_response(case)
+                .ok_or_else(|| fail("invalid_reference_error", "unknown SSI reference case"));
+        }
         if op.stage == Stage::Approved {
             let sequence = op
                 .id
@@ -634,12 +652,28 @@ impl Engine {
                 .generation
                 .wrapping_mul(1_000_000)
                 .wrapping_add(sequence);
+            // Calendar is derived from the recorded run epoch, never wall clock.
+            let timestamp = self
+                .epoch_unix_ms
+                .unwrap_or(0)
+                .saturating_add(op.completed_ms.unwrap_or(self.now_ms));
+            let date =
+                chrono::DateTime::from_timestamp_millis(timestamp.min(i64::MAX as u64) as i64)
+                    .unwrap_or_default();
             Ok(
                 serde_json::json!({"success":true,"terminal_status":"None","error":"","code":0,"id":op.id,"result":{
                     "terminal":op.device_id,"terminal_id":op.device_id,"merchant_id":op.merchant,"rrn":format!("{:012}",serial%1_000_000_000_000),
-                    "card_mask":"4444 44** **** 1111","card_holder":"TEST CARD","auth_code":format!("{:06}",serial.wrapping_add(op.scenario.seed)%1_000_000),
+                    "card_mask":"4444 44** **** 1111","pan":"4444 44** **** 1111","card_holder":"TEST CARD","owner_name":"TEST CARD","auth_code":format!("{:06}",serial.wrapping_add(op.scenario.seed)%1_000_000),
                     "payment_system":"VISA","receipt_no":sequence.to_string(),"invoice_num":sequence,"acquirer_and_seller":"TEST ACQUIRER / TEST MERCHANT",
-                    "amount":op.amount,"value":op.amount
+                    "amount":op.amount,"value":op.amount,
+                    "date_time":date.format("%d.%m.%Y %-H:%M:%S").to_string(),"exp_date":date.format("%y%m").to_string(),
+                    "totals_debit_num":0,"totals_debit_amt":0,"totals_credit_num":0,"totals_credit_amt":0,
+                    "totals_cancelled_num":0,"totals_cancelled_amt":0,"sign_verif":false,"signature_required":false,
+                    "txn_num":0,"add_amount":0,"discountedAmount":0,"txn_type":1,"entry_mode":3,"receipt":"",
+                    "bank_acquirer":"TEST ACQUIRER / TEST MERCHANT","bank_name":"TEST ACQUIRER / TEST MERCHANT",
+                    "provider_type":"POSCONTROL","additional_properties":{
+                        "responseCode":"0000","transactionResult":"APPROVED-ONLINE","errorDetails":"","transactionUid":op.id
+                    }
                 }}),
             )
         } else {

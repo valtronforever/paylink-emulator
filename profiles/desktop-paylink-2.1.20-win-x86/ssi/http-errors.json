@@ -1,0 +1,146 @@
+{
+  "E00": {
+    "success": false,
+    "code": 9024,
+    "error": "Загальна помилка. Зверніться в службу підтримки Checkbox.",
+    "description": "Error => (E00) General error"
+  },
+  "E01": {
+    "success": false,
+    "code": 9022,
+    "error": "Термінал не підтримує поточний тип протоколу. Потрібно звернутися в банк.",
+    "description": "The protocol is not supported => (E01) Protocol version is not supported by the terminal"
+  },
+  "E02": {
+    "success": false,
+    "code": 9300,
+    "error": "Виникла помилка контрольної суми. Зверніться в службу підтримки Checkbox.",
+    "description": "Checksum description => (E02) Checksum error"
+  },
+  "E03": {
+    "success": false,
+    "code": 9301,
+    "error": "Було отримано невірний формат JSON повідомлення. Зверніться в службу підтримки Checkbox.",
+    "description": "Json message format description => (E03) Json message format error"
+  },
+  "E04": {
+    "success": false,
+    "code": 9302,
+    "error": "Відсутні обов’язкові поля в запиті до терміналу. Зверніться в службу підтримки Checkbox.",
+    "description": "Required fields are missing => (E04) Required fields are missing"
+  },
+  "E05": {
+    "success": false,
+    "code": 9008,
+    "error": "Помилка виконання операції на терміналі.",
+    "description": "Command execution description => (E05) Unknown method"
+  },
+  "E06": {
+    "success": false,
+    "code": 9009,
+    "error": "Пристрій вже зайнятий виконанням команди. Потрібно зачекати декілька секунд та повторити спробу.",
+    "description": "Device is busy => (E06) Terminal Busy"
+  },
+  "E07": {
+    "success": false,
+    "code": 9303,
+    "error": "Не знайдено торговця з вказаним Merchant ID. Перевірте в параметрах підключення до терміналу значення Merchant ID. В разі потреби зверніться до служби підтримки банку.",
+    "description": "Merchant Id is not found => (E07) Merchant Id is not found"
+  },
+  "E08": {
+    "success": false,
+    "code": 9304,
+    "error": "Переривання операції заборонене. Очікуйте її завершення.",
+    "description": "Interrupt prohibited => (E08) Interrupt prohibited"
+  },
+  "E09": {
+    "success": false,
+    "code": 9021,
+    "error": "Неправильно вказані параметри.",
+    "description": "Argument description => (E09) Format error"
+  },
+  "E10": {
+    "success": false,
+    "code": 9204,
+    "error": "Відсутній зв'язок з платіжним терміналом. Перевірте доступність терміналу в локальній мережі та відповідного банківського ПЗ на ньому.",
+    "description": "No connection with host => (E10) Connection error"
+  },
+  "E11": {
+    "success": false,
+    "code": 9305,
+    "error": "Виникла помилка верифікації (ПІН-код, підпису). Перевірте ПІН-код. В разі потреби зверніться в службу підтримки банку.",
+    "description": "Verification description => (E11) Verification error (pin, signature)"
+  },
+  "E12": {
+    "success": false,
+    "code": 9201,
+    "error": "Операція була перервана користувачем.",
+    "description": "Transaction canceled by user => (E12) Transaction canceled"
+  },
+  "E13": {
+    "success": false,
+    "code": 9029,
+    "error": "На термінал було передано невірне поле MAC. Зверніться до служби підтримки Checkbox.",
+    "description": "Wrong MAC => (E13) MAC Error - MAC"
+  },
+  "E14": {
+    "success": false,
+    "code": 9306,
+    "error": "На терміналі відсутні ключі. Зверніться до служби підтримки банку.",
+    "description": "Key description => (E14) Key error"
+  },
+  "E15": {
+    "success": false,
+    "code": 9307,
+    "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+    "description": "Need Z report => (E15) Need z report"
+  },
+  "E16": {
+    "success": false,
+    "code": 9308,
+    "error": "Виникла помилка зчитування карти. Перевірте картку на ушкодження та спробуйте повторити операцію.",
+    "description": "Card description => (E16) Card error"
+  },
+  "E17": {
+    "success": false,
+    "code": 9202,
+    "error": "EMV Decline.",
+    "description": "EMV Decline => (E17) EMV error"
+  },
+  "E18": {
+    "success": false,
+    "code": 9024,
+    "error": "Загальна помилка. Зверніться в службу підтримки Checkbox.",
+    "description": "Error => (E18) Printer is out of paper or inoperational"
+  },
+  "E19": {
+    "success": false,
+    "code": 9024,
+    "error": "Загальна помилка. Зверніться в службу підтримки Checkbox.",
+    "description": "Error => (E19) Transaction amount out of limit"
+  },
+  "E20": {
+    "success": false,
+    "code": 9024,
+    "error": "Загальна помилка. Зверніться в службу підтримки Checkbox.",
+    "description": "Error => (E20) No last transactions found"
+  },
+  "E21": {
+    "success": false,
+    "code": 9307,
+    "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+    "description": "Need Z report => (E21) General error in transaction"
+  },
+  "E22": {
+    "success": false,
+    "code": 9024,
+    "error": "Загальна помилка. Зверніться в службу підтримки Checkbox.",
+    "description": "Error => (E22) Transaction with such transactionUid is already processing"
+  },
+  "transport_timeout": {
+    "success": false,
+    "code": 9016,
+    "error": "Вичерпано час очікування відповіді від терміналу. Перевірте параметри підключення до терміналу та сам термінал.",
+    "description": "Timed out : Unable to read data from the transport connection: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond."
+  }
+}

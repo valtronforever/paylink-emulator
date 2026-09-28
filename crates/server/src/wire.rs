@@ -293,7 +293,7 @@ async fn connection(mut socket: TcpStream, s: Shared, generation: u64) -> Result
         }
         let result = match d.engine.devices.get(device_id) {
             Some(device) if device.online && device.setup_error.is_none() => {
-                json!({"success":true,"terminal_status":"None","error":"","code":0})
+                json!({"success":true,"terminal_status":"None","message":"ping","error":"","code":0})
             }
             Some(_) => wire_error("terminal_connection_refused", "Terminal unavailable"),
             None => wire_error("terminal_id_invalid", "Unknown terminal"),
@@ -472,6 +472,8 @@ async fn connection(mut socket: TcpStream, s: Shared, generation: u64) -> Result
                             400
                         } else if delivery == Delivery::Http500 {
                             500
+                        } else if op.scenario.reference_error.is_some() {
+                            503
                         } else {
                             200
                         },

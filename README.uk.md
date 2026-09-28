@@ -73,3 +73,8 @@ npm run test:browser
 - [Версійний профіль](profiles/desktop-paylink-2.1.20-win-x86/manifest.json), [межі сумісності та калібрування](docs/COMPATIBILITY.md).
 - [Задачі репозиторію](https://github.com/valtronforever/paylink-emulator/issues), [інтеграція Inerix](https://github.com/valtronforever/inerix/issues/476).
 - Офіційні джерела: [підключення PayLink](https://wiki.checkbox.ua/app/pc/portal_acquiring), [поширені помилки](https://wiki.checkbox.ua/app/pc/desktop_paylink_errors).
+# Windows-стенд SSI JSON
+
+Для дослідження сумісності зі справжнім PayLink див. [інструкцію стенду](docs/WINDOWS_SSI_LAB.md)
+та [записані спостереження й межі перевірки](docs/SSI_FINDINGS.md). Headless SSI-симулятор
+і recorder не потребують фізичного термінала або GPUI.

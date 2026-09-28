@@ -1,5 +1,11 @@
 # Compatibility evidence
 
+Issue #9 now has real **PayLink + simulated SSI JSON** recordings, a terminal-side
+responder and a recorder. See [Windows runbook](WINDOWS_SSI_LAB.md) and
+[findings/remaining acceptance gaps](SSI_FINDINGS.md). This evidence does not
+verify physical terminals or banks. The success/ping shape is calibrated to the
+captured subset; broad error, timing and integration compatibility remains unverified.
+
 Target: **Checkbox Desktop PayLink 2.1.20, win-x86**. Emulator host platforms are independent of this target.
 
 The [manifest](../profiles/desktop-paylink-2.1.20-win-x86/manifest.json) records the official installer URL and SHA-256 actually computed on 2026-09-21. Acceptance follows the user’s documentation-only decision. Physical terminal comparison is optional and does not block delivery. See [documented scope and assumptions](DOCUMENTATION_CONTRACT.md). The executable has **not** been run against a physical terminal. API bodies, error channels, numeric codes, model-specific phases, timeout boundaries and browser headers remain **unverified**. Passing emulator tests proves its own model behaves consistently, not compatibility with a bank.

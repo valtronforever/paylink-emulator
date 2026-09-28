@@ -1,0 +1,1573 @@
+{
+  "spec": {
+    "url": "https://www.ssi.com.ua/_files/ugd/c8ff39_c33c4ea4837842229ecb6331cb310d28.pdf",
+    "revision": "1.4.6",
+    "date": "2026-09-12",
+    "wire_version": 1,
+    "sha256": "8e4b459ade28f4ee301de7751659d4bf365f9c0f2ac3508a6745a597158e1a65",
+    "ambiguities": [
+      "§4.3.5 says params is absent except GetLastResult, but individual method examples require params.",
+      "§4.3.2 lists APPROVED_ONLINE; §5.5.1 example uses APPROVED-ONLINE.",
+      "§4.3.2 describes 2/3-character responseCode; §5.5.1 example uses 0000.",
+      "Request examples contain punctuation errors; codec tests use valid JSON and the §6.1 XOR algorithm."
+    ]
+  },
+  "scope": "All errorCode and status values, and all transactionResult examples in this document. Bank responseCode is not exhaustively enumerated by SSI.",
+  "errors": [
+    {
+      "status": "not_run",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E00.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9024,
+          "error": "Загальна помилка. Зверніться в службу підтримки Checkbox.",
+          "description": "Error => (E00) General error"
+        },
+        "duration_ms": 28.607499999999845
+      },
+      "emulator_case": {
+        "id": "E00",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E00"
+      },
+      "fixture": "reference/E00.json",
+      "reason": "Native mapping recorded; updated emulator replay pending CI build. Injection does not establish legitimate method/phase reachability.",
+      "code": "E00",
+      "description": "General error",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "request",
+      "method": "Purchase",
+      "phase": "acceptance",
+      "injection": "request_errors.Purchase",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E01.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9022,
+          "error": "Термінал не підтримує поточний тип протоколу. Потрібно звернутися в банк.",
+          "description": "The protocol is not supported => (E01) Protocol version is not supported by the terminal"
+        },
+        "duration_ms": 26.943599999999833
+      },
+      "emulator_case": {
+        "id": "E01",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E01"
+      },
+      "fixture": "reference/E01.json",
+      "reason": "Native mapping recorded; updated emulator replay pending CI build. Injection does not establish legitimate method/phase reachability.",
+      "code": "E01",
+      "description": "Protocol version is not supported by the terminal",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "request",
+      "method": "Purchase",
+      "phase": "acceptance",
+      "injection": "request_errors.Purchase",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E02.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9300,
+          "error": "Виникла помилка контрольної суми. Зверніться в службу підтримки Checkbox.",
+          "description": "Checksum description => (E02) Checksum error"
+        },
+        "duration_ms": 26.448699999999917
+      },
+      "emulator_case": {
+        "id": "E02",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E02"
+      },
+      "fixture": "reference/E02.json",
+      "reason": "Native mapping recorded; updated emulator replay pending CI build. Injection does not establish legitimate method/phase reachability.",
+      "code": "E02",
+      "description": "Checksum error",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "request",
+      "method": "Purchase",
+      "phase": "acceptance",
+      "injection": "request_errors.Purchase",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E03.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9301,
+          "error": "Було отримано невірний формат JSON повідомлення. Зверніться в службу підтримки Checkbox.",
+          "description": "Json message format description => (E03) Json message format error"
+        },
+        "duration_ms": 31.10850000000005
+      },
+      "emulator_case": {
+        "id": "E03",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E03"
+      },
+      "fixture": "reference/E03.json",
+      "reason": "Native mapping recorded; updated emulator replay pending CI build. Injection does not establish legitimate method/phase reachability.",
+      "code": "E03",
+      "description": "Json message format error",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "request",
+      "method": "Purchase",
+      "phase": "acceptance",
+      "injection": "request_errors.Purchase",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E04.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9302,
+          "error": "Відсутні обов’язкові поля в запиті до терміналу. Зверніться в службу підтримки Checkbox.",
+          "description": "Required fields are missing => (E04) Required fields are missing"
+        },
+        "duration_ms": 23.074699999999893
+      },
+      "emulator_case": {
+        "id": "E04",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E04"
+      },
+      "fixture": "reference/E04.json",
+      "reason": "Native mapping recorded; updated emulator replay pending CI build. Injection does not establish legitimate method/phase reachability.",
+      "code": "E04",
+      "description": "Required fields are missing",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "request",
+      "method": "Purchase",
+      "phase": "acceptance",
+      "injection": "request_errors.Purchase",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E05.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9008,
+          "error": "Помилка виконання операції на терміналі.",
+          "description": "Command execution description => (E05) Unknown method"
+        },
+        "duration_ms": 22.270300000000134
+      },
+      "emulator_case": {
+        "id": "E05",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E05"
+      },
+      "fixture": "reference/E05.json",
+      "reason": "Native mapping recorded; updated emulator replay pending CI build. Injection does not establish legitimate method/phase reachability.",
+      "code": "E05",
+      "description": "Unknown method",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "request",
+      "method": "Purchase",
+      "phase": "acceptance",
+      "injection": "request_errors.Purchase",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E06.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9009,
+          "error": "Пристрій вже зайнятий виконанням команди. Потрібно зачекати декілька секунд та повторити спробу.",
+          "description": "Device is busy => (E06) Terminal Busy"
+        },
+        "duration_ms": 23.521799999999985
+      },
+      "emulator_case": {
+        "id": "E06",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E06"
+      },
+      "fixture": "reference/E06.json",
+      "reason": "Native mapping recorded; updated emulator replay pending CI build. Injection does not establish legitimate method/phase reachability.",
+      "code": "E06",
+      "description": "Terminal Busy",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "request",
+      "method": "Purchase",
+      "phase": "acceptance",
+      "injection": "request_errors.Purchase",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E07.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9303,
+          "error": "Не знайдено торговця з вказаним Merchant ID. Перевірте в параметрах підключення до терміналу значення Merchant ID. В разі потреби зверніться до служби підтримки банку.",
+          "description": "Merchant Id is not found => (E07) Merchant Id is not found"
+        },
+        "duration_ms": 22.405199999999695
+      },
+      "emulator_case": {
+        "id": "E07",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E07"
+      },
+      "fixture": "reference/E07.json",
+      "reason": "Native mapping recorded; updated emulator replay pending CI build. Injection does not establish legitimate method/phase reachability.",
+      "code": "E07",
+      "description": "Merchant Id is not found",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "request",
+      "method": "Purchase",
+      "phase": "acceptance",
+      "injection": "request_errors.Purchase",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E08.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9304,
+          "error": "Переривання операції заборонене. Очікуйте її завершення.",
+          "description": "Interrupt prohibited => (E08) Interrupt prohibited"
+        },
+        "duration_ms": 22.51859999999988
+      },
+      "emulator_case": {
+        "id": "E08",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E08"
+      },
+      "fixture": "reference/E08.json",
+      "reason": "Native mapping recorded; updated emulator replay pending CI build. Injection does not establish legitimate method/phase reachability.",
+      "code": "E08",
+      "description": "Interrupt prohibited",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "request",
+      "method": "Purchase",
+      "phase": "acceptance",
+      "injection": "request_errors.Purchase",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E09.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9021,
+          "error": "Неправильно вказані параметри.",
+          "description": "Argument description => (E09) Format error"
+        },
+        "duration_ms": 23.6541000000002
+      },
+      "emulator_case": {
+        "id": "E09",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E09"
+      },
+      "fixture": "reference/E09.json",
+      "reason": "Native mapping recorded; updated emulator replay pending CI build. Injection does not establish legitimate method/phase reachability.",
+      "code": "E09",
+      "description": "Format error",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "request",
+      "method": "Purchase",
+      "phase": "acceptance",
+      "injection": "request_errors.Purchase",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E10.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9204,
+          "error": "Відсутній зв'язок з платіжним терміналом. Перевірте доступність терміналу в локальній мережі та відповідного банківського ПЗ на ньому.",
+          "description": "No connection with host => (E10) Connection error"
+        },
+        "duration_ms": 23220.088099999997
+      },
+      "emulator_case": {
+        "id": "E10",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E10"
+      },
+      "fixture": "reference/E10.json",
+      "reason": "Native mapping recorded; updated emulator replay pending CI build. Injection does not establish legitimate method/phase reachability.",
+      "code": "E10",
+      "description": "Connection error",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "operation",
+      "method": "GetLastResult",
+      "phase": "completed",
+      "injection": "error_code",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E11.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9305,
+          "error": "Виникла помилка верифікації (ПІН-код, підпису). Перевірте ПІН-код. В разі потреби зверніться в службу підтримки банку.",
+          "description": "Verification description => (E11) Verification error (pin, signature)"
+        },
+        "duration_ms": 2076.985099999998
+      },
+      "emulator_case": {
+        "id": "E11",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E11"
+      },
+      "fixture": "reference/E11.json",
+      "reason": "Native mapping recorded; updated emulator replay pending CI build. Injection does not establish legitimate method/phase reachability.",
+      "code": "E11",
+      "description": "Verification error (pin, signature)",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "operation",
+      "method": "GetLastResult",
+      "phase": "completed",
+      "injection": "error_code",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E12.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9201,
+          "error": "Операція була перервана користувачем.",
+          "description": "Transaction canceled by user => (E12) Transaction canceled"
+        },
+        "duration_ms": 2070.0882999999994
+      },
+      "emulator_case": {
+        "id": "E12",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E12"
+      },
+      "fixture": "reference/E12.json",
+      "reason": "Native mapping recorded; updated emulator replay pending CI build. Injection does not establish legitimate method/phase reachability.",
+      "code": "E12",
+      "description": "Transaction canceled",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "operation",
+      "method": "GetLastResult",
+      "phase": "completed",
+      "injection": "error_code",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E13.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9029,
+          "error": "На термінал було передано невірне поле MAC. Зверніться до служби підтримки Checkbox.",
+          "description": "Wrong MAC => (E13) MAC Error - MAC"
+        },
+        "duration_ms": 2066.131999999998
+      },
+      "emulator_case": {
+        "id": "E13",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E13"
+      },
+      "fixture": "reference/E13.json",
+      "reason": "Native mapping recorded; updated emulator replay pending CI build. Injection does not establish legitimate method/phase reachability.",
+      "code": "E13",
+      "description": "MAC Error - MAC",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "operation",
+      "method": "GetLastResult",
+      "phase": "completed",
+      "injection": "error_code",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E14.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9306,
+          "error": "На терміналі відсутні ключі. Зверніться до служби підтримки банку.",
+          "description": "Key description => (E14) Key error"
+        },
+        "duration_ms": 2060.373300000003
+      },
+      "emulator_case": {
+        "id": "E14",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E14"
+      },
+      "fixture": "reference/E14.json",
+      "reason": "Native mapping recorded; updated emulator replay pending CI build. Injection does not establish legitimate method/phase reachability.",
+      "code": "E14",
+      "description": "Key error",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "operation",
+      "method": "GetLastResult",
+      "phase": "completed",
+      "injection": "error_code",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E15.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9307,
+          "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+          "description": "Need Z report => (E15) Need z report"
+        },
+        "duration_ms": 2062.593200000003
+      },
+      "emulator_case": {
+        "id": "E15",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E15"
+      },
+      "fixture": "reference/E15.json",
+      "reason": "Native mapping recorded; updated emulator replay pending CI build. Injection does not establish legitimate method/phase reachability.",
+      "code": "E15",
+      "description": "Need z report",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "operation",
+      "method": "GetLastResult",
+      "phase": "completed",
+      "injection": "error_code",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E16.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9308,
+          "error": "Виникла помилка зчитування карти. Перевірте картку на ушкодження та спробуйте повторити операцію.",
+          "description": "Card description => (E16) Card error"
+        },
+        "duration_ms": 2088.246300000006
+      },
+      "emulator_case": {
+        "id": "E16",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E16"
+      },
+      "fixture": "reference/E16.json",
+      "reason": "Native mapping recorded; updated emulator replay pending CI build. Injection does not establish legitimate method/phase reachability.",
+      "code": "E16",
+      "description": "Card error",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "operation",
+      "method": "GetLastResult",
+      "phase": "completed",
+      "injection": "error_code",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E17.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9202,
+          "error": "EMV Decline.",
+          "description": "EMV Decline => (E17) EMV error"
+        },
+        "duration_ms": 2083.006999999998
+      },
+      "emulator_case": {
+        "id": "E17",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E17"
+      },
+      "fixture": "reference/E17.json",
+      "reason": "Native mapping recorded; updated emulator replay pending CI build. Injection does not establish legitimate method/phase reachability.",
+      "code": "E17",
+      "description": "EMV error",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "operation",
+      "method": "GetLastResult",
+      "phase": "completed",
+      "injection": "error_code",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E18.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9024,
+          "error": "Загальна помилка. Зверніться в службу підтримки Checkbox.",
+          "description": "Error => (E18) Printer is out of paper or inoperational"
+        },
+        "duration_ms": 20.325400000001537
+      },
+      "emulator_case": {
+        "id": "E18",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E18"
+      },
+      "fixture": "reference/E18.json",
+      "reason": "Native mapping recorded; updated emulator replay pending CI build. Injection does not establish legitimate method/phase reachability.",
+      "code": "E18",
+      "description": "Printer is out of paper or inoperational",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "request",
+      "method": "Purchase",
+      "phase": "acceptance",
+      "injection": "request_errors.Purchase",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E19.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9024,
+          "error": "Загальна помилка. Зверніться в службу підтримки Checkbox.",
+          "description": "Error => (E19) Transaction amount out of limit"
+        },
+        "duration_ms": 18.964799999994284
+      },
+      "emulator_case": {
+        "id": "E19",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E19"
+      },
+      "fixture": "reference/E19.json",
+      "reason": "Native mapping recorded; updated emulator replay pending CI build. Injection does not establish legitimate method/phase reachability.",
+      "code": "E19",
+      "description": "Transaction amount out of limit",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "request",
+      "method": "Purchase",
+      "phase": "acceptance",
+      "injection": "request_errors.Purchase",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E20.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9024,
+          "error": "Загальна помилка. Зверніться в службу підтримки Checkbox.",
+          "description": "Error => (E20) No last transactions found"
+        },
+        "duration_ms": 2075.1452999999965
+      },
+      "emulator_case": {
+        "id": "E20",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E20"
+      },
+      "fixture": "reference/E20.json",
+      "reason": "Native mapping recorded; updated emulator replay pending CI build. Injection does not establish legitimate method/phase reachability.",
+      "code": "E20",
+      "description": "No last transactions found",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "operation",
+      "method": "GetLastResult",
+      "phase": "completed",
+      "injection": "error_code",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E21.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9307,
+          "error": "Потрібно виконати звірку з процесинговим центром банку. Виконайте закриття банківської зміни.",
+          "description": "Need Z report => (E21) General error in transaction"
+        },
+        "duration_ms": 2058.2909
+      },
+      "emulator_case": {
+        "id": "E21",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E21"
+      },
+      "fixture": "reference/E21.json",
+      "reason": "Native mapping recorded; updated emulator replay pending CI build. Injection does not establish legitimate method/phase reachability.",
+      "code": "E21",
+      "description": "General error in transaction",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "operation",
+      "method": "GetLastResult",
+      "phase": "completed",
+      "injection": "error_code",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": "reference/evidence/2026-09-28T04-12-07-742Z-f75a1328-E22.json",
+      "paylink_reaction": {
+        "status": 503,
+        "content_type": "application/json",
+        "body": {
+          "success": false,
+          "code": 9024,
+          "error": "Загальна помилка. Зверніться в службу підтримки Checkbox.",
+          "description": "Error => (E22) Transaction with such transactionUid is already processing"
+        },
+        "duration_ms": 2063.969799999999
+      },
+      "emulator_case": {
+        "id": "E22",
+        "outcome": "error",
+        "error_id": "terminal_general",
+        "reference_error": "E22"
+      },
+      "fixture": "reference/E22.json",
+      "reason": "Native mapping recorded; updated emulator replay pending CI build. Injection does not establish legitimate method/phase reachability.",
+      "code": "E22",
+      "description": "Transaction with such transactionUid is already processing",
+      "section": "4.3.3",
+      "pages": [
+        29,
+        30
+      ],
+      "category": "operation",
+      "method": "GetLastResult",
+      "phase": "completed",
+      "injection": "error_code",
+      "reference_status": "observed_injection",
+      "test": "crates/server/tests/http.rs::ssi_error_responses_match_all_recorded_injections"
+    }
+  ],
+  "states": [
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "No reviewed paired reference fixture yet; injection is not proof of physical reachability.",
+      "code": "S00",
+      "description": "idle",
+      "section": "4.3.4",
+      "pages": [
+        31
+      ],
+      "method": "GetStatus",
+      "injection": "complete operation"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "No reviewed paired reference fixture yet; injection is not proof of physical reachability.",
+      "code": "S01",
+      "description": "busy",
+      "section": "4.3.4",
+      "pages": [
+        31
+      ],
+      "method": "GetStatus",
+      "injection": "phases[].status=S01"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "No reviewed paired reference fixture yet; injection is not proof of physical reachability.",
+      "code": "S02",
+      "description": "awaiting_card",
+      "section": "4.3.4",
+      "pages": [
+        31
+      ],
+      "method": "GetStatus",
+      "injection": "phases[].status=S02"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "No reviewed paired reference fixture yet; injection is not proof of physical reachability.",
+      "code": "S03",
+      "description": "awaiting_verification",
+      "section": "4.3.4",
+      "pages": [
+        31
+      ],
+      "method": "GetStatus",
+      "injection": "phases[].status=S03"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "No reviewed paired reference fixture yet; injection is not proof of physical reachability.",
+      "code": "S04",
+      "description": "bank_communication",
+      "section": "4.3.4",
+      "pages": [
+        31
+      ],
+      "method": "GetStatus",
+      "injection": "phases[].status=S04"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "No reviewed paired reference fixture yet; injection is not proof of physical reachability.",
+      "code": "S05",
+      "description": "printing",
+      "section": "4.3.4",
+      "pages": [
+        31
+      ],
+      "method": "GetStatus",
+      "injection": "phases[].status=S05"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "No reviewed paired reference fixture yet; injection is not proof of physical reachability.",
+      "code": "S06",
+      "description": "settlement_required",
+      "section": "4.3.4",
+      "pages": [
+        31
+      ],
+      "method": "GetStatus",
+      "injection": "phases[].status=S06"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "No reviewed paired reference fixture yet; injection is not proof of physical reachability.",
+      "code": "S07",
+      "description": "remove_card",
+      "section": "4.3.4",
+      "pages": [
+        31
+      ],
+      "method": "GetStatus",
+      "injection": "phases[].status=S07"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "No reviewed paired reference fixture yet; injection is not proof of physical reachability.",
+      "code": "S08",
+      "description": "awaiting_second_step",
+      "section": "4.3.4",
+      "pages": [
+        31
+      ],
+      "method": "GetStatus",
+      "injection": "phases[].status=S08"
+    }
+  ],
+  "financial_results": [
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "FAILED",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "TRY_AGAIN",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "TRY_AGAIN_PHONE",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "CARD_ERROR",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "MESSAGE_ERROR",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "NO_CONNECTION",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "CONNECTION_ERROR",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "INTERNAL_ERROR",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "EMV_ERROR",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "CONNECTION_TIMEOUT",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "INSUFFICIENT_BALANCE",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "CARD_BLOCKED",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "CANCELLED",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "UNSUPPORTED_CARD",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "DECLINED_ONLINE",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "APPROVED_ONLINE",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "DECLINED_OFFLINE",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "CARD_DECLINED_ONLINE",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "APPROVED_OFFLINE",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "KEY_ERROR",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "BATCH_UPLOAD_NEEDED",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "SIGNATURE_VERIFICATION_ERROR",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "COMPLETED",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "APPROVED",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "IN_PROGRESS",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "FORCED_DECLINED_OFFLINE",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "CANCELLED_BEFORE_START",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "PIN_ERROR",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "BATCH_CLOSE_NEEDED",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "OK",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "SSI lists result examples, not a normative mapping to errorCode/responseCode; combinations require explicit scenario evidence.",
+      "code": "PRINTER_ERROR",
+      "section": "4.3.2",
+      "pages": [
+        26,
+        27
+      ],
+      "method": "GetLastResult",
+      "injection": "transaction_result"
+    }
+  ],
+  "transport": [
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "No reviewed paired reference fixture yet; injection is not proof of physical reachability.",
+      "code": "silence",
+      "category": "transport_or_invalid_message"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "No reviewed paired reference fixture yet; injection is not proof of physical reachability.",
+      "code": "close",
+      "category": "transport_or_invalid_message"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "No reviewed paired reference fixture yet; injection is not proof of physical reachability.",
+      "code": "bad_lrc",
+      "category": "transport_or_invalid_message"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "No reviewed paired reference fixture yet; injection is not proof of physical reachability.",
+      "code": "bad_length",
+      "category": "transport_or_invalid_message"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "No reviewed paired reference fixture yet; injection is not proof of physical reachability.",
+      "code": "bad_json",
+      "category": "transport_or_invalid_message"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "No reviewed paired reference fixture yet; injection is not proof of physical reachability.",
+      "code": "fragmented_frames",
+      "category": "transport_or_invalid_message"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "No reviewed paired reference fixture yet; injection is not proof of physical reachability.",
+      "code": "coalesced_frames",
+      "category": "transport_or_invalid_message"
+    },
+    {
+      "status": "not_run",
+      "raw_ssi": null,
+      "paylink_reaction": null,
+      "emulator_case": null,
+      "fixture": null,
+      "reason": "No reviewed paired reference fixture yet; injection is not proof of physical reachability.",
+      "code": "unknown_status",
+      "category": "transport_or_invalid_message"
+    }
+  ],
+  "local_paylink_errors": []
+}
