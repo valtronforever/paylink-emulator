@@ -4,13 +4,13 @@ import {serve} from './ssi/server.mjs';
 const {values, positionals} = parseArgs({allowPositionals: true, options: {
   port: {type: 'string', default: '3000'}, 'control-port': {type: 'string', default: '13001'},
   wire: {type: 'string', default: 'runs/manual/reference/ssi-wire.jsonl'},
-  file: {type: 'string'}, 'run-id': {type: 'string', default: 'manual'},
+  file: {type: 'string'}, state: {type:'string'}, 'run-id': {type: 'string', default: 'manual'},
 }});
 const token = process.env.SSI_CONTROL_TOKEN;
 const command = positionals[0] ?? 'serve';
 if (command === 'serve') {
   const server = await serve({port: Number(values.port), controlPort: Number(values['control-port']),
-    token, wirePath: values.wire, runId: values['run-id']});
+    token, wirePath: values.wire, statePath:values.state, runId: values['run-id']});
   console.log(JSON.stringify(server.ready));
   for (const signal of ['SIGINT', 'SIGTERM']) process.once(signal, async () => { await server.close(); process.exit(0); });
 } else {

@@ -1,0 +1,22 @@
+{
+  "origin": "https://example.com",
+  "browser": "154.0.4258.37",
+  "inerix": "not_run_dependency_476",
+  "https_to_localhost": "see_results",
+  "results": [
+    {
+      "target": "reference",
+      "scenario_id": "ping",
+      "origin": "https://example.com",
+      "error": "Failed to fetch",
+      "elapsed_ms": 6.099999999627471
+    },
+    {
+      "target": "reference",
+      "scenario_id": "approved",
+      "origin": "https://example.com",
+      "error": "Failed to fetch",
+      "elapsed_ms": 2.7000000001862645
+    }
+  ]
+}

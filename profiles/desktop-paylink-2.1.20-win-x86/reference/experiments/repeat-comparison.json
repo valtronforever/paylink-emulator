@@ -1,0 +1,69 @@
+{
+  "scope": "Native semantic repeat using the same explicit volatile-field allowlist; no ID adaptation needed",
+  "results": [
+    {
+      "scenario_id": "ping",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 21.268299999999954,
+      "emulator_ms": 18.26389999999992,
+      "classification": null,
+      "original_ms": 21.268299999999954,
+      "repeat_ms": 18.26389999999992
+    },
+    {
+      "scenario_id": "approved",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 2104.8764,
+      "emulator_ms": 2110.68,
+      "classification": null,
+      "original_ms": 2104.8764,
+      "repeat_ms": 2110.68
+    },
+    {
+      "scenario_id": "declined",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 2055.5391999999997,
+      "emulator_ms": 2073.3587,
+      "classification": null,
+      "original_ms": 2055.5391999999997,
+      "repeat_ms": 2073.3587
+    },
+    {
+      "scenario_id": "timeout",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 166184.4786,
+      "emulator_ms": 166198.5776,
+      "classification": null,
+      "original_ms": 166184.4786,
+      "repeat_ms": 166198.5776
+    }
+  ]
+}

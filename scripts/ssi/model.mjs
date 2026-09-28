@@ -23,9 +23,14 @@ const methods = ['Purchase', 'PingDevice', 'GetStatus', 'GetLastResult', 'Interr
 const faultTypes = ['normal', 'silence', 'close', 'bad_lrc', 'bad_json', 'bad_length', 'unknown_status'];
 export function scenario(value) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw Error('Expected scenario object');
-  const allowed = [...Object.keys(defaultScenario), 'response_delay_ms', 'fragment_bytes', 'fragment_delay_ms', 'result_fields'];
+  const allowed = [...Object.keys(defaultScenario), 'response_delay_ms', 'fragment_bytes', 'fragment_delay_ms', 'result_fields', 'method_delays'];
   for (const key of Object.keys(value)) if (!allowed.includes(key)) throw Error(`Unknown scenario field: ${key}`);
   const s = structuredClone({...defaultScenario, ...value});
+  s.method_delays ??= {};
+  if (!s.method_delays || typeof s.method_delays !== 'object' || Array.isArray(s.method_delays)) throw Error('Invalid method_delays');
+  for (const [method, delay] of Object.entries(s.method_delays)) {
+    if (!methods.includes(method) || !Number.isInteger(delay) || delay < 0 || delay > 3600000) throw Error('Invalid method delay');
+  }
   s.result_fields ??= {};
   if (!s.result_fields || typeof s.result_fields !== 'object' || Array.isArray(s.result_fields)) throw Error('Invalid result_fields');
   for (const [key, value] of Object.entries(s.result_fields)) {

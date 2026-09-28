@@ -37,7 +37,7 @@ const ssi = (r, b) => control(config.ssi_control_url, process.env.SSI_CONTROL_TO
 const emu = (r, b) => control(config.emulator_control_url, process.env.PAYLINK_CONTROL_TOKEN, r, b, true);
 try {
   // Readiness is an actual control roundtrip. POSServer readiness/API schema is recorded below.
-  await ssi('health');
+  manifest.ssi_runtime = await ssi('health');
   const schema = await recordHttp(config.reference_url + '/swagger/v1/swagger.json', {method: 'GET'}, {file: join(root, 'reference/http.jsonl'), runId, scenarioId: 'preflight', epoch});
   if (schema.status !== 200 || !schema.body?.paths) throw Error('PayLink local OpenAPI unavailable');
   writeFileSync(join(root, 'reference/openapi.json'), JSON.stringify(schema.body, null, 2));
@@ -81,7 +81,12 @@ finally {
     catch (e) { manifest.missing_evidence.push(`Native log unavailable: ${e.code}`); }
   }
   if (!manifest.native_logs.length) manifest.missing_evidence.push('Native logs were not supplied');
-  manifest.missing_evidence.push('Database consistent export not captured', 'Browser recordings are a separate stage');
+  if (config.database_path) {
+    try {
+      manifest.database = JSON.parse(execFileSync(config.python ?? 'python', ['scripts/lab/backup-paylink-db.py', config.database_path, join(root, 'reference/paylink-logs/response.db')], {encoding:'utf8'}));
+    } catch { manifest.missing_evidence.push('Database backup failed; no consistency claim'); }
+  } else manifest.missing_evidence.push('Database consistent export not captured');
+  manifest.missing_evidence.push('Browser recordings are a separate stage');
   manifest.finished_utc = new Date().toISOString();
   manifest.executable_sha256_after = hash(config.executable_path);
   if (manifest.executable_sha256_after !== manifest.executable_sha256) { manifest.status = 'invalid_build_changed'; process.exitCode = 1; }

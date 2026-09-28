@@ -1,15 +1,26 @@
 import net from 'node:net';
 import http from 'node:http';
-import {appendFileSync, mkdirSync} from 'node:fs';
+import {appendFileSync, mkdirSync, existsSync, readFileSync, writeFileSync, renameSync} from 'node:fs';
 import {dirname} from 'node:path';
+import {setTimeout as sleep} from 'node:timers/promises';
+import {createHash, randomUUID} from 'node:crypto';
 import {Decoder, encode, lrc} from './codec.mjs';
-import {Terminal, reply} from './model.mjs';
+import {Terminal, reply, scenario} from './model.mjs';
 
-export async function serve({port = 3000, controlPort = 13001, token, wirePath, runId = 'manual'} = {}) {
+export async function serve({port = 3000, controlPort = 13001, token, wirePath, statePath, runId = 'manual'} = {}) {
   if (typeof token !== 'string' || token.length < 16) throw Error('SSI_CONTROL_TOKEN must contain at least 16 characters');
   if (!wirePath) throw Error('A wire journal path is required');
   mkdirSync(dirname(wirePath), {recursive: true});
+  const identity = {boot_id:randomUUID(), source_hashes:Object.fromEntries(['codec.mjs','model.mjs','server.mjs'].map(file =>
+    [file,createHash('sha256').update(readFileSync(new URL(file,import.meta.url))).digest('hex')]))};
   const epoch = performance.now(), events = [], sockets = new Set();
+  let terminal;
+  const persist = () => {
+    if (!statePath || !terminal) return;
+    mkdirSync(dirname(statePath), {recursive:true});
+    writeFileSync(statePath + '.tmp', JSON.stringify({version:1,last:terminal.last}));
+    renameSync(statePath + '.tmp', statePath);
+  };
   let nextConnection = 0, cursor = 0, context = {run_id: runId, scenario_id: 'unarmed'};
   const emit = (kind, data = {}) => {
     const event = {seq: ++cursor, utc: new Date().toISOString(), elapsed_ms: performance.now() - epoch,
@@ -17,12 +28,21 @@ export async function serve({port = 3000, controlPort = 13001, token, wirePath, 
     // The file is authoritative. Fail closed on write failure; never silently lose evidence.
     appendFileSync(wirePath, JSON.stringify(event) + '\n');
     events.push(event); if (events.length > 10000) events.shift();
+    if (['accepted','completed','reset'].includes(kind)) persist();
   };
-  const terminal = new Terminal(emit);
+  terminal = new Terminal(emit);
+  if (statePath && existsSync(statePath)) {
+    const saved = JSON.parse(readFileSync(statePath, 'utf8'));
+    if (saved.version !== 1 || (saved.last && (!saved.last.params || typeof saved.last.code !== 'string'))) throw Error('Invalid persistent SSI state');
+    if (saved.last) saved.last.scenario = scenario(saved.last.scenario);
+    terminal.last = saved.last;
+    emit('restored_result', {has_result:!!terminal.last});
+  }
   const tick = setInterval(() => terminal.tick(), 10);
   const tcp = net.createServer(socket => {
     const connection_id = ++nextConnection, decoder = new Decoder();
-    const log = (kind, data) => emit(kind, {connection_id, ...data});
+    const connectionContext = {...context}, lifetime = new AbortController();
+    const log = (kind, data) => emit(kind, {...connectionContext, connection_id, ...data});
     if (sockets.size >= 32) { socket.destroy(); return; }
     sockets.add(socket); socket.setTimeout(20000);
     log('connected', {peer: socket.remoteAddress});
@@ -33,6 +53,7 @@ export async function serve({port = 3000, controlPort = 13001, token, wirePath, 
     });
     socket.on('error', e => log('socket_error', {error: e.message}));
     socket.on('close', () => {
+      lifetime.abort();
       sockets.delete(socket); log('disconnected', {pending_hex: decoder.pending.toString('hex')});
     });
     let chain = Promise.resolve();
@@ -57,8 +78,9 @@ export async function serve({port = 3000, controlPort = 13001, token, wirePath, 
           if (fault === 'bad_json') {
             bytes[5] = 0x21; bytes[bytes.length - 1] = lrc(bytes.subarray(5, -1));
           }
-          const pause = ms => new Promise(resolve => setTimeout(resolve, ms));
-          if (s.response_delay_ms) await pause(s.response_delay_ms);
+          const pause = ms => sleep(ms, undefined, {signal:lifetime.signal});
+          const delay = s.method_delays[result.method] ?? s.response_delay_ms;
+          if (delay) await pause(delay);
           if (generation !== terminal.generation || socket.destroyed) return;
           const decoded = new Decoder().push(bytes)[0];
           log('frame', {direction: 'tx', hex: bytes.toString('hex'), json: decoded?.json ?? null,
@@ -83,7 +105,7 @@ export async function serve({port = 3000, controlPort = 13001, token, wirePath, 
     try {
       if (req.method === 'GET') {
         if (url.pathname === '/state') return send(200, terminal.state());
-        if (url.pathname === '/health') return send(200, {ready: true, run_id: context.run_id});
+        if (url.pathname === '/health') return send(200, {ready: true, run_id: context.run_id, ...identity});
         if (url.pathname === '/events') {
           const after = Number(url.searchParams.get('after') ?? 0);
           return send(200, {first_seq: events[0]?.seq, last_seq: cursor, truncated: after < (events[0]?.seq ?? 1) - 1,
@@ -114,7 +136,7 @@ export async function serve({port = 3000, controlPort = 13001, token, wirePath, 
   });
   try { await listen(tcp, port); await listen(control, controlPort); }
   catch (e) { clearInterval(tick); tcp.close(); control.close(); throw e; }
-  const ready = {tcp: `127.0.0.1:${tcp.address().port}`, control_url: `http://127.0.0.1:${control.address().port}`, wire_path: wirePath};
+  const ready = {tcp: `127.0.0.1:${tcp.address().port}`, control_url: `http://127.0.0.1:${control.address().port}`, wire_path: wirePath, state_path:statePath ?? null, ...identity};
   emit('ready', ready);
   return {ready, terminal, close: async () => {
     clearInterval(tick);

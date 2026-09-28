@@ -15,7 +15,9 @@ const handler = (_req, res) => {
 const server = config.browser_tls ? https.createServer({key: readFileSync(config.browser_tls.key), cert: readFileSync(config.browser_tls.cert)}, handler) : http.createServer(handler);
 await new Promise(r => server.listen(13020, '127.0.0.1', r));
 const origin = config.browser_origin ?? `${config.browser_tls ? 'https' : 'http'}://127.0.0.1:13020`;
-const browser = await chromium.launch({channel: config.browser_channel ?? 'chromium', headless: true});
+const browser = await chromium.launch({channel: config.browser_channel ?? 'chromium', headless: true}).catch(async error => {
+  await new Promise(r => server.close(r)); throw error;
+});
 const summary = [];
 try {
   for (const target of ['reference', 'emulator']) {
@@ -44,16 +46,19 @@ try {
             ...(request.body ? {body: JSON.stringify(request.body)} : {}), signal: AbortSignal.timeout(timeout)});
           result = {status: r.status, body: await r.text(), elapsed_ms: performance.now() - start};
         } catch (e) { result = {error: e.message, elapsed_ms: performance.now() - start}; }
-        document.querySelector('#result').textContent = JSON.stringify(result, null, 2); return result;
+        let output = document.querySelector('#result');
+        if (!output) { output = document.createElement('pre'); output.id = 'result'; document.body.appendChild(output); }
+        output.textContent = JSON.stringify(result, null, 2); return result;
       }, {url: config[`${target}_url`] + (target === 'emulator' ? item.emulator_path ?? item.request.path : item.request.path), request: item.request, timeout: item.timeout_ms ?? 30000});
       summary.push({target, scenario_id: item.id, origin, ...result});
       await page.screenshot({path: join(out, `${target}-${item.id}.png`)});
-      if (result.error && !result.error.includes('fetch')) break;
+      // A fetch failure may leave an accepted operation running. Do not reset it.
+      if (result.error) break;
     }
     writeFileSync(join(out, `${target}-events.json`), JSON.stringify(events, null, 2));
     await context.tracing.stop({path: join(out, `${target}-trace.zip`)}); await context.close();
   }
 } finally {
-  writeFileSync(join(out, 'summary.json'), JSON.stringify({origin, browser: browser.version(), inerix: 'not_run_dependency_476', https_to_localhost: origin.startsWith('https:') ? 'see_results' : 'not_run_no_trusted_harness_certificate', results: summary}, null, 2));
+  writeFileSync(join(out, 'summary.json'), JSON.stringify({origin, browser: browser.version(), loopback_permission:'default', inerix: 'not_run_dependency_476', https_to_localhost: origin.startsWith('https:') ? 'see_results' : 'not_run_no_trusted_harness_certificate', results: summary}, null, 2));
   await browser.close(); await new Promise(r => server.close(r));
 }

@@ -1,0 +1,72 @@
+{
+  "generation": 10,
+  "status": "S00",
+  "armed": {
+    "id": "restart-probe",
+    "phases": [
+      {
+        "status": "S02",
+        "ms": 100
+      },
+      {
+        "status": "S04",
+        "ms": 100
+      }
+    ],
+    "error_code": "",
+    "response_code": "0000",
+    "transaction_result": "APPROVED-ONLINE",
+    "faults": {},
+    "request_errors": {},
+    "result_fields": {},
+    "response_delay_ms": 0,
+    "fragment_delay_ms": 0,
+    "fragment_bytes": 0
+  },
+  "active": null,
+  "last": {
+    "params": {
+      "originalTrnName": "Purchase",
+      "transAmount": "100",
+      "authCode": "123456",
+      "date": "28/09/2026",
+      "time": "05:01:21",
+      "invoiceNum": "000001",
+      "bankName": "SIMULATED",
+      "merchantId": "TEST-MERCHANT",
+      "pan": "4111XXXXXXXX1111",
+      "responseCode": "0000",
+      "rrn": "000000000001",
+      "transactionResult": "APPROVED-ONLINE",
+      "terminalId": "TEST0001",
+      "posEntryMode": "CONTACTLESS",
+      "binName": "VISA",
+      "cardHolderName": "TEST USER",
+      "errorDetails": "",
+      "transactionUid": "2aacef7c88be"
+    },
+    "code": "",
+    "scenario": {
+      "id": "restart-probe",
+      "phases": [
+        {
+          "status": "S02",
+          "ms": 100
+        },
+        {
+          "status": "S04",
+          "ms": 100
+        }
+      ],
+      "error_code": "",
+      "response_code": "0000",
+      "transaction_result": "APPROVED-ONLINE",
+      "faults": {},
+      "request_errors": {},
+      "result_fields": {},
+      "response_delay_ms": 0,
+      "fragment_delay_ms": 0,
+      "fragment_bytes": 0
+    }
+  }
+}

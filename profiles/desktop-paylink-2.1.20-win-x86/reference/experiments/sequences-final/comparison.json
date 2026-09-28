@@ -1,0 +1,84 @@
+{
+  "summary": {
+    "verified": 5,
+    "mismatch": 0,
+    "not_run": 0
+  },
+  "results": [
+    {
+      "scenario_id": "busy-and-recovery",
+      "step_id": "first",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 5206.8913999999995,
+      "emulator_ms": 4008.7522999999983,
+      "classification": null
+    },
+    {
+      "scenario_id": "busy-and-recovery",
+      "step_id": "busy-ping",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 5.8788999999999305,
+      "emulator_ms": 4.894000000000233,
+      "classification": null
+    },
+    {
+      "scenario_id": "busy-and-recovery",
+      "step_id": "busy-purchase",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 14.829500000000053,
+      "emulator_ms": 12.80659999999989,
+      "classification": null
+    },
+    {
+      "scenario_id": "busy-and-recovery",
+      "step_id": "recovered",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 5139.8135999999995,
+      "emulator_ms": 4012.2963999999993,
+      "classification": null
+    },
+    {
+      "scenario_id": "fragmented-ping",
+      "step_id": "request",
+      "status": "verified",
+      "checks": {
+        "http_status": true,
+        "content_type": true,
+        "connection_error": true,
+        "payload": true,
+        "timing": null
+      },
+      "reference_ms": 1759.2078000000001,
+      "emulator_ms": 3.972200000000157,
+      "classification": null
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+[
+  {
+    "id": "ping",
+    "ssi": {},
+    "emulator": {
+      "id": "ping"
+    },
+    "request": {
+      "method": "GET",
+      "path": "/api/pos/00000000-0000-4000-8000-000000000001/ping"
+    }
+  },
+  {
+    "id": "approved",
+    "ssi": {
+      "result_fields": {
+        "pan": "4444 44** **** 1111",
+        "cardHolderName": "TEST CARD",
+        "bankName": "TEST ACQUIRER / TEST MERCHANT"
+      }
+    },
+    "emulator": {
+      "id": "approved",
+      "outcome": "approved"
+    },
+    "request": {
+      "method": "POST",
+      "path": "/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+      "body": {
+        "amount": 100,
+        "merchant_id": "TEST-MERCHANT"
+      }
+    },
+    "variable_fields": [
+      "id",
+      "result.rrn",
+      "result.auth_code",
+      "result.invoice_num",
+      "result.receipt_no",
+      "result.date_time",
+      "result.additional_properties.transactionUid"
+    ],
+    "id_mapping": [
+      {
+        "paths": [
+          "result.terminal",
+          "result.terminal_id"
+        ],
+        "reference": "TEST0001",
+        "emulator": "00000000-0000-4000-8000-000000000001"
+      }
+    ]
+  },
+  {
+    "id": "declined",
+    "ssi": {
+      "error_code": "E21",
+      "response_code": "51",
+      "transaction_result": "DECLINED_ONLINE"
+    },
+    "emulator": {
+      "id": "declined",
+      "outcome": "declined",
+      "reference_error": "E21"
+    },
+    "request": {
+      "method": "POST",
+      "path": "/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+      "body": {
+        "amount": 100,
+        "merchant_id": "TEST-MERCHANT"
+      }
+    },
+    "variable_fields": [
+      "id"
+    ]
+  },
+  {
+    "id": "timeout",
+    "ssi": {
+      "faults": {
+        "Purchase": "silence"
+      },
+      "request_errors": {
+        "GetResultByUid": "E20"
+      }
+    },
+    "emulator": {
+      "id": "timeout",
+      "outcome": "approved",
+      "reference_error": "transport_timeout"
+    },
+    "request": {
+      "method": "POST",
+      "path": "/api/pos/00000000-0000-4000-8000-000000000001/purchase",
+      "body": {
+        "amount": 100,
+        "merchant_id": "TEST-MERCHANT"
+      }
+    },
+    "timeout_ms": 210000,
+    "variable_fields": [
+      "id"
+    ]
+  }
+]
