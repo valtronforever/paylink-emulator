@@ -1,5 +1,9 @@
 # Compatibility evidence
 
+The [PayLink documentation audit](PAYLINK_DOCUMENTATION_AUDIT.uk.md) records seven
+groups of discrepancies/omissions between native PayLink and its own wiki/Swagger.
+These are separate from emulator defects and SSI specification differences.
+
 Issue #9 now has real **PayLink + simulated SSI JSON** recordings, a terminal-side
 responder and a recorder. See [Windows runbook](WINDOWS_SSI_LAB.md) and
 [findings/remaining acceptance gaps](SSI_FINDINGS.md). This evidence does not

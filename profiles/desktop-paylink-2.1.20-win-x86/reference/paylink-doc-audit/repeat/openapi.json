@@ -1,0 +1,4357 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Checkbox POSServer",
+    "description": "POSServer (2.1.20.10)<BR>Build : 20.05.2026 14:18:57",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/dms/info": {
+      "get": {
+        "tags": [
+          "DMS"
+        ],
+        "summary": "Інформація про сервер",
+        "responses": {
+          "200": {
+            "description": "App environment dynamic schema",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppEnvironmentComponents"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/dms/launch_parameters": {
+      "get": {
+        "tags": [
+          "DMS"
+        ],
+        "summary": "Параметри запуску сервера",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/dms/devices": {
+      "get": {
+        "tags": [
+          "DMS"
+        ],
+        "summary": "Отримання списку пристроїв, зареєстрованих на сервері.",
+        "description": "Sample request:\r\n            \r\n    GET /api/devices",
+        "parameters": [
+          {
+            "name": "CodeRegistration",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Повертає масив терміналів, зареєстрованих на сервері."
+          }
+        }
+      }
+    },
+    "/api/dms/devices/register": {
+      "post": {
+        "tags": [
+          "DMS"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IDevice"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IDevice"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IDevice"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IDevice"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/dms/devices/{device_id}": {
+      "delete": {
+        "tags": [
+          "DMS"
+        ],
+        "summary": "Видалення пристрою зі списку доступних пристроїв.",
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "description": "Ідентифікатор пристрою",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Пристрій успішно видалений."
+          },
+          "404": {
+            "description": "Пристрій відсутній."
+          },
+          "500": {
+            "description": "Помилка вилучення пристрою."
+          }
+        }
+      }
+    },
+    "/api/dms/saveconfig": {
+      "post": {
+        "tags": [
+          "DMS"
+        ],
+        "summary": "Збереження налаштувань пристроїв, які зареєстровані на сервері.",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/pos/setup_map": {
+      "get": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Отримання схеми співставлення банку, моделі терміналу та протоколу обміну",
+        "parameters": [
+          {
+            "name": "reload",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankTerminalConfigurationRegistry"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pos/errors": {
+      "get": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Отримання списку помилок",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pos/protocol/{protocol}": {
+      "get": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Перевірка встановленого драйверу протокола",
+        "parameters": [
+          {
+            "name": "protocol",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/ProtocolType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Встановлення драйверу протокола",
+        "parameters": [
+          {
+            "name": "protocol",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/ProtocolType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pos/devices": {
+      "get": {
+        "tags": [
+          "POS"
+        ],
+        "parameters": [
+          {
+            "name": "CodeRegistration",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeviceDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/devices": {
+      "get": {
+        "tags": [
+          "POS"
+        ],
+        "parameters": [
+          {
+            "name": "CodeRegistration",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeviceDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pos/devices/{device_id}": {
+      "get": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Отримання інформації про платіжний термінал.",
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "description": "Ідентифікатор терміналу",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Повертає налаштування терміналу.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeviceDTO"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Термінал з переданим ідентифікатором відсутній на сервері.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Видалення терміналу зі списку доступних пристроїв.",
+        "description": "Для фактичного видалення терміналу з налаштувань сервера необхідно зробити виклик команди /api/pos/saveconfig яка оновить файл налаштувань.",
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "description": "Ідентифікатор терміналу",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Пристрій успішно видалений."
+          },
+          "404": {
+            "description": "Пристрій відсутній."
+          },
+          "500": {
+            "description": "Помилка вилучення пристрою."
+          }
+        }
+      }
+    },
+    "/api/devices/{device_id}": {
+      "get": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Отримання інформації про платіжний термінал.",
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "description": "Ідентифікатор терміналу",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Повертає налаштування терміналу.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeviceDTO"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Термінал з переданим ідентифікатором відсутній на сервері.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Видалення терміналу зі списку доступних пристроїв.",
+        "description": "Для фактичного видалення терміналу з налаштувань сервера необхідно зробити виклик команди /api/pos/saveconfig яка оновить файл налаштувань.",
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "description": "Ідентифікатор терміналу",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Пристрій успішно видалений."
+          },
+          "404": {
+            "description": "Пристрій відсутній."
+          },
+          "500": {
+            "description": "Помилка вилучення пристрою."
+          }
+        }
+      }
+    },
+    "/api/pos/devices/search": {
+      "get": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Пошук терміналів згідно вказаного протоколу обміну та порту",
+        "parameters": [
+          {
+            "name": "Protocol",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/ProtocolType"
+            }
+          },
+          {
+            "name": "TypeConnect",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/TransportTypes"
+            }
+          },
+          {
+            "name": "Port",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Baudrate",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/POSScanResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Пошук терміналів за вказаним типом підключення з перебором наявних протоколів",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/POSScanRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/POSScanResponse"
+                  }
+                ],
+                "description": "Запит пошуку платіжного терміналу"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/POSScanRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/POSScanResponse"
+                  }
+                ],
+                "description": "Запит пошуку платіжного терміналу"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/POSScanRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/POSScanResponse"
+                  }
+                ],
+                "description": "Запит пошуку платіжного терміналу"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/POSScanRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/POSScanResponse"
+                  }
+                ],
+                "description": "Запит пошуку платіжного терміналу"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/POSScanResponseResult"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pos/devices/{Bank}/{DeviceModel}/{TypeConnect}/search": {
+      "get": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Пошук терміналів за вказаним типом підключення з перебором наявних протоколів",
+        "parameters": [
+          {
+            "name": "Bank",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/DeviceType"
+            }
+          },
+          {
+            "name": "DeviceModel",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/DeviceModel"
+            }
+          },
+          {
+            "name": "TypeConnect",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/TransportTypes"
+            }
+          },
+          {
+            "name": "ProcessId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Protocol",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/ProtocolType"
+            }
+          },
+          {
+            "name": "Port",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Baudrate",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/POSScanResponseResult"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pos/devices/search/{ProcessId}": {
+      "delete": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Скасування процесу пошуку пристроїв",
+        "parameters": [
+          {
+            "name": "ProcessId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/POSDeviceSearchResultSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pos/device/{protocol}/information": {
+      "post": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Отримання інформації про термінал",
+        "parameters": [
+          {
+            "name": "protocol",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/ProtocolType"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/TCPConnectPropertiesPOS"
+                  },
+                  {
+                    "$ref": "#/components/schemas/RS232ConnectPropertiesPOS"
+                  },
+                  {
+                    "$ref": "#/components/schemas/LinuxRS232ConnectPropertiesPOS"
+                  }
+                ]
+              },
+              "example": {"host":"192.168.0.54","port":2000,"mac":null,"merchant_id":"","resolve_ip_by_mac":null,"mode":"tcp"}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/device/{protocol}/information": {
+      "post": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Отримання інформації про термінал",
+        "parameters": [
+          {
+            "name": "protocol",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/ProtocolType"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/TCPConnectPropertiesPOS"
+                  },
+                  {
+                    "$ref": "#/components/schemas/RS232ConnectPropertiesPOS"
+                  },
+                  {
+                    "$ref": "#/components/schemas/LinuxRS232ConnectPropertiesPOS"
+                  }
+                ]
+              },
+              "example": {"host":"192.168.0.54","port":2000,"mac":null,"merchant_id":"","resolve_ip_by_mac":null,"mode":"tcp"}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pos/device/information": {
+      "get": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Отримання інформації з пристрою",
+        "parameters": [
+          {
+            "name": "deviceId",
+            "in": "query",
+            "description": "Ідентифікатор терміналу",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pos/device/ip": {
+      "patch": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Оновлення інформації про IP адресу терміналу на основі MAC адреси",
+        "parameters": [
+          {
+            "name": "deviceId",
+            "in": "query",
+            "description": "Ідентифікатор терміналу",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pos/devices/{device_id}/acquirers": {
+      "get": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Отримання списку екваєр, які запрограмовані банком на терміналі",
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "description": "Ідентифікатор терміналу",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/devices/{device_id}/acquirers": {
+      "get": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Отримання списку екваєр, які запрограмовані банком на терміналі",
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "description": "Ідентифікатор терміналу",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pos/devices/{bank}/{protocol}/merchants": {
+      "post": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Отримання списку мерчантів, які запрограмовані банком на терміналі",
+        "parameters": [
+          {
+            "name": "bank",
+            "in": "path",
+            "description": "Ідентифікатор банку",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/DeviceType"
+            }
+          },
+          {
+            "name": "protocol",
+            "in": "path",
+            "description": "Тип протоколу, який налаштований на терміналі",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/ProtocolType"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/TCPConnectPropertiesPOS"
+                  },
+                  {
+                    "$ref": "#/components/schemas/RS232ConnectPropertiesPOS"
+                  },
+                  {
+                    "$ref": "#/components/schemas/LinuxRS232ConnectPropertiesPOS"
+                  }
+                ]
+              },
+              "example": {"host":"192.168.0.54","port":2000,"mac":null,"merchant_id":"","resolve_ip_by_mac":null,"mode":"tcp"}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Merchants"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/devices/{bank}/{protocol}/merchants": {
+      "post": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Отримання списку мерчантів, які запрограмовані банком на терміналі",
+        "parameters": [
+          {
+            "name": "bank",
+            "in": "path",
+            "description": "Ідентифікатор банку",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/DeviceType"
+            }
+          },
+          {
+            "name": "protocol",
+            "in": "path",
+            "description": "Тип протоколу, який налаштований на терміналі",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/ProtocolType"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/TCPConnectPropertiesPOS"
+                  },
+                  {
+                    "$ref": "#/components/schemas/RS232ConnectPropertiesPOS"
+                  },
+                  {
+                    "$ref": "#/components/schemas/LinuxRS232ConnectPropertiesPOS"
+                  }
+                ]
+              },
+              "example": {"host":"192.168.0.54","port":2000,"mac":null,"merchant_id":"","resolve_ip_by_mac":null,"mode":"tcp"}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Merchants"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pos/devices/register": {
+      "post": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Реєстрація терміналу на сервері",
+        "description": "Щоб зберегти доданий пристрій в налаштуваннях сервера, необхідно зробити виклик команди /api/pos/saveconfig, яка оновить файл налаштувань сервера.",
+        "requestBody": {
+          "description": "Параметри підключення до пристрою",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/POSDeviceDTO"
+              },
+              "example": "{\"id\":\"\",\"name\":\"Smirnoff FOP\",\"device_category\":\"pos\",\"type\":\"privatbank\",\"bank_name\":\"\",\"model\":\"Ingenico_All\",\"protocol\":\"Privat JSON\",\"properties\":{\"port\":6,\"baudrate\":115200,\"merchant_id\":\"4\",\"resolve_ip_by_mac\":null,\"mode\":\"rs232\"},\"connected\":false,\"last_operation_id\":\"\",\"verify_payment_system\":true,\"code_registration\":\"\"}"
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/POSDeviceDTO"
+              },
+              "example": "{\"id\":\"\",\"name\":\"Smirnoff FOP\",\"device_category\":\"pos\",\"type\":\"privatbank\",\"bank_name\":\"\",\"model\":\"Ingenico_All\",\"protocol\":\"Privat JSON\",\"properties\":{\"port\":6,\"baudrate\":115200,\"merchant_id\":\"4\",\"resolve_ip_by_mac\":null,\"mode\":\"rs232\"},\"connected\":false,\"last_operation_id\":\"\",\"verify_payment_system\":true,\"code_registration\":\"\"}"
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/POSDeviceDTO"
+              },
+              "example": "{\"id\":\"\",\"name\":\"Smirnoff FOP\",\"device_category\":\"pos\",\"type\":\"privatbank\",\"bank_name\":\"\",\"model\":\"Ingenico_All\",\"protocol\":\"Privat JSON\",\"properties\":{\"port\":6,\"baudrate\":115200,\"merchant_id\":\"4\",\"resolve_ip_by_mac\":null,\"mode\":\"rs232\"},\"connected\":false,\"last_operation_id\":\"\",\"verify_payment_system\":true,\"code_registration\":\"\"}"
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/POSDeviceDTO"
+              },
+              "example": "{\"id\":\"\",\"name\":\"Smirnoff FOP\",\"device_category\":\"pos\",\"type\":\"privatbank\",\"bank_name\":\"\",\"model\":\"Ingenico_All\",\"protocol\":\"Privat JSON\",\"properties\":{\"port\":6,\"baudrate\":115200,\"merchant_id\":\"4\",\"resolve_ip_by_mac\":null,\"mode\":\"rs232\"},\"connected\":false,\"last_operation_id\":\"\",\"verify_payment_system\":true,\"code_registration\":\"\"}"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/devices/register": {
+      "post": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Реєстрація терміналу на сервері",
+        "description": "Щоб зберегти доданий пристрій в налаштуваннях сервера, необхідно зробити виклик команди /api/pos/saveconfig, яка оновить файл налаштувань сервера.",
+        "requestBody": {
+          "description": "Параметри підключення до пристрою",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/POSDeviceDTO"
+              },
+              "example": "{\"id\":\"\",\"name\":\"Smirnoff FOP\",\"device_category\":\"pos\",\"type\":\"privatbank\",\"bank_name\":\"\",\"model\":\"Ingenico_All\",\"protocol\":\"Privat JSON\",\"properties\":{\"port\":6,\"baudrate\":115200,\"merchant_id\":\"4\",\"resolve_ip_by_mac\":null,\"mode\":\"rs232\"},\"connected\":false,\"last_operation_id\":\"\",\"verify_payment_system\":true,\"code_registration\":\"\"}"
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/POSDeviceDTO"
+              },
+              "example": "{\"id\":\"\",\"name\":\"Smirnoff FOP\",\"device_category\":\"pos\",\"type\":\"privatbank\",\"bank_name\":\"\",\"model\":\"Ingenico_All\",\"protocol\":\"Privat JSON\",\"properties\":{\"port\":6,\"baudrate\":115200,\"merchant_id\":\"4\",\"resolve_ip_by_mac\":null,\"mode\":\"rs232\"},\"connected\":false,\"last_operation_id\":\"\",\"verify_payment_system\":true,\"code_registration\":\"\"}"
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/POSDeviceDTO"
+              },
+              "example": "{\"id\":\"\",\"name\":\"Smirnoff FOP\",\"device_category\":\"pos\",\"type\":\"privatbank\",\"bank_name\":\"\",\"model\":\"Ingenico_All\",\"protocol\":\"Privat JSON\",\"properties\":{\"port\":6,\"baudrate\":115200,\"merchant_id\":\"4\",\"resolve_ip_by_mac\":null,\"mode\":\"rs232\"},\"connected\":false,\"last_operation_id\":\"\",\"verify_payment_system\":true,\"code_registration\":\"\"}"
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/POSDeviceDTO"
+              },
+              "example": "{\"id\":\"\",\"name\":\"Smirnoff FOP\",\"device_category\":\"pos\",\"type\":\"privatbank\",\"bank_name\":\"\",\"model\":\"Ingenico_All\",\"protocol\":\"Privat JSON\",\"properties\":{\"port\":6,\"baudrate\":115200,\"merchant_id\":\"4\",\"resolve_ip_by_mac\":null,\"mode\":\"rs232\"},\"connected\":false,\"last_operation_id\":\"\",\"verify_payment_system\":true,\"code_registration\":\"\"}"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/pos/saveconfig": {
+      "post": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Збереження налаштувань терміналів, які зареєстровані на сервері.",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/pos/{device_id}/purchase": {
+      "post": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Відправка команди \"Оплата\" на платіжний термінал.",
+        "description": "Дана команда автоматично встановлює з'єднання з терміналом перед початком відправки запиту на оплату.\r\n\r\nПриклад запиту:\r\n            \r\n    POST /[controller]/b2a90d65-856c-47d9-aad6-71fbf1b4f6b6/purchase\r\n    {\r\n       \"amount\": 100\r\n    }",
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "description": "Ідентифікатор терміналу",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PerformPurchaseDTO"
+              },
+              "example": {"facepay":false,"amount":100,"discount":0,"amountOfParts":0,"discountedAmount":0,"merchant_id":null,"id":"eb29f9a48179","require_ack":false,"run_mac_ip_resolver":null}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Повернуто успішний результат виконання команди",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некоректні дані",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          },
+          "503": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pos/{device_id}/cancel": {
+      "post": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Відправка команди \"Відміна транзакції\"/\"Повернення коштів\" на платіжний термінал.",
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "description": "Ідентифікатор терміналу",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Дані для відміни транзакції",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PerformVoidDTO"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PerformVoidDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PerformVoidDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PerformVoidDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          },
+          "503": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pos/{device_id}/ping": {
+      "get": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Визначення доступності терміналу.",
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "description": "Ідентифікатор терміналу",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/pos/{device_id}/last-result": {
+      "get": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Отримання результату останньої операції, яку виконував термінал.",
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          },
+          "503": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pos/{device_id}/get_batch_totals": {
+      "post": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Повертає X-звіт в електронному виді.",
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/pos/{device_id}/get_batch_totals/{merchant_id}": {
+      "post": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Повертає X-звіт в електронному виді.",
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/pos/{device_id}/print_batch_totals": {
+      "post": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Друк X-звіту.",
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/pos/{device_id}/print_batch_totals/{merchant_id}": {
+      "post": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Друк X-звіту.",
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/pos/{device_id}/print_batch_journal": {
+      "post": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Друк звіту по операціям за день.",
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/pos/{device_id}/print_batch_journal/{merchant_id}": {
+      "post": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Друк звіту по операціям за день.",
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/pos/{device_id}/settlement": {
+      "post": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Закриття зміни та очищення журналу.",
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/pos/{device_id}/settlement/{merchant_id}": {
+      "post": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Закриття зміни та очищення журналу.",
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/pos/{device_id}/print_last_settle_copy": {
+      "post": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Друк копії останнього Z-звіту.",
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/pos/{device_id}/print_last_settle_copy/{merchant_id}": {
+      "post": {
+        "tags": [
+          "POS"
+        ],
+        "summary": "Друк копії останнього Z-звіту.",
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/scales/setup_map": {
+      "get": {
+        "tags": [
+          "Scales"
+        ],
+        "summary": "Отримання схеми співставлення моделі вагів та протоколу обміну",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/scales/devices": {
+      "get": {
+        "tags": [
+          "Scales"
+        ],
+        "summary": "Отримання списку терміналів, зареєстрованих на сервері.",
+        "description": "Sample request:\r\n            \r\n    GET /api/devices",
+        "parameters": [
+          {
+            "name": "CodeRegistration",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Повертає масив терміналів, зареєстрованих на сервері.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScaleDeviceDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scales/devices/{DeviceModel}/{TypeConnect}/search": {
+      "get": {
+        "tags": [
+          "Scales"
+        ],
+        "summary": "Пошук вагів за вказаним типом підключення з перебором наявних протоколів",
+        "parameters": [
+          {
+            "name": "DeviceModel",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/ScaleModels"
+            }
+          },
+          {
+            "name": "TypeConnect",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/TransportTypes"
+            }
+          },
+          {
+            "name": "ProcessId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Protocol",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/ScaleProtocolTypes"
+            }
+          },
+          {
+            "name": "Port",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Baudrate",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScaleDeviceSearchResultSchema"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scales/devices/search/{ProcessId}": {
+      "delete": {
+        "tags": [
+          "Scales"
+        ],
+        "summary": "Скасування процесу пошуку пристроїв",
+        "parameters": [
+          {
+            "name": "ProcessId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/POSDeviceSearchResultSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scales/devices/register": {
+      "post": {
+        "tags": [
+          "Scales"
+        ],
+        "summary": "Реєстрація вагів на сервері",
+        "description": "Щоб зберегти доданий пристрій в налаштуваннях сервера, необхідно зробити виклик команди /api/scales/saveconfig, яка оновить файл налаштувань сервера.",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScaleDeviceDTO"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScaleDeviceDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScaleDeviceDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScaleDeviceDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/scales/devices/{device_id}": {
+      "delete": {
+        "tags": [
+          "Scales"
+        ],
+        "summary": "Видалення вагів зі списку доступних пристроїв.",
+        "description": "Для фактичного видалення пристрою з налаштувань сервера необхідно зробити виклик команди /api/scales/saveconfig яка оновить файл налаштувань.",
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "description": "Ідентифікатор пристрою",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Пристрій успішно видалений."
+          },
+          "404": {
+            "description": "Пристрій відсутній."
+          },
+          "500": {
+            "description": "Помилка вилучення пристрою."
+          }
+        }
+      }
+    },
+    "/api/scales/saveconfig": {
+      "post": {
+        "tags": [
+          "Scales"
+        ],
+        "summary": "Збереження налаштувань терміналів, які зареєстровані на сервері.",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/scales/{device_id}/get_weight": {
+      "get": {
+        "tags": [
+          "Scales"
+        ],
+        "summary": "Get weight",
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AppEnvironmentComponents": {
+        "type": "object",
+        "properties": {
+          "app_info": {
+            "$ref": "#/components/schemas/AppInfo"
+          },
+          "launch_options": {
+            "$ref": "#/components/schemas/AppLaunchOptions"
+          },
+          "os_info": {
+            "$ref": "#/components/schemas/OSInfo"
+          },
+          "paths_info": {
+            "$ref": "#/components/schemas/PathsInfo"
+          }
+        }
+      },
+      "AppInfo": {
+        "type": "object",
+        "properties": {
+          "Version": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "name_exec": {
+            "type": "string",
+            "description": "Назва виконуючого файлу",
+            "nullable": true,
+            "readOnly": true
+          },
+          "version_short": {
+            "type": "string",
+            "description": "Версія застосунку (скорочена)",
+            "nullable": true,
+            "readOnly": true
+          },
+          "build": {
+            "type": "string",
+            "description": "Час збірки застосунку",
+            "nullable": true,
+            "readOnly": true
+          },
+          "Name": {
+            "type": "string",
+            "description": "Назва застосунку",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Інформація про застосунок"
+      },
+      "AppLaunchOptions": {
+        "type": "object",
+        "properties": {
+          "lang": {
+            "type": "string",
+            "description": "Мова застосунку",
+            "nullable": true,
+            "readOnly": true
+          },
+          "startup_level": {
+            "$ref": "#/components/schemas/LevelStartUp"
+          },
+          "is_service": {
+            "type": "boolean",
+            "description": "Запуск в режимі сервісу"
+          },
+          "install_protocol_driver": {
+            "type": "boolean",
+            "description": "Інсталювати драйвер протоколу"
+          },
+          "load_driver": {
+            "type": "string",
+            "description": "Список ідентифікаторів пристроїв",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Параметри запуску застосунка"
+      },
+      "ArchitectureType": {
+        "enum": [
+          "Unknown",
+          "x86",
+          "x64",
+          "ARM",
+          "ARM64"
+        ],
+        "type": "string",
+        "description": "Architecture of type"
+      },
+      "BankTerminalConfiguration": {
+        "required": [
+          "description",
+          "mapping_devices_info",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Ідентифікатор банку"
+          },
+          "description": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Назва банку"
+          },
+          "mapping_devices_info": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TerminalConfiguration"
+            },
+            "description": "Масив пристроїв, які банк використовує"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Інформація про пристрої, які підтримуються банком"
+      },
+      "BankTerminalConfigurationRegistry": {
+        "required": [
+          "bank_devices"
+        ],
+        "type": "object",
+        "properties": {
+          "bank_devices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BankTerminalConfiguration"
+            },
+            "description": "Масив даних про банки та їх пристрої"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Мапінг даних для створення пристрою"
+      },
+      "BaseResponseDTO": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Статус успішного виконання операції. При значенні False дані про помилку повертаються в полях \"code\", \"description\" та додатково \"message\""
+          },
+          "message": {
+            "type": "string",
+            "description": "Додаткове повідомлення про помилку",
+            "nullable": true
+          },
+          "code": {
+            "type": "integer",
+            "description": "Код статусу/помилки терміналу",
+            "format": "int32"
+          },
+          "error": {
+            "type": "string",
+            "description": "Опис помилки",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "description": "Ідентифікатор операції",
+            "nullable": true
+          },
+          "result": {
+            "$ref": "#/components/schemas/ResponseDTO"
+          },
+          "terminal_status": {
+            "$ref": "#/components/schemas/TerminalStatuses"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Блок даних, які містяться у відповіді на виконання операції"
+      },
+      "ConnectPropertiesBase": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "$ref": "#/components/schemas/TransportTypes"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConnectType": {
+        "enum": [
+          "tcp",
+          "rs232",
+          "serial"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "DeviceCategory": {
+        "enum": [
+          "Unknown",
+          "POS",
+          "Scale"
+        ],
+        "type": "string",
+        "description": "Категорія пристрою"
+      },
+      "DeviceDTO": {
+        "required": [
+          "BankName",
+          "codeRegistation",
+          "id",
+          "lastOperationId",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "UUID пристрою для ідентифікації"
+          },
+          "name": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Назва пристрою/мерчанта"
+          },
+          "bank_name": {
+            "type": "string",
+            "description": "Назва банку, якому належить термінал"
+          },
+          "type": {
+            "$ref": "#/components/schemas/DeviceType"
+          },
+          "last_operation_id": {
+            "type": "string",
+            "description": "Ідентифікатор останньої операції"
+          },
+          "model": {
+            "$ref": "#/components/schemas/DeviceModel"
+          },
+          "protocol": {
+            "$ref": "#/components/schemas/ProtocolType"
+          },
+          "properties": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/POSConnectPropertiesBase"
+              },
+              {
+                "$ref": "#/components/schemas/RS232ConnectPropertiesPOS"
+              },
+              {
+                "$ref": "#/components/schemas/LinuxRS232ConnectPropertiesPOS"
+              },
+              {
+                "$ref": "#/components/schemas/TCPConnectPropertiesPOS"
+              }
+            ],
+            "description": "Параметри підключення до терміналу",
+            "nullable": true
+          },
+          "connected": {
+            "type": "boolean",
+            "description": "Ідентифікатор використання терміналу (не використовується)"
+          },
+          "verify_payment_system": {
+            "type": "boolean",
+            "description": "Ознака використання верифікації платіжної системи"
+          },
+          "code_registration": {
+            "type": "string",
+            "description": "Реєстраційний код мерчанта (ІПН/ЄДРПОУ)\r\nКод організації, для якої використовується поточне налаштування підключення до терміналу.\r\nВикористовується для фільтрації відбору списку налаштувань терміналів.\r\nЗначення передається самим клієнтом.\r\nНаприклад, якщо є декілька організацій, які зареєстровані на одному терміналі, то можна передати ІПН/ЄДРПОУ організації, до якої дане налаштування терміналу відноситься. Тоді при виклику роута /devices, з передачею значення параметра CodeRegistration, буде повернуто список налаштувань підключень до терміналів, які відповідають переданому значенню."
+          },
+          "device_category": {
+            "$ref": "#/components/schemas/DeviceCategory"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Інформація про пристрій/мерчант"
+      },
+      "DeviceDataUSB": {
+        "required": [
+          "device_description",
+          "device_id",
+          "driver_installed",
+          "need_reboot",
+          "pnp_device_id",
+          "port",
+          "port_name",
+          "port_number",
+          "vendor_description",
+          "vendor_id"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DeviceInfoBase"
+          }
+        ],
+        "properties": {
+          "vendor_id": {
+            "minLength": 1,
+            "type": "string",
+            "description": "VendorId"
+          },
+          "vendor_description": {
+            "minLength": 1,
+            "type": "string",
+            "description": "VendorDescription"
+          },
+          "device_id": {
+            "minLength": 1,
+            "type": "string",
+            "description": "DeviceId"
+          },
+          "device_description": {
+            "minLength": 1,
+            "type": "string",
+            "description": "DeviceDescription"
+          },
+          "port": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Port"
+          },
+          "port_number": {
+            "type": "integer",
+            "description": "Port",
+            "format": "int32"
+          },
+          "port_name": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Назва порту пристрою в операційній системі"
+          },
+          "pnp_device_id": {
+            "minLength": 1,
+            "type": "string",
+            "description": "PNP device ID"
+          },
+          "driver_installed": {
+            "type": "boolean",
+            "description": "Ознака встановленого драйвера для пристрою"
+          },
+          "need_reboot": {
+            "type": "boolean",
+            "description": "Ознака необхідності перезавантаження ПК"
+          }
+        },
+        "additionalProperties": false,
+        "description": "DeviceDataUSB"
+      },
+      "DeviceInfoBase": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Default name"
+          },
+          "address": {
+            "type": "string",
+            "description": "Address (TCP/IP address, COM/USB address etc)",
+            "nullable": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/TerminalStatuses"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Device info base"
+      },
+      "DeviceModel": {
+        "enum": [
+          "none",
+          "Ingenico_All",
+          "Ingenico_Desk_3200",
+          "PAX_A930",
+          "PAX_S800",
+          "Verifone_V520",
+          "Verifone_V675",
+          "QR",
+          "Verifone_All",
+          "Castles_Saturn_1000",
+          "Tactilion_P2000L",
+          "NEWLAND_N950",
+          "SmartOne"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "DeviceSearchResultSchema": {
+        "required": [
+          "usb_devices"
+        ],
+        "type": "object",
+        "properties": {
+          "usb_devices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DeviceDataUSB"
+            },
+            "description": "Список знайдених USB пристроїв"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Інформація про знайдені пристрої"
+      },
+      "DeviceType": {
+        "enum": [
+          "privatbank",
+          "oschadbank",
+          "monobank",
+          "avalbank",
+          "vostokbank",
+          "ukrgasbank",
+          "ukrsibbank",
+          "pivdennyybank",
+          "pumb",
+          "sensbank",
+          "ukrposhta",
+          "abank",
+          "none"
+        ],
+        "type": "string",
+        "description": "Банк"
+      },
+      "DriverProtocolSchema": {
+        "required": [
+          "driver_installed",
+          "information",
+          "status_installed"
+        ],
+        "type": "object",
+        "properties": {
+          "driver_installed": {
+            "type": "boolean",
+            "description": "Драйвер інстальовано"
+          },
+          "status_installed": {
+            "$ref": "#/components/schemas/Statuses"
+          },
+          "driver_register_command": {
+            "type": "string",
+            "description": "Команда реєстрації драйвера",
+            "nullable": true
+          },
+          "information": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Information"
+          }
+        },
+        "additionalProperties": false,
+        "description": "DriverProtocolSchema"
+      },
+      "ErrorResponse": {
+        "required": [
+          "description",
+          "error"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "success"
+          },
+          "code": {
+            "type": "integer",
+            "description": "code",
+            "format": "int32"
+          },
+          "error": {
+            "type": "string",
+            "description": "error"
+          },
+          "description": {
+            "type": "string",
+            "description": "description"
+          },
+          "result": {
+            "description": "result",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Помилка виконання запиту"
+      },
+      "FoundDevices": {
+        "required": [
+          "connect_type"
+        ],
+        "type": "object",
+        "properties": {
+          "connect_type": {
+            "$ref": "#/components/schemas/ConnectType"
+          },
+          "Devices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IDeviceInfo"
+            },
+            "description": "Data information about founded devices",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Container of data with found devices"
+      },
+      "HTTPValidationError": {
+        "required": [
+          "Detail"
+        ],
+        "type": "object",
+        "properties": {
+          "detail": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "description": "Список помилок валідації"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Помилка валідації даних HTTP запиту"
+      },
+      "IAppEnvironment": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Середовище застосунку"
+      },
+      "IDevice": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string",
+            "description": "UUID пристрою для ідентифікації",
+            "nullable": true
+          },
+          "Name": {
+            "type": "string",
+            "description": "Назва пристрою",
+            "nullable": true
+          },
+          "DeviceCategory": {
+            "$ref": "#/components/schemas/DeviceCategory"
+          },
+          "Status": {
+            "$ref": "#/components/schemas/TerminalStatuses"
+          },
+          "CodeRegistation": {
+            "type": "string",
+            "description": "Реєстраційний код мерчанта (ІПН/ЄДРПОУ)\r\nКод організації, для якої використовується поточне налаштування підключення до терміналу.\r\nВикористовується для фільтрації відбору списку налаштувань терміналів.\r\nЗначення передається самим клієнтом.\r\nНаприклад, якщо є декілька організацій, які зареєстровані на одному терміналі, то можна передати ІПН/ЄДРПОУ організації, до якої дане налаштування терміналу відноситься. Тоді при виклику роута /devices, з передачею значення параметра CodeRegistration, буде повернуто список налаштувань підключень до терміналів, які відповідають переданому значенню.",
+            "nullable": true
+          },
+          "Connected": {
+            "type": "boolean",
+            "description": "Ідентифікатор використання терміналу (не використовується)"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Interface of device"
+      },
+      "IDeviceInfo": {
+        "type": "object",
+        "properties": {
+          "DeviceName": {
+            "type": "string",
+            "description": "Gets the display name of the device.",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents a device with a display name."
+      },
+      "LevelStartUp": {
+        "enum": [
+          "OS",
+          "User",
+          "None"
+        ],
+        "type": "string",
+        "description": "Level start-up"
+      },
+      "LinuxRS232ConnectProperties": {
+        "required": [
+          "port"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ConnectPropertiesBase"
+          }
+        ],
+        "properties": {
+          "port": {
+            "minLength": 1,
+            "type": "string",
+            "description": "port"
+          },
+          "baudrate": {
+            "type": "integer",
+            "description": "baudrate",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LinuxRS232ConnectPropertiesPOS": {
+        "required": [
+          "port"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/POSConnectPropertiesBase"
+          }
+        ],
+        "properties": {
+          "port": {
+            "minLength": 1,
+            "type": "string",
+            "description": "port"
+          },
+          "baudrate": {
+            "type": "integer",
+            "description": "baudrate",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Merchant": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Запрограмований банком ідентифікатор мерчанта",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Запрограмована банком назва мерчанта",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Опис даних мерчанта"
+      },
+      "Merchants": {
+        "type": "object",
+        "properties": {
+          "merchants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Merchant"
+            },
+            "description": "Список мерчантів. Якщо не вдалося отримати інформацію про мерчантів, то повертається пустий список.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Запрограмований банком список мерчантів у терміналі"
+      },
+      "NetworkDeviceInfo": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DeviceInfoBase"
+          }
+        ],
+        "properties": {
+          "mac": {
+            "type": "string",
+            "description": "MAC address",
+            "nullable": true
+          },
+          "ports": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "Ports",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Network device info"
+      },
+      "OSInfo": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string",
+            "description": "Назва операційної системи",
+            "nullable": true,
+            "readOnly": true
+          },
+          "Platform": {
+            "type": "string",
+            "description": "Платформа",
+            "nullable": true,
+            "readOnly": true
+          },
+          "Version": {
+            "type": "string",
+            "description": "Версія операційної системи",
+            "nullable": true,
+            "readOnly": true
+          },
+          "Description": {
+            "type": "string",
+            "description": "Опис операційної системи",
+            "nullable": true,
+            "readOnly": true
+          },
+          "arch_type": {
+            "$ref": "#/components/schemas/ArchitectureType"
+          },
+          "Type": {
+            "$ref": "#/components/schemas/OSType"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Інформація про операційну систему"
+      },
+      "OSType": {
+        "enum": [
+          "Unknown",
+          "Win",
+          "Linux",
+          "Mac"
+        ],
+        "type": "string",
+        "description": "Тип ОС"
+      },
+      "POSConnectPropertiesBase": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ConnectPropertiesBase"
+          }
+        ],
+        "properties": {
+          "merchant_id": {
+            "type": "string",
+            "description": "Ідентифікатор мерчанта",
+            "nullable": true
+          },
+          "resolve_ip_by_mac": {
+            "type": "boolean",
+            "description": "Determines whether the terminal IP address should be resolved\r\nby searching the local network using the device MAC address.\r\nPriority: Request → Terminal → Server → Default(false).",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Base POS connect properties"
+      },
+      "POSDeviceDTO": {
+        "required": [
+          "BankName",
+          "CodeRegistation",
+          "Id",
+          "LastOperationId",
+          "Name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Назва пристрою/мерчанта"
+          },
+          "device_category": {
+            "$ref": "#/components/schemas/DeviceCategory"
+          },
+          "type": {
+            "$ref": "#/components/schemas/DeviceType"
+          },
+          "bank_name": {
+            "type": "string",
+            "description": "Назва банку, якому належить термінал"
+          },
+          "model": {
+            "$ref": "#/components/schemas/DeviceModel"
+          },
+          "protocol": {
+            "$ref": "#/components/schemas/ProtocolType"
+          },
+          "status": {
+            "$ref": "#/components/schemas/TerminalStatuses"
+          },
+          "properties": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/POSConnectPropertiesBase"
+              },
+              {
+                "$ref": "#/components/schemas/RS232ConnectPropertiesPOS"
+              },
+              {
+                "$ref": "#/components/schemas/LinuxRS232ConnectPropertiesPOS"
+              },
+              {
+                "$ref": "#/components/schemas/TCPConnectPropertiesPOS"
+              }
+            ],
+            "description": "Параметри підключення до терміналу",
+            "nullable": true
+          },
+          "code_registration": {
+            "type": "string",
+            "description": "Реєстраційний код мерчанта (ІПН/ЄДРПОУ)\r\nКод організації, для якої використовується поточне налаштування підключення до терміналу.\r\nВикористовується для фільтрації відбору списку налаштувань терміналів.\r\nЗначення передається самим клієнтом.\r\nНаприклад, якщо є декілька організацій, які зареєстровані на одному терміналі, то можна передати ІПН/ЄДРПОУ організації, до якої дане налаштування терміналу відноситься. Тоді при виклику роута /devices, з передачею значення параметра CodeRegistration, буде повернуто список налаштувань підключень до терміналів, які відповідають переданому значенню."
+          },
+          "last_operation_id": {
+            "type": "string",
+            "description": "Ідентифікатор останньої операції"
+          },
+          "verify_payment_system": {
+            "type": "boolean",
+            "description": "Ознака використання верифікації платіжної системи"
+          },
+          "connected": {
+            "type": "boolean",
+            "description": "Ідентифікатор використання терміналу (не використовується)"
+          },
+          "used_payment_sign_mode": {
+            "type": "boolean",
+            "description": "Пристрій використовується для оплати в режимі підпису фінансової операції."
+          },
+          "id": {
+            "type": "string",
+            "description": "UUID пристрою для ідентифікації"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Інформація про пристрій/мерчант"
+      },
+      "POSDeviceSearchResultSchema": {
+        "required": [
+          "pos_devices",
+          "usb_devices"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SearchResponseBase"
+          }
+        ],
+        "properties": {
+          "pos_devices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/POSTerminalSchema"
+            },
+            "description": "Список визначених терміналів"
+          },
+          "network_devices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NetworkDeviceInfo"
+            },
+            "description": "Network devices info",
+            "nullable": true
+          },
+          "usb_devices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DeviceDataUSB"
+            },
+            "description": "Список знайдених USB пристроїв"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Інформація про знайдені пристрої"
+      },
+      "POSProtocolSchema": {
+        "required": [
+          "baudrate",
+          "description",
+          "driver_protocol",
+          "driver_used",
+          "support_tcp_ports",
+          "tcp_port",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Протокол"
+          },
+          "description": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Опис протоколу"
+          },
+          "driver_used": {
+            "type": "boolean",
+            "description": "Використовується драйвер"
+          },
+          "driver_protocol": {
+            "$ref": "#/components/schemas/DriverProtocolSchema"
+          },
+          "tcp_port": {
+            "type": "integer",
+            "description": "TCP port по замовчуванню",
+            "format": "int32"
+          },
+          "support_tcp_ports": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "Список TCP портів, які можуть використовуватися з цим протоколом"
+          },
+          "baudrate": {
+            "type": "integer",
+            "description": "Швидкість обміну по COM/USB порту по замовчуванню",
+            "format": "int32"
+          },
+          "support_tcp_connection": {
+            "type": "boolean",
+            "description": "Підтримка підключення по TCP/IP"
+          },
+          "support_com_connection": {
+            "type": "boolean",
+            "description": "Підтримка підключення по COM/USB"
+          },
+          "support_multi_merchants": {
+            "type": "boolean",
+            "description": "Підтримка мультимерчатингу"
+          },
+          "support_confirm_signature": {
+            "type": "boolean",
+            "description": "Підтримка підтвердження підтримки механізму підпису оплати"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Дані про протокол взаємодії з пристроєм"
+      },
+      "POSScanRequest": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ScanRequest"
+          }
+        ],
+        "properties": {
+          "bank": {
+            "$ref": "#/components/schemas/DeviceType"
+          },
+          "device_model": {
+            "$ref": "#/components/schemas/DeviceModel"
+          },
+          "protocol_type": {
+            "$ref": "#/components/schemas/ProtocolType"
+          },
+          "port": {
+            "type": "integer",
+            "description": "Порт пристрою",
+            "format": "int32",
+            "nullable": true
+          },
+          "baudrate": {
+            "type": "integer",
+            "description": "Порт пристрою",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Запит пошуку платіжного терміналу"
+      },
+      "POSScanResponse": {
+        "required": [
+          "pos_devices"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/POSScanRequest"
+          }
+        ],
+        "properties": {
+          "pos_devices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/POSTerminalSchema"
+            },
+            "description": "Список визначених терміналів"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Інформація про знайдені пристрої"
+      },
+      "POSScanResponseResult": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Success",
+            "readOnly": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Description",
+            "nullable": true,
+            "readOnly": true
+          },
+          "description_code": {
+            "type": "integer",
+            "description": "Description code",
+            "format": "int32",
+            "nullable": true,
+            "readOnly": true
+          },
+          "error": {
+            "type": "string",
+            "description": "Error",
+            "nullable": true,
+            "readOnly": true
+          },
+          "error_description": {
+            "type": "string",
+            "description": "Description of error",
+            "nullable": true,
+            "readOnly": true
+          },
+          "error_code": {
+            "type": "integer",
+            "description": "Error code",
+            "format": "int32",
+            "nullable": true,
+            "readOnly": true
+          },
+          "result": {
+            "$ref": "#/components/schemas/POSScanResponse"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Result"
+      },
+      "POSTerminalSchema": {
+        "required": [
+          "device",
+          "merchants"
+        ],
+        "type": "object",
+        "properties": {
+          "device": {
+            "$ref": "#/components/schemas/POSDeviceDTO"
+          },
+          "merchants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Merchant"
+            },
+            "description": "Масив мерчантів, які зареєстровані на терміналі"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Дані про термінал"
+      },
+      "PathsInfo": {
+        "type": "object",
+        "properties": {
+          "Config": {
+            "type": "string",
+            "description": "Тека збереження налаштувань застосунку",
+            "nullable": true,
+            "readOnly": true
+          },
+          "Logs": {
+            "type": "string",
+            "description": "Тека збереження логів",
+            "nullable": true,
+            "readOnly": true
+          },
+          "Langs": {
+            "type": "string",
+            "description": "Тека мовного інтерфейсу",
+            "nullable": true,
+            "readOnly": true
+          },
+          "Backup": {
+            "type": "string",
+            "description": "Тека збережених данних для відновлення",
+            "nullable": true,
+            "readOnly": true
+          },
+          "Update": {
+            "type": "string",
+            "description": "Тека оновлень застосунку",
+            "nullable": true,
+            "readOnly": true
+          },
+          "DB": {
+            "type": "string",
+            "description": "Тека до бази даних",
+            "nullable": true,
+            "readOnly": true
+          },
+          "Reports": {
+            "type": "string",
+            "description": "Тека до збережених звітів",
+            "nullable": true,
+            "readOnly": true
+          },
+          "Root": {
+            "type": "string",
+            "description": "Шлях до запуску застосунку",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Інформація про теки застосунка"
+      },
+      "PaymentDTO": {
+        "required": [
+          "amount"
+        ],
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "integer",
+            "description": "Сума оплати. Вказується в копійках.",
+            "format": "int64"
+          },
+          "discount": {
+            "type": "integer",
+            "description": "Сума знижки. Вказується в копійках. Опціонально.",
+            "format": "int64"
+          },
+          "amountOfParts": {
+            "type": "integer",
+            "description": "Кількість платежів. Відноситься до послуги оплати частинами від Приватбанку. Опціонально.",
+            "format": "int64"
+          },
+          "discountedAmount": {
+            "type": "integer",
+            "description": "Сума знижки. Вказується в копійках. Опціональний ключ, якщо розрахунок знижки на певні діапазони БІН номерів карт здійснюється на стороні зовнішньої системи. Використовується в протоколі SSI JSON.",
+            "format": "int64"
+          },
+          "merchant_id": {
+            "type": "string",
+            "description": "Ідентифікатор торгівця, який запрограмований банком на терміналі.",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "description": "Унікальний ідентифікатор операції. Опціонально.",
+            "nullable": true
+          },
+          "step": {
+            "type": "integer",
+            "description": "Шаг виконання 2-х крокових банківських операцій. Опціонально.",
+            "format": "int32",
+            "nullable": true
+          },
+          "continue_payment": {
+            "type": "boolean",
+            "description": "Поле відповідає за те, чи слід продовжувати процес оплати. Доступний лише для сокетних підключень.\r\nЦей параметр заборонено передавати одночасно з параметром confirm_signature",
+            "nullable": true
+          },
+          "require_ack": {
+            "type": "boolean",
+            "description": "Ознака того, що сервер вимагає підтвердження від фронт-системи про отримання відповіді"
+          },
+          "run_mac_ip_resolver": {
+            "type": "boolean",
+            "description": "Відповідає за те, чи потрібно визначити адресу терміналу перед відправкою команди",
+            "nullable": true
+          },
+          "confirm_signature": {
+            "type": "boolean",
+            "description": "Параметр відповідає за те, чи потрібне підтвердження підпису платіжної операції зі сторони каси. Доступний лише для сокетних підключень.\r\nЦей параметр заборонено передавати одночасно з параметром continue_payment",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Основний блок даних для здійснення операції оплати/повернення"
+      },
+      "PerformPurchaseDTO": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PaymentDTO"
+          }
+        ],
+        "properties": {
+          "facepay": {
+            "type": "boolean",
+            "description": "Ідентифікація покупця по обличчю. Використовується на терміналах від Приватбанку. Опціонально."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Блок даних для здіснення операції оплати"
+      },
+      "PerformVoidDTO": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PaymentDTO"
+          }
+        ],
+        "properties": {
+          "invoicenum": {
+            "type": "string",
+            "description": "Номер чека, по якому робиться повернення. Опціонально.",
+            "nullable": true
+          },
+          "rrn": {
+            "type": "string",
+            "description": "Ідентифікатор банківської транзакції, по якій потрібно зробити повернення коштів.",
+            "nullable": true
+          },
+          "auth_code": {
+            "type": "string",
+            "description": "Код авторизації банківської транзакції, по якій потрібно зробити повернення коштів.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Блок даних для здійснення операції повернення коштів"
+      },
+      "ProtocolType": {
+        "enum": [
+          "IngenicoBPOS",
+          "PrivatJSON",
+          "VerifonePrintec",
+          "SSIJson",
+          "SSIECR",
+          "KKM_2_0",
+          "KKM_3_0",
+          "Asap_PEC",
+          "SmartOne_PEC"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "RS232ConnectProperties": {
+        "required": [
+          "port"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ConnectPropertiesBase"
+          }
+        ],
+        "properties": {
+          "port": {
+            "type": "integer",
+            "description": "port",
+            "format": "int32"
+          },
+          "baudrate": {
+            "type": "integer",
+            "description": "baudrate",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RS232ConnectPropertiesPOS": {
+        "required": [
+          "port"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/POSConnectPropertiesBase"
+          }
+        ],
+        "properties": {
+          "port": {
+            "type": "integer",
+            "description": "port",
+            "format": "int32"
+          },
+          "baudrate": {
+            "type": "integer",
+            "description": "baudrate",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResponseDTO": {
+        "type": "object",
+        "properties": {
+          "terminal_id": {
+            "type": "string",
+            "description": "terminal_id",
+            "nullable": true
+          },
+          "terminal": {
+            "type": "string",
+            "description": "terminal",
+            "nullable": true
+          },
+          "merchant_id": {
+            "type": "string",
+            "description": "merchant_id",
+            "nullable": true
+          },
+          "pan": {
+            "type": "string",
+            "description": "pan",
+            "nullable": true
+          },
+          "card_mask": {
+            "type": "string",
+            "description": "card_mask",
+            "nullable": true
+          },
+          "rrn": {
+            "type": "string",
+            "description": "rrn",
+            "nullable": true
+          },
+          "currency": {
+            "type": "string",
+            "description": "currency",
+            "nullable": true
+          },
+          "currency_code": {
+            "type": "string",
+            "description": "currency_code",
+            "nullable": true
+          },
+          "auth_code": {
+            "type": "string",
+            "description": "auth_code",
+            "nullable": true
+          },
+          "date_time": {
+            "type": "string",
+            "description": "date_time",
+            "nullable": true
+          },
+          "invoice_num": {
+            "type": "integer",
+            "description": "invoice_num",
+            "format": "int32"
+          },
+          "receipt_no": {
+            "type": "string",
+            "description": "receipt_no",
+            "nullable": true
+          },
+          "exp_date": {
+            "type": "string",
+            "description": "exp_date",
+            "nullable": true
+          },
+          "card_holder": {
+            "type": "string",
+            "description": "card_holder",
+            "nullable": true
+          },
+          "owner_name": {
+            "type": "string",
+            "description": "owner_name",
+            "nullable": true
+          },
+          "issuer_name": {
+            "type": "string",
+            "description": "issuer_name",
+            "nullable": true
+          },
+          "payment_system": {
+            "type": "string",
+            "description": "payment_system",
+            "nullable": true
+          },
+          "totals_debit_num": {
+            "type": "integer",
+            "description": "totals_debit_num",
+            "format": "int32"
+          },
+          "totals_debit_amt": {
+            "type": "integer",
+            "description": "totals_debit_amt",
+            "format": "int32"
+          },
+          "totals_credit_num": {
+            "type": "integer",
+            "description": "totals_credit_num",
+            "format": "int32"
+          },
+          "totals_credit_amt": {
+            "type": "integer",
+            "description": "totals_credit_amt",
+            "format": "int32"
+          },
+          "totals_cancelled_num": {
+            "type": "integer",
+            "description": "totals_cancelled_num",
+            "format": "int32"
+          },
+          "totals_cancelled_amt": {
+            "type": "integer",
+            "description": "totals_cancelled_amt",
+            "format": "int32"
+          },
+          "sign_verif": {
+            "type": "boolean",
+            "description": "sign_verif"
+          },
+          "signature_required": {
+            "type": "boolean",
+            "description": "signature_required"
+          },
+          "txn_num": {
+            "type": "integer",
+            "description": "txn_num",
+            "format": "int32"
+          },
+          "amount": {
+            "type": "integer",
+            "description": "amount",
+            "format": "int32"
+          },
+          "value": {
+            "type": "integer",
+            "description": "value",
+            "format": "int32"
+          },
+          "add_amount": {
+            "type": "integer",
+            "description": "add_amount",
+            "format": "int32"
+          },
+          "discountedAmount": {
+            "type": "integer",
+            "description": "discountedAmount -  опціональний ключ, якщо розрахунок знижки на певні діапазони БІН номерів карт здійснюється на стороні зовнішньої системи (тільки для протоколу SSI JSON)",
+            "format": "int64"
+          },
+          "txn_type": {
+            "type": "integer",
+            "description": "txn_type",
+            "format": "int32"
+          },
+          "entry_mode": {
+            "type": "integer",
+            "description": "entry_mode",
+            "format": "int32"
+          },
+          "emv_aid": {
+            "type": "string",
+            "description": "emv_aid",
+            "nullable": true
+          },
+          "scenario_data": {
+            "type": "string",
+            "description": "scenario_data",
+            "nullable": true
+          },
+          "terminal_info": {
+            "type": "string",
+            "description": "terminal_info",
+            "nullable": true
+          },
+          "receipt": {
+            "type": "string",
+            "description": "receipt (slip)",
+            "nullable": true
+          },
+          "additional_properties": {
+            "type": "object",
+            "additionalProperties": { },
+            "description": "data",
+            "nullable": true
+          },
+          "bank_name": {
+            "type": "string",
+            "description": "bank_name",
+            "nullable": true
+          },
+          "acquirer_and_seller": {
+            "type": "string",
+            "description": "acquirer_and_seller",
+            "nullable": true
+          },
+          "provider_type": {
+            "type": "string",
+            "description": "provider_type",
+            "nullable": true
+          },
+          "bank_acquirer": {
+            "type": "string",
+            "description": "bank_acquirer",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Блок даних, що містить відповідь від терміналу"
+      },
+      "ScaleConnectProperties": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "$ref": "#/components/schemas/TransportTypes"
+          }
+        },
+        "additionalProperties": false,
+        "description": "ScaleConnectProperties"
+      },
+      "ScaleDeviceDTO": {
+        "required": [
+          "device_category",
+          "model",
+          "name",
+          "properties",
+          "protocol"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "UUID пристрою для ідентифікації",
+            "nullable": true
+          },
+          "name": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Назва пристрою"
+          },
+          "device_category": {
+            "$ref": "#/components/schemas/DeviceCategory"
+          },
+          "model": {
+            "$ref": "#/components/schemas/ScaleModels"
+          },
+          "protocol": {
+            "$ref": "#/components/schemas/ScaleProtocolTypes"
+          },
+          "Status": {
+            "$ref": "#/components/schemas/TerminalStatuses"
+          },
+          "properties": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/ScaleTCP"
+              },
+              {
+                "$ref": "#/components/schemas/ScaleRS232"
+              }
+            ],
+            "description": "Параметри підключення до пристрою"
+          },
+          "code_registration": {
+            "type": "string",
+            "description": "Реєстраційний код продавця (ІПН/ЄДРПОУ)",
+            "nullable": true
+          },
+          "Connected": {
+            "type": "boolean",
+            "description": "Ідентифікатор використання терміналу (не використовується)"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Scale device DTO"
+      },
+      "ScaleDeviceSearchResultSchema": {
+        "required": [
+          "scale_devices"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DeviceSearchResultSchema"
+          }
+        ],
+        "properties": {
+          "scale_devices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScaleDeviceDTO"
+            },
+            "description": "Список визначених пристроїв"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Інформація про знайдені пристрої"
+      },
+      "ScaleLinuxRS232": {
+        "required": [
+          "port"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ScaleConnectProperties"
+          }
+        ],
+        "properties": {
+          "mode": {
+            "$ref": "#/components/schemas/TransportTypes"
+          },
+          "port": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Шлях до підключеного пристрою (/dev/...)"
+          },
+          "baudrate": {
+            "type": "integer",
+            "description": "Швидкість обміну даними з пристроєм",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Serial connect properties"
+      },
+      "ScaleModels": {
+        "enum": [
+          "CAS",
+          "Acom",
+          "MettlerToledo",
+          "Vagar",
+          "Dniproves",
+          "PPR",
+          "None"
+        ],
+        "type": "string",
+        "description": "Scale models"
+      },
+      "ScaleProtocolTypes": {
+        "enum": [
+          "CAS_AP",
+          "MettlerToledoTigerE"
+        ],
+        "type": "string",
+        "description": "Scale protocols"
+      },
+      "ScaleRS232": {
+        "required": [
+          "port"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ScaleConnectProperties"
+          }
+        ],
+        "properties": {
+          "mode": {
+            "$ref": "#/components/schemas/TransportTypes"
+          },
+          "port": {
+            "type": "integer",
+            "description": "port",
+            "format": "int32"
+          },
+          "baudrate": {
+            "type": "integer",
+            "description": "baudrate",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "RS232 connect properties"
+      },
+      "ScaleTCP": {
+        "required": [
+          "host"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ScaleConnectProperties"
+          }
+        ],
+        "properties": {
+          "mode": {
+            "$ref": "#/components/schemas/TransportTypes"
+          },
+          "host": {
+            "minLength": 1,
+            "type": "string",
+            "description": "host"
+          },
+          "port": {
+            "type": "integer",
+            "description": "port",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "TCP connect properties"
+      },
+      "ScanRequest": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ScanRequestBase"
+          }
+        ],
+        "properties": {
+          "usb_devices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/USBDeviceInfo"
+            },
+            "description": "Список USB пристроїв для аналізу",
+            "nullable": true
+          },
+          "net_devices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NetworkDeviceInfo"
+            },
+            "description": "Список мережевих адрес для аналізу",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Параметри пошуку пристроїв"
+      },
+      "ScanRequestBase": {
+        "type": "object",
+        "properties": {
+          "id_scan": {
+            "type": "string",
+            "description": "Ідентифікатор задачі пошуку",
+            "nullable": true
+          },
+          "connect_type": {
+            "$ref": "#/components/schemas/TransportTypes"
+          },
+          "pagination": {
+            "type": "integer",
+            "description": "Максимальна кількість пристроїв для перевірки",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Базова структура запиту"
+      },
+      "SearchResponseBase": {
+        "type": "object",
+        "properties": {
+          "devices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FoundDevices"
+            },
+            "description": "Список виявлених пристров",
+            "nullable": true
+          },
+          "count": {
+            "type": "integer",
+            "description": "Кількість знайдених пристроїв",
+            "format": "int32"
+          },
+          "checked": {
+            "type": "integer",
+            "description": "Кількість перевірених пристроїв",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Search response base"
+      },
+      "Statuses": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "type": "integer",
+        "description": "Driver statuses",
+        "format": "int32"
+      },
+      "TCPConnectProperties": {
+        "required": [
+          "host"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ConnectPropertiesBase"
+          }
+        ],
+        "properties": {
+          "host": {
+            "minLength": 1,
+            "type": "string",
+            "description": "host"
+          },
+          "port": {
+            "type": "integer",
+            "description": "port",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TCPConnectPropertiesPOS": {
+        "required": [
+          "host",
+          "mac"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/POSConnectPropertiesBase"
+          }
+        ],
+        "properties": {
+          "host": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Host"
+          },
+          "port": {
+            "type": "integer",
+            "description": "Port",
+            "format": "int32"
+          },
+          "mac": {
+            "type": "string",
+            "description": "MAC"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TerminalConfiguration": {
+        "required": [
+          "description",
+          "protocols",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Модель пристрою"
+          },
+          "description": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Назва пристрою"
+          },
+          "protocols": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/POSProtocolSchema"
+            },
+            "description": "Масив протоколів, які підтримує пристрій"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Мапінг данних пристрою"
+      },
+      "TerminalStatuses": {
+        "enum": [
+          0,
+          1,
+          100,
+          101,
+          102,
+          103,
+          200,
+          201,
+          202,
+          203,
+          204,
+          205,
+          1000,
+          1001,
+          1002,
+          2000,
+          2001,
+          3000,
+          9000,
+          9001,
+          9002,
+          9003,
+          9004,
+          9005,
+          9006,
+          9007,
+          9008,
+          9009,
+          9010,
+          9011,
+          9012,
+          9013,
+          9014,
+          9015,
+          9016,
+          9017,
+          9018,
+          9019,
+          9020,
+          9021,
+          9022,
+          9023,
+          9024,
+          9025,
+          9026,
+          9027,
+          9028,
+          9029,
+          9030,
+          9031,
+          9032,
+          9033,
+          9034,
+          9035,
+          9036,
+          9037,
+          9038,
+          9039,
+          9040,
+          9041,
+          9042,
+          9043,
+          9044,
+          9045,
+          9046,
+          9047,
+          9048,
+          9049,
+          9201,
+          9202,
+          9203,
+          9204,
+          9205,
+          9206,
+          9207,
+          9208,
+          9300,
+          9301,
+          9302,
+          9303,
+          9304,
+          9305,
+          9306,
+          9307,
+          9308,
+          9400,
+          9401,
+          9402,
+          9403,
+          9404,
+          9405,
+          9406,
+          9407,
+          9408,
+          9409,
+          9410,
+          9411,
+          9412,
+          9413,
+          9414,
+          9415,
+          9416,
+          9417,
+          9418,
+          9419,
+          9420,
+          9421,
+          9422,
+          9423,
+          9424,
+          9425,
+          9426,
+          9427,
+          9428,
+          9429,
+          9430,
+          9431,
+          9432,
+          9433,
+          9434,
+          9435,
+          9436,
+          9437,
+          9499,
+          9500,
+          9501,
+          9502,
+          9503,
+          9504,
+          9505,
+          9506,
+          9507,
+          9508,
+          9509,
+          9510,
+          9511,
+          9512,
+          9513,
+          9514,
+          9515,
+          9516,
+          9517,
+          9518,
+          9519,
+          9520,
+          9521,
+          9522,
+          9523,
+          9524,
+          9525,
+          9526,
+          9527,
+          9528,
+          9529,
+          9530,
+          9531,
+          9532,
+          9533,
+          9534,
+          9535,
+          9536,
+          9537,
+          9600,
+          9601,
+          9602,
+          9603,
+          9604,
+          9605,
+          9999
+        ],
+        "type": "integer",
+        "description": "Terminal statuses",
+        "format": "int32"
+      },
+      "TransportTypes": {
+        "enum": [
+          "tcp",
+          "rs232",
+          "serial"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "USBDeviceInfo": {
+        "required": [
+          "device_description",
+          "device_id",
+          "driver_status",
+          "driver_url",
+          "need_reboot",
+          "pnp_device_id",
+          "port",
+          "port_name",
+          "port_number",
+          "vendor_description",
+          "vendor_id"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DeviceInfoBase"
+          }
+        ],
+        "properties": {
+          "vendor_id": {
+            "minLength": 1,
+            "type": "string",
+            "description": "VendorId"
+          },
+          "vendor_description": {
+            "minLength": 1,
+            "type": "string",
+            "description": "VendorDescription"
+          },
+          "device_id": {
+            "minLength": 1,
+            "type": "string",
+            "description": "DeviceId"
+          },
+          "device_description": {
+            "minLength": 1,
+            "type": "string",
+            "description": "DeviceDescription"
+          },
+          "port": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Port"
+          },
+          "port_number": {
+            "type": "integer",
+            "description": "Port",
+            "format": "int32"
+          },
+          "port_name": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Назва порту пристрою в операційній системі"
+          },
+          "pnp_device_id": {
+            "minLength": 1,
+            "type": "string",
+            "description": "PNP device ID"
+          },
+          "driver_status": {
+            "$ref": "#/components/schemas/Statuses"
+          },
+          "need_reboot": {
+            "type": "boolean",
+            "description": "Ознака необхідності перезавантаження ПК"
+          },
+          "driver_url": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Шлях завантаження драйвера"
+          }
+        },
+        "additionalProperties": false,
+        "description": "UsbDeviceInfo"
+      },
+      "ValidationError": {
+        "required": [
+          "ErrorMessage",
+          "ErrorType",
+          "Loc"
+        ],
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "description": "msg"
+          },
+          "type": {
+            "type": "string",
+            "description": "type"
+          },
+          "data": {
+            "type": "object",
+            "additionalProperties": { },
+            "description": "data",
+            "nullable": true
+          },
+          "loc": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "loc"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Помилка валідації даних"
+      },
+      "Version": {
+        "type": "object",
+        "properties": {
+          "Major": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "Minor": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "Build": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "Revision": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "MajorRevision": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "MinorRevision": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

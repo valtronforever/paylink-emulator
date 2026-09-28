@@ -76,6 +76,8 @@ npm run test:browser
 
 ## Документація
 
+- [Аудит: документація PayLink проти фактичної поведінки](docs/PAYLINK_DOCUMENTATION_AUDIT.uk.md).
+
 - [Повний README англійською](README.md).
 - [Керівний API](docs/CONTROL_API.md) і [OpenAPI 3.1](docs/control-openapi.json).
 - [Сценарії](examples/), [контейнери](docs/CONTAINERS.md), [тестування](docs/TESTING.md).
