@@ -8,6 +8,11 @@ A Rust terminal simulator for manual testing and browser automation, targeting *
 
 ## Quick start
 
+For the independent terminal-side SSI JSON responder and real Windows PayLink
+recordings, see the [Windows bench](docs/WINDOWS_SSI_LAB.md) and
+[scoped findings](docs/SSI_FINDINGS.md). The calibrated CLI matches 27 recorded
+HTTP cases and 5 concurrency/fragmentation checks; remaining gaps are explicit.
+
 Install [Rust](https://rustup.rs/); `rust-toolchain.toml` pins the compiler. Linux/macOS/Windows use the same CLI. Commands below use POSIX shell syntax; in PowerShell set `$env:PAYLINK_CONTROL_TOKEN = 'local-test-token-at-least-16-chars'`.
 
 ```sh
