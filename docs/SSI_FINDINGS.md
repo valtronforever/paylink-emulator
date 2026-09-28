@@ -1,5 +1,12 @@
 # Recorded SSI bench findings
 
+For **PayLink's own documentation versus native HTTP behavior**, see the separate
+[PayLink documentation audit](PAYLINK_DOCUMENTATION_AUDIT.uk.md). It distinguishes
+public wiki claims, the same-build Swagger contract and SSI protocol observations.
+The public wiki does explicitly mention two minutes for timeout; the new audit
+compares that statement with native measurements instead of treating 120 seconds
+solely as an emulator assumption.
+
 Target: POSServer 2.1.20.10 from the pinned Desktop PayLink 2.1.20 win-x86 installer.
 Capture date: 2026-09-28. Source: `reference/evidence/` in the version profile.
 Bank configuration: **none / SIMULATED**, not bank certification.

@@ -1,0 +1,74 @@
+{
+  "scope": "PayLink documentation versus native POSServer HTTP behavior; independent of emulator replay and SSI error-code conformance",
+  "capture_date": "2026-09-28",
+  "host": {
+    "platform": "win32",
+    "release": "10.0.26200",
+    "version": "Windows 11 Home",
+    "architecture": "x64",
+    "node": "v24.16.0"
+  },
+  "executable_sha256": "85d1bf9280e7c63e1099ecc2db480813f439e68c41a5eca8a453094a948ab465",
+  "installer_sha256": "62d0e7a539380937ecb5af2f1c50438e4b84a070de4a20c1c848c11a5e395491",
+  "readme": "../../../../docs/PAYLINK_DOCUMENTATION_AUDIT.uk.md",
+  "native_logs": "Retained locally in the isolated PayLink installation; not exported",
+  "public_html": "Full website pages remain local; only source identifiers, hashes, short quotation and factual findings are exported",
+  "files": [
+    {
+      "path": "full/contract-ssi.jsonl",
+      "sha256": "fe0fd33e42c5d2f32e4d8c00d3332ed60b09718994f798f3f51cc5c24c7d6cd3"
+    },
+    {
+      "path": "full/http.jsonl",
+      "sha256": "9fadcfc6e653d99cdbd2effeddcb3894139a8124194e99bc70bd5b5bd5270760"
+    },
+    {
+      "path": "full/manifest.json",
+      "sha256": "38739eb111866fa8b7d447d11130df591d0318ff1a7358a3f964a9b1272f697a"
+    },
+    {
+      "path": "full/openapi.json",
+      "sha256": "36c1db3ce8676546d762ac00ff452ca9c02e49bb8bfabddae2be01389bff9704"
+    },
+    {
+      "path": "full/source.mjs",
+      "sha256": "5ba34660e3ab244f5609fffa0eda499bb17045527490273a53c328cf56807af0"
+    },
+    {
+      "path": "full/timeout-ssi.jsonl",
+      "sha256": "9d90b1aadb5933cff4cf2745edfd788120e3f4467447d7e1ef7a85dd11787e3d"
+    },
+    {
+      "path": "full/timeout-state.json",
+      "sha256": "4011b7e7041a68f0e8e28ac95b6c929f94f7e2270a8c020636e577f59c0d1f9d"
+    },
+    {
+      "path": "repeat/contract-ssi.jsonl",
+      "sha256": "9a43626a5d6a2ad98ac76346cd6e66b01420a7a061a74dad7eeb736696f0e202"
+    },
+    {
+      "path": "repeat/http.jsonl",
+      "sha256": "2770df1dfe8b9d4c60eda8086122a624594e362b7f980ee1f1eb4e76e7d6d33f"
+    },
+    {
+      "path": "repeat/manifest.json",
+      "sha256": "2586ccc9a46270bb28664dfaa004706b51aae372e5857c25d1dec14a6393e0d5"
+    },
+    {
+      "path": "repeat/openapi.json",
+      "sha256": "09c471ca9fa2c0905d8383b91f976b1bb5c0a0c241fe6a5146390c02da66fc0b"
+    },
+    {
+      "path": "repeat/source.mjs",
+      "sha256": "9081ec92316007819a70bfe7792108b9d5a5f74ee868cb779282d09d32c12418"
+    },
+    {
+      "path": "repeat/unassigned-ssi.jsonl",
+      "sha256": "e5a549b163d9ed5eca49f97f00fbdbdc11562060a1d4f083c81670dc8e7a75a8"
+    },
+    {
+      "path": "sources.json",
+      "sha256": "6e1dbddd9f23640194e2614611e8187d7fe7f3e678cbfefe648976221f1035ed"
+    }
+  ]
+}

@@ -1,0 +1,292 @@
+{
+  "run_id": "paylink-docs-9dd5f3ed-f412-496c-9b1d-83ae6414b51c",
+  "started_utc": "2026-09-28T06:26:15.938Z",
+  "scope": "Native PayLink documentation audit with synthetic loopback devices",
+  "executable_sha256": "85d1bf9280e7c63e1099ecc2db480813f439e68c41a5eca8a453094a948ab465",
+  "commit": "ab3f8e6b525c4dc383e7ea08b1e87bdf18333448",
+  "source_sha256": "5ba34660e3ab244f5609fffa0eda499bb17045527490273a53c328cf56807af0",
+  "reference_url": "http://127.0.0.1:9020",
+  "cases": [
+    {
+      "id": "register-contract",
+      "path": "/api/pos/devices/register",
+      "method": "POST",
+      "status": 200,
+      "duration_ms": 9.19119999999998,
+      "connection_error": null
+    },
+    {
+      "id": "register-timeout",
+      "path": "/api/pos/devices/register",
+      "method": "POST",
+      "status": 200,
+      "duration_ms": 4.371300000000019,
+      "connection_error": null
+    },
+    {
+      "id": "devices",
+      "path": "/api/devices",
+      "method": "GET",
+      "status": 200,
+      "duration_ms": 27.973499999999945,
+      "connection_error": null
+    },
+    {
+      "id": "pos-devices",
+      "path": "/api/pos/devices",
+      "method": "GET",
+      "status": 200,
+      "duration_ms": 11.125,
+      "connection_error": null
+    },
+    {
+      "id": "device",
+      "path": "/api/pos/devices/88389473-2d78-4ac0-a94f-f400feec4b33",
+      "method": "GET",
+      "status": 200,
+      "duration_ms": 6.014799999999923,
+      "connection_error": null
+    },
+    {
+      "id": "missing-device",
+      "path": "/api/pos/devices/b5f555cd-5276-4f31-b122-322cb0dc1278",
+      "method": "GET",
+      "status": 404,
+      "duration_ms": 54.22679999999991,
+      "connection_error": null
+    },
+    {
+      "id": "missing-ping",
+      "path": "/api/pos/b5f555cd-5276-4f31-b122-322cb0dc1278/ping",
+      "method": "GET",
+      "status": 404,
+      "duration_ms": 158.48749999999995,
+      "connection_error": null
+    },
+    {
+      "id": "filter-A",
+      "path": "/api/devices?CodeRegistration=DOC-AUDIT-A",
+      "method": "GET",
+      "status": 200,
+      "duration_ms": 16.082499999999982,
+      "connection_error": null
+    },
+    {
+      "id": "filter-missing",
+      "path": "/api/devices?CodeRegistration=DOC-AUDIT-NONE",
+      "method": "GET",
+      "status": 200,
+      "duration_ms": 9.221099999999979,
+      "connection_error": null
+    },
+    {
+      "id": "missing-amount",
+      "path": "/api/pos/88389473-2d78-4ac0-a94f-f400feec4b33/purchase",
+      "method": "POST",
+      "status": 400,
+      "duration_ms": 12.910599999999931,
+      "connection_error": null
+    },
+    {
+      "id": "negative-amount",
+      "path": "/api/pos/88389473-2d78-4ac0-a94f-f400feec4b33/purchase",
+      "method": "POST",
+      "status": 400,
+      "duration_ms": 7.988999999999805,
+      "connection_error": null
+    },
+    {
+      "id": "overflow-amount",
+      "path": "/api/pos/88389473-2d78-4ac0-a94f-f400feec4b33/purchase",
+      "method": "POST",
+      "status": 503,
+      "duration_ms": 25.266200000000026,
+      "connection_error": null
+    },
+    {
+      "id": "approved",
+      "path": "/api/pos/88389473-2d78-4ac0-a94f-f400feec4b33/purchase",
+      "method": "POST",
+      "status": 200,
+      "duration_ms": 2070.0985,
+      "connection_error": null
+    },
+    {
+      "id": "unknown-property",
+      "path": "/api/pos/88389473-2d78-4ac0-a94f-f400feec4b33/purchase",
+      "method": "POST",
+      "status": 200,
+      "duration_ms": 2057.6305,
+      "connection_error": null
+    },
+    {
+      "id": "string-amount",
+      "path": "/api/pos/88389473-2d78-4ac0-a94f-f400feec4b33/purchase",
+      "method": "POST",
+      "status": 200,
+      "duration_ms": 2064.9856,
+      "connection_error": null
+    },
+    {
+      "id": "cors-ping",
+      "path": "/api/pos/88389473-2d78-4ac0-a94f-f400feec4b33/ping",
+      "method": "GET",
+      "status": 200,
+      "duration_ms": 12.201000000000022,
+      "connection_error": null
+    },
+    {
+      "id": "cors-preflight",
+      "path": "/api/pos/88389473-2d78-4ac0-a94f-f400feec4b33/purchase",
+      "method": "OPTIONS",
+      "status": 204,
+      "duration_ms": 1.312699999999495,
+      "connection_error": null
+    },
+    {
+      "id": "busy-ping",
+      "path": "/api/pos/88389473-2d78-4ac0-a94f-f400feec4b33/ping",
+      "method": "GET",
+      "status": 503,
+      "duration_ms": 14.590000000000146,
+      "connection_error": null
+    },
+    {
+      "id": "busy-owner",
+      "path": "/api/pos/88389473-2d78-4ac0-a94f-f400feec4b33/purchase",
+      "method": "POST",
+      "status": 200,
+      "duration_ms": 5103.777900000001,
+      "connection_error": null
+    },
+    {
+      "id": "last-result",
+      "path": "/api/pos/88389473-2d78-4ac0-a94f-f400feec4b33/last-result",
+      "method": "GET",
+      "status": 200,
+      "duration_ms": 4.824300000000221,
+      "connection_error": null
+    },
+    {
+      "id": "wiki-timeout",
+      "path": "/api/pos/f9f43c16-4217-4b65-9428-a3374c3d3931/purchase",
+      "method": "POST",
+      "status": 503,
+      "duration_ms": 166162.8388,
+      "connection_error": null
+    },
+    {
+      "id": "timeout-recovery-ping",
+      "path": "/api/pos/f9f43c16-4217-4b65-9428-a3374c3d3931/ping",
+      "method": "GET",
+      "status": 200,
+      "duration_ms": 14.018299999996088,
+      "connection_error": null
+    },
+    {
+      "id": "cleanup-contract",
+      "path": "/api/pos/devices/88389473-2d78-4ac0-a94f-f400feec4b33",
+      "method": "DELETE",
+      "status": 200,
+      "duration_ms": 5.650500000017928,
+      "connection_error": null
+    },
+    {
+      "id": "cleanup-timeout",
+      "path": "/api/pos/devices/f9f43c16-4217-4b65-9428-a3374c3d3931",
+      "method": "DELETE",
+      "status": 200,
+      "duration_ms": 3.2292000000015832,
+      "connection_error": null
+    }
+  ],
+  "devices": [
+    {
+      "label": "contract",
+      "configuration": {
+        "id": "88389473-2d78-4ac0-a94f-f400feec4b33",
+        "name": "DOC-AUDIT-contract",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 63599,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "DOC-AUDIT-A",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:63599",
+        "control_url": "http://127.0.0.1:63600",
+        "wire_path": "runs\\paylink-doc-audit\\contract-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "86606586-bb08-40cc-9538-709f346fac28",
+        "source_hashes": {
+          "codec.mjs": "cbf22f5acfd947797176d0f2335691cbe22b5c29382d142eec57afb4286c93d6",
+          "model.mjs": "1d96ccd16613edc66510ffec88437675ef1e087bf5f97655d67c9c6508128211",
+          "server.mjs": "307ddc250513bf9d46ced72a5373d29c1a83cdc475e488674a2d5097d83eaf4f"
+        }
+      }
+    },
+    {
+      "label": "timeout",
+      "configuration": {
+        "id": "f9f43c16-4217-4b65-9428-a3374c3d3931",
+        "name": "DOC-AUDIT-timeout",
+        "device_category": "pos",
+        "type": "none",
+        "bank_name": "SIMULATED",
+        "model": "Verifone_All",
+        "protocol": "SSIJson",
+        "properties": {
+          "host": "127.0.0.1",
+          "port": 63601,
+          "mac": "",
+          "mode": "tcp",
+          "merchant_id": "TEST-MERCHANT",
+          "resolve_ip_by_mac": false
+        },
+        "code_registration": "DOC-AUDIT-B",
+        "last_operation_id": "",
+        "verify_payment_system": false,
+        "connected": false,
+        "used_payment_sign_mode": false
+      },
+      "runtime": {
+        "tcp": "127.0.0.1:63601",
+        "control_url": "http://127.0.0.1:63602",
+        "wire_path": "runs\\paylink-doc-audit\\timeout-ssi.jsonl",
+        "state_path": null,
+        "boot_id": "58117e01-41e8-4b40-a335-4019dc53b67f",
+        "source_hashes": {
+          "codec.mjs": "cbf22f5acfd947797176d0f2335691cbe22b5c29382d142eec57afb4286c93d6",
+          "model.mjs": "1d96ccd16613edc66510ffec88437675ef1e087bf5f97655d67c9c6508128211",
+          "server.mjs": "307ddc250513bf9d46ced72a5373d29c1a83cdc475e488674a2d5097d83eaf4f"
+        }
+      }
+    }
+  ],
+  "status": "recorded",
+  "openapi_sha256": "36c1db3ce8676546d762ac00ff452ca9c02e49bb8bfabddae2be01389bff9704",
+  "timeout_scenario": {
+    "id": "wiki-timeout",
+    "faults": {
+      "Purchase": "silence"
+    },
+    "request_errors": {
+      "GetResultByUid": "E20"
+    }
+  },
+  "finished_utc": "2026-09-28T06:29:02.963Z",
+  "executable_sha256_after": "85d1bf9280e7c63e1099ecc2db480813f439e68c41a5eca8a453094a948ab465"
+}

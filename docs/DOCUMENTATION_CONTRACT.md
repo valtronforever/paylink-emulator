@@ -16,6 +16,12 @@ Manual mode waits for card/customer/bank actions. Automatic mode advances throug
 
 ## Explicit assumptions
 
+The initial 120000 ms emulator default is configurable. A later
+[native documentation audit](PAYLINK_DOCUMENTATION_AUDIT.uk.md) found that the
+PayLink wiki explicitly describes two minutes, while the recorded SSIJson/TCP
+silence/recovery path takes about 166 seconds. Do not treat that default as a
+verified upper bound for real PayLink.
+
 | Documentation gap | Emulator rule | How to test/change it |
 | --- | --- | --- |
 | Exact phase durations and bank response time | Synthetic defaults: connect 300 ms, card 2000 ms, customer 500 ms, authorization 1200 ms, confirmation 500 ms; response 0 ms; deadline 120000 ms | Scenario `timing`; realtime clock for UI tests, controlled clock for exact boundaries |

@@ -4,6 +4,11 @@ This is the issue #9 research bench. It does not certify a bank, physical termin
 EMV, USB driver, or Inerix integration. The original documentation acceptance gate
 is unchanged. See [observations and remaining work](SSI_FINDINGS.md).
 
+For a targeted comparison of native PayLink with its **own** wiki and local
+OpenAPI, use `scripts/lab/audit-paylink-docs.mjs`. The
+[documentation audit](PAYLINK_DOCUMENTATION_AUDIT.uk.md) gives the findings,
+source pointers, raw evidence and full/quick reproduction commands.
+
 The responder uses Node's built-in TCP/HTTP modules, independently of the Rust
 emulator model and response mapper. Node is already required by the differential
 runner; there are no additional npm runtime dependencies. GPUI is not needed.
