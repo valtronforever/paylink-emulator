@@ -1,0 +1,16 @@
+{
+  "origin": "https://example.com",
+  "browser": "154.0.4258.37",
+  "loopback_permission": "default",
+  "inerix": "not_run_dependency_476",
+  "https_to_localhost": "see_results",
+  "results": [
+    {
+      "target": "emulator",
+      "scenario_id": "ping",
+      "origin": "https://example.com",
+      "error": "Failed to fetch",
+      "elapsed_ms": 5.6000000005587935
+    }
+  ]
+}

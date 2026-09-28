@@ -418,6 +418,22 @@
     {
       "path": "transport/unknown_status-ssi.jsonl",
       "sha256": "7047c429ae41003227bcfac43fdf445575678e9b63acdcd329ccd8508d8fbb71"
+    },
+    {
+      "path": "https-emulator-denial/emulator-events.json",
+      "sha256": "b9b2d4129295be89bf359de54eb1e29f1f2ebc3bffc66cdb53b3bc11f8f33c68"
+    },
+    {
+      "path": "https-emulator-denial/emulator-ping.png",
+      "sha256": "946d1f8f4eb0e098c344e858cafd8327379458a5c896aaace94a7ae69aae9e28"
+    },
+    {
+      "path": "https-emulator-denial/emulator-trace.zip",
+      "sha256": "4351e4fba642937bf2dce79de1dc978a4726b4a80327dabe4cb902ccb2a2f2b6"
+    },
+    {
+      "path": "https-emulator-denial/summary.json",
+      "sha256": "4c3b7f03fd67eacca2eafc507f07388d4af63031ef184df9b5eef1f03de4b4e6"
     }
   ]
 }
